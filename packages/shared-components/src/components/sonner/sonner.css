@@ -1,0 +1,39 @@
+/* Sonner overrides — Gold design tokens */
+
+.gold-sonner [data-sonner-toaster] {
+  font-family: var(--font-sans);
+  --width: 22rem;
+}
+
+.gold-sonner [data-sonner-toast] {
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+}
+
+.gold-sonner [data-sonner-toast][data-styled='true'] [data-title] {
+  line-height: 1.4;
+}
+
+.gold-sonner [data-sonner-toast][data-styled='true'] [data-description] {
+  line-height: 1.45;
+}
+
+[dir='rtl'] .gold-sonner [data-sonner-toaster][data-x-position='right'] {
+  left: 1rem;
+  right: auto;
+}
+
+[dir='rtl'] .gold-sonner [data-sonner-toaster][data-x-position='left'] {
+  right: 1rem;
+  left: auto;
+}
+
+[dir='ltr'] .gold-sonner [data-sonner-toaster][data-x-position='right'] {
+  right: 1rem;
+  left: auto;
+}
+
+[dir='ltr'] .gold-sonner [data-sonner-toaster][data-x-position='left'] {
+  left: 1rem;
+  right: auto;
+}

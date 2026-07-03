@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Dialog } from '@gold/shared-components/components/dialog';
+import Dialog from '@gold/shared-components/dialog';
 
 const meta = {
   title: 'Components/Dialog',

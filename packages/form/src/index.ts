@@ -1,8 +1,18 @@
-export { GeneratedForm } from './generated-form';
-export { buildDefaultValues } from './build-default-values';
-export { defineFormField, defineFormSchema } from './define-form-schema';
-export { MailIcon, LockIcon } from './icons';
-export { useForm } from '@tanstack/react-form';
+import GeneratedForm from './generated-form';
+import { buildDefaultValues } from './build-default-values';
+import { defineFormField, defineFormSchema } from './define-form-schema';
+import { MailIcon, LockIcon } from './icons';
+import { useForm } from '@tanstack/react-form';
+
+export {
+  GeneratedForm,
+  buildDefaultValues,
+  defineFormField,
+  defineFormSchema,
+  MailIcon,
+  LockIcon,
+  useForm,
+};
 export type {
   FormFieldDefinition,
   FormFieldNames,
@@ -11,3 +21,4 @@ export type {
   FormSchema,
   InferFormValues,
 } from './types';
+export type { GeneratedFormProps } from './generated-form';

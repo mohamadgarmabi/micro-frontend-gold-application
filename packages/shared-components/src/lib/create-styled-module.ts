@@ -15,7 +15,7 @@ type RootPropsOf<T extends Record<string, unknown>> = T extends {
   ? P
   : never;
 
-export type StyledModuleResult<T extends Record<string, unknown>> = (T extends {
+type StyledModuleResult<T extends Record<string, unknown>> = (T extends {
   Root: AnyComponent;
 }
   ? (props: RootPropsOf<T>) => ReactNode
@@ -23,39 +23,7 @@ export type StyledModuleResult<T extends Record<string, unknown>> = (T extends {
   [K in keyof T]: T[K];
 };
 
-function toPartKey(exportName: string) {
-  return exportName.replace(/[^a-zA-Z0-9]/g, '');
-}
-
-function isClass(value: unknown): value is new (...args: never[]) => unknown {
-  return (
-    typeof value === 'function' &&
-    /^class\s/.test(Function.prototype.toString.call(value))
-  );
-}
-
-function isReactComponent(value: unknown): value is AnyComponent {
-  if (value == null) return false;
-
-  if (typeof value === 'object' && '$$typeof' in value) {
-    const type = (value as { $$typeof: symbol }).$$typeof;
-    return (
-      type === Symbol.for('react.forward_ref') ||
-      type === Symbol.for('react.memo')
-    );
-  }
-
-  if (typeof value === 'function') {
-    if (isClass(value)) return false;
-    const { name } = value;
-    if (/^use[A-Z]/.test(name) || /^create[A-Z]/.test(name)) return false;
-    return true;
-  }
-
-  return false;
-}
-
-export function createStyledModule<T extends Record<string, unknown>>(
+function createStyledModule<T extends Record<string, unknown>>(
   base: T,
   extra?: Partial<Record<keyof T, string>>
 ): StyledModuleResult<T> {
@@ -124,3 +92,38 @@ export function createStyledModule<T extends Record<string, unknown>>(
     passthrough
   ) as unknown as StyledModuleResult<T>;
 }
+
+function toPartKey(exportName: string) {
+  return exportName.replace(/[^a-zA-Z0-9]/g, '');
+}
+
+function isClass(value: unknown): value is new (...args: never[]) => unknown {
+  return (
+    typeof value === 'function' &&
+    /^class\s/.test(Function.prototype.toString.call(value))
+  );
+}
+
+function isReactComponent(value: unknown): value is AnyComponent {
+  if (value == null) return false;
+
+  if (typeof value === 'object' && '$$typeof' in value) {
+    const type = (value as { $$typeof: symbol }).$$typeof;
+    return (
+      type === Symbol.for('react.forward_ref') ||
+      type === Symbol.for('react.memo')
+    );
+  }
+
+  if (typeof value === 'function') {
+    if (isClass(value)) return false;
+    const { name } = value;
+    if (/^use[A-Z]/.test(name) || /^create[A-Z]/.test(name)) return false;
+    return true;
+  }
+
+  return false;
+}
+
+export { createStyledModule };
+export type { StyledModuleResult };

@@ -2,60 +2,82 @@
 
 /* nx-tailwind-sources:start */
 /* nx-tailwind-sources:end */
+@import './fonts.css';
 @import './base-ui.css';
 @import './components.css';
+@import './rtl.css';
 
 /*
  * Color Hunt palette
- * https://colorhunt.co/palette/606c5dfff4f4f7e6c4f1c376
+ * https://colorhunt.co/palette/7b542fb6771dff9d00ffcf71
  *
- * #606c5d — primary (olive)
- * #fff4f4 — surface
- * #f7e6c4 — secondary / muted
- * #f1c376 — accent (gold)
+ * #7B542F — primary
+ * #B6771D — accent (amber brown)
+ * #FF9D00 — secondary
+ * #FFCF71 — cream / highlight
  */
 
-@theme {
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant rtl (&:where([dir="rtl"], [dir="rtl"] *));
+@custom-variant ltr (&:where([dir="ltr"], [dir="ltr"] *));
+
+@theme inline {
   /* Palette primitives */
-  --color-brand: #606c5d;
-  --color-brand-surface: #fff4f4;
-  --color-brand-muted: #f7e6c4;
-  --color-brand-accent: #f1c376;
+  --color-brand: var(--ds-brand);
+  --color-brand-surface: var(--ds-brand-surface);
+  --color-brand-muted: var(--ds-brand-muted);
+  --color-brand-accent: var(--ds-brand-accent);
 
   /* Brand scale (gold-* maps to site palette for Tailwind utilities) */
-  --color-gold-50: #fff4f4;
-  --color-gold-100: #f7e6c4;
-  --color-gold-200: #f1c376;
-  --color-gold-300: #e8c98a;
-  --color-gold-400: #c9b07a;
-  --color-gold-500: #8f9a8c;
-  --color-gold-600: #606c5d;
-  --color-gold-700: #525e50;
-  --color-gold-800: #454f44;
-  --color-gold-900: #3a4339;
+  --color-gold-50: var(--ds-gold-50);
+  --color-gold-100: var(--ds-gold-100);
+  --color-gold-200: var(--ds-gold-200);
+  --color-gold-300: var(--ds-gold-300);
+  --color-gold-400: var(--ds-gold-400);
+  --color-gold-500: var(--ds-gold-500);
+  --color-gold-600: var(--ds-gold-600);
+  --color-gold-700: var(--ds-gold-700);
+  --color-gold-800: var(--ds-gold-800);
+  --color-gold-900: var(--ds-gold-900);
+
+  /* Neutral scale (warm grays) */
+  --color-neutral-50: var(--ds-neutral-50);
+  --color-neutral-100: var(--ds-neutral-100);
+  --color-neutral-200: var(--ds-neutral-200);
+  --color-neutral-300: var(--ds-neutral-300);
+  --color-neutral-400: var(--ds-neutral-400);
+  --color-neutral-500: var(--ds-neutral-500);
+  --color-neutral-600: var(--ds-neutral-600);
+  --color-neutral-700: var(--ds-neutral-700);
+  --color-neutral-800: var(--ds-neutral-800);
+  --color-neutral-900: var(--ds-neutral-900);
 
   /* Surfaces */
-  --color-surface: #ffffff;
-  --color-surface-muted: #fff4f4;
-  --color-surface-elevated: #ffffff;
-  --color-surface-accent: #f7e6c4;
-  --color-border: #e8ddd0;
-  --color-border-strong: #c9b89e;
+  --color-surface: var(--ds-surface);
+  --color-surface-muted: var(--ds-surface-muted);
+  --color-surface-elevated: var(--ds-surface-elevated);
+  --color-surface-accent: var(--ds-surface-accent);
+  --color-border: var(--ds-border);
+  --color-border-strong: var(--ds-border-strong);
 
   /* Text */
-  --color-foreground: #3a4339;
-  --color-foreground-muted: #606c5d;
-  --color-foreground-subtle: #8f9a8c;
-  --color-foreground-on-brand: #fff4f4;
+  --color-foreground: var(--ds-foreground);
+  --color-foreground-muted: var(--ds-foreground-muted);
+  --color-foreground-subtle: var(--ds-foreground-subtle);
+  --color-foreground-on-brand: var(--ds-foreground-on-brand);
 
   /* Semantic */
-  --color-danger: #c44536;
-  --color-danger-muted: #fff4f4;
-  --color-success: #606c5d;
-  --color-success-muted: #f7e6c4;
+  --color-danger: var(--ds-danger);
+  --color-danger-muted: var(--ds-danger-muted);
+  --color-success: var(--ds-success);
+  --color-success-muted: var(--ds-success-muted);
+  --color-warning: var(--ds-warning);
+  --color-warning-muted: var(--ds-warning-muted);
+  --color-info: var(--ds-info);
+  --color-info-muted: var(--ds-info-muted);
 
-  /* Typography */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  /* Typography — overridden per direction in fonts.css */
+  --font-sans: var(--ds-font-sans-ltr);
 
   /* Radius */
   --radius-sm: 0.375rem;
@@ -64,10 +86,184 @@
   --radius-xl: 1rem;
 
   /* Shadows */
-  --shadow-popup: 0 10px 40px -10px rgb(58 67 57 / 0.18);
-  --shadow-focus: 0 0 0 3px color-mix(in oklab, var(--color-brand) 28%, transparent);
+  --shadow-popup: var(--ds-shadow-popup);
+  --shadow-focus: var(--ds-shadow-focus);
 
   /* Z-index */
   --z-popup: 50;
   --z-toast: 60;
+}
+
+/* ── Light mode (default) ─────────────────────────────────────────── */
+
+:root,
+.light {
+  --ds-brand: #7b542f;
+  --ds-brand-surface: #fffbf5;
+  --ds-brand-muted: #ffcf71;
+  --ds-brand-accent: #ff9d00;
+
+  --ds-gold-50: #fffbf5;
+  --ds-gold-100: #fff3dc;
+  --ds-gold-200: #ffcf71;
+  --ds-gold-300: #f5bc5a;
+  --ds-gold-400: #e8a020;
+  --ds-gold-500: #ff9d00;
+  --ds-gold-600: #7b542f;
+  --ds-gold-700: #684528;
+  --ds-gold-800: #553820;
+  --ds-gold-900: #422b18;
+
+  --ds-neutral-50: #faf8f6;
+  --ds-neutral-100: #f0ebe6;
+  --ds-neutral-200: #ddd4cb;
+  --ds-neutral-300: #c4b8ab;
+  --ds-neutral-400: #a89888;
+  --ds-neutral-500: #8a7968;
+  --ds-neutral-600: #6e5f50;
+  --ds-neutral-700: #564a3e;
+  --ds-neutral-800: #3d352d;
+  --ds-neutral-900: #261f19;
+
+  --ds-surface: #ffffff;
+  --ds-surface-muted: #fffbf5;
+  --ds-surface-elevated: #ffffff;
+  --ds-surface-accent: #ffcf71;
+  --ds-border: #e8ddd0;
+  --ds-border-strong: #c9b89e;
+
+  --ds-foreground: #422b18;
+  --ds-foreground-muted: #7b542f;
+  --ds-foreground-subtle: #a89888;
+  --ds-foreground-on-brand: #fffbf5;
+
+  --ds-danger: #c73e3e;
+  --ds-danger-muted: #fdf0f0;
+  --ds-success: #2d7a4a;
+  --ds-success-muted: #edf7f0;
+  --ds-warning: #b6771d;
+  --ds-warning-muted: #fff8ed;
+  --ds-info: #2563eb;
+  --ds-info-muted: #eff6ff;
+
+  --ds-shadow-popup: 0 10px 40px -10px rgb(66 43 24 / 0.18);
+  --ds-shadow-focus: 0 0 0 3px color-mix(in oklab, var(--ds-brand) 28%, transparent);
+
+  color-scheme: light;
+}
+
+/* ── Dark mode (class) ────────────────────────────────────────────── */
+
+.dark {
+  --ds-brand: #ff9d00;
+  --ds-brand-surface: #1a120c;
+  --ds-brand-muted: #3d2e1f;
+  --ds-brand-accent: #ffcf71;
+
+  --ds-gold-50: #1a120c;
+  --ds-gold-100: #2d2118;
+  --ds-gold-200: #3d2e1f;
+  --ds-gold-300: #5c4528;
+  --ds-gold-400: #b6771d;
+  --ds-gold-500: #ff9d00;
+  --ds-gold-600: #ff9d00;
+  --ds-gold-700: #ffcf71;
+  --ds-gold-800: #ffe4a8;
+  --ds-gold-900: #fff3dc;
+
+  --ds-neutral-50: #1a120c;
+  --ds-neutral-100: #261f19;
+  --ds-neutral-200: #3d352d;
+  --ds-neutral-300: #564a3e;
+  --ds-neutral-400: #6e5f50;
+  --ds-neutral-500: #8a7968;
+  --ds-neutral-600: #a89888;
+  --ds-neutral-700: #c4b8ab;
+  --ds-neutral-800: #ddd4cb;
+  --ds-neutral-900: #f0ebe6;
+
+  --ds-surface: #231910;
+  --ds-surface-muted: #1a120c;
+  --ds-surface-elevated: #2d2118;
+  --ds-surface-accent: #3d2e1f;
+  --ds-border: #3d352d;
+  --ds-border-strong: #564a3e;
+
+  --ds-foreground: #fffbf5;
+  --ds-foreground-muted: #ffcf71;
+  --ds-foreground-subtle: #a89888;
+  --ds-foreground-on-brand: #1a120c;
+
+  --ds-danger: #f87171;
+  --ds-danger-muted: #3d1f1f;
+  --ds-success: #4ade80;
+  --ds-success-muted: #1a2e22;
+  --ds-warning: #fbbf24;
+  --ds-warning-muted: #3d2e1a;
+  --ds-info: #60a5fa;
+  --ds-info-muted: #1a2540;
+
+  --ds-shadow-popup: 0 10px 40px -10px rgb(0 0 0 / 0.45);
+  --ds-shadow-focus: 0 0 0 3px color-mix(in oklab, var(--ds-brand) 35%, transparent);
+
+  color-scheme: dark;
+}
+
+/* ── Dark mode (system preference, when not forced light) ─────────── */
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --ds-brand: #ff9d00;
+    --ds-brand-surface: #1a120c;
+    --ds-brand-muted: #3d2e1f;
+    --ds-brand-accent: #ffcf71;
+
+    --ds-gold-50: #1a120c;
+    --ds-gold-100: #2d2118;
+    --ds-gold-200: #3d2e1f;
+    --ds-gold-300: #5c4528;
+    --ds-gold-400: #b6771d;
+    --ds-gold-500: #ff9d00;
+    --ds-gold-600: #ff9d00;
+    --ds-gold-700: #ffcf71;
+    --ds-gold-800: #ffe4a8;
+    --ds-gold-900: #fff3dc;
+
+    --ds-neutral-50: #1a120c;
+    --ds-neutral-100: #261f19;
+    --ds-neutral-200: #3d352d;
+    --ds-neutral-300: #564a3e;
+    --ds-neutral-400: #6e5f50;
+    --ds-neutral-500: #8a7968;
+    --ds-neutral-600: #a89888;
+    --ds-neutral-700: #c4b8ab;
+    --ds-neutral-800: #ddd4cb;
+    --ds-neutral-900: #f0ebe6;
+
+    --ds-surface: #231910;
+    --ds-surface-muted: #1a120c;
+    --ds-surface-elevated: #2d2118;
+    --ds-surface-accent: #3d2e1f;
+    --ds-border: #3d352d;
+    --ds-border-strong: #564a3e;
+
+    --ds-foreground: #fffbf5;
+    --ds-foreground-muted: #ffcf71;
+    --ds-foreground-subtle: #a89888;
+    --ds-foreground-on-brand: #1a120c;
+
+    --ds-danger: #f87171;
+    --ds-danger-muted: #3d1f1f;
+    --ds-success: #4ade80;
+    --ds-success-muted: #1a2e22;
+    --ds-warning: #fbbf24;
+    --ds-warning-muted: #3d2e1a;
+    --ds-info: #60a5fa;
+    --ds-info-muted: #1a2540;
+
+    --ds-shadow-popup: 0 10px 40px -10px rgb(0 0 0 / 0.45);
+    --ds-shadow-focus: 0 0 0 3px color-mix(in oklab, var(--ds-brand) 35%, transparent);
+
+    color-scheme: dark;
+  }
 }

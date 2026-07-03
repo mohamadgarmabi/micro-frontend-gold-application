@@ -9,8 +9,7 @@ packages/
   design-system/       # Tailwind v4 tokens + Base UI global CSS
   shared-components/   # 38 Base UI components — Module Federation provider
 apps/
-  react-sample/        # React consumer
-  vue-sample/          # Vue consumer (loads React remotes)
+  website/             # Vue consumer (loads React remotes)
 ```
 
 ## Packages
@@ -36,7 +35,6 @@ pnpm generate:components
 
 ```bash
 pnpm install
-pnpm dev:react   # or: nx dev react-sample
 ```
 
 - React: http://localhost:4200
@@ -50,8 +48,7 @@ pnpm stop        # free ports 4200, 4300, 5100
 ### Run individually
 
 ```bash
-nx dev react-sample    # design-system → shared-components → react
-nx dev vue-sample
+nx dev website
 nx dev shared-components
 ```
 

@@ -1,10 +1,10 @@
 type ClassNameArg = string | false | null | undefined;
 
-export function cn(...classes: ClassNameArg[]) {
+function cn(...classes: ClassNameArg[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export function mergeClassName<S>(
+function mergeClassName<S>(
   base: string,
   className?: string | ((state: S) => string | undefined)
 ): string | ((state: S) => string | undefined) {
@@ -14,3 +14,5 @@ export function mergeClassName<S>(
 
   return cn(base, className);
 }
+
+export { cn, mergeClassName };

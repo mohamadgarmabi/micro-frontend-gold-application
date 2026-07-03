@@ -34,6 +34,9 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
-    "@gold/design-system": "workspace:*"
+    "@gold/apis": "workspace:*",
+    "@gold/design-system": "workspace:*",
+    "@gold/form": "workspace:*",
+    "@gold/shared-components": "workspace:*"
   }
 }

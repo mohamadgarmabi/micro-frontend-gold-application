@@ -121,25 +121,88 @@ function readNamespaceExport(slug) {
   return ns?.[1] ?? null;
 }
 
-function generateSingle(slug, exportName) {
-  return `import { ${exportName} as Base${exportName} } from '@base-ui/react/${slug}';
+function writeComponentFile(slug, fileName, content) {
+  const dir = path.join(componentsDir, slug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, fileName), content);
+}
+
+function hookFile(exportName) {
+  return `function use${exportName}() {
+  return {};
+}
+
+export { use${exportName} };
+`;
+}
+
+function typeFile(exportName, propsTypeBody) {
+  return `import { ${exportName} as Base${exportName} } from '@base-ui/react/${exportName === 'OTPField' ? 'otp-field' : exportName.replace(/([A-Z])/g, (m, c, i) => (i ? '-' : '') + c.toLowerCase()).replace(/^-/, '')}';
 import type { ComponentProps } from 'react';
-import { mergeClassName } from '../lib/cn';
-import { singleComponentStyles } from '../lib/styles';
 
-export type ${exportName}Props = ComponentProps<typeof Base${exportName}>;
+type ${exportName}Props = ${propsTypeBody};
 
-export function ${exportName}({ className, ...props }: ${exportName}Props) {
+export type { ${exportName}Props };
+`;
+}
+
+function stylesVarName(slug) {
+  return `${slug.replace(/-/g, '')}Styles`;
+}
+
+function classNameVarName(slug) {
+  return `${slug.replace(/-/g, '')}ClassName`;
+}
+
+function generateSingle(slug, exportName) {
+  const classVar = classNameVarName(slug);
+
+  writeComponentFile(
+    slug,
+    `${slug}.styles.ts`,
+    `import { singleComponentStyles } from '../../lib/styles';
+
+const ${classVar} = singleComponentStyles.${exportName} ?? '';
+
+export { ${classVar} };
+`,
+  );
+
+  writeComponentFile(
+    slug,
+    `${slug}.type.ts`,
+    `import { ${exportName} as Base${exportName} } from '@base-ui/react/${slug}';
+import type { ComponentProps } from 'react';
+
+type ${exportName}Props = ComponentProps<typeof Base${exportName}>;
+
+export type { ${exportName}Props };
+`,
+  );
+
+  writeComponentFile(slug, `${slug}.hook.ts`, hookFile(exportName));
+
+  writeComponentFile(
+    slug,
+    'index.tsx',
+    `import { ${exportName} as Base${exportName} } from '@base-ui/react/${slug}';
+import { mergeClassName } from '../../lib/cn';
+import type { ${exportName}Props } from './${slug}.type';
+import { ${classVar} } from './${slug}.styles';
+
+function ${exportName}({ className, ...props }: ${exportName}Props) {
   return (
     <Base${exportName}
-      className={mergeClassName(singleComponentStyles.${exportName}, className)}
+      className={mergeClassName(${classVar}, className)}
       {...props}
     />
   );
 }
 
 export default ${exportName};
-`;
+export type { ${exportName}Props };
+`,
+  );
 }
 
 function generateNamespace(slug, exportName) {
@@ -150,16 +213,44 @@ function generateNamespace(slug, exportName) {
         .join('\n')
     : '';
 
-  return `import { ${exportName} as Base${exportName} } from '@base-ui/react/${slug}';
-import { createStyledModule } from '../lib/create-styled-module';
-import { styles } from '../lib/styles';
+  const stylesVar = stylesVarName(slug);
 
-export const ${exportName} = createStyledModule(Base${exportName}, {
+  writeComponentFile(
+    slug,
+    `${slug}.styles.ts`,
+    `import { styles } from '../../lib/styles';
+
+const ${stylesVar} = {
 ${overrideEntries}
-});
+};
+
+export { ${stylesVar} };
+`,
+  );
+
+  writeComponentFile(
+    slug,
+    `${slug}.type.ts`,
+    `type ${exportName}Module = Record<string, never>;
+
+export type { ${exportName}Module };
+`,
+  );
+
+  writeComponentFile(slug, `${slug}.hook.ts`, hookFile(exportName));
+
+  writeComponentFile(
+    slug,
+    'index.tsx',
+    `import { ${exportName} as Base${exportName} } from '@base-ui/react/${slug}';
+import { createStyledModule } from '../../lib/create-styled-module';
+import { ${stylesVar} } from './${slug}.styles';
+
+const ${exportName} = createStyledModule(Base${exportName}, ${stylesVar});
 
 export default ${exportName};
-`;
+`,
+  );
 }
 
 fs.mkdirSync(componentsDir, { recursive: true });
@@ -168,32 +259,36 @@ const manifest = [];
 
 for (const slug of UI_COMPONENTS) {
   const exportName = getExportName(slug);
-  const fileName = slug;
-  const filePath = path.join(componentsDir, `${fileName}.tsx`);
-
   const namespace = readNamespaceExport(slug);
   const isSingle = !namespace || SINGLE_EXPORT_OVERRIDES[slug];
 
   if (!MANUAL_COMPONENTS.has(slug)) {
-    const content = isSingle
-      ? generateSingle(slug, SINGLE_EXPORT_OVERRIDES[slug]?.exportName ?? exportName)
-      : generateNamespace(slug, namespace ?? exportName);
-
-    fs.writeFileSync(filePath, content);
+    if (isSingle) {
+      generateSingle(slug, SINGLE_EXPORT_OVERRIDES[slug]?.exportName ?? exportName);
+    } else {
+      generateNamespace(slug, namespace ?? exportName);
+    }
   }
 
-  manifest.push({ slug, name: exportName, file: `./src/components/${fileName}.tsx` });
+  manifest.push({ slug, name: exportName, file: `./src/components/${slug}/index.tsx` });
 }
 
-const indexContent = `${manifest.map((m) => `export { default as ${m.name} } from './components/${m.slug}';`).join('\n')}
+const indexContent = `${manifest.map((m) => `import ${m.name} from './components/${m.slug}';`).join('\n')}
+
+export {
+  ${manifest.map((m) => m.name).join(',\n  ')},
+};
 export { componentManifest } from './component-manifest';
 `;
 
 fs.writeFileSync(path.join(root, 'src/index.ts'), indexContent);
 
-const manifestTs = `export const componentManifest = ${JSON.stringify(manifest, null, 2)} as const;
+const manifestTs = `const componentManifest = ${JSON.stringify(manifest, null, 2)} as const;
 
-export type ComponentName = (typeof componentManifest)[number]['name'];
+type ComponentName = (typeof componentManifest)[number]['name'];
+
+export { componentManifest };
+export type { ComponentName };
 `;
 
 fs.writeFileSync(path.join(root, 'src/component-manifest.ts'), manifestTs);
@@ -203,9 +298,27 @@ const exposes = Object.fromEntries(
 );
 
 const viteExposes = `// Auto-generated by scripts/generate-base-ui-components.mjs
-export const federationExposes = ${JSON.stringify(exposes, null, 2)} as const;
+const federationExposes = ${JSON.stringify(exposes, null, 2)} as const;
+
+export { federationExposes };
 `;
 
 fs.writeFileSync(path.join(root, 'federation-exposes.ts'), viteExposes);
+
+const pkgPath = path.join(root, 'package.json');
+const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+
+const exports = {
+  '.': './src/index.ts',
+  './components/*': './src/components/*/index.tsx',
+};
+
+for (const m of manifest) {
+  exports[`./${m.slug}`] = `./src/components/${m.slug}/index.tsx`;
+}
+
+pkg.sideEffects = false;
+pkg.exports = exports;
+fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`);
 
 console.log(`Generated ${manifest.length} Base UI components.`);

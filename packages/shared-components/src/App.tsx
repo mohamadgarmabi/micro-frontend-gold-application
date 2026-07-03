@@ -1,9 +1,9 @@
-import { Button } from './components/button';
-import { Input } from './components/input';
-import { Checkbox } from './components/checkbox';
-import { Switch } from './components/switch';
-import { Tabs } from './components/tabs';
-import { Dialog } from './components/dialog';
+import Button from './components/button';
+import Input from './components/input';
+import Checkbox from './components/checkbox';
+import Switch from './components/switch';
+import Tabs from './components/tabs';
+import Dialog from './components/dialog';
 import { componentManifest } from './component-manifest';
 
 const MailIcon = () => (

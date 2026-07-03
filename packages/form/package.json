@@ -3,8 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "sideEffects": false,
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./generated-form": "./src/generated-form/index.tsx",
+    "./define-form-schema": "./src/define-form-schema/index.ts",
+    "./build-default-values": "./src/build-default-values/index.ts",
+    "./types": "./src/types/index.ts",
+    "./icons": "./src/icons/index.tsx"
   },
   "nx": {
     "name": "form",

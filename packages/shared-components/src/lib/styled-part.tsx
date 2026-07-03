@@ -1,7 +1,7 @@
 import { createElement, type ComponentProps, type ComponentType } from 'react';
 import { cn } from './cn';
 
-export function styledPart<C extends ComponentType<Record<string, unknown>>>(
+function styledPart<C extends ComponentType<Record<string, unknown>>>(
   Component: C,
   baseClassName: string
 ): C {
@@ -19,3 +19,5 @@ export function styledPart<C extends ComponentType<Record<string, unknown>>>(
   Styled.displayName = `Gold${Component.displayName ?? 'Part'}`;
   return Styled as C;
 }
+
+export { styledPart };

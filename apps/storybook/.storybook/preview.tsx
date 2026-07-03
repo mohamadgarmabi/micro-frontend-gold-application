@@ -2,6 +2,23 @@ import type { Preview } from '@storybook/react-vite';
 import '../src/styles.css';
 
 const preview: Preview = {
+  globalTypes: {
+    colorMode: {
+      description: 'Light / dark mode',
+      toolbar: {
+        title: 'Theme',
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', icon: 'sun', title: 'Light' },
+          { value: 'dark', icon: 'moon', title: 'Dark' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+  initialGlobals: {
+    colorMode: 'light',
+  },
   parameters: {
     layout: 'centered',
     controls: {
@@ -12,11 +29,16 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
-      <div className="gold-root bg-surface p-6 text-foreground">
-        <Story />
-      </div>
-    ),
+    (Story, { globals }) => {
+      const isDark = globals.colorMode === 'dark';
+      return (
+        <div
+          className={`gold-root ${isDark ? 'dark' : 'light'} min-w-[20rem] bg-surface p-6 text-foreground`}
+        >
+          <Story />
+        </div>
+      );
+    },
   ],
 };
 

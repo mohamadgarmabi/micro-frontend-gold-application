@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Checkbox } from '@gold/shared-components/components/checkbox';
+import Checkbox from '@gold/shared-components/checkbox';
 
 const meta = {
   title: 'Components/Checkbox',

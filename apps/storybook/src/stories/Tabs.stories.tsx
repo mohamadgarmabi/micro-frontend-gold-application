@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tabs } from '@gold/shared-components/components/tabs';
+import Tabs from '@gold/shared-components/tabs';
 
 const meta = {
   title: 'Components/Tabs',

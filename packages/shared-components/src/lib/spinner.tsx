@@ -4,7 +4,7 @@ type SpinnerProps = {
   className?: string;
 };
 
-export function Spinner({ className }: SpinnerProps) {
+function Spinner({ className }: SpinnerProps) {
   return (
     <svg
       aria-hidden
@@ -28,3 +28,5 @@ export function Spinner({ className }: SpinnerProps) {
     </svg>
   );
 }
+
+export { Spinner };

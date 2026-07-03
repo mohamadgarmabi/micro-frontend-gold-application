@@ -1,39 +1,90 @@
-export { default as Accordion } from './components/accordion';
-export { default as AlertDialog } from './components/alert-dialog';
-export { default as Autocomplete } from './components/autocomplete';
-export { default as Avatar } from './components/avatar';
-export { default as Button } from './components/button';
-export { default as Checkbox } from './components/checkbox';
-export { default as CheckboxGroup } from './components/checkbox-group';
-export { default as Collapsible } from './components/collapsible';
-export { default as Combobox } from './components/combobox';
-export { default as ContextMenu } from './components/context-menu';
-export { default as Dialog } from './components/dialog';
-export { default as Drawer } from './components/drawer';
-export { default as Field } from './components/field';
-export { default as Fieldset } from './components/fieldset';
-export { default as Form } from './components/form';
-export { default as Input } from './components/input';
-export { default as Menu } from './components/menu';
-export { default as Menubar } from './components/menubar';
-export { default as Meter } from './components/meter';
-export { default as NavigationMenu } from './components/navigation-menu';
-export { default as NumberField } from './components/number-field';
-export { default as OTPField } from './components/otp-field';
-export { default as Popover } from './components/popover';
-export { default as PreviewCard } from './components/preview-card';
-export { default as Progress } from './components/progress';
-export { default as Radio } from './components/radio';
-export { default as RadioGroup } from './components/radio-group';
-export { default as ScrollArea } from './components/scroll-area';
-export { default as Select } from './components/select';
-export { default as Separator } from './components/separator';
-export { default as Slider } from './components/slider';
-export { default as Switch } from './components/switch';
-export { default as Tabs } from './components/tabs';
-export { default as Toast } from './components/toast';
-export { default as Toggle } from './components/toggle';
-export { default as ToggleGroup } from './components/toggle-group';
-export { default as Toolbar } from './components/toolbar';
-export { default as Tooltip } from './components/tooltip';
+import Accordion from './components/accordion';
+import AlertDialog from './components/alert-dialog';
+import Autocomplete from './components/autocomplete';
+import Avatar from './components/avatar';
+import Badge from './components/badge';
+import Button from './components/button';
+import Card from './components/card';
+import CheckboxGroup from './components/checkbox-group';
+import Checkbox from './components/checkbox';
+import Collapsible from './components/collapsible';
+import Combobox from './components/combobox';
+import ContextMenu from './components/context-menu';
+import Dialog from './components/dialog';
+import Drawer from './components/drawer';
+import Field from './components/field';
+import Fieldset from './components/fieldset';
+import Form from './components/form';
+import Input from './components/input';
+import Menu from './components/menu';
+import Menubar from './components/menubar';
+import Meter from './components/meter';
+import NavigationMenu from './components/navigation-menu';
+import NumberField from './components/number-field';
+import OTPField from './components/otp-field';
+import Popover from './components/popover';
+import PriceDisplay from './components/price-display';
+import PreviewCard from './components/preview-card';
+import Progress from './components/progress';
+import RadioGroup from './components/radio-group';
+import Radio from './components/radio';
+import ScrollArea from './components/scroll-area';
+import Select from './components/select';
+import Separator from './components/separator';
+import Slider from './components/slider';
+import Toaster from './components/sonner';
+import { toast } from './components/sonner';
+import Switch from './components/switch';
+import Tabs from './components/tabs';
+import Toast from './components/toast';
+import ToggleGroup from './components/toggle-group';
+import Toggle from './components/toggle';
+import Toolbar from './components/toolbar';
+import Tooltip from './components/tooltip';
+
+export {
+  Accordion,
+  AlertDialog,
+  Autocomplete,
+  Avatar,
+  Badge,
+  Button,
+  Card,
+  CheckboxGroup,
+  Checkbox,
+  Collapsible,
+  Combobox,
+  ContextMenu,
+  Dialog,
+  Drawer,
+  Field,
+  Fieldset,
+  Form,
+  Input,
+  Menu,
+  Menubar,
+  Meter,
+  NavigationMenu,
+  NumberField,
+  OTPField,
+  Popover,
+  PriceDisplay,
+  PreviewCard,
+  Progress,
+  RadioGroup,
+  Radio,
+  ScrollArea,
+  Select,
+  Separator,
+  Slider,
+  Toaster,
+  toast,
+  Switch,
+  Tabs,
+  Toast,
+  ToggleGroup,
+  Toggle,
+  Toolbar,
+  Tooltip,
+};
 export { componentManifest } from './component-manifest';

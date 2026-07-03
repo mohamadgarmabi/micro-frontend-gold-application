@@ -1,6 +1,6 @@
 /** Gold design tokens as Tailwind class bundles for Base UI parts */
 
-export const styles = {
+const styles = {
   button: {
     base: 'inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors gold-focus gold-disabled select-none',
     primary:
@@ -19,9 +19,9 @@ export const styles = {
 
   inputWrapper: 'relative flex w-full items-center',
 
-  inputWithLeftIcon: 'pl-9',
+  inputWithLeftIcon: 'ps-9',
 
-  inputWithRightIcon: 'pr-9',
+  inputWithRightIcon: 'pe-9',
 
   inputError:
     'border-danger hover:border-danger focus:border-danger focus:ring-danger/20',
@@ -29,9 +29,9 @@ export const styles = {
   inputIconSlot:
     'pointer-events-none absolute inset-y-0 flex items-center text-foreground-subtle',
 
-  inputIconLeft: 'left-3',
+  inputIconLeft: 'start-3',
 
-  inputIconRight: 'right-3',
+  inputIconRight: 'end-3',
 
   label: 'text-sm font-medium text-foreground',
 
@@ -68,7 +68,7 @@ export const styles = {
     'relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border border-transparent bg-gold-100 transition-colors data-checked:bg-gold-600 gold-focus gold-disabled',
 
   switchThumb:
-    'pointer-events-none block size-5 translate-x-0.5 rounded-full bg-white shadow-sm transition-transform data-checked:translate-x-[1.375rem]',
+    'pointer-events-none block size-5 translate-x-0.5 rounded-full bg-white shadow-sm transition-transform data-checked:translate-x-[1.375rem] rtl:translate-x-[-0.125rem] rtl:data-checked:-translate-x-[1.375rem]',
 
   radioRoot:
     'flex size-4 shrink-0 items-center justify-center rounded-full border border-border bg-white transition-colors data-checked:border-gold-600 gold-focus gold-disabled',
@@ -113,7 +113,7 @@ export const styles = {
   accordionPanel: 'px-4 pb-4 text-sm text-foreground-muted',
 
   toastViewport:
-    'fixed top-4 right-4 z-[60] flex w-full max-w-sm flex-col gap-2 outline-none',
+    'fixed top-4 end-4 z-[60] flex w-full max-w-sm flex-col gap-2 outline-none',
 
   toastRoot:
     'rounded-xl border border-border bg-surface-elevated p-4 shadow-popup data-ending-style:opacity-0 data-starting-style:opacity-0',
@@ -145,7 +145,7 @@ export const styles = {
     'flex cursor-default items-center px-3 py-2 text-sm outline-none select-none data-highlighted:bg-gold-100 data-highlighted:text-gold-800',
 
   otpInput:
-    'size-10 rounded-lg border border-border bg-white text-center text-lg font-medium text-foreground gold-focus',
+    'aspect-square min-w-0 flex-1 rounded-xl border border-border bg-surface text-center text-lg font-medium text-foreground gold-focus data-filled:border-gold-600',
 
   drawerPopup:
     'fixed z-50 flex flex-col bg-surface shadow-popup outline-none data-ending-style:translate-y-full data-starting-style:translate-y-full',
@@ -162,7 +162,7 @@ export const styles = {
 } as const;
 
 /** Maps Base UI part names to style keys */
-export const partStyles: Record<string, string> = {
+const partStyles: Record<string, string> = {
   Root: '',
   Provider: '',
   Portal: '',
@@ -235,7 +235,7 @@ export const partStyles: Record<string, string> = {
   Validity: styles.error,
 };
 
-export const singleComponentStyles: Record<string, string> = {
+const singleComponentStyles: Record<string, string> = {
   Button: `${styles.button.base} ${styles.button.primary}`,
   Input: styles.input,
   Separator: styles.separator,
@@ -243,3 +243,5 @@ export const singleComponentStyles: Record<string, string> = {
   CheckboxGroup: 'flex flex-col gap-3',
   RadioGroup: 'flex flex-col gap-3',
 };
+
+export { styles, partStyles, singleComponentStyles };

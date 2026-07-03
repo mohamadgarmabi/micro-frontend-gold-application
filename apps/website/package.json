@@ -1,0 +1,56 @@
+{
+  "name": "@gold/website",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview --port 4300 --strictPort"
+  },
+  "nx": {
+    "name": "website",
+    "projectType": "application",
+    "sourceRoot": "apps/website/src",
+    "implicitDependencies": ["design-system", "shared-components", "apis"],
+    "targets": {
+      "dev": {
+        "executor": "nx:run-commands",
+        "continuous": true,
+        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "dependsOn": ["shared-components:dev"],
+        "options": {
+          "command": "vite --port 4300 --strictPort",
+          "cwd": "apps/website"
+        }
+      },
+      "build": {
+        "executor": "nx:run-commands",
+        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "dependsOn": ["shared-components:build"],
+        "options": {
+          "command": "vite build",
+          "cwd": "apps/website"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@gold/apis": "workspace:*",
+    "@gold/design-system": "workspace:*",
+    "@gold/form": "workspace:*",
+    "@gold/shared-components": "workspace:*",
+    "@module-federation/runtime": "^2.4.0",
+    "@tanstack/vue-query": "^5.90.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@module-federation/vite": "^1.15.5",
+    "@vitejs/plugin-react": "^6.0.2",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.9.2",
+    "vite": "^8.0.13"
+  }
+}

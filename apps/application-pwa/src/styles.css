@@ -1,0 +1,108 @@
+@import '@gold/design-system/styles.css';
+
+/* nx-tailwind-sources:start */
+@source "../../../packages/apis";
+@source "../../../packages/design-system";
+@source "../../../packages/form";
+@source "../../../packages/shared-components";
+/* nx-tailwind-sources:end */
+
+@import 'tailwindcss';
+
+@theme {
+  --font-mono: 'Vazirmatn Variable', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide scrollbars globally — touch/scroll still works */
+html,
+body,
+#app,
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.aurum-serif {
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+
+.aurum-gradient-bg {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% -10%,
+    color-mix(in oklab, var(--ds-brand) 12%, transparent) 0%,
+    var(--ds-brand-surface) 60%
+  );
+}
+
+.aurum-spot-card {
+  background: linear-gradient(
+    135deg,
+    var(--ds-surface-accent) 0%,
+    var(--ds-surface-elevated) 40%,
+    var(--ds-surface-muted) 100%
+  );
+  border: 1px solid color-mix(in oklab, var(--ds-brand) 22%, transparent);
+  box-shadow: var(--ds-shadow-popup);
+}
+
+.pwa-banner {
+  position: fixed;
+  inset-inline-end: 1rem;
+  bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  z-index: 60;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: min(24rem, calc(100vw - 2rem));
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--ds-border);
+  border-radius: 1rem;
+  background: var(--ds-surface-elevated);
+  color: var(--ds-foreground);
+  box-shadow: var(--ds-shadow-popup);
+  backdrop-filter: blur(12px);
+}
+
+.pwa-banner__action,
+.pwa-banner__dismiss {
+  border-radius: 9999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pwa-banner__action {
+  border: 1px solid color-mix(in oklab, var(--ds-brand) 30%, transparent);
+  background: color-mix(in oklab, var(--ds-brand) 14%, transparent);
+  color: var(--ds-brand);
+}
+
+.pwa-banner__dismiss {
+  border: 1px solid var(--ds-border);
+  background: transparent;
+  color: var(--ds-foreground-subtle);
+}

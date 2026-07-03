@@ -5,21 +5,19 @@
   "scripts": {
     "stop": "for port in 4200 4300 4400 5100 6006; do lsof -ti tcp:$port | xargs kill -9 2>/dev/null; done || true",
     "generate:components": "node scripts/generate-base-ui-components.mjs",
+    "generate:stories": "node scripts/generate-storybook-stories.mjs",
     "predev:react": "pnpm stop",
-    "predev:vue": "pnpm stop",
-    "predev:start": "pnpm stop",
-    "dev": "nx dev react-sample",
-    "dev:react": "nx dev react-sample",
-    "dev:vue": "nx dev vue-sample",
-    "dev:start": "nx dev start-sample",
+    "predev:website": "pnpm stop",
+    "predev:application-pwa": "pnpm stop",
+    "dev:website": "nx dev website",
+    "dev:application-pwa": "nx dev application-pwa",
     "dev:components": "nx dev shared-components",
     "dev:storybook": "nx dev storybook",
-    "build": "nx run-many -t build -p shared-components,react-sample,vue-sample,start-sample,form",
+    "build": "nx run-many -t build -p shared-components,website,application-pwa,form",
     "preview:components": "nx preview shared-components",
-    "preview:react": "nx preview react-sample",
     "preview:form": "nx preview form",  
     "preview:storybook": "nx preview storybook",
-    "preview:start": "nx preview start-sample"
+    "preview:application-pwa": "nx preview application-pwa"
   },
   "private": true,
   "dependencies": {

@@ -1,10 +1,12 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import type { StorybookConfig } from '@storybook/react-vite';
 import tailwindcss from '@tailwindcss/vite';
 import { mergeConfig } from 'vite';
 
-const dirname = path.dirname(fileURLToPath(import.meta.url));
+const workspacePackages = [
+  '@gold/apis',
+  '@gold/form',
+  '@gold/shared-components',
+];
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
@@ -13,13 +15,8 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     return mergeConfig(config, {
       plugins: [tailwindcss()],
-      resolve: {
-        alias: {
-          '@gold/shared-components': path.resolve(
-            dirname,
-            '../../../packages/shared-components/src'
-          ),
-        },
+      optimizeDeps: {
+        exclude: workspacePackages,
       },
     });
   },

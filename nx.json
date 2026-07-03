@@ -49,7 +49,7 @@
     },
     {
       "plugin": "@nx/vitest",
-      "exclude": ["apps/start-sample/**/*"],
+      "exclude": ["apps/application-pwa/**/*"],
       "options": {
         "testTargetName": "test",
         "ciTargetName": "test-ci",

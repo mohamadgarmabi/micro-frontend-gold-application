@@ -1,0 +1,28 @@
+/* Document direction — set `dir="rtl"` or `dir="ltr"` on <html> */
+
+[dir='rtl'] {
+  direction: rtl;
+}
+
+[dir='ltr'] {
+  direction: ltr;
+}
+
+/* Prefer logical alignment for unstyled blocks */
+[dir='rtl'] :where(:not([dir='ltr'])) {
+  text-align: start;
+}
+
+/* Flip physical-only icons when needed */
+[dir='rtl'] .gold-rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Scrollbar gutter for fixed bottom nav */
+[dir='rtl'] .gold-safe-inline-end {
+  inset-inline-end: 1rem;
+}
+
+[dir='ltr'] .gold-safe-inline-end {
+  inset-inline-end: 1rem;
+}
