@@ -1,0 +1,25 @@
+{
+  "name": "@gold/design-system",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./styles.css": "./src/styles.css",
+    "./base-ui.css": "./src/base-ui.css",
+    "./components.css": "./src/components.css"
+  },
+  "nx": {
+    "name": "design-system",
+    "projectType": "library",
+    "sourceRoot": "packages/design-system/src",
+    "targets": {
+      "dev": {
+        "executor": "nx:run-commands",
+        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "options": {
+          "command": "echo @gold/design-system ready",
+          "cwd": "packages/design-system"
+        }
+      }
+    }
+  }
+}

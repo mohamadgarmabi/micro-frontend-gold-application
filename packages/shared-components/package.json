@@ -1,0 +1,67 @@
+{
+  "name": "@gold/shared-components",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview --port 5100 --strictPort"
+  },
+  "nx": {
+    "name": "shared-components",
+    "projectType": "library",
+    "sourceRoot": "packages/shared-components/src",
+    "implicitDependencies": [
+      "design-system"
+    ],
+    "targets": {
+      "dev": {
+        "executor": "nx:run-commands",
+        "continuous": true,
+        "syncGenerators": [
+          "@juristr/nx-tailwind-sync:source-directives"
+        ],
+        "dependsOn": [
+          "design-system:dev"
+        ],
+        "options": {
+          "command": "vite --port 5100 --strictPort",
+          "cwd": "packages/shared-components"
+        }
+      },
+      "build": {
+        "executor": "nx:run-commands",
+        "syncGenerators": [
+          "@juristr/nx-tailwind-sync:source-directives"
+        ],
+        "dependsOn": [
+          "design-system:dev"
+        ],
+        "options": {
+          "command": "vite build",
+          "cwd": "packages/shared-components"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.6.0",
+    "@gold/design-system": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./button": "./src/components/button.tsx",
+    "./input": "./src/components/input.tsx",
+    "./checkbox": "./src/components/checkbox.tsx"
+  },
+  "devDependencies": {
+    "@module-federation/vite": "^1.15.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^6.0.2",
+    "typescript": "~5.9.2",
+    "vite": "^8.0.13"
+  }
+}

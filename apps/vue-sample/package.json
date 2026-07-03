@@ -1,0 +1,53 @@
+{
+  "name": "@gold/vue-sample",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "preview": "vite preview --port 4300 --strictPort"
+  },
+  "nx": {
+    "name": "vue-sample",
+    "projectType": "application",
+    "sourceRoot": "apps/vue-sample/src",
+    "implicitDependencies": ["design-system", "shared-components"],
+    "targets": {
+      "dev": {
+        "executor": "nx:run-commands",
+        "continuous": true,
+        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "dependsOn": ["shared-components:dev"],
+        "options": {
+          "command": "vite --port 4300 --strictPort",
+          "cwd": "apps/vue-sample"
+        }
+      },
+      "build": {
+        "executor": "nx:run-commands",
+        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "dependsOn": ["shared-components:build"],
+        "options": {
+          "command": "vite build",
+          "cwd": "apps/vue-sample"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@gold/design-system": "workspace:*",
+    "@gold/shared-components": "workspace:*",
+    "@module-federation/runtime": "^2.4.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@module-federation/vite": "^1.15.5",
+    "@vitejs/plugin-react": "^6.0.2",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.9.2",
+    "vite": "^8.0.13"
+  }
+}

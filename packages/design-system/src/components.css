@@ -1,0 +1,11 @@
+/* Shared component-layer utilities for @gold/shared-components (Base UI + Tailwind v4) */
+
+@layer components {
+  .gold-focus {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-gold-600/30 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-surface;
+  }
+
+  .gold-disabled {
+    @apply disabled:cursor-not-allowed disabled:opacity-50 data-disabled:cursor-not-allowed data-disabled:opacity-50;
+  }
+}

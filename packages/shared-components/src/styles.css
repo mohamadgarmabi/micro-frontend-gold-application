@@ -1,0 +1,5 @@
+@import '@gold/design-system/styles.css';
+
+/* nx-tailwind-sources:start */
+@source "../../design-system";
+/* nx-tailwind-sources:end */

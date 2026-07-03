@@ -1,0 +1,6 @@
+@import '@gold/design-system/styles.css';
+
+/* nx-tailwind-sources:start */
+@source "../../../packages/design-system";
+@source "../../../packages/shared-components";
+/* nx-tailwind-sources:end */

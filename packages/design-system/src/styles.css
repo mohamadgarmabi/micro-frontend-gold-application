@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+/* nx-tailwind-sources:start */
+/* nx-tailwind-sources:end */
+@import './base-ui.css';
+@import './components.css';
+
+/*
+ * Color Hunt palette
+ * https://colorhunt.co/palette/606c5dfff4f4f7e6c4f1c376
+ *
+ * #606c5d — primary (olive)
+ * #fff4f4 — surface
+ * #f7e6c4 — secondary / muted
+ * #f1c376 — accent (gold)
+ */
+
+@theme {
+  /* Palette primitives */
+  --color-brand: #606c5d;
+  --color-brand-surface: #fff4f4;
+  --color-brand-muted: #f7e6c4;
+  --color-brand-accent: #f1c376;
+
+  /* Brand scale (gold-* maps to site palette for Tailwind utilities) */
+  --color-gold-50: #fff4f4;
+  --color-gold-100: #f7e6c4;
+  --color-gold-200: #f1c376;
+  --color-gold-300: #e8c98a;
+  --color-gold-400: #c9b07a;
+  --color-gold-500: #8f9a8c;
+  --color-gold-600: #606c5d;
+  --color-gold-700: #525e50;
+  --color-gold-800: #454f44;
+  --color-gold-900: #3a4339;
+
+  /* Surfaces */
+  --color-surface: #ffffff;
+  --color-surface-muted: #fff4f4;
+  --color-surface-elevated: #ffffff;
+  --color-surface-accent: #f7e6c4;
+  --color-border: #e8ddd0;
+  --color-border-strong: #c9b89e;
+
+  /* Text */
+  --color-foreground: #3a4339;
+  --color-foreground-muted: #606c5d;
+  --color-foreground-subtle: #8f9a8c;
+  --color-foreground-on-brand: #fff4f4;
+
+  /* Semantic */
+  --color-danger: #c44536;
+  --color-danger-muted: #fff4f4;
+  --color-success: #606c5d;
+  --color-success-muted: #f7e6c4;
+
+  /* Typography */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Shadows */
+  --shadow-popup: 0 10px 40px -10px rgb(58 67 57 / 0.18);
+  --shadow-focus: 0 0 0 3px color-mix(in oklab, var(--color-brand) 28%, transparent);
+
+  /* Z-index */
+  --z-popup: 50;
+  --z-toast: 60;
+}

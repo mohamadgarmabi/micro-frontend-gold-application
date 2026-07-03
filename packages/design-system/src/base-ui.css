@@ -1,0 +1,31 @@
+/* Base UI global setup — https://base-ui.com/react/overview/quick-start */
+
+body {
+  position: relative;
+  font-family: var(--font-sans);
+  color: var(--color-foreground);
+  background-color: var(--color-brand-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+.gold-root {
+  isolation: isolate;
+  min-height: 100%;
+}
+
+/* Popup motion defaults */
+[data-starting-style],
+[data-ending-style] {
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease;
+}
+
+[data-starting-style],
+[data-ending-style] {
+  opacity: 0;
+}
+
+[data-popup-open] {
+  z-index: var(--z-popup);
+}

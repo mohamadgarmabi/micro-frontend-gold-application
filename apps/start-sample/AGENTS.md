@@ -1,0 +1,25 @@
+<!-- intent-skills:start -->
+# TanStack Intent - before editing files, run the matching guidance command.
+tanstackIntent:
+  - id: "@vitejs/devtools-kit#vite-devtools-kit"
+    run: "pnpm dlx @tanstack/intent@latest load @vitejs/devtools-kit#vite-devtools-kit"
+    for: "Creates devtools integrations that mount inside the Vite DevTools hub via @vitejs/devtools-kit. Use when building Vite plugins with devtools panels, RPC functions, dock entries, shared state, messages/notifications, terminals, command palette entries, or any hub-level integration. Applies to files importing from @vitejs/devtools-kit or containing devtools.setup hooks in Vite plugins. For building one portable devtool integration without a hub (CLI, static deploy, MCP), see the `devframe` skill instead."
+  - id: "devframe#devframe"
+    run: "pnpm dlx @tanstack/intent@latest load devframe#devframe"
+    for: "Use when building a devtool with devframe — the framework- and build-tool-agnostic foundation for defining a devtool once and serving it in many places. Covers DevframeDefinition, picking the right deployment adapter (cli / build / spa / vite / embedded / mcp), designing RPC contracts, exposing an agent-native surface over MCP, and wiring the author's SPA client. For host-level features (docks, terminals, palette, etc.), the devframe can be mounted into a host that provides them — Vite DevTools is one supported target, reached via the `vite` adapter. Triggers on `devframe` imports, `defineDevframe`, `createCli`, `createMcpServer`, `connectDevframe`, and on migrations of existing inspectors (eslint-config-inspector, unocss-inspector, node-modules-inspector-style tools) to devframe."
+  - id: "dotenv#dotenv"
+    run: "pnpm dlx @tanstack/intent@latest load dotenv#dotenv"
+    for: "Load environment variables from a .env file into process.env for Node.js applications. Use when configuring apps with secrets, setting up local development environments, managing API keys and database uRLs, parsing .env file contents, or populating environment variables programmatically. Always use this skill when the user mentions .env, even for simple tasks like \"set up dotenv\" — the skill contains critical gotchas (encrypted keys, variable expansion, command substitution) that prevent common production issues."
+  - id: "dotenv#dotenvx"
+    run: "pnpm dlx @tanstack/intent@latest load dotenv#dotenvx"
+    for: "Use dotenvx to run commands with environment variables, manage multiple .env files, expand variables, and encrypt env files for safe commits and CI/CD."
+  - id: "nostics#add-diagnostic"
+    run: "pnpm dlx @tanstack/intent@latest load nostics#add-diagnostic"
+    for: "Add a new diagnostic code following the defineDiagnostics() conventions from nostics"
+  - id: "nostics#nostics"
+    run: "pnpm dlx @tanstack/intent@latest load nostics#nostics"
+    for: "Structured diagnostic code library for JavaScript/TypeScript. Turns errors and other conditions into typed, machine-readable `Diagnostic` instances with stable codes, docs URLs, and actionable fields. Use this skill whenever the project imports `nostics`, or works with `defineDiagnostics`/`defineProdDiagnostics`, the `Diagnostic` class, diagnostic code registries, or structured error handling. Also covers reporters (`createConsoleReporter`, `createFetchReporter` from nostics/reporters/fetch, `createFileReporter` from nostics/reporters/node, `createDevReporter` from nostics/reporters/dev), formatters (`formatDiagnostic`, `ansiFormatter`, `jsonFormatter`), and Vite plugins (`nosticsStrip` from @nostics/unplugin/strip-transform, `nosticsCollector` from @nostics/unplugin/dev-server-collector). Also use when migrating a library's existing `console.warn`/`console.error`/`warn()` helpers or thrown `Error`s to diagnostics: follow `references/migration.md`."
+  - id: "vue-virtual-scroller#vue-virtual-scroller"
+    run: "pnpm dlx @tanstack/intent@latest load vue-virtual-scroller#vue-virtual-scroller"
+    for: "Use this skill for Vue 3 virtual scrolling with vue-virtual-scroller, important for good performance with a lot of data, including RecycleScroller, DynamicScroller, DynamicScrollerItem, WindowScroller, useRecycleScroller, useDynamicScroller, and useWindowScroller for fixed-size lists, unknown-size rows, grids, chat feeds, tables, and page-scrolling layouts."
+<!-- intent-skills:end -->

@@ -1,0 +1,39 @@
+{
+  "name": "@gold/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build -o dist"
+  },
+  "nx": {
+    "name": "storybook",
+    "projectType": "application",
+    "sourceRoot": "apps/storybook/src",
+    "implicitDependencies": ["design-system", "shared-components"],
+    "targets": {
+      "dev": {
+        "executor": "nx:run-commands",
+        "continuous": true,
+        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "options": {
+          "command": "storybook dev -p 6006 --no-open",
+          "cwd": "apps/storybook"
+        }
+      },
+      "build": {
+        "executor": "nx:run-commands",
+        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "options": {
+          "command": "storybook build -o dist",
+          "cwd": "apps/storybook"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.6.0",
+    "@gold/design-system": "workspace:*"
+  }
+}
