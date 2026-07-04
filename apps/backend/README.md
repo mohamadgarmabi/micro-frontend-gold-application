@@ -1,4 +1,4 @@
-# djshop
+# Backend
 
 A Django-based web application skeleton featuring Django Rest Framework, Channels, PostgreSQL (with Docker), OpenAPI (drf_spectacular), and CORS support. Designed for ecommerce or generic shop/backoffice APIs with modern best practices.
 
@@ -31,7 +31,7 @@ A Django-based web application skeleton featuring Django Rest Framework, Channel
 
 ```bash
 git clone <YOUR_REPO_URL>
-cd djshop
+cd backend
 ```
 
 ---
@@ -52,7 +52,7 @@ docker-compose up --build
 ### Development
 
 - App code lives in `src/`
-- Django settings are env-specific (`src/djshop/envs/`)
+- Django settings are env-specific (`src/core/envs/`)
   - `common.py`: shared config
   - `development.py`: overrides for local/Postgres/Docker
 
@@ -86,7 +86,7 @@ You can override via your `.env` or Compose file.
 
 - Add new Django apps in `src/`
 - Install additional dependencies in `requirements.txt`
-- Update environment settings in `src/djshop/envs/`
+- Update environment settings in `src/core/envs/`
 
 ---
 

@@ -16,8 +16,8 @@ services:
       - db
     environment:
       - POSTGRES_HOST=db
-      - POSTGRES_DB=djshop
-      - POSTGRES_USER=djshop
+      - POSTGRES_DB=backend
+      - POSTGRES_USER=backend
       - POSTGRES_PASSWORD=123@456
       - POSTGRES_PORT=5432
 
@@ -26,11 +26,11 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - djshop-data:/var/lib/postgresql/data
+      - backend-data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=djshop
-      - POSTGRES_USER=djshop
+      - POSTGRES_DB=backend
+      - POSTGRES_USER=backend
       - POSTGRES_PASSWORD=123@456
 
 volumes:
-  djshop-data:
+  backend-data:
