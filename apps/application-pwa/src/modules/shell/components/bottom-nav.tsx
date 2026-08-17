@@ -1,48 +1,73 @@
-import { Link, useRouterState } from '@tanstack/react-router'
-import { ArrowLeftRight, Home, Settings, TrendingUp, User } from 'lucide-react'
-import type { AurumNavPage } from '../types'
+import { Link } from '@tanstack/react-router'
+import { Search } from 'lucide-react'
+import { useBottomNav } from '../hooks/bottom-nav.hook'
+import SearchDrawer from './search-drawer'
 
-const navItems: { page: AurumNavPage; to: string; icon: React.ReactNode; label: string }[] = [
-  { page: 'home', to: '/home', icon: <Home size={20} />, label: 'Home' },
-  { page: 'chart', to: '/chart', icon: <TrendingUp size={20} />, label: 'Chart' },
-  { page: 'trade', to: '/trade', icon: <ArrowLeftRight size={20} />, label: 'Trade' },
-  { page: 'profile', to: '/profile', icon: <User size={20} />, label: 'Profile' },
-  { page: 'options', to: '/options', icon: <Settings size={20} />, label: 'Options' },
-]
-
-function BottomNav() {
-  const pathname = useRouterState({ select: (s) => s.location.pathname })
+const BottomNav = () => {
+  const { items, visualPage, showSearch, search, trackRef, slider } = useBottomNav()
 
   return (
-    <nav
-      className="fixed inset-x-0 bottom-0 z-50 mx-auto flex max-w-md items-center justify-around border-t border-border bg-brand-surface/95 px-2 backdrop-blur-lg"
-      style={{
-        paddingBottom: 'max(env(safe-area-inset-bottom, 12px), 12px)',
-      }}
-    >
-      {navItems.map(({ page, to, icon, label }) => {
-        const active = pathname === to || (to === '/home' && pathname === '/')
-        return (
-          <Link
-            key={page}
-            to={to}
-            className={`relative flex flex-col items-center gap-0.5 rounded-xl px-3 py-3 no-underline transition-all duration-200 ${
-              active
-                ? 'text-gold-600'
-                : 'text-foreground-subtle hover:text-foreground'
-            }`}
-          >
-            <span className={`transition-transform duration-200 ${active ? 'scale-110' : ''}`}>
-              {icon}
+    <>
+      <nav className={`liquid-nav ${showSearch ? 'is-search-visible' : ''}`}>
+        <button
+          type="button"
+          className={`liquid-nav__search ${search.isOpen ? 'is-active' : ''}`}
+          onClick={search.openSearch}
+          tabIndex={showSearch ? 0 : -1}
+          aria-hidden={!showSearch}
+          aria-label="Search"
+        >
+          <Search size={20} strokeWidth={search.isOpen ? 2.4 : 1.75} />
+        </button>
+        <div className="liquid-nav__bar">
+          <div ref={trackRef} className="liquid-nav__track">
+            <span
+              className={`liquid-nav__slider ${slider.isReady ? 'is-ready' : ''}`}
+              style={{
+                width: slider.width,
+                transform: `translate3d(${slider.x}px, 0, 0)`,
+              }}
+              aria-hidden="true"
+            >
+              <span className="liquid-nav__glow" />
+              <span className="liquid-nav__indicator" />
             </span>
-            <span className="text-[10px] font-medium">{label}</span>
-            {active && (
-              <span className="absolute bottom-1 h-1 w-1 rounded-full bg-gold-600" />
-            )}
-          </Link>
-        )
-      })}
-    </nav>
+            {items.map((item) => {
+              const Icon = item.icon
+              const isActive = item.page === visualPage
+
+              return (
+                <Link
+                  key={item.page}
+                  to={item.to}
+                  viewTransition={false}
+                  data-nav-item={item.page}
+                  className={`liquid-nav__item ${isActive ? 'is-active' : ''}`}
+                >
+                  <Icon size={20} strokeWidth={isActive ? 2.4 : 1.75} />
+                  <span>{item.label}</span>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+      </nav>
+      <SearchDrawer
+        isOpen={search.isOpen}
+        query={search.query}
+        results={search.results}
+        onOpenChange={(open) => {
+          if (open) {
+            search.openSearch()
+            return
+          }
+
+          search.closeSearch()
+        }}
+        onQueryChange={search.setQuery}
+        onClose={search.closeSearch}
+      />
+    </>
   )
 }
 

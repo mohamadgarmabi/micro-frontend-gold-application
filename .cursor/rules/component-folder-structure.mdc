@@ -1,9 +1,7 @@
 ---
-description: Component folder and file layout for design-system, form, and shared-components packages
 globs: packages/{design-system,form,shared-components}/**/*
 alwaysApply: false
 ---
-
 # Component Folder Structure
 
 Applies to **packages only** (`design-system`, `form`, `shared-components`). Apps follow this pattern later.
@@ -54,7 +52,7 @@ import type { ButtonProps } from './button.type';
 import { useButton } from './button.hook';
 import { buttonStyles } from './button.styles';
 
-function Button(props: ButtonProps) {
+const Button = (props: ButtonProps) => {
   const { className, ...rest } = useButton(props);
   return <button className={className} {...rest} />;
 }

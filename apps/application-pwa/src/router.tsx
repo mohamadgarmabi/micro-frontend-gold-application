@@ -2,10 +2,16 @@ import { configureApis } from '@gold/apis'
 import { QueryClient } from '@tanstack/react-query'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
+import type { AuthContext } from '#/modules/auth/types'
 import { apiConfig } from './config/api'
 import { routeTree } from './routeTree.gen'
 
 configureApis(apiConfig)
+
+const defaultAuthContext: AuthContext = {
+  token: null,
+  isAuthenticated: false,
+}
 
 export function getRouter() {
   const queryClient = new QueryClient({
@@ -19,10 +25,14 @@ export function getRouter() {
 
   const router = createTanStackRouter({
     routeTree,
-    context: { queryClient },
+    context: {
+      queryClient,
+      auth: defaultAuthContext,
+    },
     scrollRestoration: true,
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
+    defaultViewTransition: true,
   })
 
   setupRouterSsrQueryIntegration({

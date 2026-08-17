@@ -39,13 +39,13 @@ function LoginView() {
     <div className="aurum-gradient-bg flex min-h-screen flex-col">
         <div className="flex flex-1 flex-col items-center justify-center px-6 pt-20 pb-8">
           <div className="mb-8 flex flex-col items-center">
-            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-gold-600 via-gold-700 to-gold-400 shadow-lg shadow-gold-600/30">
-              <span className="aurum-serif text-2xl font-bold text-foreground-on-brand">Au</span>
+            <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-button text-button-foreground shadow-lg">
+              <span className="aurum-serif text-2xl font-bold">Au</span>
             </div>
             <h1 className="aurum-serif text-3xl font-semibold tracking-tight text-foreground">
               Aurum
             </h1>
-            <p className="mt-1 text-sm text-foreground-subtle">Gold. Traded precisely.</p>
+            <p className="mt-1 text-sm text-foreground-subtle">Trade with precision.</p>
           </div>
 
           <div className="w-full max-w-sm space-y-4">
@@ -79,7 +79,7 @@ function LoginView() {
               type="button"
               onClick={goToOtp}
               disabled={!canSubmit}
-              className="w-full rounded-xl py-3.5 shadow-lg shadow-gold-600/25 disabled:shadow-none"
+              className="w-full rounded-xl py-3.5 shadow-lg shadow-neutral-900/10 disabled:shadow-none dark:shadow-white/10"
             >
               Send OTP
             </Button>

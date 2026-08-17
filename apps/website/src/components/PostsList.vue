@@ -3,7 +3,7 @@ import { postController } from '@gold/apis/posts';
 import { useQuery } from '@tanstack/vue-query';
 import { apiConfig } from '../config/api';
 
-const { data: posts, isPending, isError } = useQuery(postController.getPostList());
+const { data: posts, isPending, isError } = useQuery(postController.getPostList({limit: 10}));
 </script>
 
 <template>

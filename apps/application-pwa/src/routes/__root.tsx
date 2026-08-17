@@ -2,12 +2,27 @@ import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/reac
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { QueryClient } from '@tanstack/react-query'
+import { getAuthSession } from '#/modules/auth/apis/get-auth-session'
+import { setAuthContext } from '#/modules/auth/stores/auth.store'
+import type { AuthContext } from '#/modules/auth/types'
+import { THEME_INIT_SCRIPT, THEME_META_COLORS } from '#/config/theme.constants'
 import AppProviders from '../components/AppProviders'
 import PwaInstallPrompt from '../components/PwaInstallPrompt'
 
 import appCss from '../styles.css?url'
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+type RouterContext = {
+  queryClient: QueryClient
+  auth: AuthContext
+}
+
+export const Route = createRootRouteWithContext<RouterContext>()({
+  beforeLoad: async () => {
+    const auth = await getAuthSession()
+    setAuthContext(auth)
+
+    return { auth }
+  },
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
@@ -19,7 +34,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: 'description',
         content: 'Aurum — Gold trading PWA. Trade gold precisely on the go.',
       },
-      { name: 'theme-color', content: '#1a120c' },
+      { name: 'theme-color', content: THEME_META_COLORS.dark },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       { title: 'Aurum — Gold Trading' },
@@ -35,11 +50,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fa" dir="rtl" className="dark" suppressHydrationWarning>
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="gold-root bg-brand-surface font-sans text-foreground antialiased [overflow-wrap:anywhere] selection:bg-gold-600/25">
+      <body className="gold-root bg-brand-surface font-sans text-foreground antialiased [overflow-wrap:anywhere] selection:bg-gold-600/20">
         {children}
         <AppProviders />
         <PwaInstallPrompt />
@@ -57,3 +73,5 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     </html>
   )
 }
+
+export type { RouterContext }

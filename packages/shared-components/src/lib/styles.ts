@@ -4,11 +4,11 @@ const styles = {
   button: {
     base: 'inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors gold-focus gold-disabled select-none',
     primary:
-      'bg-gold-600 text-foreground-on-brand hover:bg-gold-700 active:bg-gold-800 data-popup-open:bg-gold-700',
+      'bg-button text-button-foreground hover:bg-button-hover active:bg-button-hover data-popup-open:bg-button-hover',
     secondary:
-      'border border-gold-600/30 bg-brand-surface text-gold-700 hover:bg-gold-100 active:bg-gold-200 data-popup-open:bg-gold-100',
+      'border border-button bg-transparent text-button hover:bg-button/10 active:bg-button/15 data-popup-open:bg-button/10',
     ghost:
-      'bg-transparent text-foreground-muted hover:bg-gold-100 active:bg-gold-200 data-popup-open:bg-gold-100',
+      'bg-transparent text-foreground hover:bg-button/10 active:bg-button/15 data-popup-open:bg-button/10',
     destructive:
       'bg-danger text-white hover:bg-red-700 active:bg-red-800',
     icon: 'size-9 rounded-lg p-0',
@@ -60,7 +60,7 @@ const styles = {
   separator: 'shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px',
 
   checkboxRoot:
-    'flex size-4 shrink-0 items-center justify-center rounded border border-border bg-white text-white transition-colors data-checked:border-gold-600 data-checked:bg-gold-600 gold-focus gold-disabled',
+    'flex size-4 shrink-0 items-center justify-center rounded border border-border bg-surface text-button-foreground transition-colors data-checked:border-gold-600 data-checked:bg-gold-600 gold-focus gold-disabled',
 
   checkboxIndicator: 'size-3',
 

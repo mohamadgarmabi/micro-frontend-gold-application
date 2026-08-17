@@ -5,7 +5,7 @@ const sonnerClassNames = {
   title: '!text-sm !font-semibold !text-foreground',
   description: '!text-sm !text-foreground-muted',
   actionButton:
-    '!rounded-lg !bg-gold-600 !px-3 !py-1.5 !text-xs !font-semibold !text-foreground-on-brand',
+    '!rounded-lg !bg-button !px-3 !py-1.5 !text-xs !font-semibold !text-button-foreground',
   cancelButton:
     '!rounded-lg !border !border-border !bg-surface !px-3 !py-1.5 !text-xs !font-medium !text-foreground-muted',
   closeButton:

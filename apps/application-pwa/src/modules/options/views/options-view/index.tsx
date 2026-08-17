@@ -4,8 +4,10 @@ import { toast } from '@gold/shared-components/sonner'
 import { Check, ChevronRight, Clock } from 'lucide-react'
 import Card from '#/modules/shell/components/card'
 import GoldBadge from '#/modules/shell/components/gold-badge'
+import ThemeSelector from '#/modules/shell/components/theme-selector'
 import Toggle from '#/modules/shell/components/toggle'
 import { useDirection } from '#/modules/shell/hooks/direction.hook'
+import { useTheme } from '#/modules/shell/hooks/theme.hook'
 import { useOptions } from '../../hooks/options.hook'
 
 function OptionsView() {
@@ -14,12 +16,21 @@ function OptionsView() {
     setNotifications,
     biometric,
     setBiometric,
-    darkMode,
-    setDarkMode,
     priceAlert,
     setPriceAlert,
   } = useOptions()
   const { isRtl, setDirection } = useDirection()
+  const { preference, setTheme } = useTheme()
+
+  const handleThemeChange = (nextTheme: typeof preference) => {
+    setTheme(nextTheme)
+    const labels = {
+      light: 'تم روشن فعال شد',
+      dark: 'تم تاریک فعال شد',
+      system: 'تم مطابق سیستم فعال شد',
+    }
+    toast.info(labels[nextTheme])
+  }
 
   const handleDirectionChange = (rtl: boolean) => {
     setDirection(rtl ? 'rtl' : 'ltr')
@@ -46,9 +57,12 @@ function OptionsView() {
                 </div>
                 <Toggle value={isRtl} onChange={handleDirectionChange} />
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
-                <span className="text-sm text-foreground">Dark Mode</span>
-                <Toggle value={darkMode} onChange={setDarkMode} />
+              <div className="rounded-xl border border-border bg-surface-elevated p-4">
+                <div className="mb-3">
+                  <p className="text-sm text-foreground">Theme</p>
+                  <p className="text-xs text-foreground-subtle">Light, dark, or follow system</p>
+                </div>
+                <ThemeSelector value={preference} onChange={handleThemeChange} />
               </div>
               <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
                 <div>

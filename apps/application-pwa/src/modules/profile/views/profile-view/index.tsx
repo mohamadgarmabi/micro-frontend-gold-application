@@ -1,7 +1,5 @@
 import Avatar from '@gold/shared-components/avatar'
 import Button from '@gold/shared-components/button'
-import { toast } from '@gold/shared-components/sonner'
-import { useNavigate } from '@tanstack/react-router'
 import {
   Bell,
   ChevronRight,
@@ -18,14 +16,13 @@ import GoldBadge from '#/modules/shell/components/gold-badge'
 import { useProfile } from '../../hooks/profile.hook'
 
 function ProfileView() {
-  const navigate = useNavigate()
-  const { showBalance, setShowBalance } = useProfile()
+  const { showBalance, setShowBalance, signOut } = useProfile()
 
   return (
     <div className="min-h-screen pb-24">
-        <div className="bg-gradient-to-b from-gold-600/5 to-transparent px-5 pt-12 pb-8">
+        <div className="bg-gradient-to-b from-gold-600/8 to-transparent px-5 pt-12 pb-8">
           <div className="flex items-center gap-4">
-            <Avatar className="size-16 rounded-2xl bg-gradient-to-br from-gold-600 to-gold-700 text-xl font-bold text-foreground-on-brand">
+            <Avatar className="size-16 rounded-2xl bg-button text-xl font-bold text-button-foreground">
               <Avatar.Fallback>MC</Avatar.Fallback>
             </Avatar>
             <div>
@@ -99,10 +96,7 @@ function ProfileView() {
 
           <Button
             type="button"
-            onClick={() => {
-              toast.info('از حساب خارج شدید')
-              navigate({ to: '/login' })
-            }}
+            onClick={signOut}
             className="flex w-full items-center justify-start gap-3 rounded-xl border border-border bg-surface-elevated p-4 text-danger hover:border-danger/30 hover:bg-danger-muted"
           >
             <LogOut size={16} />

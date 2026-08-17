@@ -43,7 +43,7 @@ function OtpView() {
             type="button"
             onClick={verify}
             disabled={!complete}
-            className="mb-4 w-full rounded-xl py-3.5 shadow-lg shadow-gold-600/25 disabled:shadow-none"
+            className="mb-4 w-full rounded-xl py-3.5 shadow-lg shadow-neutral-900/10 disabled:shadow-none dark:shadow-white/10"
           >
             Verify & Continue
           </Button>

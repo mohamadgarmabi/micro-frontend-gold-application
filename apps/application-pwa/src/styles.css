@@ -28,6 +28,19 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease !important;
 }
 
 /* Hide scrollbars globally — touch/scroll still works */
@@ -49,11 +62,18 @@ body,
 }
 
 .aurum-gradient-bg {
-  background: radial-gradient(
-    ellipse 80% 60% at 50% -10%,
-    color-mix(in oklab, var(--ds-brand) 12%, transparent) 0%,
-    var(--ds-brand-surface) 60%
-  );
+  background:
+    radial-gradient(
+      ellipse 90% 70% at 50% -20%,
+      color-mix(in oklab, var(--ds-brand) 18%, transparent) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 100% 100%,
+      color-mix(in oklab, var(--ds-brand-accent) 8%, transparent) 0%,
+      transparent 50%
+    ),
+    var(--ds-brand-surface);
 }
 
 .aurum-spot-card {
@@ -70,7 +90,7 @@ body,
 .pwa-banner {
   position: fixed;
   inset-inline-end: 1rem;
-  bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+  bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
   z-index: 60;
   display: flex;
   flex-wrap: wrap;
@@ -105,4 +125,225 @@ body,
   border: 1px solid var(--ds-border);
   background: transparent;
   color: var(--ds-foreground-subtle);
+}
+
+.liquid-nav {
+  --search-size: 0px;
+  --search-gap: 0px;
+  pointer-events: none;
+  position: fixed;
+  z-index: 50;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--search-gap);
+  padding-inline: 1.15rem;
+  padding-bottom: max(0.9rem, env(safe-area-inset-bottom, 0px));
+  transition: gap 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s;
+  view-transition-name: liquid-nav;
+}
+
+.liquid-nav.is-search-visible {
+  --search-size: 3.99rem;
+  --search-gap: 0.55rem;
+}
+
+.liquid-nav__bar,
+.liquid-nav__search {
+  pointer-events: auto;
+  background: color-mix(in oklab, var(--ds-surface-elevated) 42%, transparent);
+  border: 1px solid color-mix(in oklab, var(--ds-foreground) 12%, transparent);
+  box-shadow:
+    0 18px 40px color-mix(in oklab, #000 16%, transparent),
+    0 4px 12px color-mix(in oklab, #000 8%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 48%, transparent);
+  backdrop-filter: blur(28px) saturate(1.85);
+  -webkit-backdrop-filter: blur(28px) saturate(1.85);
+}
+
+.liquid-nav__bar {
+  position: relative;
+  isolation: isolate;
+  flex: 0 1 20.5rem;
+  width: 20.5rem;
+  max-width: 100%;
+  padding: 0.32rem;
+  overflow: visible;
+  border-radius: 999px;
+}
+
+.dark .liquid-nav__bar,
+.dark .liquid-nav__search {
+  background: color-mix(in oklab, var(--ds-surface-elevated) 38%, transparent);
+  border-color: color-mix(in oklab, #fff 16%, transparent);
+  box-shadow:
+    0 20px 48px color-mix(in oklab, #000 42%, transparent),
+    0 6px 16px color-mix(in oklab, #000 22%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 18%, transparent);
+}
+
+.liquid-nav__track {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  min-width: 0;
+}
+
+.liquid-nav__slider {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.liquid-nav__slider.is-ready {
+  transition:
+    transform 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s,
+    width 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s;
+}
+
+.liquid-nav__glow {
+  position: absolute;
+  z-index: 0;
+  inset-inline: 0;
+  bottom: -0.85rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklab, var(--ds-brand) 70%, transparent) 0%,
+    transparent 72%
+  );
+  filter: blur(12px);
+  opacity: 0.7;
+  pointer-events: none;
+  animation: liquid-nav-breathe 2.8s ease-in-out infinite;
+}
+
+.liquid-nav__indicator {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ds-brand) 18%, var(--ds-surface));
+  box-shadow:
+    0 8px 20px color-mix(in oklab, var(--ds-brand) 28%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 40%, transparent);
+  pointer-events: none;
+}
+
+.liquid-nav__item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.12rem;
+  min-height: 3.35rem;
+  min-width: 0;
+  padding-inline: 0.2rem;
+  border: 0;
+  background: transparent;
+  border-radius: 999px;
+  color: var(--ds-foreground-subtle);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.35s ease 0.14s,
+    transform 0.35s ease 0.14s;
+}
+
+.liquid-nav__search {
+  display: flex;
+  flex: 0 0 var(--search-size);
+  align-items: center;
+  justify-content: center;
+  width: var(--search-size);
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 999px;
+  color: var(--ds-foreground-subtle);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.72);
+  transition:
+    color 0.35s ease 0.14s,
+    opacity 0.42s ease 0.14s,
+    transform 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s,
+    flex-basis 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s,
+    width 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s;
+}
+
+.liquid-nav.is-search-visible .liquid-nav__search {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.liquid-nav__search.is-active {
+  color: var(--ds-foreground);
+}
+
+.liquid-nav__search svg {
+  flex-shrink: 0;
+  transition: transform 0.35s ease 0.14s;
+}
+
+.liquid-nav__search.is-active svg {
+  transform: scale(1.08);
+}
+
+.liquid-nav__item span {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.liquid-nav__item.is-active {
+  color: var(--ds-foreground);
+  transform: translateY(-1px);
+}
+
+.liquid-nav__item.is-active svg {
+  transform: scale(1.08);
+}
+
+.liquid-nav__item svg {
+  transition: transform 0.35s ease 0.14s;
+}
+
+.liquid-nav__item.is-active span {
+  font-weight: 700;
+}
+
+@keyframes liquid-nav-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+    filter: blur(11px);
+    transform: scaleX(0.92);
+  }
+  50% {
+    opacity: 0.85;
+    filter: blur(16px);
+    transform: scaleX(1.08);
+  }
+}
+
+::view-transition-old(liquid-nav) {
+  display: none;
+}
+
+::view-transition-new(liquid-nav) {
+  animation: none;
 }

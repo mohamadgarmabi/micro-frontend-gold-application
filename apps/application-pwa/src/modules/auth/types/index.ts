@@ -3,4 +3,13 @@ type AuthCredentials = {
   countryCode: string
 }
 
-export type { AuthCredentials }
+type AuthContext = {
+  token: string | null
+  isAuthenticated: boolean
+}
+
+type AuthSearchParams = {
+  redirect: string
+}
+
+export type { AuthContext, AuthCredentials, AuthSearchParams }

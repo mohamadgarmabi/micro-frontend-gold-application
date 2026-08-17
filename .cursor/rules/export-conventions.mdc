@@ -22,7 +22,7 @@ export enum Status {}
 ```ts
 const foo = 1;
 
-function bar() {}
+const bar = () => {}
 
 interface Baz {}
 
@@ -43,7 +43,8 @@ export type { Baz, Qux };
 
 ## Rules
 
-- Define with `const`, `function`, `interface`, `type`, or `enum` — no `export` keyword on the declaration.
+- Define with `const`, `interface`, `type`, or `enum` — no `export` keyword on the declaration.
+- Callables are `const name = () => {}` — never `function name()`.
 - Group all exports together at the end of the file.
 - Re-export barrels (`index.ts`) follow the same rule: import first, export at bottom.
 - Applies to all packages and apps in this workspace.

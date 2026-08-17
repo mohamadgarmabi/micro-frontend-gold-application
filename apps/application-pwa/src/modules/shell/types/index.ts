@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { LucideIcon } from 'lucide-react'
 
 type AppShellProps = {
   children: ReactNode
@@ -28,11 +29,40 @@ type ToggleProps = {
   onChange: (value: boolean) => void
 }
 
+type ThemePreference = 'light' | 'dark' | 'system'
+
+type ResolvedTheme = 'light' | 'dark'
+
+type BottomNavItem = {
+  page: AurumNavPage
+  to: '/home' | '/chart' | '/trade' | '/profile' | '/options'
+  icon: LucideIcon
+  label: string
+}
+
+type BottomNavSlider = {
+  x: number
+  width: number
+  isReady: boolean
+}
+
+type SearchResult = {
+  id: string
+  title: string
+  subtitle: string
+  href: '/home' | '/chart' | '/trade' | '/profile' | '/options'
+}
+
 export type {
   AppShellProps,
   AurumNavPage,
+  BottomNavItem,
+  BottomNavSlider,
   CardProps,
   GoldBadgeProps,
   PriceTagProps,
+  ResolvedTheme,
+  SearchResult,
+  ThemePreference,
   ToggleProps,
 }

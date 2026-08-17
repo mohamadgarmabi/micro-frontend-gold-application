@@ -4,14 +4,14 @@ Persistent conventions for all AI-assisted development in this monorepo.
 
 ## Scope
 
-| Area | Component folder pattern | Module folder pattern | Export conventions |
-|------|-------------------------|----------------------|------------------|
-| `packages/design-system` | ✅ Required | — | ✅ Required |
-| `packages/form` | ✅ Required | — | ✅ Required |
-| `packages/shared-components` | ✅ Required | — | ✅ Required |
-| `packages/apis` | — | — | ✅ Required |
-| TanStack apps (`apps/*` with `@tanstack/react-router`) | — | ✅ Required | ✅ Required |
-| Other apps | — | — | ✅ Required |
+| Area | Component folder pattern | Module folder pattern | Export conventions | Arrow functions |
+|------|-------------------------|----------------------|------------------|-----------------|
+| `packages/design-system` | ✅ Required | — | ✅ Required | ✅ Required |
+| `packages/form` | ✅ Required | — | ✅ Required | ✅ Required |
+| `packages/shared-components` | ✅ Required | — | ✅ Required | ✅ Required |
+| `packages/apis` | — | — | ✅ Required | ✅ Required |
+| TanStack apps (`apps/*` with `@tanstack/react-router`) | — | ✅ Required | ✅ Required | ✅ Required |
+| Other apps | — | — | ✅ Required | ✅ Required |
 
 ---
 
@@ -51,7 +51,7 @@ import type { ButtonProps } from './button.type';
 import { useButton } from './button.hook';
 import { buttonStyles } from './button.styles';
 
-function Button(props: ButtonProps) {
+const Button = (props: ButtonProps) => {
   const { className, children, ...rest } = useButton(props);
   return (
     <button className={className} {...rest}>
@@ -125,7 +125,7 @@ export type Id = string;
 ```ts
 const x = 1;
 
-function fn() {}
+const fn = () => {}
 
 interface Props {}
 
@@ -146,10 +146,52 @@ export type { Props, Id };
 
 ---
 
-## 4. Migration Notes
+## 4. Arrow Functions Only
+
+Never use the `function` keyword. Every callable starts with `const` and is an arrow function.
+
+### ❌ Do not use function declarations or function expressions
+
+```ts
+function getToken() {
+  return null
+}
+
+const load = function () {}
+
+const api = {
+  fetch() {
+    return null
+  },
+}
+```
+
+### ✅ Always use const + arrow
+
+```ts
+const getToken = () => null
+
+const load = async () => {}
+
+const Button = (props: ButtonProps) => {
+  return <button {...props} />
+}
+
+const useLogin = () => {}
+
+const api = {
+  fetch: () => null,
+}
+```
+
+Applies to components, hooks, helpers, handlers, and object methods in all packages and apps.
+
+---
+
+## 5. Migration Notes
 
 Existing flat files have been migrated to the folder pattern in `shared-components` and `form`.
 
 `design-system` is CSS-only today (tokens and Base UI styles). When React components are added, use the same folder pattern.
 
-TanStack apps use the module folder pattern. Export conventions apply to all packages and apps.
+TanStack apps use the module folder pattern. Export conventions and arrow functions apply to all packages and apps.
