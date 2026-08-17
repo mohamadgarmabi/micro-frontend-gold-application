@@ -128,31 +128,37 @@ body,
 }
 
 .liquid-nav {
-  --search-size: 0px;
-  --search-gap: 0px;
   pointer-events: none;
   position: fixed;
   z-index: 50;
   inset-inline: 0;
   bottom: 0;
   display: flex;
-  align-items: stretch;
   justify-content: center;
-  gap: var(--search-gap);
   padding-inline: 1.15rem;
   padding-bottom: max(0.9rem, env(safe-area-inset-bottom, 0px));
-  transition: gap 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s;
-  view-transition-name: liquid-nav;
 }
 
-.liquid-nav.is-search-visible {
-  --search-size: 3.99rem;
-  --search-gap: 0.55rem;
-}
-
-.liquid-nav__bar,
-.liquid-nav__search {
+.liquid-nav__bar {
+  position: relative;
   pointer-events: auto;
+  flex: 0 1 20.5rem;
+  width: 20.5rem;
+  max-width: 100%;
+  padding: 0.32rem;
+  overflow: visible;
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.liquid-nav__bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
   background: color-mix(in oklab, var(--ds-surface-elevated) 42%, transparent);
   border: 1px solid color-mix(in oklab, var(--ds-foreground) 12%, transparent);
   box-shadow:
@@ -161,21 +167,10 @@ body,
     inset 0 1px 0 color-mix(in oklab, #fff 48%, transparent);
   backdrop-filter: blur(28px) saturate(1.85);
   -webkit-backdrop-filter: blur(28px) saturate(1.85);
+  transform: translateZ(0);
 }
 
-.liquid-nav__bar {
-  position: relative;
-  isolation: isolate;
-  flex: 0 1 20.5rem;
-  width: 20.5rem;
-  max-width: 100%;
-  padding: 0.32rem;
-  overflow: visible;
-  border-radius: 999px;
-}
-
-.dark .liquid-nav__bar,
-.dark .liquid-nav__search {
+.dark .liquid-nav__bar::before {
   background: color-mix(in oklab, var(--ds-surface-elevated) 38%, transparent);
   border-color: color-mix(in oklab, #fff 16%, transparent);
   box-shadow:
@@ -231,10 +226,12 @@ body,
   z-index: 0;
   inset: 0;
   border-radius: 999px;
-  background: color-mix(in oklab, var(--ds-brand) 18%, var(--ds-surface));
+  background: color-mix(in oklab, var(--ds-brand) 22%, transparent);
   box-shadow:
     0 8px 20px color-mix(in oklab, var(--ds-brand) 28%, transparent),
     inset 0 1px 0 color-mix(in oklab, #fff 40%, transparent);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
   pointer-events: none;
 }
 
@@ -258,48 +255,6 @@ body,
   transition:
     color 0.35s ease 0.14s,
     transform 0.35s ease 0.14s;
-}
-
-.liquid-nav__search {
-  display: flex;
-  flex: 0 0 var(--search-size);
-  align-items: center;
-  justify-content: center;
-  width: var(--search-size);
-  min-width: 0;
-  overflow: hidden;
-  padding: 0;
-  border-radius: 999px;
-  color: var(--ds-foreground-subtle);
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.72);
-  transition:
-    color 0.35s ease 0.14s,
-    opacity 0.42s ease 0.14s,
-    transform 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s,
-    flex-basis 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s,
-    width 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s;
-}
-
-.liquid-nav.is-search-visible .liquid-nav__search {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
-}
-
-.liquid-nav__search.is-active {
-  color: var(--ds-foreground);
-}
-
-.liquid-nav__search svg {
-  flex-shrink: 0;
-  transition: transform 0.35s ease 0.14s;
-}
-
-.liquid-nav__search.is-active svg {
-  transform: scale(1.08);
 }
 
 .liquid-nav__item span {
@@ -338,12 +293,4 @@ body,
     filter: blur(16px);
     transform: scaleX(1.08);
   }
-}
-
-::view-transition-old(liquid-nav) {
-  display: none;
-}
-
-::view-transition-new(liquid-nav) {
-  animation: none;
 }

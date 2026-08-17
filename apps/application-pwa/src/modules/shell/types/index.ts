@@ -46,13 +46,6 @@ type BottomNavSlider = {
   isReady: boolean
 }
 
-type SearchResult = {
-  id: string
-  title: string
-  subtitle: string
-  href: '/home' | '/chart' | '/trade' | '/profile' | '/options'
-}
-
 export type {
   AppShellProps,
   AurumNavPage,
@@ -62,7 +55,6 @@ export type {
   GoldBadgeProps,
   PriceTagProps,
   ResolvedTheme,
-  SearchResult,
   ThemePreference,
   ToggleProps,
 }

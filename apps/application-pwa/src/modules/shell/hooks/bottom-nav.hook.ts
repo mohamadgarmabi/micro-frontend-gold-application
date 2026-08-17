@@ -2,7 +2,6 @@ import { useRouterState } from '@tanstack/react-router'
 import { ArrowLeftRight, Home, Settings, TrendingUp, User } from 'lucide-react'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { AurumNavPage, BottomNavItem, BottomNavSlider } from '../types'
-import { useSearch } from './search.hook'
 
 const ACTIVE_MOVE_DELAY_MS = 140
 
@@ -26,7 +25,6 @@ const useBottomNav = () => {
   const pathname = useRouterState({ select: (state) => state.location.pathname })
   const activePage = resolveActivePage(pathname)
   const [visualPage, setVisualPage] = useState<AurumNavPage>(activePage)
-  const [showSearch, setShowSearch] = useState(activePage === 'home')
   const [slider, setSlider] = useState<BottomNavSlider>({
     x: 0,
     width: 0,
@@ -34,8 +32,6 @@ const useBottomNav = () => {
   })
   const trackRef = useRef<HTMLDivElement>(null)
   const canAnimateRef = useRef(false)
-  const search = useSearch()
-  const { closeSearch } = search
 
   useEffect(() => {
     if (visualPage === activePage) {
@@ -48,24 +44,6 @@ const useBottomNav = () => {
 
     return () => window.clearTimeout(timer)
   }, [activePage, visualPage])
-
-  useEffect(() => {
-    const shouldShowSearch = activePage === 'home'
-
-    if (showSearch === shouldShowSearch) {
-      return
-    }
-
-    const timer = window.setTimeout(() => {
-      setShowSearch(shouldShowSearch)
-
-      if (!shouldShowSearch) {
-        closeSearch()
-      }
-    }, ACTIVE_MOVE_DELAY_MS)
-
-    return () => window.clearTimeout(timer)
-  }, [activePage, closeSearch, showSearch])
 
   useLayoutEffect(() => {
     const track = trackRef.current
@@ -115,13 +93,11 @@ const useBottomNav = () => {
       mutationObserver.disconnect()
       window.removeEventListener('resize', measure)
     }
-  }, [visualPage, showSearch])
+  }, [visualPage])
 
   return {
     items: navItems,
     visualPage,
-    showSearch,
-    search,
     trackRef,
     slider,
   }
