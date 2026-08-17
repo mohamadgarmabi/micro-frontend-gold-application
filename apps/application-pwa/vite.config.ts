@@ -23,9 +23,15 @@ export default defineConfig(({ mode }) => {
     server: {
       port: PORT,
       strictPort: true,
-      host: '127.0.0.1',
+      host: true,
+      allowedHosts: true,
     },
-    preview: { port: PORT, strictPort: true },
+    preview: {
+      port: PORT,
+      strictPort: true,
+      host: true,
+      allowedHosts: true,
+    },
     resolve: { tsconfigPaths: true },
     optimizeDeps: {
       exclude: workspacePackages,

@@ -7,10 +7,10 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "dev": "vite dev --port 4400 --strictPort",
+    "dev": "vite dev --port 4400 --strictPort --host",
     "generate-routes": "tsr generate",
     "build": "vite build",
-    "preview": "vite preview --port 4400 --strictPort",
+    "preview": "vite preview --port 4400 --strictPort --host",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint . --max-warnings=0"
   },
@@ -35,7 +35,7 @@
           "shared-components:dev"
         ],
         "options": {
-          "command": "vite dev --port 4400 --strictPort",
+          "command": "vite dev --port 4400 --strictPort --host",
           "cwd": "apps/application-pwa"
         }
       },
