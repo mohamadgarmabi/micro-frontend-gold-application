@@ -3,6 +3,7 @@ import { QueryClient } from '@tanstack/react-query'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
 import type { AuthContext } from '#/modules/auth/types'
+import NotFoundView from '#/modules/shell/views/not-found-view'
 import { apiConfig } from './config/api'
 import { routeTree } from './routeTree.gen'
 
@@ -33,6 +34,7 @@ const getRouter = () => {
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
     defaultViewTransition: true,
+    defaultNotFoundComponent: NotFoundView,
   })
 
   setupRouterSsrQueryIntegration({

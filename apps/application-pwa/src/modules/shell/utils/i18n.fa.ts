@@ -149,6 +149,10 @@ const faMessages: Record<MessageKey, string> = {
   'auth.webauthnRegistered': 'ورود زیست‌سنجی فعال شد',
   'auth.webauthnRemoved': 'ورود زیست‌سنجی غیرفعال شد',
 
+  'notFound.title': 'صفحه پیدا نشد',
+  'notFound.description': 'این صفحه وجود ندارد یا جابه‌جا شده است.',
+  'notFound.goHome': 'بازگشت به خانه',
+
   'pwa.updateAvailable': 'نسخه جدیدی در دسترس است.',
   'pwa.reload': 'بارگذاری مجدد',
   'pwa.installLabel': 'نصب برنامه',

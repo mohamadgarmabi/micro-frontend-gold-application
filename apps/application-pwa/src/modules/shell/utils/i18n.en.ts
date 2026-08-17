@@ -147,6 +147,10 @@ const enMessages = {
   'auth.webauthnRegistered': 'Biometric login enabled',
   'auth.webauthnRemoved': 'Biometric login disabled',
 
+  'notFound.title': 'Page not found',
+  'notFound.description': 'This page does not exist or has been moved.',
+  'notFound.goHome': 'Go home',
+
   'pwa.updateAvailable': 'A new version is available.',
   'pwa.reload': 'Reload',
   'pwa.installLabel': 'Install app',

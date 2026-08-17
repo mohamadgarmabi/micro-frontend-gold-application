@@ -9,6 +9,7 @@ import { getDirectionPreference } from '#/modules/shell/apis/get-direction'
 import { directionStore } from '#/modules/shell/stores/direction.store'
 import { THEME_INIT_SCRIPT, THEME_META_COLORS } from '#/config/theme.constants'
 import { DIRECTION_INIT_SCRIPT } from '#/config/direction.constants'
+import NotFoundView from '#/modules/shell/views/not-found-view'
 import AppProviders from '../components/AppProviders'
 import PwaInstallPrompt from '../components/PwaInstallPrompt'
 
@@ -76,6 +77,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       { rel: 'apple-touch-icon', href: '/icon.svg' },
     ],
   }),
+  notFoundComponent: NotFoundView,
   shellComponent: RootDocument,
 })
 
