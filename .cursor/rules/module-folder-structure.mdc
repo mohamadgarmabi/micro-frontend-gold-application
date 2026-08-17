@@ -69,5 +69,6 @@ export const Route = createFileRoute('/login')({
 
 - Put page JSX in `views/`, not in `routes/`
 - Split logic into `hooks/`, API calls into `apis/`, types into `types/`
+- View `index.tsx` files only render: no state, effects, derived values, or handler bodies
 - Keep empty scaffold folders; add a minimal placeholder file when a folder has no exports yet
 - Follow export conventions (exports at bottom of file)

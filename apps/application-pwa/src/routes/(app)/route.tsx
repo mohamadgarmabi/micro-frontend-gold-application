@@ -2,6 +2,14 @@ import { Outlet, createFileRoute } from '@tanstack/react-router'
 import { requireAuth } from '#/modules/auth/utils/auth.guards'
 import AppShell from '#/modules/shell/components/app-shell'
 
+const AppLayout = () => {
+  return (
+    <AppShell>
+      <Outlet />
+    </AppShell>
+  )
+}
+
 export const Route = createFileRoute('/(app)')({
   beforeLoad: ({ context, location }) => {
     requireAuth({
@@ -11,11 +19,3 @@ export const Route = createFileRoute('/(app)')({
   },
   component: AppLayout,
 })
-
-function AppLayout() {
-  return (
-    <AppShell>
-      <Outlet />
-    </AppShell>
-  )
-}

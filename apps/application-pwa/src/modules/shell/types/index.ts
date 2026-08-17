@@ -27,17 +27,39 @@ type PriceTagProps = {
 type ToggleProps = {
   value: boolean
   onChange: (value: boolean) => void
+  disabled?: boolean
 }
+
+type Direction = 'rtl' | 'ltr'
+
+type Locale = 'en' | 'fa'
+
+type TranslateValues = Record<string, string | number>
+
+type MessageKey = keyof typeof import('../utils/i18n.en').enMessages
 
 type ThemePreference = 'light' | 'dark' | 'system'
 
 type ResolvedTheme = 'light' | 'dark'
+
+type ThemeSelectorOption = {
+  value: ThemePreference
+  label: string
+  icon: LucideIcon
+  isActive: boolean
+  onSelect: () => void
+  buttonClassName: string
+  iconWrapClassName: string
+}
 
 type BottomNavItem = {
   page: AurumNavPage
   to: '/home' | '/chart' | '/trade' | '/profile' | '/options'
   icon: LucideIcon
   label: string
+  isActive: boolean
+  className: string
+  strokeWidth: number
 }
 
 type BottomNavSlider = {
@@ -52,9 +74,14 @@ export type {
   BottomNavItem,
   BottomNavSlider,
   CardProps,
+  Direction,
   GoldBadgeProps,
+  Locale,
+  MessageKey,
   PriceTagProps,
   ResolvedTheme,
   ThemePreference,
+  ThemeSelectorOption,
   ToggleProps,
+  TranslateValues,
 }

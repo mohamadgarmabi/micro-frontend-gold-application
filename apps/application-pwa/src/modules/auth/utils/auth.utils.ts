@@ -1,10 +1,23 @@
-import type { AuthContext } from '../types'
+import type { AuthContext, AuthSearchParams } from '../types'
 
-function resolveAuthContext(token: string | null): AuthContext {
+const resolveAuthContext = (token: string | null): AuthContext => {
   return {
     token,
     isAuthenticated: Boolean(token),
   }
 }
 
-export { resolveAuthContext }
+const resolveRedirectSearch = (search: unknown): AuthSearchParams['redirect'] => {
+  if (
+    typeof search === 'object' &&
+    search !== null &&
+    'redirect' in search &&
+    typeof search.redirect === 'string'
+  ) {
+    return search.redirect
+  }
+
+  return '/home'
+}
+
+export { resolveAuthContext, resolveRedirectSearch }

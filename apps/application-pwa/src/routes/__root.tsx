@@ -5,7 +5,10 @@ import type { QueryClient } from '@tanstack/react-query'
 import { getAuthSession } from '#/modules/auth/apis/get-auth-session'
 import { setAuthContext } from '#/modules/auth/stores/auth.store'
 import type { AuthContext } from '#/modules/auth/types'
+import { getDirectionPreference } from '#/modules/shell/apis/get-direction'
+import { directionStore } from '#/modules/shell/stores/direction.store'
 import { THEME_INIT_SCRIPT, THEME_META_COLORS } from '#/config/theme.constants'
+import { DIRECTION_INIT_SCRIPT } from '#/config/direction.constants'
 import AppProviders from '../components/AppProviders'
 import PwaInstallPrompt from '../components/PwaInstallPrompt'
 
@@ -16,10 +19,38 @@ type RouterContext = {
   auth: AuthContext
 }
 
+const RootDocument = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <html suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: DIRECTION_INIT_SCRIPT }} />
+        <HeadContent />
+      </head>
+      <body className="gold-root bg-brand-surface font-sans text-foreground antialiased [overflow-wrap:anywhere] selection:bg-gold-600/20">
+        {children}
+        <AppProviders />
+        <PwaInstallPrompt />
+        <TanStackDevtools
+          config={{ position: 'bottom-right' }}
+          plugins={[
+            {
+              name: 'Tanstack Router',
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+        <Scripts />
+      </body>
+    </html>
+  )
+}
+
 export const Route = createRootRouteWithContext<RouterContext>()({
   beforeLoad: async () => {
-    const auth = await getAuthSession()
+    const [auth, direction] = await Promise.all([getAuthSession(), getDirectionPreference()])
     setAuthContext(auth)
+    directionStore.actions.hydrate(direction)
 
     return { auth }
   },
@@ -47,31 +78,5 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   }),
   shellComponent: RootDocument,
 })
-
-function RootDocument({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="fa" dir="rtl" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-        <HeadContent />
-      </head>
-      <body className="gold-root bg-brand-surface font-sans text-foreground antialiased [overflow-wrap:anywhere] selection:bg-gold-600/20">
-        {children}
-        <AppProviders />
-        <PwaInstallPrompt />
-        <TanStackDevtools
-          config={{ position: 'bottom-right' }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
-        <Scripts />
-      </body>
-    </html>
-  )
-}
 
 export type { RouterContext }

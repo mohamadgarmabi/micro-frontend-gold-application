@@ -32,9 +32,9 @@ button/
 
 | File | Purpose |
 |------|---------|
-| `index.tsx` | Component implementation and JSX only |
+| `index.tsx` | JSX only — call the hook and render |
 | `[name].type.ts` | Props, variants, and all TypeScript types |
-| `[name].hook.ts` | Component-specific hooks and state logic |
+| `[name].hook.ts` | State, effects, handlers, and derived values |
 | `[name].styles.ts` | Styled parts, class maps, style tokens |
 
 ## Rules

@@ -13,7 +13,7 @@ const defaultAuthContext: AuthContext = {
   isAuthenticated: false,
 }
 
-export function getRouter() {
+const getRouter = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -42,6 +42,8 @@ export function getRouter() {
 
   return router
 }
+
+export { getRouter }
 
 declare module '@tanstack/react-router' {
   interface Register {

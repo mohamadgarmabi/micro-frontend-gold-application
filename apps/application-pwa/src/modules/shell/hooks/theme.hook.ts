@@ -8,7 +8,7 @@ import {
   resolveTheme,
 } from '../utils/theme.utils'
 
-function useTheme() {
+const useTheme = () => {
   const [preference, setPreference] = useState<ThemePreference>(readThemePreference)
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>(() =>
     resolveTheme(readThemePreference()),

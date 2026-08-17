@@ -8,13 +8,9 @@ import { VitePWA } from 'vite-plugin-pwa'
 const PORT = 4400
 const DEFAULT_API_URL = 'https://jsonplaceholder.typicode.com'
 
-const workspacePackages = [
-  '@gold/apis',
-  '@gold/form',
-  '@gold/shared-components',
-]
+const workspacePackages = ['@gold/apis', '@gold/form', '@gold/shared-components']
 
-function toApiUrlPattern(baseURL: string): RegExp {
+const toApiUrlPattern = (baseURL: string): RegExp => {
   const escaped = baseURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   return new RegExp(`^${escaped}/.*`, 'i')
 }

@@ -10,7 +10,9 @@
     "dev": "vite dev --port 4400 --strictPort",
     "generate-routes": "tsr generate",
     "build": "vite build",
-    "preview": "vite preview --port 4400 --strictPort"
+    "preview": "vite preview --port 4400 --strictPort",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint . --max-warnings=0"
   },
   "nx": {
     "name": "application-pwa",

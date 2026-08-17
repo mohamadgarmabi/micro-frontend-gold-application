@@ -11,7 +11,7 @@ type RedirectIfAuthenticatedOptions = {
   redirectTo: AuthSearchParams['redirect']
 }
 
-function requireAuth({ auth, href }: RequireAuthOptions): void {
+const requireAuth = ({ auth, href }: RequireAuthOptions): void => {
   if (auth.isAuthenticated) {
     return
   }
@@ -22,10 +22,7 @@ function requireAuth({ auth, href }: RequireAuthOptions): void {
   })
 }
 
-function redirectIfAuthenticated({
-  auth,
-  redirectTo,
-}: RedirectIfAuthenticatedOptions): void {
+const redirectIfAuthenticated = ({ auth, redirectTo }: RedirectIfAuthenticatedOptions): void => {
   if (!auth.isAuthenticated) {
     return
   }

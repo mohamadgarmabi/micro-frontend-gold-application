@@ -3,9 +3,7 @@ import { AUTH_TOKEN_COOKIE_NAME } from '#/config/auth.constants'
 import { authStore } from '#/modules/auth/stores/auth.store'
 
 export const apiConfig = {
-  baseURL:
-    import.meta.env.VITE_APP_API_URL ??
-    'https://jsonplaceholder.typicode.com',
+  baseURL: import.meta.env.VITE_APP_API_URL ?? 'https://jsonplaceholder.typicode.com',
   auth: {
     tokenCookieName: AUTH_TOKEN_COOKIE_NAME,
     cookie: {

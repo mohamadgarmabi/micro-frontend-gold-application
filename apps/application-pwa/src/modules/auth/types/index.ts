@@ -12,4 +12,16 @@ type AuthSearchParams = {
   redirect: string
 }
 
-export type { AuthContext, AuthCredentials, AuthSearchParams }
+type StoredWebAuthnCredential = {
+  credentialId: string
+}
+
+type WebAuthnErrorCode = 'cancelled' | 'failed'
+
+export type {
+  AuthContext,
+  AuthCredentials,
+  AuthSearchParams,
+  StoredWebAuthnCredential,
+  WebAuthnErrorCode,
+}

@@ -1,7 +1,7 @@
 import { THEME_META_COLORS, THEME_STORAGE_KEY } from '#/config/theme.constants'
 import type { ResolvedTheme, ThemePreference } from '../types'
 
-function readSystemTheme(): ResolvedTheme {
+const readSystemTheme = (): ResolvedTheme => {
   if (typeof window === 'undefined') {
     return 'dark'
   }
@@ -9,18 +9,16 @@ function readSystemTheme(): ResolvedTheme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
-function readThemePreference(): ThemePreference {
+const readThemePreference = (): ThemePreference => {
   if (typeof window === 'undefined') {
     return 'system'
   }
 
   const stored = localStorage.getItem(THEME_STORAGE_KEY)
-  return stored === 'light' || stored === 'dark' || stored === 'system'
-    ? stored
-    : 'system'
+  return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system'
 }
 
-function resolveTheme(preference: ThemePreference): ResolvedTheme {
+const resolveTheme = (preference: ThemePreference): ResolvedTheme => {
   if (preference === 'system') {
     return readSystemTheme()
   }
@@ -28,7 +26,7 @@ function resolveTheme(preference: ThemePreference): ResolvedTheme {
   return preference
 }
 
-function updateThemeColorMeta(theme: ResolvedTheme): void {
+const updateThemeColorMeta = (theme: ResolvedTheme): void => {
   if (typeof document === 'undefined') {
     return
   }
@@ -41,7 +39,7 @@ function updateThemeColorMeta(theme: ResolvedTheme): void {
   meta.setAttribute('content', THEME_META_COLORS[theme])
 }
 
-function applyTheme(theme: ResolvedTheme): void {
+const applyTheme = (theme: ResolvedTheme): void => {
   if (typeof document === 'undefined') {
     return
   }
@@ -58,7 +56,7 @@ function applyTheme(theme: ResolvedTheme): void {
   }, 300)
 }
 
-function persistThemePreference(preference: ThemePreference): void {
+const persistThemePreference = (preference: ThemePreference): void => {
   if (typeof window === 'undefined') {
     return
   }

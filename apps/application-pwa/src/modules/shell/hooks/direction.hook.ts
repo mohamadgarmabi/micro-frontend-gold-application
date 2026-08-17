@@ -1,38 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useSelector } from '@tanstack/react-store'
+import { useEffect } from 'react'
+import { directionStore } from '../stores/direction.store'
+import type { Direction } from '../types'
 
-type Direction = 'rtl' | 'ltr'
-
-const DIRECTION_STORAGE_KEY = 'aurum:direction'
-
-function readDirection(): Direction {
-  if (typeof window === 'undefined') {
-    return 'rtl'
-  }
-
-  const stored = localStorage.getItem(DIRECTION_STORAGE_KEY)
-  return stored === 'ltr' || stored === 'rtl' ? stored : 'rtl'
-}
-
-function useDirection() {
-  const [direction, setDirection] = useState<Direction>(readDirection)
+const useDirection = () => {
+  const direction: Direction = useSelector(directionStore, (state) => state)
 
   useEffect(() => {
-    document.documentElement.dir = direction
-    document.documentElement.lang = direction === 'rtl' ? 'fa' : 'en'
-    localStorage.setItem(DIRECTION_STORAGE_KEY, direction)
-  }, [direction])
+    directionStore.actions.syncFromStorage()
+  }, [])
+
+  const setDirection = (nextDirection: Direction) => {
+    directionStore.actions.setDirection(nextDirection)
+  }
 
   const toggleDirection = () => {
-    setDirection((current) => (current === 'rtl' ? 'ltr' : 'rtl'))
+    setDirection(direction === 'rtl' ? 'ltr' : 'rtl')
   }
+
+  const toasterPosition = direction === 'rtl' ? ('top-left' as const) : ('top-right' as const)
 
   return {
     direction,
     setDirection,
     isRtl: direction === 'rtl',
+    toasterPosition,
     toggleDirection,
   }
 }
 
-export { useDirection };
-export type { Direction };
+export { useDirection }
+export type { Direction }

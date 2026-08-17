@@ -14,10 +14,15 @@
     "dev:components": "nx dev shared-components",
     "dev:storybook": "nx dev storybook",
     "build": "nx run-many -t build -p shared-components,website,application-pwa,form",
+    "lint": "nx run-many -t lint --all --output-style=static",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit -p apps/application-pwa/tsconfig.json && tsc --noEmit -p packages/shared-components/tsconfig.json && tsc --noEmit -p packages/form/tsconfig.json",
     "preview:components": "nx preview shared-components",
-    "preview:form": "nx preview form",  
+    "preview:form": "nx preview form",
     "preview:storybook": "nx preview storybook",
-    "preview:application-pwa": "nx preview application-pwa"
+    "preview:application-pwa": "nx preview application-pwa",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
@@ -67,7 +72,9 @@
     "eslint-plugin-jsx-a11y": "6.10.1",
     "eslint-plugin-react": "7.35.0",
     "eslint-plugin-react-hooks": "5.0.0",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
+    "lint-staged": "^17.3.0",
     "nx": "23.0.1",
     "prettier": "~3.6.2",
     "react-refresh": "^0.10.0",

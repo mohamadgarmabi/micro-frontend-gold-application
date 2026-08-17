@@ -1,16 +1,17 @@
 import { useRouterState } from '@tanstack/react-router'
 import { ArrowLeftRight, Home, Settings, TrendingUp, User } from 'lucide-react'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import type { AurumNavPage, BottomNavItem, BottomNavSlider } from '../types'
+import type { AurumNavPage, BottomNavItem, BottomNavSlider, MessageKey } from '../types'
+import { useI18n } from './i18n.hook'
 
 const ACTIVE_MOVE_DELAY_MS = 140
 
-const navItems: BottomNavItem[] = [
-  { page: 'home', to: '/home', icon: Home, label: 'Home' },
-  { page: 'chart', to: '/chart', icon: TrendingUp, label: 'Chart' },
-  { page: 'trade', to: '/trade', icon: ArrowLeftRight, label: 'Trade' },
-  { page: 'profile', to: '/profile', icon: User, label: 'Profile' },
-  { page: 'options', to: '/options', icon: Settings, label: 'Settings' },
+const navItems = [
+  { page: 'home' as const, to: '/home' as const, icon: Home },
+  { page: 'chart' as const, to: '/chart' as const, icon: TrendingUp },
+  { page: 'trade' as const, to: '/trade' as const, icon: ArrowLeftRight },
+  { page: 'profile' as const, to: '/profile' as const, icon: User },
+  { page: 'options' as const, to: '/options' as const, icon: Settings },
 ]
 
 const resolveActivePage = (pathname: string): AurumNavPage => {
@@ -23,6 +24,7 @@ const resolveActivePage = (pathname: string): AurumNavPage => {
 
 const useBottomNav = () => {
   const pathname = useRouterState({ select: (state) => state.location.pathname })
+  const { t, locale } = useI18n()
   const activePage = resolveActivePage(pathname)
   const [visualPage, setVisualPage] = useState<AurumNavPage>(activePage)
   const [slider, setSlider] = useState<BottomNavSlider>({
@@ -93,13 +95,28 @@ const useBottomNav = () => {
       mutationObserver.disconnect()
       window.removeEventListener('resize', measure)
     }
-  }, [visualPage])
+  }, [visualPage, locale])
+
+  const items: BottomNavItem[] = navItems.map((item) => {
+    const isActive = item.page === visualPage
+
+    return {
+      ...item,
+      label: t(`nav.${item.page}` as MessageKey),
+      isActive,
+      className: isActive ? 'liquid-nav__item is-active' : 'liquid-nav__item',
+      strokeWidth: isActive ? 2.4 : 1.75,
+    }
+  })
 
   return {
-    items: navItems,
-    visualPage,
+    items,
     trackRef,
-    slider,
+    sliderClassName: slider.isReady ? 'liquid-nav__slider is-ready' : 'liquid-nav__slider',
+    sliderStyle: {
+      width: slider.width,
+      transform: `translate3d(${slider.x}px, 0, 0)`,
+    },
   }
 }
 

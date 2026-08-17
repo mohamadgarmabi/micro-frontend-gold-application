@@ -4,18 +4,18 @@ import type { AuthContext } from '../types'
 import { resolveAuthContext } from '../utils/auth.utils'
 
 const authStore = createStore(resolveAuthContext(null), ({ setState, get }) => ({
-  syncFromCookie(cookieSource?: string): AuthContext {
+  syncFromCookie: (cookieSource?: string): AuthContext => {
     const nextState = resolveAuthContext(getAuthToken(cookieSource))
     setState(() => nextState)
     return get()
   },
-  setSession(token: string): AuthContext {
+  setSession: (token: string): AuthContext => {
     setAuthToken(token)
     const nextState = resolveAuthContext(token)
     setState(() => nextState)
     return get()
   },
-  clearSession(): AuthContext {
+  clearSession: (): AuthContext => {
     clearAuthToken()
     const nextState = resolveAuthContext(null)
     setState(() => nextState)
@@ -23,11 +23,11 @@ const authStore = createStore(resolveAuthContext(null), ({ setState, get }) => (
   },
 }))
 
-function getAuthContext(): AuthContext {
+const getAuthContext = (): AuthContext => {
   return authStore.state
 }
 
-function setAuthContext(auth: AuthContext): AuthContext {
+const setAuthContext = (auth: AuthContext): AuthContext => {
   authStore.setState(() => auth)
   return authStore.state
 }

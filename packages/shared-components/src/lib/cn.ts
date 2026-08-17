@@ -1,18 +1,22 @@
-type ClassNameArg = string | false | null | undefined;
+type ClassNameArg = string | false | null | undefined
 
-function cn(...classes: ClassNameArg[]) {
-  return classes.filter(Boolean).join(' ');
+type ClassNameFn<S> = (state: S) => string | undefined
+
+type MergeClassName = {
+  (base: string, className?: string): string
+  <S>(base: string, className?: string | ClassNameFn<S>): string | ClassNameFn<S>
 }
 
-function mergeClassName<S>(
-  base: string,
-  className?: string | ((state: S) => string | undefined)
-): string | ((state: S) => string | undefined) {
+const cn = (...classes: ClassNameArg[]) => {
+  return classes.filter(Boolean).join(' ')
+}
+
+const mergeClassName = ((base: string, className?: string | ClassNameFn<unknown>) => {
   if (typeof className === 'function') {
-    return (state: S) => cn(base, className(state));
+    return (state: unknown) => cn(base, className(state))
   }
 
-  return cn(base, className);
-}
+  return cn(base, className)
+}) as MergeClassName
 
-export { cn, mergeClassName };
+export { cn, mergeClassName }
