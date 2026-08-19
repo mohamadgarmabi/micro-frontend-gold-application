@@ -1,8 +1,9 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const collapsibleStyles = {
-Trigger: styles.accordionTrigger,
-  Panel: styles.accordionPanel,
-};
+  Trigger: cva(styles.accordionTrigger),
+  Panel: cva(styles.accordionPanel),
+}
 
-export { collapsibleStyles };
+export { collapsibleStyles }

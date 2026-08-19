@@ -1,34 +1,31 @@
-import Button from '@gold/shared-components/button'
-import Input from '@gold/shared-components/input'
 import Separator from '@gold/shared-components/separator'
 import { GeneratedForm } from '@gold/form'
-import { Fingerprint, Shield } from 'lucide-react'
+import { Shield } from 'lucide-react'
 import { useLogin } from '../../hooks/auth.hook'
 
 const LoginView = () => {
   const {
     t,
-    phone,
-    setPhone,
-    cc,
-    handleCountryChange,
-    canSubmit,
     goToOtp,
-    countryCodes,
     passwordSchema,
     passwordDefaults,
     trustBadges,
     footerButtons,
     showWebAuthn,
     webAuthnBusy,
+    scanClassName,
+    scanIcon,
+    scanTitle,
+    scanHint,
+    orPasswordLabel,
     handleWebAuthnLogin,
   } = useLogin()
 
   return (
     <div className="aurum-gradient-bg flex min-h-screen flex-col">
-      <div className="flex flex-1 flex-col items-center justify-center px-6 pt-20 pb-8">
+      <div className="flex flex-1 flex-col items-center justify-center px-6 pt-16 pb-8">
         <div className="mb-8 flex flex-col items-center">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-button text-button-foreground shadow-lg">
+          <div className="aurum-mark mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-button text-button-foreground">
             <span className="aurum-serif text-2xl font-bold">Au</span>
           </div>
           <h1 className="aurum-serif text-3xl font-semibold tracking-tight text-foreground">
@@ -37,67 +34,30 @@ const LoginView = () => {
           <p className="mt-1 text-sm text-foreground-subtle">{t('auth.tagline')}</p>
         </div>
 
-        <div className="w-full max-w-sm space-y-4">
+        <div className="aurum-login-card w-full max-w-sm rounded-3xl p-6">
           {showWebAuthn ? (
             <>
-              <Button
-                type="button"
-                onClick={handleWebAuthnLogin}
-                loading={webAuthnBusy}
-                leftIcon={<Fingerprint />}
-                className="w-full rounded-xl py-3.5 shadow-lg shadow-neutral-900/10 disabled:shadow-none dark:shadow-white/10"
-              >
-                {t('auth.webauthn')}
-              </Button>
+              <div className="mb-6 flex flex-col items-center">
+                <button
+                  type="button"
+                  className={scanClassName}
+                  onClick={handleWebAuthnLogin}
+                  disabled={webAuthnBusy}
+                  aria-label={scanTitle}
+                >
+                  {scanIcon}
+                </button>
+                <p className="mt-5 text-sm font-medium text-foreground">{scanTitle}</p>
+                <p className="mt-1 text-xs text-foreground-subtle">{scanHint}</p>
+              </div>
 
-              <div className="flex items-center gap-3">
+              <div className="mb-5 flex items-center gap-3">
                 <Separator className="flex-1" />
-                <span className="text-xs text-foreground-subtle">{t('auth.or')}</span>
+                <span className="text-[11px] text-foreground-subtle">{orPasswordLabel}</span>
                 <Separator className="flex-1" />
               </div>
             </>
           ) : null}
-
-          <div>
-            <label className="mb-2 block text-xs tracking-widest text-foreground-subtle uppercase">
-              {t('auth.mobileNumber')}
-            </label>
-            <div className="flex gap-2">
-              <select
-                value={cc}
-                onChange={handleCountryChange}
-                className="w-20 rounded-lg border border-border bg-surface px-2 py-3 font-mono text-sm text-foreground transition-colors focus:border-gold-600 focus:outline-none focus:ring-2 focus:ring-gold-600/20"
-              >
-                {countryCodes.map((code) => (
-                  <option key={code} value={code}>
-                    {code}
-                  </option>
-                ))}
-              </select>
-              <Input
-                type="tel"
-                placeholder="(555) 000-0000"
-                value={phone}
-                onValueChange={setPhone}
-                className="flex-1"
-              />
-            </div>
-          </div>
-
-          <Button
-            type="button"
-            onClick={goToOtp}
-            disabled={!canSubmit}
-            className="w-full rounded-xl py-3.5 shadow-lg shadow-neutral-900/10 disabled:shadow-none dark:shadow-white/10"
-          >
-            {t('auth.sendOtp')}
-          </Button>
-
-          <div className="flex items-center gap-3">
-            <Separator className="flex-1" />
-            <span className="text-xs text-foreground-subtle">{t('auth.or')}</span>
-            <Separator className="flex-1" />
-          </div>
 
           <GeneratedForm
             fields={passwordSchema}
@@ -109,9 +69,12 @@ const LoginView = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-6 px-6 pb-10">
+      <div className="flex flex-wrap items-center justify-center gap-2 px-6 pb-10">
         {trustBadges.map((label) => (
-          <div key={label} className="flex items-center gap-1 text-[10px] text-foreground-subtle">
+          <div
+            key={label}
+            className="flex items-center gap-1.5 rounded-full border border-border bg-surface-elevated/70 px-2.5 py-1 text-[10px] text-foreground-subtle backdrop-blur-sm"
+          >
             <Shield size={10} className="text-gold-600" />
             {label}
           </div>

@@ -1,8 +1,9 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const previewcardStyles = {
-Trigger: styles.button.ghost,
-  Popup: styles.previewCardPopup,
-};
+  Trigger: cva(styles.button.ghost),
+  Popup: cva(styles.previewCardPopup),
+}
 
-export { previewcardStyles };
+export { previewcardStyles }

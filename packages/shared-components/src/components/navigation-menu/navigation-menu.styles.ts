@@ -1,9 +1,10 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const navigationmenuStyles = {
-List: styles.navigationList,
-  Trigger: styles.navigationTrigger,
-  Popup: styles.popup,
-};
+  List: cva(styles.navigationList),
+  Trigger: cva(styles.navigationTrigger),
+  Popup: cva(styles.popup),
+}
 
-export { navigationmenuStyles };
+export { navigationmenuStyles }

@@ -1,5 +1,6 @@
-import { singleComponentStyles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { singleComponentStyles } from '../../lib/styles'
 
-const togglegroupClassName = singleComponentStyles.ToggleGroup ?? '';
+const togglegroupClassName = cva(singleComponentStyles.ToggleGroup ?? '')
 
-export { togglegroupClassName };
+export { togglegroupClassName }

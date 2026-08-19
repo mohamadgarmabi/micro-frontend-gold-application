@@ -8,12 +8,10 @@ import {
   defineFormSchema,
   type FooterButtons,
 } from '@gold/form'
-import { useState, createElement, type ChangeEvent } from 'react'
+import { useState, createElement } from 'react'
 import { useI18n } from '#/modules/shell/hooks/i18n.hook'
 import { authStore } from '../stores/auth.store'
 import { useWebAuthn } from './webauthn.hook'
-
-const countryCodes = ['+1', '+44', '+49', '+971', '+65', '+91']
 
 const useAuth = () => {
   const router = useRouter()
@@ -43,15 +41,18 @@ const useLogin = () => {
   const { login } = useAuth()
   const { t } = useI18n()
   const { redirect } = useSearch({ from: '/(auth)/login' })
-  const [phone, setPhone] = useState('')
-  const [cc, setCc] = useState('+1')
-  const canSubmit = phone.length >= 7
   const {
-    isSupported: showWebAuthn,
+    isSupported,
+    hasCredential,
     isBusy: webAuthnBusy,
+    scanClassName,
+    scanIcon,
+    scanTitle,
+    scanHint,
     signIn,
     showCancelledOrFailed,
   } = useWebAuthn()
+  const showWebAuthn = isSupported && hasCredential
 
   const goToOtp = () => {
     toast.success(t('auth.otpSent'))
@@ -60,16 +61,12 @@ const useLogin = () => {
 
   const handleWebAuthnLogin = () => {
     void signIn()
-      .then(() => {
-        login(`aurum-demo-token-${Date.now()}`)
+      .then((session) => {
+        login(session.token)
         toast.success(t('auth.webauthnSuccess'))
         navigate({ to: redirect })
       })
       .catch(showCancelledOrFailed)
-  }
-
-  const handleCountryChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setCc(event.target.value)
   }
 
   const passwordSchema = defineFormSchema([
@@ -101,19 +98,18 @@ const useLogin = () => {
 
   return {
     t,
-    phone,
-    setPhone,
-    cc,
-    handleCountryChange,
-    canSubmit,
     goToOtp,
-    countryCodes,
     passwordSchema,
     passwordDefaults: buildDefaultValues(passwordSchema),
     trustBadges,
     footerButtons,
     showWebAuthn,
     webAuthnBusy,
+    scanClassName,
+    scanIcon,
+    scanTitle,
+    scanHint,
+    orPasswordLabel: t('auth.orPassword'),
     handleWebAuthnLogin,
   }
 }

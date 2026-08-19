@@ -6,11 +6,7 @@ export {
   setApiConfig,
 } from './config'
 export type { ApiAuthConfig, ApiConfig, ApiCookieOptions, ResolvedApiConfig } from './config'
-export type {
-  ApiInterceptors,
-  ApiRequestInterceptor,
-  ApiResponseInterceptor,
-} from './config'
+export type { ApiInterceptors, ApiRequestInterceptor, ApiResponseInterceptor } from './config'
 
 export {
   clearAuthToken,

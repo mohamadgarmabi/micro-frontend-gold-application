@@ -1,9 +1,10 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const dialogStyles = {
-Trigger: styles.button.primary,
-  Popup: styles.popup,
-  Backdrop: styles.backdrop,
-};
+  Trigger: cva(styles.button.primary),
+  Popup: cva(styles.popup),
+  Backdrop: cva(styles.backdrop),
+}
 
-export { dialogStyles };
+export { dialogStyles }

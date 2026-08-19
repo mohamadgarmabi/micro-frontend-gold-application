@@ -1,10 +1,11 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const sliderStyles = {
-Root: styles.sliderRoot,
-  Track: styles.sliderTrack,
-  Indicator: styles.sliderIndicator,
-  Thumb: styles.sliderThumb,
-};
+  Root: cva(styles.sliderRoot),
+  Track: cva(styles.sliderTrack),
+  Indicator: cva(styles.sliderIndicator),
+  Thumb: cva(styles.sliderThumb),
+}
 
-export { sliderStyles };
+export { sliderStyles }

@@ -1,24 +1,19 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const root = path.resolve(__dirname, '..');
-const manifestPath = path.join(root, 'packages/shared-components/src/component-manifest.ts');
-const storiesDir = path.join(root, 'apps/storybook/src/stories');
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const root = path.resolve(__dirname, '..')
+const manifestPath = path.join(root, 'packages/shared-components/src/component-manifest.ts')
+const storiesDir = path.join(root, 'apps/storybook/src/stories')
 
 const manifest = JSON.parse(
-  fs.readFileSync(manifestPath, 'utf8').match(/const componentManifest = (\[[\s\S]*?\])\s+as const/)[1],
-);
+  fs
+    .readFileSync(manifestPath, 'utf8')
+    .match(/const componentManifest = (\[[\s\S]*?\])\s+as const/)[1],
+)
 
-const SKIP = new Set([
-  'Button',
-  'Input',
-  'Checkbox',
-  'Switch',
-  'Tabs',
-  'Dialog',
-]);
+const SKIP = new Set(['Button', 'Input', 'Checkbox', 'Switch', 'Tabs', 'Dialog'])
 
 const STORY_BODY = {
   badge: `export const Default: Story = { args: { children: 'Gold', variant: 'brand' } };
@@ -122,14 +117,15 @@ export const Small: Story = { args: { value: 2150, change: -0.42, size: 'sm' } }
     <Drawer>
       <Drawer.Trigger>Open drawer</Drawer.Trigger>
       <Drawer.Portal>
-        <Drawer.Backdrop />
-        <Drawer.Popup className="fixed inset-x-0 bottom-0 rounded-t-2xl p-6">
+        <Drawer.Overlay />
+        <Drawer.Content className="p-6">
+          <Drawer.Handle />
           <Drawer.Title>Drawer title</Drawer.Title>
           <Drawer.Description className="mt-2 text-sm text-foreground-muted">
             Slide-up panel content.
           </Drawer.Description>
           <Drawer.Close className="mt-4 rounded-lg px-4 py-2 text-sm">Close</Drawer.Close>
-        </Drawer.Popup>
+        </Drawer.Content>
       </Drawer.Portal>
     </Drawer>
   ),
@@ -502,7 +498,7 @@ export const Default: Story = {
     </Combobox>
   ),
 };`,
-};
+}
 
 const EXTRA_IMPORTS = {
   sonner: `import Button from '@gold/shared-components/button';`,
@@ -514,20 +510,20 @@ const EXTRA_IMPORTS = {
   form: `import Button from '@gold/shared-components/button';
 import Field from '@gold/shared-components/field';`,
   menubar: `import Menu from '@gold/shared-components/menu';`,
-};
+}
 
 function storyFile({ slug, name }) {
-  const extraImport = EXTRA_IMPORTS[slug] ?? '';
+  const extraImport = EXTRA_IMPORTS[slug] ?? ''
   const importLine =
     slug === 'sonner'
       ? `import Toaster, { toast } from '@gold/shared-components/sonner';`
-      : `import ${name} from '@gold/shared-components/${slug}';`;
+      : `import ${name} from '@gold/shared-components/${slug}';`
 
   const body =
     STORY_BODY[slug] ??
     `export const Default: Story = {
   render: () => <${name}>${name} demo</${name}>,
-};`;
+};`
 
   return `import type { Meta, StoryObj } from '@storybook/react-vite';
 ${importLine}
@@ -543,30 +539,30 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 ${body}
-`;
+`
 }
 
-fs.mkdirSync(storiesDir, { recursive: true });
+fs.mkdirSync(storiesDir, { recursive: true })
 
-let created = 0;
-let skipped = 0;
+let created = 0
+let skipped = 0
 
 for (const entry of manifest) {
-  const { name } = entry;
+  const { name } = entry
   if (SKIP.has(name)) {
-    skipped += 1;
-    continue;
+    skipped += 1
+    continue
   }
 
-  const filePath = path.join(storiesDir, `${name}.stories.tsx`);
+  const filePath = path.join(storiesDir, `${name}.stories.tsx`)
   if (fs.existsSync(filePath)) {
-    skipped += 1;
-    continue;
+    skipped += 1
+    continue
   }
 
-  fs.writeFileSync(filePath, storyFile(entry));
-  created += 1;
-  console.log(`Created ${name}.stories.tsx`);
+  fs.writeFileSync(filePath, storyFile(entry))
+  created += 1
+  console.log(`Created ${name}.stories.tsx`)
 }
 
-console.log(`Done: ${created} created, ${skipped} skipped.`);
+console.log(`Done: ${created} created, ${skipped} skipped.`)

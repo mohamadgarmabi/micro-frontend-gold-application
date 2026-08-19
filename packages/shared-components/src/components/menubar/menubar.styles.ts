@@ -1,5 +1,6 @@
-import { singleComponentStyles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { singleComponentStyles } from '../../lib/styles'
 
-const menubarClassName = singleComponentStyles.Menubar ?? '';
+const menubarClassName = cva(singleComponentStyles.Menubar ?? '')
 
-export { menubarClassName };
+export { menubarClassName }

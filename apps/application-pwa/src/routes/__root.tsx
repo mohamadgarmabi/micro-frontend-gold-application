@@ -28,7 +28,7 @@ const RootDocument = ({ children }: { children: React.ReactNode }) => {
         <script dangerouslySetInnerHTML={{ __html: DIRECTION_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="gold-root bg-brand-surface font-sans text-foreground antialiased [overflow-wrap:anywhere] selection:bg-gold-600/20">
+      <body className="gold-root gold-app-chrome font-sans text-foreground antialiased [overflow-wrap:anywhere] selection:bg-gold-600/20">
         {children}
         <AppProviders />
         <PwaInstallPrompt />

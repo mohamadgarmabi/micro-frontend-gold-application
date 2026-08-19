@@ -1,7 +1,7 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
 
 const fieldsetStyles = {
+  Root: cva(''),
+}
 
-};
-
-export { fieldsetStyles };
+export { fieldsetStyles }

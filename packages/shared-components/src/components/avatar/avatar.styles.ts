@@ -1,9 +1,10 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const avatarStyles = {
-Root: styles.avatarRoot,
-  Image: styles.avatarImage,
-  Fallback: styles.avatarFallback,
-};
+  Root: cva(styles.avatarRoot),
+  Image: cva(styles.avatarImage),
+  Fallback: cva(styles.avatarFallback),
+}
 
-export { avatarStyles };
+export { avatarStyles }

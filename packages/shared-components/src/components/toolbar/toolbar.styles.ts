@@ -1,7 +1,8 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const toolbarStyles = {
-Root: styles.toolbarRoot,
-};
+  Root: cva(styles.toolbarRoot),
+}
 
-export { toolbarStyles };
+export { toolbarStyles }

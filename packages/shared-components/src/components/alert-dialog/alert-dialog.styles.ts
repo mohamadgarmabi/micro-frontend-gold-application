@@ -1,9 +1,10 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const alertdialogStyles = {
-Trigger: styles.button.destructive,
-  Popup: styles.popup,
-  Backdrop: styles.backdrop,
-};
+  Trigger: cva(styles.button.destructive),
+  Popup: cva(styles.popup),
+  Backdrop: cva(styles.backdrop),
+}
 
-export { alertdialogStyles };
+export { alertdialogStyles }

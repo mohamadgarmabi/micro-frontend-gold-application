@@ -1,7 +1,7 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
 
 const numberfieldStyles = {
+  Root: cva(''),
+}
 
-};
-
-export { numberfieldStyles };
+export { numberfieldStyles }

@@ -1,13 +1,14 @@
 import { toast } from '@gold/shared-components/sonner'
-import { useEffect, useState } from 'react'
+import { Fingerprint, LoaderCircle } from 'lucide-react'
+import { createElement, useEffect, useState } from 'react'
 import { useI18n } from '#/modules/shell/hooks/i18n.hook'
 import {
   authenticateWithWebAuthn,
-  clearWebAuthnCredential,
   getWebAuthnErrorCode,
   isWebAuthnSupported,
   readWebAuthnCredential,
   registerWebAuthnCredential,
+  removeWebAuthnCredential,
 } from '../utils/webauthn.utils'
 
 const useWebAuthn = () => {
@@ -49,13 +50,7 @@ const useWebAuthn = () => {
     setIsBusy(true)
 
     try {
-      if (readWebAuthnCredential()) {
-        await authenticateWithWebAuthn()
-        return
-      }
-
-      await registerWebAuthnCredential()
-      setHasCredential(true)
+      return await authenticateWithWebAuthn()
     } finally {
       setIsBusy(false)
     }
@@ -67,9 +62,18 @@ const useWebAuthn = () => {
     }
 
     if (!enabled) {
-      clearWebAuthnCredential()
-      setHasCredential(false)
-      toast.info(t('auth.webauthnRemoved'))
+      setIsBusy(true)
+
+      void removeWebAuthnCredential()
+        .then(() => {
+          setHasCredential(false)
+          toast.info(t('auth.webauthnRemoved'))
+        })
+        .catch(showCancelledOrFailed)
+        .finally(() => {
+          setIsBusy(false)
+        })
+
       return
     }
 
@@ -86,12 +90,22 @@ const useWebAuthn = () => {
       })
   }
 
+  const scanIcon = createElement(isBusy ? LoaderCircle : Fingerprint, {
+    size: 28,
+    strokeWidth: 1.7,
+    className: isBusy ? 'animate-spin' : undefined,
+  })
+
   return {
     isSupported,
     hasCredential,
     isBusy,
     biometricHint: isSupported ? t('options.biometricHint') : t('options.biometricUnavailable'),
     isBiometricDisabled: !isSupported || isBusy,
+    scanClassName: isBusy ? 'aurum-bio-scan is-busy' : 'aurum-bio-scan',
+    scanIcon,
+    scanTitle: isBusy ? t('auth.webauthnBusy') : t('auth.webauthn'),
+    scanHint: t('auth.webauthnHint'),
     signIn,
     handleBiometricToggle,
     showCancelledOrFailed,

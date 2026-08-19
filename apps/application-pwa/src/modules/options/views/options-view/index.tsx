@@ -1,5 +1,6 @@
 import Button from '@gold/shared-components/button'
 import Input from '@gold/shared-components/input'
+import Select from '@gold/shared-components/select'
 import { ChevronRight } from 'lucide-react'
 import Card from '#/modules/shell/components/card'
 import GoldBadge from '#/modules/shell/components/gold-badge'
@@ -14,10 +15,9 @@ const OptionsView = () => {
     setNotifications,
     biometric,
     biometricHint,
+    biometricIcon,
     isBiometricDisabled,
     handleBiometricToggle,
-    priceAlert,
-    setPriceAlert,
     isRtl,
     preference,
     handleThemeChange,
@@ -25,7 +25,9 @@ const OptionsView = () => {
     handleSaveAlert,
     savedAlerts,
     aboutItems,
-    currencyOptions,
+    currency,
+    currencySelectOptions,
+    handleCurrencyChange,
   } = useOptions()
 
   return (
@@ -60,11 +62,13 @@ const OptionsView = () => {
                 <p className="text-sm text-foreground">{t('options.currency')}</p>
                 <p className="text-xs text-foreground-subtle">{t('options.currencyHint')}</p>
               </div>
-              <select className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm text-foreground focus:border-gold-600 focus:outline-none focus:ring-2 focus:ring-gold-600/20">
-                {currencyOptions.map((currency) => (
-                  <option key={currency}>{currency}</option>
-                ))}
-              </select>
+              <Select
+                value={currency}
+                onValueChange={handleCurrencyChange}
+                options={currencySelectOptions}
+                searchable
+                title={t('options.currency')}
+              />
             </div>
           </div>
         </div>
@@ -93,8 +97,10 @@ const OptionsView = () => {
                 <span className="text-sm text-foreground-subtle">$</span>
                 <Input
                   type="number"
-                  value={priceAlert}
-                  onValueChange={setPriceAlert}
+                  value={['3,400']}
+                  onValueChange={() => {
+                    //
+                  }}
                   className="border-0 bg-transparent p-0 font-mono text-sm shadow-none focus:ring-0"
                 />
               </div>
@@ -133,9 +139,14 @@ const OptionsView = () => {
           </p>
           <div className="space-y-1">
             <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
-              <div>
-                <p className="text-sm text-foreground">{t('options.biometric')}</p>
-                <p className="text-xs text-foreground-subtle">{biometricHint}</p>
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-600/10 text-gold-600">
+                  {biometricIcon}
+                </div>
+                <div>
+                  <p className="text-sm text-foreground">{t('options.biometric')}</p>
+                  <p className="text-xs text-foreground-subtle">{biometricHint}</p>
+                </div>
               </div>
               <Toggle
                 value={biometric}

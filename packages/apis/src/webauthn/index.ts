@@ -1,0 +1,55 @@
+import {
+  requestAuthenticateOptions,
+  requestAuthenticateVerify,
+  requestRegisterOptions,
+  requestRegisterVerify,
+  requestRemoveCredentials,
+  webauthnController,
+} from './controller'
+import { endpoint } from './endpoints'
+import type {
+  WebAuthnAssertionResponseDto,
+  WebAuthnAttestationResponseDto,
+  WebAuthnAuthenticateCredentialDto,
+  WebAuthnAuthenticateOptionsDto,
+  WebAuthnAuthenticateOptionsRequestDto,
+  WebAuthnAuthenticatorSelection,
+  WebAuthnBase64Url,
+  WebAuthnCredentialDescriptor,
+  WebAuthnPubKeyCredParam,
+  WebAuthnRegisterCredentialDto,
+  WebAuthnRegisterOptionsDto,
+  WebAuthnRegisterResultDto,
+  WebAuthnRpEntity,
+  WebAuthnSessionDto,
+  WebAuthnTransport,
+  WebAuthnUserEntity,
+} from './dto'
+
+export {
+  endpoint,
+  requestAuthenticateOptions,
+  requestAuthenticateVerify,
+  requestRegisterOptions,
+  requestRegisterVerify,
+  requestRemoveCredentials,
+  webauthnController,
+}
+export type {
+  WebAuthnAssertionResponseDto,
+  WebAuthnAttestationResponseDto,
+  WebAuthnAuthenticateCredentialDto,
+  WebAuthnAuthenticateOptionsDto,
+  WebAuthnAuthenticateOptionsRequestDto,
+  WebAuthnAuthenticatorSelection,
+  WebAuthnBase64Url,
+  WebAuthnCredentialDescriptor,
+  WebAuthnPubKeyCredParam,
+  WebAuthnRegisterCredentialDto,
+  WebAuthnRegisterOptionsDto,
+  WebAuthnRegisterResultDto,
+  WebAuthnRpEntity,
+  WebAuthnSessionDto,
+  WebAuthnTransport,
+  WebAuthnUserEntity,
+}

@@ -1,6 +1,7 @@
 import { useRouterState } from '@tanstack/react-router'
 import { ArrowLeftRight, Home, Settings, TrendingUp, User } from 'lucide-react'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { liquidNavItemStyles, liquidNavSliderStyles } from '../components/bottom-nav.styles'
 import type { AurumNavPage, BottomNavItem, BottomNavSlider, MessageKey } from '../types'
 import { useI18n } from './i18n.hook'
 
@@ -104,7 +105,7 @@ const useBottomNav = () => {
       ...item,
       label: t(`nav.${item.page}` as MessageKey),
       isActive,
-      className: isActive ? 'liquid-nav__item is-active' : 'liquid-nav__item',
+      className: liquidNavItemStyles({ active: isActive }),
       strokeWidth: isActive ? 2.4 : 1.75,
     }
   })
@@ -112,7 +113,7 @@ const useBottomNav = () => {
   return {
     items,
     trackRef,
-    sliderClassName: slider.isReady ? 'liquid-nav__slider is-ready' : 'liquid-nav__slider',
+    sliderClassName: liquidNavSliderStyles({ ready: slider.isReady }),
     sliderStyle: {
       width: slider.width,
       transform: `translate3d(${slider.x}px, 0, 0)`,

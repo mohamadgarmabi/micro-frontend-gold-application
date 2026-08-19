@@ -1,20 +1,24 @@
 import type { LucideIcon } from 'lucide-react'
 
-type HoldingRow = {
-  ouncesLabel: string
-  avgLabel: string
-  valueLabel: string
-  changeLabel: string
+type AssetId = 'gold' | 'silver'
+
+type AssetTab = {
+  id: AssetId
+  label: string
+  onSelect: () => void
+  className: string
 }
 
-type MarketRow = {
-  symbol: string
-  ticker: string
-  name: string
-  priceLabel: string
-  changeLabel: string
-  changeClassName: string
-  ChangeIcon: LucideIcon
+type WalletTile = {
+  label: string
+  value: string
+  hint: string
+}
+
+type QuickAction = {
+  label: string
+  to: '/trade' | '/chart' | '/profile'
+  Icon: LucideIcon
 }
 
 type ActivityRow = {
@@ -28,4 +32,4 @@ type ActivityRow = {
   iconClassName: string
 }
 
-export type { ActivityRow, HoldingRow, MarketRow }
+export type { ActivityRow, AssetId, AssetTab, QuickAction, WalletTile }

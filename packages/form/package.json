@@ -16,7 +16,10 @@
     "name": "form",
     "projectType": "library",
     "sourceRoot": "packages/form/src",
-    "implicitDependencies": ["design-system", "shared-components"],
+    "implicitDependencies": [
+      "design-system",
+      "shared-components"
+    ],
     "targets": {
       "typecheck": {
         "executor": "nx:run-commands",
@@ -31,6 +34,7 @@
     "@gold/design-system": "workspace:*",
     "@gold/shared-components": "workspace:*",
     "@tanstack/react-form": "^1.19.2",
+    "class-variance-authority": "^0.7.1",
     "react": "^19.0.0"
   },
   "devDependencies": {

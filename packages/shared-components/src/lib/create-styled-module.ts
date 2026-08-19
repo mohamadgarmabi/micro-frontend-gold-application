@@ -12,9 +12,23 @@ type RootPropsOf<T> = T extends {
 
 type StyledModuleResult<T> = ((props: RootPropsOf<T>) => ReactNode) & T
 
+type StyleSlot = string | (() => string)
+
+const resolveStyleSlot = (value: unknown) => {
+  if (typeof value === 'function') {
+    return String(value())
+  }
+
+  if (typeof value === 'string') {
+    return value
+  }
+
+  return ''
+}
+
 const createStyledModule = <T extends object>(
   base: T,
-  extra?: Partial<Record<keyof T, string>>,
+  extra?: Partial<Record<keyof T, StyleSlot>>,
 ): StyledModuleResult<T> => {
   const styled: Record<string, AnyComponent> = {}
   const passthrough: Record<string, unknown> = {}
@@ -27,7 +41,10 @@ const createStyledModule = <T extends object>(
 
     const partKey = toPartKey(String(key))
     const className =
-      extra?.[key as keyof T] ?? partStyles[partKey] ?? partStyles[String(key)] ?? ''
+      resolveStyleSlot(extra?.[key as keyof T]) ||
+      partStyles[partKey] ||
+      partStyles[String(key)] ||
+      ''
 
     styled[key] = className ? styledPart(value, className) : value
   }

@@ -1,5 +1,6 @@
-import { singleComponentStyles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { singleComponentStyles } from '../../lib/styles'
 
-const radiogroupClassName = singleComponentStyles.RadioGroup ?? '';
+const radiogroupClassName = cva(singleComponentStyles.RadioGroup ?? '')
 
-export { radiogroupClassName };
+export { radiogroupClassName }

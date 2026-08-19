@@ -1,9 +1,10 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const meterStyles = {
-Root: styles.meterTrack,
-  Indicator: styles.meterIndicator,
-  Track: styles.meterTrack,
-};
+  Root: cva(styles.meterTrack),
+  Indicator: cva(styles.meterIndicator),
+  Track: cva(styles.meterTrack),
+}
 
-export { meterStyles };
+export { meterStyles }

@@ -12,7 +12,11 @@
     "./posts": "./src/posts/index.ts",
     "./posts/controller": "./src/posts/controller/index.ts",
     "./posts/endpoints": "./src/posts/endpoints/index.ts",
-    "./posts/dto": "./src/posts/dto/index.ts"
+    "./posts/dto": "./src/posts/dto/index.ts",
+    "./webauthn": "./src/webauthn/index.ts",
+    "./webauthn/controller": "./src/webauthn/controller/index.ts",
+    "./webauthn/endpoints": "./src/webauthn/endpoints/index.ts",
+    "./webauthn/dto": "./src/webauthn/dto/index.ts"
   },
   "nx": {
     "name": "apis",

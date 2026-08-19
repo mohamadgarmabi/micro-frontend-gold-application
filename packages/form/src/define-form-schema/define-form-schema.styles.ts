@@ -1,3 +1,5 @@
-const defineFormSchemaStyles = {} as const;
+import { cva } from 'class-variance-authority'
 
-export { defineFormSchemaStyles };
+const defineFormSchemaStyles = cva('')
+
+export { defineFormSchemaStyles }

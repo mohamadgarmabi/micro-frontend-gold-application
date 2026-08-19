@@ -1,8 +1,9 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const popoverStyles = {
-Trigger: styles.button.secondary,
-  Popup: styles.popup,
-};
+  Trigger: cva(styles.button.secondary),
+  Popup: cva(styles.popup),
+}
 
-export { popoverStyles };
+export { popoverStyles }

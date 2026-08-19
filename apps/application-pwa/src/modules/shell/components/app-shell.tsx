@@ -1,13 +1,14 @@
 import type { AppShellProps } from '../types'
+import { appPageStyles, appShellStyles } from './app-shell.styles'
 import BottomNav from './bottom-nav'
 
 const AppShell = ({ children, showNav = true }: AppShellProps) => {
   return (
     <>
-      <div className="gold-root relative mx-auto min-h-screen max-w-md overflow-x-hidden bg-brand-surface">
-        {children}
+      <div className={appShellStyles()}>
+        <div className={appPageStyles()}>{children}</div>
       </div>
-      {showNav && <BottomNav />}
+      {showNav ? <BottomNav /> : null}
     </>
   )
 }

@@ -1,9 +1,10 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const menuStyles = {
-Trigger: styles.button.secondary,
-  Popup: styles.menuPopup,
-  Item: styles.menuItem,
-};
+  Trigger: cva(styles.button.secondary),
+  Popup: cva(styles.menuPopup),
+  Item: cva(styles.menuItem),
+}
 
-export { menuStyles };
+export { menuStyles }

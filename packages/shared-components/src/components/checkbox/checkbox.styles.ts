@@ -1,8 +1,9 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const checkboxStyles = {
-Root: styles.checkboxRoot,
-  Indicator: styles.checkboxIndicator,
-};
+  Root: cva(styles.checkboxRoot),
+  Indicator: cva(styles.checkboxIndicator),
+}
 
-export { checkboxStyles };
+export { checkboxStyles }

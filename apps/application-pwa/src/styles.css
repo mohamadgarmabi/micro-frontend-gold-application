@@ -127,60 +127,89 @@ body,
   color: var(--ds-foreground-subtle);
 }
 
+.gold-app-chrome {
+  background: color-mix(in oklab, var(--ds-brand-surface) 78%, var(--ds-foreground) 12%);
+}
+
+.gold-app-frame {
+  view-transition-name: aurum-frame;
+  border-inline: 1px solid color-mix(in oklab, var(--ds-foreground) 14%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--ds-border) 85%, transparent),
+    0 28px 80px color-mix(in oklab, #000 12%, transparent);
+}
+
+.gold-app-page {
+  view-transition-name: aurum-page;
+}
+
+@media (min-width: 28.01rem) {
+  .gold-app-frame {
+    border: 1px solid color-mix(in oklab, var(--ds-foreground) 14%, transparent);
+  }
+}
+
 .liquid-nav {
+  view-transition-name: aurum-nav;
   pointer-events: none;
   position: fixed;
   z-index: 50;
-  inset-inline: 0;
   bottom: 0;
+  left: max(0px, calc((100% - 28rem) / 2));
+  width: min(100%, 28rem);
   display: flex;
   justify-content: center;
   padding-inline: 1.15rem;
   padding-bottom: max(0.9rem, env(safe-area-inset-bottom, 0px));
+  background: transparent;
+  border: 0;
 }
 
 .liquid-nav__bar {
+  isolation: isolate;
   position: relative;
   pointer-events: auto;
-  flex: 0 1 20.5rem;
-  width: 20.5rem;
-  max-width: 100%;
-  padding: 0.32rem;
+  flex: 1 1 auto;
+  width: 100%;
+  padding: 0.35rem;
   overflow: visible;
-  border-radius: 999px;
+  border-radius: 1.65rem;
   background: transparent;
-  border: 0;
-  box-shadow: none;
+  border: 1px solid color-mix(in oklab, var(--ds-foreground) 14%, transparent);
+  box-shadow:
+    0 18px 40px color-mix(in oklab, #000 22%, transparent),
+    0 6px 18px color-mix(in oklab, #000 12%, transparent);
 }
 
 .liquid-nav__bar::before {
   content: '';
   position: absolute;
+  z-index: 0;
   inset: 0;
-  z-index: -1;
   border-radius: inherit;
-  background: color-mix(in oklab, var(--ds-surface-elevated) 42%, transparent);
-  border: 1px solid color-mix(in oklab, var(--ds-foreground) 12%, transparent);
-  box-shadow:
-    0 18px 40px color-mix(in oklab, #000 16%, transparent),
-    0 4px 12px color-mix(in oklab, #000 8%, transparent),
-    inset 0 1px 0 color-mix(in oklab, #fff 48%, transparent);
+  background: color-mix(in oklab, var(--ds-surface-elevated) 58%, transparent);
   backdrop-filter: blur(28px) saturate(1.85);
   -webkit-backdrop-filter: blur(28px) saturate(1.85);
-  transform: translateZ(0);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, #fff 42%, transparent);
+  pointer-events: none;
 }
 
-.dark .liquid-nav__bar::before {
-  background: color-mix(in oklab, var(--ds-surface-elevated) 38%, transparent);
-  border-color: color-mix(in oklab, #fff 16%, transparent);
-  box-shadow:
-    0 20px 48px color-mix(in oklab, #000 42%, transparent),
-    0 6px 16px color-mix(in oklab, #000 22%, transparent),
-    inset 0 1px 0 color-mix(in oklab, #fff 18%, transparent);
+.liquid-nav__bar::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset-inline: 0.55rem;
+  bottom: -0.9rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, #000 32%, transparent);
+  filter: blur(18px);
+  pointer-events: none;
 }
 
 .liquid-nav__track {
   position: relative;
+  z-index: 1;
   flex: 1;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -205,33 +234,28 @@ body,
 
 .liquid-nav__glow {
   position: absolute;
-  z-index: 0;
-  inset-inline: 0;
-  bottom: -0.85rem;
-  height: 1.35rem;
-  border-radius: 999px;
+  inset: -18% -8%;
+  border-radius: 50%;
   background: radial-gradient(
-    ellipse at center,
-    color-mix(in oklab, var(--ds-brand) 70%, transparent) 0%,
+    circle at center,
+    color-mix(in oklab, var(--ds-brand) 38%, transparent),
     transparent 72%
   );
   filter: blur(12px);
-  opacity: 0.7;
+  opacity: 0.8;
   pointer-events: none;
-  animation: liquid-nav-breathe 2.8s ease-in-out infinite;
+  animation: liquid-nav-breathe 4.2s ease-in-out infinite;
 }
 
 .liquid-nav__indicator {
   position: absolute;
   z-index: 0;
-  inset: 0;
-  border-radius: 999px;
-  background: color-mix(in oklab, var(--ds-brand) 22%, transparent);
-  box-shadow:
-    0 8px 20px color-mix(in oklab, var(--ds-brand) 28%, transparent),
-    inset 0 1px 0 color-mix(in oklab, #fff 40%, transparent);
-  backdrop-filter: blur(12px) saturate(1.4);
-  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  inset: 0.2rem;
+  border-radius: 0.95rem;
+  background: color-mix(in oklab, var(--ds-brand) 18%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, #fff 28%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   pointer-events: none;
 }
 
@@ -265,8 +289,8 @@ body,
 }
 
 .liquid-nav__item.is-active {
-  color: var(--ds-foreground);
-  transform: translateY(-1px);
+  color: var(--ds-brand);
+  transform: none;
 }
 
 .liquid-nav__item.is-active svg {
@@ -281,6 +305,124 @@ body,
   font-weight: 700;
 }
 
+.aurum-mark {
+  box-shadow:
+    0 18px 36px color-mix(in oklab, var(--ds-brand) 22%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 42%, transparent);
+}
+
+.aurum-login-card {
+  border: 1px solid color-mix(in oklab, var(--ds-foreground) 8%, transparent);
+  background: color-mix(in oklab, var(--ds-surface-elevated) 78%, transparent);
+  box-shadow:
+    0 24px 60px color-mix(in oklab, #000 8%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 40%, transparent);
+  backdrop-filter: blur(22px) saturate(1.35);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+}
+
+.dark .aurum-login-card {
+  border-color: color-mix(in oklab, #fff 10%, transparent);
+  background: color-mix(in oklab, var(--ds-surface-elevated) 62%, transparent);
+  box-shadow:
+    0 28px 70px color-mix(in oklab, #000 38%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 12%, transparent);
+}
+
+.aurum-bio-scan {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.25rem;
+  height: 5.25rem;
+  border: 1px solid color-mix(in oklab, var(--ds-brand) 28%, transparent);
+  border-radius: 999px;
+  background: radial-gradient(
+    circle at 50% 30%,
+    color-mix(in oklab, var(--ds-brand-accent) 28%, transparent),
+    color-mix(in oklab, var(--ds-brand) 16%, var(--ds-surface-elevated))
+  );
+  color: var(--ds-brand);
+  cursor: pointer;
+  box-shadow:
+    0 12px 28px color-mix(in oklab, var(--ds-brand) 22%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 48%, transparent);
+  transition:
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.aurum-bio-scan:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-shadow-focus);
+}
+
+.aurum-bio-scan:active {
+  transform: scale(0.97);
+}
+
+.aurum-bio-scan::before,
+.aurum-bio-scan::after {
+  content: '';
+  position: absolute;
+  inset: -0.7rem;
+  border-radius: inherit;
+  border: 1px solid color-mix(in oklab, var(--ds-brand) 32%, transparent);
+  pointer-events: none;
+  animation: aurum-bio-pulse 2.6s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+}
+
+.aurum-bio-scan::after {
+  inset: -1.2rem;
+  animation-delay: 0.55s;
+  opacity: 0.7;
+}
+
+.aurum-bio-scan.is-busy {
+  border-color: color-mix(in oklab, var(--ds-brand) 48%, transparent);
+}
+
+.aurum-bio-scan.is-busy::before,
+.aurum-bio-scan.is-busy::after {
+  animation-duration: 1.15s;
+}
+
+.aurum-bio-scan:disabled {
+  cursor: wait;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .aurum-bio-scan:hover:not(:disabled) {
+    transform: scale(1.03);
+    border-color: color-mix(in oklab, var(--ds-brand) 46%, transparent);
+  }
+}
+
+@keyframes aurum-bio-pulse {
+  0% {
+    transform: scale(0.94);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.08);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurum-bio-scan::before,
+  .aurum-bio-scan::after {
+    animation: none;
+    opacity: 0.28;
+  }
+}
+
 @keyframes liquid-nav-breathe {
   0%,
   100% {
@@ -292,5 +434,111 @@ body,
     opacity: 0.85;
     filter: blur(16px);
     transform: scaleX(1.08);
+  }
+}
+
+:root {
+  --vt-duration: 0.38s;
+  --vt-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --vt-slide-out: -30%;
+  --vt-slide-in: 100%;
+}
+
+html[dir='rtl'] {
+  --vt-slide-out: 30%;
+  --vt-slide-in: -100%;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-group(aurum-page) {
+  z-index: 1;
+  overflow: clip;
+}
+
+::view-transition-group(aurum-nav) {
+  z-index: 50;
+}
+
+::view-transition-old(aurum-page),
+::view-transition-new(aurum-page) {
+  animation-duration: var(--vt-duration);
+  animation-timing-function: var(--vt-ease);
+  animation-fill-mode: both;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(aurum-page) {
+  animation-name: vt-fade-out;
+}
+
+::view-transition-new(aurum-page) {
+  animation-name: vt-fade-in;
+}
+
+html:active-view-transition-type(slide-forward)::view-transition-old(aurum-page) {
+  animation-name: vt-slide-out-start;
+}
+
+html:active-view-transition-type(slide-forward)::view-transition-new(aurum-page) {
+  animation-name: vt-slide-in-end;
+  z-index: 2;
+}
+
+html:active-view-transition-type(slide-back)::view-transition-old(aurum-page) {
+  animation-name: vt-slide-out-end;
+  z-index: 2;
+}
+
+html:active-view-transition-type(slide-back)::view-transition-new(aurum-page) {
+  animation-name: vt-slide-in-start;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-slide-out-start {
+  to {
+    transform: translateX(var(--vt-slide-out));
+    opacity: 0.72;
+  }
+}
+
+@keyframes vt-slide-in-end {
+  from {
+    transform: translateX(var(--vt-slide-in));
+  }
+}
+
+@keyframes vt-slide-out-end {
+  to {
+    transform: translateX(var(--vt-slide-in));
+  }
+}
+
+@keyframes vt-slide-in-start {
+  from {
+    transform: translateX(var(--vt-slide-out));
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(aurum-page),
+  ::view-transition-new(aurum-page) {
+    animation-duration: 0.01ms;
   }
 }

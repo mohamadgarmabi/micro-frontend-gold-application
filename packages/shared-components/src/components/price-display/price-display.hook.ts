@@ -1,27 +1,28 @@
-import type { PriceDisplayProps } from './price-display.type';
-import { priceSizeClassName } from './price-display.styles';
+import type { PriceDisplayProps } from './price-display.type'
+import { priceChangeStyles, priceDisplayStyles } from './price-display.styles'
 
-function defaultFormatValue(value: number) {
+const defaultFormatValue = (value: number) => {
   return value.toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  });
+  })
 }
 
-function usePriceDisplay({
+const usePriceDisplay = ({
   value,
   change,
   size = 'md',
   formatValue = defaultFormatValue,
-}: PriceDisplayProps) {
-  const up = change >= 0;
+}: PriceDisplayProps) => {
+  const up = change >= 0
 
   return {
     formattedValue: formatValue(value),
     changeLabel: `${Math.abs(change).toFixed(2)}%`,
     up,
-    valueClassName: priceSizeClassName[size],
-  };
+    valueClassName: priceDisplayStyles({ size }),
+    changeClassName: priceChangeStyles({ up }),
+  }
 }
 
-export { usePriceDisplay, defaultFormatValue };
+export { defaultFormatValue, usePriceDisplay }

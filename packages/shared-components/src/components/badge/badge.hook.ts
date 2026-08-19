@@ -1,8 +1,8 @@
-import type { BadgeProps } from './badge.type';
-import { badgeVariantClassName } from './badge.styles';
+import type { BadgeProps } from './badge.type'
+import { badgeStyles } from './badge.styles'
 
-function useBadge({ variant = 'brand' }: Pick<BadgeProps, 'variant'>) {
-  return { className: badgeVariantClassName[variant] };
+const useBadge = ({ variant = 'brand' }: Pick<BadgeProps, 'variant'>) => {
+  return { className: badgeStyles({ variant }) }
 }
 
-export { useBadge };
+export { useBadge }

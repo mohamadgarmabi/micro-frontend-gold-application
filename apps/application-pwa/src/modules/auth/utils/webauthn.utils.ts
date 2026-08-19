@@ -1,10 +1,18 @@
-import { WEBAUTHN_RP_NAME, WEBAUTHN_STORAGE_KEY } from '#/config/auth.constants'
+import { WEBAUTHN_STORAGE_KEY } from '#/config/auth.constants'
+import {
+  requestAuthenticateOptions,
+  requestAuthenticateVerify,
+  requestRegisterOptions,
+  requestRegisterVerify,
+  requestRemoveCredentials,
+} from '../apis/webauthn'
 import type { StoredWebAuthnCredential, WebAuthnErrorCode } from '../types'
-
-const bufferToBase64 = (buffer: ArrayBuffer) =>
-  btoa(Array.from(new Uint8Array(buffer), (byte) => String.fromCharCode(byte)).join(''))
-
-const base64ToBuffer = (value: string) => Uint8Array.from(atob(value), (char) => char.charCodeAt(0))
+import {
+  serializeAssertion,
+  serializeAttestation,
+  toCreationOptions,
+  toRequestOptions,
+} from './webauthn.codec'
 
 const isStoredWebAuthnCredential = (value: unknown): value is StoredWebAuthnCredential => {
   return (
@@ -79,37 +87,14 @@ const assertPublicKeyCredential = (credential: Credential | null) => {
   return credential
 }
 
-const createRandomBytes = (size: number) => crypto.getRandomValues(new Uint8Array(size))
-
 const registerWebAuthnCredential = async () => {
+  const options = await requestRegisterOptions()
   const credential = assertPublicKeyCredential(
-    await navigator.credentials.create({
-      publicKey: {
-        challenge: createRandomBytes(32),
-        rp: {
-          name: WEBAUTHN_RP_NAME,
-          id: window.location.hostname,
-        },
-        user: {
-          id: createRandomBytes(16),
-          name: 'aurum-user',
-          displayName: WEBAUTHN_RP_NAME,
-        },
-        pubKeyCredParams: [
-          { type: 'public-key', alg: -7 },
-          { type: 'public-key', alg: -257 },
-        ],
-        authenticatorSelection: {
-          userVerification: 'required',
-          residentKey: 'preferred',
-        },
-        timeout: 60_000,
-        attestation: 'none',
-      },
-    }),
+    await navigator.credentials.create({ publicKey: toCreationOptions(options) }),
   )
+  const result = await requestRegisterVerify(serializeAttestation(credential))
+  const stored = { credentialId: result.credentialId }
 
-  const stored = { credentialId: bufferToBase64(credential.rawId) }
   persistWebAuthnCredential(stored)
   return stored
 }
@@ -120,22 +105,19 @@ const authenticateWithWebAuthn = async () => {
     throw new Error('No biometric credential is registered')
   }
 
-  assertPublicKeyCredential(
+  const options = await requestAuthenticateOptions({ credentialId: stored.credentialId })
+  const assertion = assertPublicKeyCredential(
     await navigator.credentials.get({
-      publicKey: {
-        challenge: createRandomBytes(32),
-        rpId: window.location.hostname,
-        allowCredentials: [
-          {
-            id: base64ToBuffer(stored.credentialId),
-            type: 'public-key',
-          },
-        ],
-        userVerification: 'required',
-        timeout: 60_000,
-      },
+      publicKey: toRequestOptions(options, stored.credentialId),
     }),
   )
+
+  return requestAuthenticateVerify(serializeAssertion(assertion))
+}
+
+const removeWebAuthnCredential = async () => {
+  await requestRemoveCredentials()
+  clearWebAuthnCredential()
 }
 
 export {
@@ -145,4 +127,5 @@ export {
   isWebAuthnSupported,
   readWebAuthnCredential,
   registerWebAuthnCredential,
+  removeWebAuthnCredential,
 }

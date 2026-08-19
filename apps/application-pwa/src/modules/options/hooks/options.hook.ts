@@ -1,6 +1,6 @@
 import { toast } from '@gold/shared-components/sonner'
-import { Check, Clock } from 'lucide-react'
-import { useState } from 'react'
+import { Check, Clock, Fingerprint } from 'lucide-react'
+import { createElement, useState } from 'react'
 import { useWebAuthn } from '#/modules/auth/hooks/webauthn.hook'
 import { useDirection } from '#/modules/shell/hooks/direction.hook'
 import { useI18n } from '#/modules/shell/hooks/i18n.hook'
@@ -13,6 +13,7 @@ const currencyOptions = ['USD', 'EUR', 'GBP', 'AED']
 
 const useOptions = () => {
   const [notifications, setNotifications] = useState(true)
+  const [currency, setCurrency] = useState('USD')
   const [priceAlert, setPriceAlert] = useState('3350')
   const { isRtl, setDirection } = useDirection()
   const { preference, setTheme } = useTheme()
@@ -49,6 +50,17 @@ const useOptions = () => {
     toast.success(t('options.toastAlert'))
   }
 
+  const currencySelectOptions = currencyOptions.map((code) => ({
+    value: code,
+    label: code,
+  }))
+
+  const handleCurrencyChange = (next: string | string[]) => {
+    if (typeof next === 'string') {
+      setCurrency(next)
+    }
+  }
+
   const savedAlerts: SavedAlert[] = [
     {
       price: '$3,400',
@@ -81,6 +93,7 @@ const useOptions = () => {
     setNotifications,
     biometric,
     biometricHint,
+    biometricIcon: createElement(Fingerprint, { size: 16, strokeWidth: 1.8 }),
     isBiometricDisabled,
     handleBiometricToggle,
     priceAlert,
@@ -92,7 +105,9 @@ const useOptions = () => {
     handleSaveAlert,
     savedAlerts,
     aboutItems,
-    currencyOptions,
+    currency,
+    currencySelectOptions,
+    handleCurrencyChange,
   }
 }
 

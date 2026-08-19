@@ -8,9 +8,14 @@
   direction: ltr;
 }
 
-/* Prefer logical alignment for unstyled blocks */
-[dir='rtl'] :where(:not([dir='ltr'])) {
+/* Prefer logical alignment for unstyled blocks — not form controls */
+[dir='rtl'] :where(:not([dir='ltr'], input, textarea, select)) {
   text-align: start;
+}
+
+input.gold-otp-slot {
+  direction: ltr;
+  text-align: center;
 }
 
 /* Flip physical-only icons when needed */

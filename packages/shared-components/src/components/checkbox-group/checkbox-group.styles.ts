@@ -1,5 +1,6 @@
-import { singleComponentStyles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { singleComponentStyles } from '../../lib/styles'
 
-const checkboxgroupClassName = singleComponentStyles.CheckboxGroup ?? '';
+const checkboxgroupClassName = cva(singleComponentStyles.CheckboxGroup ?? '')
 
-export { checkboxgroupClassName };
+export { checkboxgroupClassName }

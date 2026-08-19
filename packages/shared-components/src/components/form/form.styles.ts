@@ -1,5 +1,6 @@
-import { singleComponentStyles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { singleComponentStyles } from '../../lib/styles'
 
-const formClassName = singleComponentStyles.Form ?? '';
+const formClassName = cva(singleComponentStyles.Form ?? '')
 
-export { formClassName };
+export { formClassName }

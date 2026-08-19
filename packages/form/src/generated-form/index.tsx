@@ -4,7 +4,7 @@ import Input from '@gold/shared-components/input'
 import type { FormFieldDefinition, FormFieldValue, FormSchema, InferFormValues } from '../types'
 import type { GeneratedFormProps } from './generated-form.type'
 import { useGeneratedForm } from './generated-form.hook'
-import { generatedFormClassName, generatedFormFooterClassName } from './generated-form.styles'
+import { generatedFormFooterStyles, generatedFormStyles } from './generated-form.styles'
 
 const renderField = <TName extends string, TType extends FormFieldDefinition<TName>['type']>(
   field: FormFieldDefinition<TName, TType>,
@@ -47,7 +47,7 @@ const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
   const { form, handleFormSubmit, cancelButton, submitButton } = useGeneratedForm(props)
 
   return (
-    <form className={className ?? generatedFormClassName} onSubmit={handleFormSubmit}>
+    <form className={className ?? generatedFormStyles()} onSubmit={handleFormSubmit}>
       {fields.map((field) => (
         <form.Field
           key={field.name}
@@ -74,7 +74,7 @@ const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
       ))}
 
       {(cancelButton || submitButton) && (
-        <div className={generatedFormFooterClassName}>
+        <div className={generatedFormFooterStyles()}>
           {cancelButton ? <Button {...cancelButton} /> : null}
           {submitButton ? <Button {...submitButton} /> : null}
         </div>

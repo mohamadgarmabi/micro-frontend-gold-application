@@ -9,8 +9,7 @@ const styles = {
       'border border-button bg-transparent text-button hover:bg-button/10 active:bg-button/15 data-popup-open:bg-button/10',
     ghost:
       'bg-transparent text-foreground hover:bg-button/10 active:bg-button/15 data-popup-open:bg-button/10',
-    destructive:
-      'bg-danger text-white hover:bg-red-700 active:bg-red-800',
+    destructive: 'bg-danger text-white hover:bg-red-700 active:bg-red-800',
     icon: 'size-9 rounded-lg p-0',
   },
 
@@ -23,11 +22,9 @@ const styles = {
 
   inputWithRightIcon: 'pe-9',
 
-  inputError:
-    'border-danger hover:border-danger focus:border-danger focus:ring-danger/20',
+  inputError: 'border-danger hover:border-danger focus:border-danger focus:ring-danger/20',
 
-  inputIconSlot:
-    'pointer-events-none absolute inset-y-0 flex items-center text-foreground-subtle',
+  inputIconSlot: 'pointer-events-none absolute inset-y-0 flex items-center text-foreground-subtle',
 
   inputIconLeft: 'start-3',
 
@@ -57,7 +54,8 @@ const styles = {
   menuItem:
     'flex cursor-default items-center gap-2 px-3 py-2 text-sm outline-none select-none data-highlighted:bg-gold-100 data-highlighted:text-gold-800 data-disabled:opacity-50',
 
-  separator: 'shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px',
+  separator:
+    'shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px',
 
   checkboxRoot:
     'flex size-4 shrink-0 items-center justify-center rounded border border-border bg-surface text-button-foreground transition-colors data-checked:border-gold-600 data-checked:bg-gold-600 gold-focus gold-disabled',
@@ -81,8 +79,7 @@ const styles = {
 
   sliderIndicator: 'absolute h-full bg-gold-600',
 
-  sliderThumb:
-    'block size-4 rounded-full border-2 border-gold-600 bg-surface shadow-sm gold-focus',
+  sliderThumb: 'block size-4 rounded-full border-2 border-gold-600 bg-surface shadow-sm gold-focus',
 
   progressRoot: 'relative h-2 w-full overflow-hidden rounded-full bg-gold-100',
 
@@ -112,8 +109,7 @@ const styles = {
 
   accordionPanel: 'px-4 pb-4 text-sm text-foreground-muted',
 
-  toastViewport:
-    'fixed top-4 end-4 z-[60] flex w-full max-w-sm flex-col gap-2 outline-none',
+  toastViewport: 'fixed top-4 end-4 z-[60] flex w-full max-w-sm flex-col gap-2 outline-none',
 
   toastRoot:
     'rounded-xl border border-border bg-surface-elevated p-4 shadow-popup data-ending-style:opacity-0 data-starting-style:opacity-0',
@@ -130,8 +126,7 @@ const styles = {
 
   fieldsetLegend: 'text-sm font-semibold text-foreground',
 
-  toolbarRoot:
-    'flex items-center gap-1 rounded-lg border border-border bg-surface p-1',
+  toolbarRoot: 'flex items-center gap-1 rounded-lg border border-border bg-surface p-1',
 
   toggle:
     'inline-flex items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium text-foreground-muted transition-colors hover:bg-gold-100 data-pressed:bg-gold-200 data-pressed:text-gold-800 gold-focus gold-disabled',
@@ -139,13 +134,14 @@ const styles = {
   selectTrigger:
     'inline-flex h-10 w-full items-center justify-between gap-2 rounded-lg border border-border bg-surface px-3 text-sm text-foreground hover:border-border-strong gold-focus gold-disabled',
 
-  selectPopup: 'z-50 max-h-72 overflow-auto rounded-xl border border-border bg-surface py-1 shadow-popup',
+  selectPopup:
+    'z-50 max-h-72 overflow-auto rounded-xl border border-border bg-surface py-1 shadow-popup',
 
   selectItem:
     'flex cursor-default items-center px-3 py-2 text-sm outline-none select-none data-highlighted:bg-gold-100 data-highlighted:text-gold-800',
 
   otpInput:
-    'aspect-square min-w-0 flex-1 rounded-xl border border-border bg-surface text-center text-lg font-medium text-foreground gold-focus data-filled:border-gold-600',
+    'gold-otp-slot aspect-square min-w-0 flex-1 rounded-xl border border-border bg-surface p-0 text-lg font-medium leading-none text-foreground gold-focus data-filled:border-gold-600',
 
   drawerPopup:
     'fixed z-50 flex flex-col bg-surface shadow-popup outline-none data-ending-style:translate-y-full data-starting-style:translate-y-full',
@@ -159,7 +155,7 @@ const styles = {
     'z-50 w-72 rounded-xl border border-border bg-surface p-4 shadow-popup data-ending-style:opacity-0 data-starting-style:opacity-0',
 
   chip: 'inline-flex items-center gap-1 rounded-full bg-gold-200 px-2 py-0.5 text-xs font-medium text-gold-800',
-} as const;
+} as const
 
 /** Maps Base UI part names to style keys */
 const partStyles: Record<string, string> = {
@@ -233,7 +229,7 @@ const partStyles: Record<string, string> = {
   Row: '',
   InputGroup: 'flex items-center gap-2',
   Validity: styles.error,
-};
+}
 
 const singleComponentStyles: Record<string, string> = {
   Button: `${styles.button.base} ${styles.button.primary}`,
@@ -242,6 +238,6 @@ const singleComponentStyles: Record<string, string> = {
   Form: 'flex flex-col gap-4',
   CheckboxGroup: 'flex flex-col gap-3',
   RadioGroup: 'flex flex-col gap-3',
-};
+}
 
-export { styles, partStyles, singleComponentStyles };
+export { styles, partStyles, singleComponentStyles }

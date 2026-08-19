@@ -1,8 +1,9 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const progressStyles = {
-Root: styles.progressRoot,
-  Indicator: styles.progressIndicator,
-};
+  Root: cva(styles.progressRoot),
+  Indicator: cva(styles.progressIndicator),
+}
 
-export { progressStyles };
+export { progressStyles }

@@ -68,6 +68,20 @@ type BottomNavSlider = {
   isReady: boolean
 }
 
+type ViewTransitionType = 'slide-forward' | 'slide-back' | 'fade'
+
+type ViewTransitionLocation = {
+  pathname: string
+  state: {
+    __TSR_index?: number
+  }
+}
+
+type ViewTransitionInfo = {
+  fromLocation?: ViewTransitionLocation | null
+  toLocation: ViewTransitionLocation
+}
+
 export type {
   AppShellProps,
   AurumNavPage,
@@ -84,4 +98,7 @@ export type {
   ThemeSelectorOption,
   ToggleProps,
   TranslateValues,
+  ViewTransitionInfo,
+  ViewTransitionLocation,
+  ViewTransitionType,
 }

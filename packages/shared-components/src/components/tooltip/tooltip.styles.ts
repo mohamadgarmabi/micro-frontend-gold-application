@@ -1,8 +1,9 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const tooltipStyles = {
-Trigger: styles.button.ghost,
-  Popup: styles.tooltipPopup,
-};
+  Trigger: cva(styles.button.ghost),
+  Popup: cva(styles.tooltipPopup),
+}
 
-export { tooltipStyles };
+export { tooltipStyles }

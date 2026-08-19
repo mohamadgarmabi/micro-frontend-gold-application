@@ -1,4 +1,5 @@
-const cardClassName =
-  'rounded-xl border border-border bg-surface-elevated p-4 shadow-sm';
+import { cva } from 'class-variance-authority'
 
-export { cardClassName };
+const cardStyles = cva('rounded-xl border border-border bg-surface-elevated p-4 shadow-sm')
+
+export { cardStyles }

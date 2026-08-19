@@ -1,3 +1,5 @@
-const buildDefaultValuesStyles = {} as const;
+import { cva } from 'class-variance-authority'
 
-export { buildDefaultValuesStyles };
+const buildDefaultValuesStyles = cva('')
+
+export { buildDefaultValuesStyles }

@@ -1,8 +1,9 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const switchStyles = {
-Root: styles.switchRoot,
-  Thumb: styles.switchThumb,
-};
+  Root: cva(styles.switchRoot),
+  Thumb: cva(styles.switchThumb),
+}
 
-export { switchStyles };
+export { switchStyles }

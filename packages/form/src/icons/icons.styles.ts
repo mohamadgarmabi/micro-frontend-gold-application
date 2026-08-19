@@ -1,3 +1,5 @@
-const iconsStyles = {} as const;
+import { cva } from 'class-variance-authority'
 
-export { iconsStyles };
+const iconsStyles = cva('')
+
+export { iconsStyles }

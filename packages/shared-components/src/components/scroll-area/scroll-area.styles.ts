@@ -1,10 +1,11 @@
-import { styles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { styles } from '../../lib/styles'
 
 const scrollareaStyles = {
-Root: 'rounded-lg border border-border',
-  Viewport: styles.scrollViewport,
-  Scrollbar: styles.scrollScrollbar,
-  Thumb: styles.scrollThumb,
-};
+  Root: cva('rounded-lg border border-border'),
+  Viewport: cva(styles.scrollViewport),
+  Scrollbar: cva(styles.scrollScrollbar),
+  Thumb: cva(styles.scrollThumb),
+}
 
-export { scrollareaStyles };
+export { scrollareaStyles }

@@ -1,5 +1,6 @@
-import { singleComponentStyles } from '../../lib/styles';
+import { cva } from 'class-variance-authority'
+import { singleComponentStyles } from '../../lib/styles'
 
-const buttonClassName = singleComponentStyles.Button;
+const buttonClassName = cva(singleComponentStyles.Button ?? '')
 
-export { buttonClassName };
+export { buttonClassName }
