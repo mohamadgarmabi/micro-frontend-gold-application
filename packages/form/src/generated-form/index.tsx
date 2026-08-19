@@ -1,6 +1,7 @@
 import Button from '@gold/shared-components/button'
 import Checkbox from '@gold/shared-components/checkbox'
 import Input from '@gold/shared-components/input'
+import type { InputSize } from '@gold/shared-components/input'
 import type { FormFieldDefinition, FormFieldValue, FormSchema, InferFormValues } from '../types'
 import type { GeneratedFormProps } from './generated-form.type'
 import { useGeneratedForm } from './generated-form.hook'
@@ -10,7 +11,8 @@ const renderField = <TName extends string, TType extends FormFieldDefinition<TNa
   field: FormFieldDefinition<TName, TType>,
   value: FormFieldValue<TType>,
   onChange: (next: FormFieldValue<TType>) => void,
-  error?: string,
+  error: string | undefined,
+  inputSize: InputSize,
 ) => {
   if (field.type === 'checkbox') {
     return (
@@ -37,6 +39,7 @@ const renderField = <TName extends string, TType extends FormFieldDefinition<TNa
         rightIcon={field.rightIcon}
         error={Boolean(error)}
         errorMessage={error}
+        size={inputSize}
       />
     </label>
   )
@@ -44,7 +47,7 @@ const renderField = <TName extends string, TType extends FormFieldDefinition<TNa
 
 const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
   const { fields, className } = props
-  const { form, handleFormSubmit, cancelButton, submitButton } = useGeneratedForm(props)
+  const { form, handleFormSubmit, cancelButton, submitButton, inputSize } = useGeneratedForm(props)
 
   return (
     <form className={className ?? generatedFormStyles()} onSubmit={handleFormSubmit}>
@@ -68,6 +71,7 @@ const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
               fieldApi.state.value as FormFieldValue<typeof field.type>,
               (next) => fieldApi.handleChange(next as never),
               fieldApi.state.meta.errors[0],
+              inputSize,
             )
           }
         </form.Field>
@@ -84,4 +88,4 @@ const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
 }
 
 export default GeneratedForm
-export type { GeneratedFormProps, FooterButtons } from './generated-form.type'
+export type { GeneratedFormProps, GeneratedFormSizes, FooterButtons } from './generated-form.type'

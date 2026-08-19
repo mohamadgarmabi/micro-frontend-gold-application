@@ -18,10 +18,20 @@ type StoredWebAuthnCredential = {
 
 type WebAuthnErrorCode = 'cancelled' | 'failed'
 
+type PinStep = 'current' | 'create' | 'confirm'
+
+type SecurityState = {
+  pinHash: string | null
+  twoFactorEnabled: boolean
+  pinUnlocked: boolean
+}
+
 export type {
   AuthContext,
   AuthCredentials,
   AuthSearchParams,
+  PinStep,
+  SecurityState,
   StoredWebAuthnCredential,
   WebAuthnErrorCode,
 }

@@ -1,10 +1,10 @@
 import Button from '@gold/shared-components/button'
 import OTPField from '@gold/shared-components/otp-field'
 import { ChevronLeft } from 'lucide-react'
-import { useOtp } from '../../hooks/auth.hook'
+import { useOtp } from '../../hooks/otp.hook'
 
 const OtpView = () => {
-  const { t, otp, setOtp, complete, verify, goBack, otpSlots } = useOtp()
+  const { t, otp, setOtp, complete, verify, goBack, handleResend, otpSlots } = useOtp()
 
   return (
     <div className="aurum-gradient-bg flex min-h-screen flex-col px-6 pt-12">
@@ -44,6 +44,7 @@ const OtpView = () => {
 
         <button
           type="button"
+          onClick={handleResend}
           className="text-center text-sm text-foreground-subtle transition-colors hover:text-gold-600"
         >
           {t('auth.resend')}

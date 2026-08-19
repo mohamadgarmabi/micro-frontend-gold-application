@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router'
 import { useBottomNav } from '../hooks/bottom-nav.hook'
 import {
   liquidNavBarStyles,
+  liquidNavFrostStyles,
   liquidNavGlowStyles,
   liquidNavIndicatorStyles,
   liquidNavStyles,
@@ -13,6 +14,7 @@ const BottomNav = () => {
 
   return (
     <nav className={liquidNavStyles()}>
+      <div className={liquidNavFrostStyles()} aria-hidden="true" />
       <div className={liquidNavBarStyles()}>
         <div ref={trackRef} className={liquidNavTrackStyles()}>
           <span className={sliderClassName} style={sliderStyle} aria-hidden="true">

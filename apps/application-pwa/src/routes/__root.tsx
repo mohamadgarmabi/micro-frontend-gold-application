@@ -3,7 +3,9 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import type { QueryClient } from '@tanstack/react-query'
 import { getAuthSession } from '#/modules/auth/apis/get-auth-session'
+import { getSecuritySession } from '#/modules/auth/apis/get-security-session'
 import { setAuthContext } from '#/modules/auth/stores/auth.store'
+import { securityStore } from '#/modules/auth/stores/security.store'
 import type { AuthContext } from '#/modules/auth/types'
 import { getDirectionPreference } from '#/modules/shell/apis/get-direction'
 import { directionStore } from '#/modules/shell/stores/direction.store'
@@ -49,8 +51,13 @@ const RootDocument = ({ children }: { children: React.ReactNode }) => {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
   beforeLoad: async () => {
-    const [auth, direction] = await Promise.all([getAuthSession(), getDirectionPreference()])
+    const [auth, direction, security] = await Promise.all([
+      getAuthSession(),
+      getDirectionPreference(),
+      getSecuritySession(),
+    ])
     setAuthContext(auth)
+    securityStore.actions.hydrate(security)
     directionStore.actions.hydrate(direction)
 
     return { auth }

@@ -21,4 +21,4 @@ export type {
   FormSchema,
   InferFormValues,
 } from './types'
-export type { GeneratedFormProps, FooterButtons } from './generated-form'
+export type { GeneratedFormProps, GeneratedFormSizes, FooterButtons } from './generated-form'

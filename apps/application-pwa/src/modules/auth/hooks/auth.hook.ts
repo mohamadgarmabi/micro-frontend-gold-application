@@ -8,9 +8,11 @@ import {
   defineFormSchema,
   type FooterButtons,
 } from '@gold/form'
-import { useState, createElement } from 'react'
+import { createElement } from 'react'
+import { DEMO_OTP_CODE } from '#/config/security.constants'
 import { useI18n } from '#/modules/shell/hooks/i18n.hook'
 import { authStore } from '../stores/auth.store'
+import { securityStore } from '../stores/security.store'
 import { useWebAuthn } from './webauthn.hook'
 
 const useAuth = () => {
@@ -20,12 +22,29 @@ const useAuth = () => {
 
   const login = (nextToken: string) => {
     authStore.actions.setSession(nextToken)
+
+    if (securityStore.state.pinHash) {
+      securityStore.actions.lock()
+    } else {
+      securityStore.actions.unlock()
+    }
+
     router.invalidate()
   }
 
   const logout = () => {
     authStore.actions.clearSession()
+    securityStore.actions.lock()
     router.invalidate()
+  }
+
+  const continueAfterAuth = (redirectTo: string) => {
+    if (securityStore.state.pinHash) {
+      void router.navigate({ to: '/pin', search: { redirect: redirectTo } })
+      return
+    }
+
+    void router.navigate({ href: redirectTo })
   }
 
   return {
@@ -33,14 +52,16 @@ const useAuth = () => {
     isAuthenticated,
     login,
     logout,
+    continueAfterAuth,
   }
 }
 
 const useLogin = () => {
   const navigate = useNavigate()
-  const { login } = useAuth()
+  const { login, continueAfterAuth } = useAuth()
   const { t } = useI18n()
   const { redirect } = useSearch({ from: '/(auth)/login' })
+  const twoFactorEnabled = useSelector(securityStore, (state) => state.twoFactorEnabled)
   const {
     isSupported,
     hasCredential,
@@ -54,9 +75,16 @@ const useLogin = () => {
   } = useWebAuthn()
   const showWebAuthn = isSupported && hasCredential
 
-  const goToOtp = () => {
-    toast.success(t('auth.otpSent'))
-    navigate({ to: '/otp', search: { redirect } })
+  const handlePasswordSignIn = () => {
+    if (twoFactorEnabled) {
+      toast.success(t('auth.otpSentDemo', { code: DEMO_OTP_CODE }))
+      navigate({ to: '/otp', search: { redirect } })
+      return
+    }
+
+    login(`aurum-demo-token-${Date.now()}`)
+    toast.success(t('auth.loginSuccess'))
+    continueAfterAuth(redirect)
   }
 
   const handleWebAuthnLogin = () => {
@@ -64,7 +92,7 @@ const useLogin = () => {
       .then((session) => {
         login(session.token)
         toast.success(t('auth.webauthnSuccess'))
-        navigate({ to: redirect })
+        continueAfterAuth(redirect)
       })
       .catch(showCancelledOrFailed)
   }
@@ -98,7 +126,7 @@ const useLogin = () => {
 
   return {
     t,
-    goToOtp,
+    handlePasswordSignIn,
     passwordSchema,
     passwordDefaults: buildDefaultValues(passwordSchema),
     trustBadges,
@@ -114,25 +142,4 @@ const useLogin = () => {
   }
 }
 
-const useOtp = () => {
-  const navigate = useNavigate()
-  const { login } = useAuth()
-  const { t } = useI18n()
-  const { redirect } = useSearch({ from: '/(auth)/otp' })
-  const [otp, setOtp] = useState('')
-  const complete = otp.length === 6
-
-  const verify = () => {
-    login(`aurum-demo-token-${Date.now()}`)
-    toast.success(t('auth.loginSuccess'))
-    navigate({ to: redirect })
-  }
-
-  const goBack = () => navigate({ to: '/login', search: { redirect } })
-
-  const otpSlots = [0, 1, 2, 3, 4, 5]
-
-  return { t, otp, setOtp, complete, verify, goBack, otpSlots }
-}
-
-export { useAuth, useLogin, useOtp }
+export { useAuth, useLogin }

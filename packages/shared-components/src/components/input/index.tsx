@@ -5,7 +5,15 @@ import { inputStyles } from './input.styles'
 import type { InputProps } from './input.type'
 
 const Input = (props: InputProps) => {
-  const { className, leftIcon, rightIcon, error = false, errorMessage, ...rest } = props
+  const {
+    className,
+    leftIcon,
+    rightIcon,
+    error = false,
+    errorMessage,
+    size = 'md',
+    ...rest
+  } = props
   const {
     inputId,
     errorDescribedBy,
@@ -25,7 +33,7 @@ const Input = (props: InputProps) => {
       <div className={inputStyles.wrapper()}>
         {leftIcon && (
           <span className={cn(inputStyles.iconSlot(), inputStyles.iconLeft())} aria-hidden>
-            <span className="[&_svg]:size-4">{leftIcon}</span>
+            <span className={inputStyles.icon({ size })}>{leftIcon}</span>
           </span>
         )}
 
@@ -41,9 +49,9 @@ const Input = (props: InputProps) => {
           onValueChange={onValueChange}
           className={mergeClassName(
             cn(
-              inputStyles.base(),
-              leftIcon ? inputStyles.withLeftIcon() : undefined,
-              hasEndAdornment ? inputStyles.withRightIcon() : undefined,
+              inputStyles.base({ size }),
+              leftIcon ? inputStyles.withLeftIcon({ size }) : undefined,
+              hasEndAdornment ? inputStyles.withRightIcon({ size }) : undefined,
               error ? inputStyles.error() : undefined,
             ),
             className,
@@ -66,7 +74,7 @@ const Input = (props: InputProps) => {
 
         {!revealToggle && rightIcon ? (
           <span className={cn(inputStyles.iconSlot(), inputStyles.iconRight())} aria-hidden>
-            <span className="[&_svg]:size-4">{rightIcon}</span>
+            <span className={inputStyles.icon({ size })}>{rightIcon}</span>
           </span>
         ) : null}
       </div>
@@ -81,4 +89,4 @@ const Input = (props: InputProps) => {
 }
 
 export default Input
-export type { InputProps }
+export type { InputProps, InputSize } from './input.type'

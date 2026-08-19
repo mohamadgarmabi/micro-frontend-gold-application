@@ -1,10 +1,11 @@
-import type { ButtonProps } from './button.type';
+import type { ButtonProps } from './button.type'
 
-function useButton({ disabled, loading = false }: ButtonProps) {
+const useButton = ({ disabled, loading = false, size = 'md' }: ButtonProps) => {
   return {
     isDisabled: disabled || loading,
     loading,
-  };
+    size,
+  }
 }
 
-export { useButton };
+export { useButton }

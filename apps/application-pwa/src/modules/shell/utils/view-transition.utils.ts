@@ -1,3 +1,7 @@
+import {
+  DEFAULT_VIEW_TRANSITION_ENABLED,
+  VIEW_TRANSITION_STORAGE_KEY,
+} from '#/config/view-transition.constants'
 import type { ViewTransitionInfo, ViewTransitionType } from '../types'
 
 const APP_TAB_PATHS = ['/home', '/chart', '/trade', '/profile', '/options'] as const
@@ -43,6 +47,14 @@ const resolveViewTransitionTypes = ({
     return ['slide-back']
   }
 
+  if ((fromPath === '/login' || fromPath === '/otp') && toPath === '/pin') {
+    return ['slide-forward']
+  }
+
+  if (fromPath === '/pin' && (toPath === '/login' || toPath === '/otp')) {
+    return ['slide-back']
+  }
+
   const fromHistory = fromLocation.state.__TSR_index
   const toHistory = toLocation.state.__TSR_index
 
@@ -57,4 +69,47 @@ const resolveViewTransitionTypes = ({
   return ['fade']
 }
 
-export { resolveViewTransitionTypes }
+const isViewTransitionEnabled = (value: string | null) => {
+  if (value === 'true') {
+    return true
+  }
+
+  if (value === 'false') {
+    return false
+  }
+
+  return DEFAULT_VIEW_TRANSITION_ENABLED
+}
+
+const readViewTransitionEnabled = () => {
+  if (typeof window === 'undefined') {
+    return DEFAULT_VIEW_TRANSITION_ENABLED
+  }
+
+  return isViewTransitionEnabled(localStorage.getItem(VIEW_TRANSITION_STORAGE_KEY))
+}
+
+const persistViewTransitionEnabled = (enabled: boolean) => {
+  if (typeof window === 'undefined') {
+    return
+  }
+
+  localStorage.setItem(VIEW_TRANSITION_STORAGE_KEY, String(enabled))
+}
+
+const getDefaultViewTransition = (enabled: boolean) => {
+  if (!enabled) {
+    return false
+  }
+
+  return {
+    types: resolveViewTransitionTypes,
+  }
+}
+
+export {
+  getDefaultViewTransition,
+  persistViewTransitionEnabled,
+  readViewTransitionEnabled,
+  resolveViewTransitionTypes,
+}

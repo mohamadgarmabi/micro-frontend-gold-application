@@ -3,36 +3,46 @@ import { mergeClassName } from '../../lib/cn'
 import { Spinner } from '../../lib/spinner'
 import type { ButtonProps } from './button.type'
 import { useButton } from './button.hook'
-import { buttonClassName } from './button.styles'
+import { buttonClassName, buttonIconClassName } from './button.styles'
 
-function Button({
+const Button = ({
   className,
   leftIcon,
   rightIcon,
   loading = false,
   disabled,
   children,
+  size = 'md',
   ...props
-}: ButtonProps) {
-  const { isDisabled } = useButton({ disabled, loading, leftIcon, rightIcon, children, ...props })
+}: ButtonProps) => {
+  const { isDisabled } = useButton({
+    disabled,
+    loading,
+    leftIcon,
+    rightIcon,
+    children,
+    size,
+    ...props,
+  })
+  const iconClassName = buttonIconClassName({ size })
 
   return (
     <BaseButton
-      className={mergeClassName(buttonClassName(), className)}
+      className={mergeClassName(buttonClassName({ size }), className)}
       disabled={isDisabled}
       aria-busy={loading || undefined}
       {...props}
     >
       {loading ? (
-        <Spinner className="size-4 shrink-0" />
+        <Spinner className={iconClassName} />
       ) : (
-        leftIcon && <span className="shrink-0 [&_svg]:size-4">{leftIcon}</span>
+        leftIcon && <span className={iconClassName}>{leftIcon}</span>
       )}
       {children}
-      {!loading && rightIcon && <span className="shrink-0 [&_svg]:size-4">{rightIcon}</span>}
+      {!loading && rightIcon && <span className={iconClassName}>{rightIcon}</span>}
     </BaseButton>
   )
 }
 
 export default Button
-export type { ButtonProps }
+export type { ButtonProps, ButtonSize } from './button.type'

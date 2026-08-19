@@ -1,0 +1,15 @@
+const PIN_LENGTH = 4
+const DEMO_OTP_CODE = '123456'
+const DEFAULT_TWO_FACTOR_ENABLED = true
+const PIN_HASH_STORAGE_KEY = 'aurum:pin-hash'
+const TWO_FACTOR_STORAGE_KEY = 'aurum:two-factor'
+const PIN_UNLOCK_STORAGE_KEY = 'aurum:pin-unlocked'
+
+export {
+  DEFAULT_TWO_FACTOR_ENABLED,
+  DEMO_OTP_CODE,
+  PIN_HASH_STORAGE_KEY,
+  PIN_LENGTH,
+  PIN_UNLOCK_STORAGE_KEY,
+  TWO_FACTOR_STORAGE_KEY,
+}

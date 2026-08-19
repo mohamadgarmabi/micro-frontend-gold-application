@@ -1,10 +1,10 @@
 {
   "latestErrorEvent": {
     "code": "TYPE-001",
-    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project \\\"/Users/mohammadgarmabi/Documents/My Projects/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.8b2f22f4d20128ffa695bca81378e460.json\\\"\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project \\\"/Users/mohammadgarmabi/Documents/My Projects/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.53c72db545bb14bbc3520f0ab22de400.json\\\"\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
     "args": {
-      "cmd": "npx tsc --project \"/Users/mohammadgarmabi/Documents/My Projects/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.8b2f22f4d20128ffa695bca81378e460.json\""
+      "cmd": "npx tsc --project \"/Users/mohammadgarmabi/Documents/My Projects/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.53c72db545bb14bbc3520f0ab22de400.json\""
     },
-    "timestamp": 1787128215089
+    "timestamp": 1787129936022
   }
 }

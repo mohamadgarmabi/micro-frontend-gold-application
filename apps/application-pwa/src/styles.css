@@ -150,7 +150,6 @@ body,
 }
 
 .liquid-nav {
-  view-transition-name: aurum-nav;
   pointer-events: none;
   position: fixed;
   z-index: 50;
@@ -160,25 +159,47 @@ body,
   display: flex;
   justify-content: center;
   padding-inline: 1.15rem;
+  padding-top: 1.25rem;
   padding-bottom: max(0.9rem, env(safe-area-inset-bottom, 0px));
   background: transparent;
   border: 0;
 }
 
+.liquid-nav__frost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--ds-brand-surface) 82%, transparent) 0%,
+    color-mix(in oklab, var(--ds-brand-surface) 42%, transparent) 48%,
+    transparent 100%
+  );
+  backdrop-filter: blur(28px) saturate(1.45);
+  -webkit-backdrop-filter: blur(28px) saturate(1.45);
+  mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 100%);
+}
+
 .liquid-nav__bar {
-  isolation: isolate;
   position: relative;
+  z-index: 1;
   pointer-events: auto;
   flex: 1 1 auto;
   width: 100%;
   padding: 0.35rem;
-  overflow: visible;
+  overflow: hidden;
   border-radius: 1.65rem;
-  background: transparent;
-  border: 1px solid color-mix(in oklab, var(--ds-foreground) 14%, transparent);
+  transform: translateZ(0);
+  background: color-mix(in oklab, var(--ds-surface-elevated) 42%, transparent);
+  border: 1px solid color-mix(in oklab, #fff 26%, var(--ds-border));
+  backdrop-filter: blur(48px) saturate(1.9);
+  -webkit-backdrop-filter: blur(48px) saturate(1.9);
   box-shadow:
-    0 18px 40px color-mix(in oklab, #000 22%, transparent),
-    0 6px 18px color-mix(in oklab, #000 12%, transparent);
+    0 16px 44px color-mix(in oklab, #000 22%, transparent),
+    0 4px 14px color-mix(in oklab, #000 10%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 48%, transparent);
 }
 
 .liquid-nav__bar::before {
@@ -187,24 +208,38 @@ body,
   z-index: 0;
   inset: 0;
   border-radius: inherit;
-  background: color-mix(in oklab, var(--ds-surface-elevated) 58%, transparent);
-  backdrop-filter: blur(28px) saturate(1.85);
-  -webkit-backdrop-filter: blur(28px) saturate(1.85);
-  box-shadow: inset 0 1px 0 color-mix(in oklab, #fff 42%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, #fff 22%, transparent) 0%,
+    transparent 46%
+  );
   pointer-events: none;
 }
 
-.liquid-nav__bar::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset-inline: 0.55rem;
-  bottom: -0.9rem;
-  height: 1.7rem;
-  border-radius: 999px;
-  background: color-mix(in oklab, #000 32%, transparent);
-  filter: blur(18px);
-  pointer-events: none;
+.dark .liquid-nav__frost {
+  background: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--ds-brand-surface) 88%, transparent) 0%,
+    color-mix(in oklab, var(--ds-brand-surface) 48%, transparent) 48%,
+    transparent 100%
+  );
+}
+
+.dark .liquid-nav__bar {
+  background: color-mix(in oklab, var(--ds-surface-elevated) 34%, transparent);
+  border-color: color-mix(in oklab, #fff 12%, var(--ds-border));
+  box-shadow:
+    0 16px 44px color-mix(in oklab, #000 42%, transparent),
+    0 4px 14px color-mix(in oklab, #000 18%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 14%, transparent);
+}
+
+.dark .liquid-nav__bar::before {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, #fff 10%, transparent) 0%,
+    transparent 48%
+  );
 }
 
 .liquid-nav__track {

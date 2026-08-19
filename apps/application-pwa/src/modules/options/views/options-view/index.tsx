@@ -3,9 +3,10 @@ import Input from '@gold/shared-components/input'
 import Select from '@gold/shared-components/select'
 import { ChevronRight } from 'lucide-react'
 import Card from '#/modules/shell/components/card'
-import GoldBadge from '#/modules/shell/components/gold-badge'
 import ThemeSelector from '#/modules/shell/components/theme-selector'
 import Toggle from '#/modules/shell/components/toggle'
+import PinDrawer from '../../components/pin-drawer'
+import TwoFactorRow from '../../components/two-factor-row'
 import { useOptions } from '../../hooks/options.hook'
 
 const OptionsView = () => {
@@ -22,6 +23,8 @@ const OptionsView = () => {
     preference,
     handleThemeChange,
     handleDirectionChange,
+    handleViewTransitionChange,
+    viewTransitionEnabled,
     handleSaveAlert,
     savedAlerts,
     aboutItems,
@@ -59,6 +62,13 @@ const OptionsView = () => {
             </div>
             <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
               <div>
+                <p className="text-sm text-foreground">{t('options.viewTransition')}</p>
+                <p className="text-xs text-foreground-subtle">{t('options.viewTransitionHint')}</p>
+              </div>
+              <Toggle value={viewTransitionEnabled} onChange={handleViewTransitionChange} />
+            </div>
+            <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
+              <div>
                 <p className="text-sm text-foreground">{t('options.currency')}</p>
                 <p className="text-xs text-foreground-subtle">{t('options.currencyHint')}</p>
               </div>
@@ -67,6 +77,7 @@ const OptionsView = () => {
                 onValueChange={handleCurrencyChange}
                 options={currencySelectOptions}
                 searchable
+                className="mx-auto"
                 title={t('options.currency')}
               />
             </div>
@@ -154,23 +165,8 @@ const OptionsView = () => {
                 disabled={isBiometricDisabled}
               />
             </div>
-            <button
-              type="button"
-              className="flex w-full items-center justify-between rounded-xl border border-border bg-surface-elevated p-4 transition-all hover:border-gold-600/30"
-            >
-              <span className="text-sm text-foreground">{t('options.changePin')}</span>
-              <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
-            </button>
-            <button
-              type="button"
-              className="flex w-full items-center justify-between rounded-xl border border-border bg-surface-elevated p-4 transition-all hover:border-gold-600/30"
-            >
-              <span className="text-sm text-foreground">{t('options.twoFactor')}</span>
-              <div className="flex items-center gap-2">
-                <GoldBadge>{t('options.active')}</GoldBadge>
-                <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
-              </div>
-            </button>
+            <PinDrawer />
+            <TwoFactorRow />
           </div>
         </div>
 

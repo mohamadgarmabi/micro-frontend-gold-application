@@ -5,6 +5,7 @@ import { useWebAuthn } from '#/modules/auth/hooks/webauthn.hook'
 import { useDirection } from '#/modules/shell/hooks/direction.hook'
 import { useI18n } from '#/modules/shell/hooks/i18n.hook'
 import { useTheme } from '#/modules/shell/hooks/theme.hook'
+import { useViewTransitionPreference } from '#/modules/shell/hooks/view-transition.hook'
 import { resolveLocale, translate } from '#/modules/shell/utils/i18n.utils'
 import type { ThemePreference } from '#/modules/shell/types'
 import type { SavedAlert } from '../types'
@@ -17,6 +18,8 @@ const useOptions = () => {
   const [priceAlert, setPriceAlert] = useState('3350')
   const { isRtl, setDirection } = useDirection()
   const { preference, setTheme } = useTheme()
+  const { enabled: viewTransitionEnabled, setEnabled: setViewTransitionEnabled } =
+    useViewTransitionPreference()
   const { t } = useI18n()
   const {
     hasCredential: biometric,
@@ -44,6 +47,11 @@ const useOptions = () => {
         nextDirection === 'rtl' ? 'options.toastRtl' : 'options.toastLtr',
       ),
     )
+  }
+
+  const handleViewTransitionChange = (enabled: boolean) => {
+    setViewTransitionEnabled(enabled)
+    toast.info(t(enabled ? 'options.toastViewTransitionOn' : 'options.toastViewTransitionOff'))
   }
 
   const handleSaveAlert = () => {
@@ -102,6 +110,8 @@ const useOptions = () => {
     preference,
     handleThemeChange,
     handleDirectionChange,
+    handleViewTransitionChange,
+    viewTransitionEnabled,
     handleSaveAlert,
     savedAlerts,
     aboutItems,

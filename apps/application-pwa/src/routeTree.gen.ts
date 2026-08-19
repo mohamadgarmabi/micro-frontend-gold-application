@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as authPinRouteImport } from './routes/(auth)/pin'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
 import { Route as appTradeRouteImport } from './routes/(app)/trade'
@@ -32,6 +33,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const authPinRoute = authPinRouteImport.update({
+  id: '/pin',
+  path: '/pin',
+  getParentRoute: () => authRouteRoute,
 } as any)
 const authOtpRoute = authOtpRouteImport.update({
   id: '/otp',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/trade': typeof appTradeRoute
   '/login': typeof authLoginRoute
   '/otp': typeof authOtpRoute
+  '/pin': typeof authPinRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/trade': typeof appTradeRoute
   '/login': typeof authLoginRoute
   '/otp': typeof authOtpRoute
+  '/pin': typeof authPinRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/(app)/trade': typeof appTradeRoute
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/otp': typeof authOtpRoute
+  '/(auth)/pin': typeof authPinRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
     | '/trade'
     | '/login'
     | '/otp'
+    | '/pin'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -123,6 +133,7 @@ export interface FileRouteTypes {
     | '/trade'
     | '/login'
     | '/otp'
+    | '/pin'
   id:
     | '__root__'
     | '/'
@@ -135,6 +146,7 @@ export interface FileRouteTypes {
     | '/(app)/trade'
     | '/(auth)/login'
     | '/(auth)/otp'
+    | '/(auth)/pin'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -165,6 +177,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/pin': {
+      id: '/(auth)/pin'
+      path: '/pin'
+      fullPath: '/pin'
+      preLoaderRoute: typeof authPinRouteImport
+      parentRoute: typeof authRouteRoute
     }
     '/(auth)/otp': {
       id: '/(auth)/otp'
@@ -241,11 +260,13 @@ const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
 interface authRouteRouteChildren {
   authLoginRoute: typeof authLoginRoute
   authOtpRoute: typeof authOtpRoute
+  authPinRoute: typeof authPinRoute
 }
 
 const authRouteRouteChildren: authRouteRouteChildren = {
   authLoginRoute: authLoginRoute,
   authOtpRoute: authOtpRoute,
+  authPinRoute: authPinRoute,
 }
 
 const authRouteRouteWithChildren = authRouteRoute._addFileChildren(

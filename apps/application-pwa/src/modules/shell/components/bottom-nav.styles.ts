@@ -2,6 +2,8 @@ import { cva } from 'class-variance-authority'
 
 const liquidNavStyles = cva('liquid-nav')
 
+const liquidNavFrostStyles = cva('liquid-nav__frost')
+
 const liquidNavBarStyles = cva('liquid-nav__bar')
 
 const liquidNavTrackStyles = cva('liquid-nav__track')
@@ -28,6 +30,7 @@ const liquidNavItemStyles = cva('liquid-nav__item', {
 
 export {
   liquidNavBarStyles,
+  liquidNavFrostStyles,
   liquidNavGlowStyles,
   liquidNavIndicatorStyles,
   liquidNavItemStyles,

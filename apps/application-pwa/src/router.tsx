@@ -3,7 +3,10 @@ import { QueryClient } from '@tanstack/react-query'
 import { createRouter as createTanStackRouter } from '@tanstack/react-router'
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
 import type { AuthContext } from '#/modules/auth/types'
-import { resolveViewTransitionTypes } from '#/modules/shell/utils/view-transition.utils'
+import {
+  getDefaultViewTransition,
+  readViewTransitionEnabled,
+} from '#/modules/shell/utils/view-transition.utils'
 import NotFoundView from '#/modules/shell/views/not-found-view'
 import { apiConfig } from './config/api'
 import { routeTree } from './routeTree.gen'
@@ -19,8 +22,8 @@ const getRouter = () => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 1000 * 60,
-        gcTime: 1000 * 60 * 5,
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        gcTime: 1000 * 60 * 5, // 5 minutes
       },
     },
   })
@@ -34,9 +37,7 @@ const getRouter = () => {
     scrollRestoration: true,
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
-    defaultViewTransition: {
-      types: resolveViewTransitionTypes,
-    },
+    defaultViewTransition: getDefaultViewTransition(readViewTransitionEnabled()),
     defaultNotFoundComponent: NotFoundView,
   })
 

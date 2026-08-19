@@ -6,7 +6,7 @@ import { useLogin } from '../../hooks/auth.hook'
 const LoginView = () => {
   const {
     t,
-    goToOtp,
+    handlePasswordSignIn,
     passwordSchema,
     passwordDefaults,
     trustBadges,
@@ -64,7 +64,8 @@ const LoginView = () => {
             defaultValues={passwordDefaults}
             footerButtons={footerButtons}
             className="space-y-4"
-            onSubmit={goToOtp}
+            onSubmit={handlePasswordSignIn}
+            sizes={{ input: 'lg', button: 'lg' }}
           />
         </div>
       </div>
