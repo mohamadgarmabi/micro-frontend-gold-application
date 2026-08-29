@@ -9,59 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as authRouteRouteImport } from './routes/(auth)/route'
-import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as authPinRouteImport } from './routes/(auth)/pin'
-import { Route as authOtpRouteImport } from './routes/(auth)/otp'
-import { Route as authLoginRouteImport } from './routes/(auth)/login'
-import { Route as appTradeRouteImport } from './routes/(app)/trade'
-import { Route as appProfileRouteImport } from './routes/(app)/profile'
-import { Route as appOptionsRouteImport } from './routes/(app)/options'
-import { Route as appHomeRouteImport } from './routes/(app)/home'
+import { Route as appRouteRouteImport } from './routes/(app)/route'
+import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as appChartRouteImport } from './routes/(app)/chart'
+import { Route as appHomeRouteImport } from './routes/(app)/home'
+import { Route as appOptionsRouteImport } from './routes/(app)/options'
+import { Route as appProfileRouteImport } from './routes/(app)/profile'
+import { Route as appTradeRouteImport } from './routes/(app)/trade'
+import { Route as authLoginRouteImport } from './routes/(auth)/login'
+import { Route as authOtpRouteImport } from './routes/(auth)/otp'
+import { Route as authPinRouteImport } from './routes/(auth)/pin'
 
-const authRouteRoute = authRouteRouteImport.update({
-  id: '/(auth)',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const appRouteRoute = appRouteRouteImport.update({
   id: '/(app)',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const authRouteRoute = authRouteRouteImport.update({
+  id: '/(auth)',
   getParentRoute: () => rootRouteImport,
 } as any)
-const authPinRoute = authPinRouteImport.update({
-  id: '/pin',
-  path: '/pin',
-  getParentRoute: () => authRouteRoute,
-} as any)
-const authOtpRoute = authOtpRouteImport.update({
-  id: '/otp',
-  path: '/otp',
-  getParentRoute: () => authRouteRoute,
-} as any)
-const authLoginRoute = authLoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => authRouteRoute,
-} as any)
-const appTradeRoute = appTradeRouteImport.update({
-  id: '/trade',
-  path: '/trade',
-  getParentRoute: () => appRouteRoute,
-} as any)
-const appProfileRoute = appProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
-  getParentRoute: () => appRouteRoute,
-} as any)
-const appOptionsRoute = appOptionsRouteImport.update({
-  id: '/options',
-  path: '/options',
+const appChartRoute = appChartRouteImport.update({
+  id: '/chart',
+  path: '/chart',
   getParentRoute: () => appRouteRoute,
 } as any)
 const appHomeRoute = appHomeRouteImport.update({
@@ -69,10 +44,35 @@ const appHomeRoute = appHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => appRouteRoute,
 } as any)
-const appChartRoute = appChartRouteImport.update({
-  id: '/chart',
-  path: '/chart',
+const appOptionsRoute = appOptionsRouteImport.update({
+  id: '/options',
+  path: '/options',
   getParentRoute: () => appRouteRoute,
+} as any)
+const appProfileRoute = appProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const appTradeRoute = appTradeRouteImport.update({
+  id: '/trade',
+  path: '/trade',
+  getParentRoute: () => appRouteRoute,
+} as any)
+const authLoginRoute = authLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authOtpRoute = authOtpRouteImport.update({
+  id: '/otp',
+  path: '/otp',
+  getParentRoute: () => authRouteRoute,
+} as any)
+const authPinRoute = authPinRouteImport.update({
+  id: '/pin',
+  path: '/pin',
+  getParentRoute: () => authRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -157,11 +157,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/(auth)': {
-      id: '/(auth)'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof authRouteRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(app)': {
@@ -171,53 +171,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/(auth)': {
+      id: '/(auth)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof authRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(auth)/pin': {
-      id: '/(auth)/pin'
-      path: '/pin'
-      fullPath: '/pin'
-      preLoaderRoute: typeof authPinRouteImport
-      parentRoute: typeof authRouteRoute
-    }
-    '/(auth)/otp': {
-      id: '/(auth)/otp'
-      path: '/otp'
-      fullPath: '/otp'
-      preLoaderRoute: typeof authOtpRouteImport
-      parentRoute: typeof authRouteRoute
-    }
-    '/(auth)/login': {
-      id: '/(auth)/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof authLoginRouteImport
-      parentRoute: typeof authRouteRoute
-    }
-    '/(app)/trade': {
-      id: '/(app)/trade'
-      path: '/trade'
-      fullPath: '/trade'
-      preLoaderRoute: typeof appTradeRouteImport
-      parentRoute: typeof appRouteRoute
-    }
-    '/(app)/profile': {
-      id: '/(app)/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof appProfileRouteImport
-      parentRoute: typeof appRouteRoute
-    }
-    '/(app)/options': {
-      id: '/(app)/options'
-      path: '/options'
-      fullPath: '/options'
-      preLoaderRoute: typeof appOptionsRouteImport
+    '/(app)/chart': {
+      id: '/(app)/chart'
+      path: '/chart'
+      fullPath: '/chart'
+      preLoaderRoute: typeof appChartRouteImport
       parentRoute: typeof appRouteRoute
     }
     '/(app)/home': {
@@ -227,12 +192,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appHomeRouteImport
       parentRoute: typeof appRouteRoute
     }
-    '/(app)/chart': {
-      id: '/(app)/chart'
-      path: '/chart'
-      fullPath: '/chart'
-      preLoaderRoute: typeof appChartRouteImport
+    '/(app)/options': {
+      id: '/(app)/options'
+      path: '/options'
+      fullPath: '/options'
+      preLoaderRoute: typeof appOptionsRouteImport
       parentRoute: typeof appRouteRoute
+    }
+    '/(app)/profile': {
+      id: '/(app)/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof appProfileRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(app)/trade': {
+      id: '/(app)/trade'
+      path: '/trade'
+      fullPath: '/trade'
+      preLoaderRoute: typeof appTradeRouteImport
+      parentRoute: typeof appRouteRoute
+    }
+    '/(auth)/login': {
+      id: '/(auth)/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authLoginRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/otp': {
+      id: '/(auth)/otp'
+      path: '/otp'
+      fullPath: '/otp'
+      preLoaderRoute: typeof authOtpRouteImport
+      parentRoute: typeof authRouteRoute
+    }
+    '/(auth)/pin': {
+      id: '/(auth)/pin'
+      path: '/pin'
+      fullPath: '/pin'
+      preLoaderRoute: typeof authPinRouteImport
+      parentRoute: typeof authRouteRoute
     }
   }
 }

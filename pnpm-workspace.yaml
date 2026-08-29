@@ -1,6 +1,15 @@
 packages:
   - "apps/*"
   - "packages/*"
+allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': true
+  core-js-pure: false
+  esbuild: true
+  less: false
+  nx: true
+  unrs-resolver: false
+  vue-demi: false
 autoInstallPeers: true
 onlyBuiltDependencies:
   - "nx"
