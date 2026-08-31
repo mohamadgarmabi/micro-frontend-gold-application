@@ -1,4 +1,4 @@
-import { PullRefresh } from '@gold/pull-refresh'
+import PullRefresh from '@gold/shared-components/pull-refresh'
 import { useAppShell } from '../hooks/app-shell.hook'
 import type { AppShellProps } from '../types'
 import { appShellStyles } from './app-shell.styles'

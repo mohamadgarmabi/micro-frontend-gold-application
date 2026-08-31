@@ -13,8 +13,7 @@
     "sourceRoot": "apps/storybook/src",
     "implicitDependencies": [
       "design-system",
-      "shared-components",
-      "pull-refresh"
+      "shared-components"
     ],
     "targets": {
       "dev": {
@@ -45,7 +44,6 @@
     "@gold/apis": "workspace:*",
     "@gold/design-system": "workspace:*",
     "@gold/form": "workspace:*",
-    "@gold/pull-refresh": "workspace:*",
     "@gold/shared-components": "workspace:*"
   },
   "devDependencies": {

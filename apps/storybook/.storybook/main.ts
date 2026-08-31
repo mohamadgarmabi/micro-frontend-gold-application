@@ -6,7 +6,6 @@ import { mergeConfig } from 'vite';
 const workspacePackages = [
   '@gold/apis',
   '@gold/form',
-  '@gold/pull-refresh',
   '@gold/shared-components',
 ];
 

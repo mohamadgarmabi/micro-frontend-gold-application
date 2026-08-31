@@ -10,7 +10,6 @@ const ORIGIN = `http://127.0.0.1:${PORT}`;
 const workspacePackages = [
   '@gold/apis',
   '@gold/form',
-  '@gold/pull-refresh',
   '@gold/shared-components',
 ];
 

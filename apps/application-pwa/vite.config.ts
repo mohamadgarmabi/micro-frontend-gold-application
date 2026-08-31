@@ -11,7 +11,6 @@ const DEFAULT_API_URL = 'https://jsonplaceholder.typicode.com'
 const workspacePackages = [
   '@gold/apis',
   '@gold/form',
-  '@gold/pull-refresh',
   '@gold/shared-components',
 ]
 

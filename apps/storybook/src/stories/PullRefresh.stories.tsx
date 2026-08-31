@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { PullRefresh } from '@gold/pull-refresh'
+import PullRefresh from '@gold/shared-components/pull-refresh'
 
 const meta = {
   title: 'Components/PullRefresh',

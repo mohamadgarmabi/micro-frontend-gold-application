@@ -14,7 +14,6 @@
     "implicitDependencies": [
       "design-system",
       "shared-components",
-      "pull-refresh",
       "apis"
     ],
     "targets": {
@@ -51,7 +50,6 @@
     "@gold/apis": "workspace:*",
     "@gold/design-system": "workspace:*",
     "@gold/form": "workspace:*",
-    "@gold/pull-refresh": "workspace:*",
     "@gold/shared-components": "workspace:*",
     "@module-federation/runtime": "^2.4.0",
     "@tanstack/vue-query": "^5.90.2",

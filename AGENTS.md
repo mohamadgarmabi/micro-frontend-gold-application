@@ -8,7 +8,6 @@ Persistent conventions for all AI-assisted development in this monorepo.
 | ------------------------------------------------------ | ------------------------ | --------------------- | ------------------ | --------------- | ---------------- | ----------------------- |
 | `packages/design-system`                               | ✅ Required              | —                     | ✅ Required        | ✅ Required     | ✅ Required      | ✅ Required             |
 | `packages/form`                                        | ✅ Required              | —                     | ✅ Required        | ✅ Required     | ✅ Required      | ✅ Required             |
-| `packages/pull-refresh`                                | ✅ Required              | —                     | ✅ Required        | ✅ Required     | ✅ Required      | ✅ Required             |
 | `packages/shared-components`                           | ✅ Required              | —                     | ✅ Required        | ✅ Required     | ✅ Required      | ✅ Required             |
 | `packages/apis`                                        | —                        | —                     | ✅ Required        | ✅ Required     | —                | ✅ Required             |
 | TanStack apps (`apps/*` with `@tanstack/react-router`) | —                        | ✅ Required           | ✅ Required        | ✅ Required     | ✅ Required      | ✅ Required             |
@@ -18,7 +17,7 @@ Persistent conventions for all AI-assisted development in this monorepo.
 
 ## 1. Component Folder Structure
 
-**Packages:** `design-system`, `form`, `pull-refresh`, `shared-components`
+**Packages:** `design-system`, `form`, `shared-components`
 
 Every component uses this folder layout — no exceptions when creating or refactoring components:
 

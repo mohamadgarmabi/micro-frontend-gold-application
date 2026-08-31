@@ -213,9 +213,6 @@ importers:
       '@gold/form':
         specifier: workspace:*
         version: link:../../packages/form
-      '@gold/pull-refresh':
-        specifier: workspace:*
-        version: link:../../packages/pull-refresh
       '@gold/shared-components':
         specifier: workspace:*
         version: link:../../packages/shared-components
@@ -322,9 +319,6 @@ importers:
       '@gold/form':
         specifier: workspace:*
         version: link:../../packages/form
-      '@gold/pull-refresh':
-        specifier: workspace:*
-        version: link:../../packages/pull-refresh
       '@gold/shared-components':
         specifier: workspace:*
         version: link:../../packages/shared-components
@@ -347,9 +341,6 @@ importers:
       '@gold/form':
         specifier: workspace:*
         version: link:../../packages/form
-      '@gold/pull-refresh':
-        specifier: workspace:*
-        version: link:../../packages/pull-refresh
       '@gold/shared-components':
         specifier: workspace:*
         version: link:../../packages/shared-components
@@ -421,22 +412,6 @@ importers:
       '@tanstack/react-form':
         specifier: ^1.19.2
         version: 1.33.5(@tanstack/react-start@1.168.49(@rspack/core@1.6.8(@swc/helpers@0.5.23))(esbuild@0.28.2)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(rollup@4.63.1)(supports-color@8.1.1)(vite@8.2.2(@types/node@22.20.1)(esbuild@0.28.2)(jiti@2.7.0)(less@4.5.1)(sass-embedded@1.103.1)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.0))(webpack@5.110.1))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      class-variance-authority:
-        specifier: ^0.7.1
-        version: 0.7.1
-      react:
-        specifier: ^19.0.0
-        version: 19.2.8
-    devDependencies:
-      '@types/react':
-        specifier: ^19.0.0
-        version: 19.2.18
-      typescript:
-        specifier: ~5.9.2
-        version: 5.9.3
-
-  packages/pull-refresh:
-    dependencies:
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1

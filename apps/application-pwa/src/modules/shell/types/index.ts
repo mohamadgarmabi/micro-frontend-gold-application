@@ -1,4 +1,4 @@
-import type { PullRefreshLabels } from '@gold/pull-refresh'
+import type { PullRefreshLabels } from '@gold/shared-components/pull-refresh'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 

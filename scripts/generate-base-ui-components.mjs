@@ -136,16 +136,6 @@ export { use${exportName} };
 `
 }
 
-function typeFile(exportName, propsTypeBody) {
-  return `import { ${exportName} as Base${exportName} } from '@base-ui/react/${exportName === 'OTPField' ? 'otp-field' : exportName.replace(/([A-Z])/g, (m, c, i) => (i ? '-' : '') + c.toLowerCase()).replace(/^-/, '')}';
-import type { ComponentProps } from 'react';
-
-type ${exportName}Props = ${propsTypeBody};
-
-export type { ${exportName}Props };
-`
-}
-
 function stylesVarName(slug) {
   return `${slug.replace(/-/g, '')}Styles`
 }
@@ -314,12 +304,21 @@ const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))
 
 const exports = {
   '.': './src/index.ts',
+  './cn': {
+    types: './src/lib/cn.ts',
+    import: './src/lib/cn.ts',
+    module: './src/lib/cn.ts',
+    browser: './src/lib/cn.ts',
+    default: './src/lib/cn.ts',
+  },
   './components/*': './src/components/*/index.tsx',
 }
 
 for (const m of manifest) {
   exports[`./${m.slug}`] = `./src/components/${m.slug}/index.tsx`
 }
+
+exports['./pull-refresh'] = './src/components/pull-refresh/index.tsx'
 
 pkg.sideEffects = false
 pkg.exports = exports

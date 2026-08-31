@@ -9,7 +9,7 @@
 }
 
 /* Prefer logical alignment for unstyled blocks — not form controls */
-[dir='rtl'] :where(:not([dir='ltr'], input, textarea, select)) {
+[dir='rtl'] :where(:not([dir='ltr'], input, textarea, select, button)) {
   text-align: start;
 }
 
