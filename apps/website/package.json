@@ -48,6 +48,7 @@
   "devDependencies": {
     "@module-federation/vite": "^1.15.5",
     "@vitejs/plugin-react": "^6.0.2",
+    "oxc-transform-react": "^0.147.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
     "typescript": "~5.9.2",

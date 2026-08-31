@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { mergeConfig } from 'vite';
 
@@ -14,7 +15,7 @@ const config: StorybookConfig = {
   framework: '@storybook/react-vite',
   async viteFinal(config) {
     return mergeConfig(config, {
-      plugins: [tailwindcss()],
+      plugins: [react({ compiler: true }), tailwindcss()],
       optimizeDeps: {
         exclude: workspacePackages,
       },

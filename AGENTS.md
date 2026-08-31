@@ -153,6 +153,10 @@ Never use the `function` keyword. Every callable starts with `const` and is an a
 ### ❌ Do not use function declarations or function expressions
 
 ```ts
+function useTypes() {
+  return {}
+}
+
 function getToken() {
   return null
 }
@@ -169,6 +173,10 @@ const api = {
 ### ✅ Always use const + arrow
 
 ```ts
+const useTypes = () => {
+  return {}
+}
+
 const getToken = () => null
 
 const load = async () => {}
@@ -202,7 +210,8 @@ Applies to components, hooks, helpers, handlers, and object methods in all packa
 
 ### Views / components must not
 
-- Use `useState`, `useEffect`, `useMemo`, or `useCallback`
+- Use `useState` or `useEffect` (those belong in hooks)
+- Use `useMemo` or `useCallback` anywhere — React Compiler memoizes automatically
 - Derive values (`const total = price * qty`)
 - Define handler bodies (`onClick={() => toast.success(...)}`)
 - Transform data, pick translation keys by condition, or build option lists
@@ -241,12 +250,29 @@ pnpm typecheck
 | Prettier   | `pnpm format` / `pnpm format:check` | `.prettierrc`                                    |
 | ESLint     | `pnpm lint`                         | `eslint.config.mjs` — errors are blockers        |
 | TypeScript | `pnpm typecheck`                    | `strict`, unused locals/params — no `tsc` errors |
+| Unused     | ESLint `@typescript-eslint/no-unused-vars` | Unused imports and variables are errors; prefix with `_` if intentional |
 
-Do not use `@ts-ignore`, `@ts-expect-error`, or `any` to hide errors. If Prettier and ESLint conflict, Prettier wins.
+Do not use `@ts-ignore`, `@ts-expect-error`, or `any` to hide errors. If Prettier and ESLint conflict, Prettier wins. `function` declarations are lint errors — use `const name = () => {}`.
 
 ---
 
-## 7. Migration Notes
+## 7. Commit messages
+
+Every commit subject is one line: `type(scope): description`.
+
+Allowed types: `feat`, `fix`, `refactor`, `perf`, `style`, `test`, `docs`, `build`, `ops`, `chore`, `wip`, `hotfix`.
+
+Scope is required. No trailing period. No paragraph summaries.
+
+Wrong: `Update ESLint rules to enforce arrow function usage, refine TypeScript...`
+
+Correct: `chore(lint): enforce arrow functions and unused imports`
+
+Husky `commit-msg` runs commitlint and rejects anything else.
+
+---
+
+## 8. Migration Notes
 
 Existing flat files have been migrated to the folder pattern in `shared-components` and `form`.
 

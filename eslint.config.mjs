@@ -104,6 +104,12 @@ export default [
     },
   },
   {
+    files: ['**/*.js', '**/*.jsx', '**/*.mjs'],
+    rules: {
+      'no-unused-vars': unusedVarsRule,
+    },
+  },
+  {
     files: ['apps/**/*.{ts,tsx,js,jsx}', 'packages/**/*.{ts,tsx,js,jsx}'],
     ignores: ['**/*.d.ts', '**/scripts/**'],
     rules: {

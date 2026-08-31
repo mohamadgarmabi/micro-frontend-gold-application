@@ -36,6 +36,8 @@
     "@babel/core": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "@chromatic-com/storybook": "^5.2.1",
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
     "@eslint/js": "^9.8.0",
     "@juristr/nx-tailwind-sync": "^0.0.9",
     "@module-federation/vite": "^1.15.5",
@@ -76,7 +78,9 @@
     "jsdom": "^27.1.0",
     "lint-staged": "^17.3.0",
     "nx": "23.0.1",
+    "oxc-transform-react": "^0.147.0",
     "prettier": "~3.6.2",
+    "prettier-plugin-tailwindcss": "0.8.1",
     "react-refresh": "^0.10.0",
     "storybook": "^10.4.6",
     "tailwindcss": "^4.3.2",
@@ -87,7 +91,6 @@
     "vitest": "~4.1.0",
     "webpack": "^5.101.3",
     "webpack-cli": "^7.0.0",
-    "webpack-dev-server": "^5.2.1",
-    "prettier-plugin-tailwindcss":"0.8.1"
+    "webpack-dev-server": "^5.2.1"
   }
 }

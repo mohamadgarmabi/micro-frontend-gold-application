@@ -123,7 +123,7 @@ const getServerTime = createServerFn({
 })
 
 // Use in a component
-const MyComponent =() => {
+const MyComponent = () => {
   const [time, setTime] = useState('')
   
   useEffect(() => {
@@ -168,7 +168,7 @@ export const Route = createFileRoute('/people')({
   component: PeopleComponent,
 })
 
-const PeopleComponent =() => {
+const PeopleComponent = () => {
   const data = Route.useLoaderData()
   return (
     <ul>

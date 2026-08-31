@@ -38,5 +38,9 @@
     "@gold/design-system": "workspace:*",
     "@gold/form": "workspace:*",
     "@gold/shared-components": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "oxc-transform-react": "^0.147.0"
   }
 }

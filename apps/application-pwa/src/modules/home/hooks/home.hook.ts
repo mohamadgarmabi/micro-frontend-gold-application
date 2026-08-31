@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import {
   AlertTriangle,
@@ -139,7 +139,7 @@ const useHome = () => {
       tileClassName: 'aurum-quick-tile aurum-quick-tile--rose',
     },
   ]
-  
+
   return {
     t,
     header,

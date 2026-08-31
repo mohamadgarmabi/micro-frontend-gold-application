@@ -26,6 +26,7 @@ Root scripts: `pnpm lint`, `pnpm format`, `pnpm format:check`, `pnpm typecheck`.
 - `tsc` must pass (`strict`, `noUnusedLocals`, `noUnusedParameters`)
 - Unused variables and unused imports are ESLint **errors** (`@typescript-eslint/no-unused-vars`). Prefix intentionally unused names with `_`
 - Only arrow functions: `const name = () => {}` — `function` declarations fail lint
+- Do not use `useMemo` or `useCallback` — React Compiler memoizes automatically
 - Do not use `@ts-ignore`, `@ts-expect-error`, or `any` to silence errors
 - If Prettier and ESLint conflict, Prettier wins (eslint-config-prettier)
 - Fix errors in the files you changed before considering the task done

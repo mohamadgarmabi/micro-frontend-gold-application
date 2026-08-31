@@ -19,5 +19,6 @@
       "@gold/shared-components/*": ["../shared-components/src/components/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/**/_probe-*"]
 }

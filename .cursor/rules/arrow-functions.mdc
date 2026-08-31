@@ -6,19 +6,7 @@ alwaysApply: true
 
 # Arrow Functions Only
 
-Never declare a function with the `function` keyword. Always start with `const` and use an arrow function.
-
-## Wrong
-
-```ts
-const useTypes = () => {
-  return {}
-}
-
-const Button = (props: ButtonProps) => {
-  return <button {...props} />
-}
-```
+Never declare a function with the `function` keyword. Always start with `const` and use an arrow function. ESLint errors if this is violated.
 
 ## Wrong
 
@@ -45,6 +33,10 @@ const api = {
 ## Correct
 
 ```ts
+const useTypes = () => {
+  return {}
+}
+
 const getToken = () => null
 
 const Button = (props: ButtonProps) => {

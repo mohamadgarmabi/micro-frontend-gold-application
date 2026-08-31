@@ -18,7 +18,8 @@ alwaysApply: true
 
 ## Not allowed in a view/component `.tsx`
 
-- `useState` / `useEffect` / `useMemo` / `useCallback`
+- `useState` / `useEffect` (move into a `*.hook.ts` file)
+- `useMemo` / `useCallback` (React Compiler memoizes automatically — do not use these)
 - Derived values (`const total = price * amount`)
 - Event handler bodies (`onClick={() => ...}`, `onChange={(e) => setX(e.target.value)}`)
 - Data transforms, filters, `Array.from`, or view-model mapping
