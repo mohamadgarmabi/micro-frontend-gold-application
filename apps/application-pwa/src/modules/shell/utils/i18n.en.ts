@@ -6,8 +6,11 @@ const enMessages = {
   'nav.options': 'Settings',
 
   'home.greeting': 'Good morning',
+  'home.greetingAfternoon': 'Good afternoon',
+  'home.greetingEvening': 'Good evening',
   'home.brand': 'Aurum',
   'home.goldSpotPrice': 'Live gold price',
+  'home.pairXau': 'XAU / USD',
   'home.liveNow': 'Today • Live',
   'home.liveCaption': 'Live price',
   'home.walletProtocol': 'Wallet: Gold vault',
@@ -29,6 +32,7 @@ const enMessages = {
   'home.walletCash': 'Toman wallet',
   'home.walletGold': 'Gold vault',
   'home.cashValue': '{amount} T',
+  'home.cashHint': 'Available to trade',
   'home.goldVaultValue': '{amount} sot',
   'home.actionDeposit': 'Deposit',
   'home.actionWithdraw': 'Withdraw',
@@ -196,6 +200,10 @@ const enMessages = {
   'auth.webauthnCancelled': 'Biometric authentication cancelled',
   'auth.webauthnRegistered': 'Biometric login enabled',
   'auth.webauthnRemoved': 'Biometric login disabled',
+
+  'pullRefresh.pull': 'Pull to refresh',
+  'pullRefresh.release': 'Release to refresh',
+  'pullRefresh.refreshing': 'Refreshing',
 
   'notFound.title': 'Page not found',
   'notFound.description': 'This page does not exist or has been moved.',

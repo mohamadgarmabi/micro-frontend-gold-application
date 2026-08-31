@@ -1,154 +1,133 @@
-import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import {
-  AlertTriangle,
-  ArrowDownToLine,
-  ArrowUpFromLine,
-  Check,
-  FileText,
-  Truck,
-} from 'lucide-react'
-import { recentActivity } from '#/modules/market/utils/data'
+import { ArrowDownToLine, ArrowUpFromLine, FileText, Truck } from 'lucide-react'
+import { assets, recentActivity, SPOT_PRICE } from '#/modules/market/utils/data'
 import { fmt } from '#/modules/market/utils/format'
 import { useI18n } from '#/modules/shell/hooks/i18n.hook'
+import type { MessageKey } from '#/modules/shell/types'
 import type {
-  AssetId,
-  AssetTab,
+  HomeActivityRow,
   HomeHeaderModel,
-  HomeHeroModel,
+  HomeMarketRow,
+  HomeQuoteModel,
+  HomeTradeAction,
+  HomeWallet,
   QuickAction,
-  StatusCard,
 } from '../types'
-import { gaugeTicks } from '../utils/gauge'
 
+const CASH_TOMAN = '12,450,000'
 const VAULT_SOT = '1,250'
-const LAST_TRADE_OZ = recentActivity[0]?.oz ?? 1
+const GOLD_CHANGE = 1.28
+const QUICK_TILE_CLASS =
+  'flex size-14 mx-auto items-center justify-center rounded-2xl border border-border bg-surface-elevated text-brand'
 
-const assetClassName = {
-  active: 'rounded-full bg-button px-4 py-1.5 text-xs font-semibold text-button-foreground',
-  idle: 'rounded-full bg-surface-elevated px-4 py-1.5 text-xs font-medium text-foreground-subtle',
-} as const
+const marketNameKey: Record<string, MessageKey> = {
+  'XAU/USD': 'market.goldSpot',
+  'XAG/USD': 'market.silverSpot',
+  'XPT/USD': 'market.platinum',
+  'XPD/USD': 'market.palladium',
+}
 
-const quotes = {
-  gold: { price: 3302.45 },
-  silver: { price: 32.18 },
-} as const
+const greetingKey = (hour: number) => {
+  if (hour < 12) {
+    return 'home.greeting' as const
+  }
 
-const dateLocales = {
-  en: 'en-US',
-  fa: 'fa-IR',
-} as const
+  if (hour < 18) {
+    return 'home.greetingAfternoon' as const
+  }
+
+  return 'home.greetingEvening' as const
+}
 
 const useHome = () => {
-  const { t, locale } = useI18n()
+  const { t } = useI18n()
   const navigate = useNavigate()
-  const [asset, setAsset] = useState<AssetId>('gold')
-  const quote = quotes[asset]
 
-  const onOpenCalendar = () => {
+  const openChart = () => {
     void navigate({ to: '/chart' })
   }
 
-  const onToggleAsset = () => {
-    setAsset((current) => (current === 'gold' ? 'silver' : 'gold'))
+  const openTrade = () => {
+    void navigate({ to: '/trade' })
   }
 
   const header: HomeHeaderModel = {
+    greeting: t(greetingKey(new Date().getHours())),
     brandName: t('home.brand'),
-    dateLabel: new Intl.DateTimeFormat(dateLocales[locale], {
-      weekday: 'long',
-      month: 'short',
-      day: 'numeric',
-    }).format(new Date()),
-    streakLabel: '21',
-    onOpenCalendar,
+    onOpenChart: openChart,
   }
 
-  const assetTabs: AssetTab[] = [
+  const quote: HomeQuoteModel = {
+    eyebrow: t('home.goldSpotPrice'),
+    pairLabel: t('home.pairXau'),
+    liveLabel: t('home.liveNow'),
+    chartLabel: t('home.viewChart'),
+    price: SPOT_PRICE,
+    change: GOLD_CHANGE,
+    onOpenChart: openChart,
+  }
+
+  const tradeActions: HomeTradeAction[] = [
     {
-      id: 'gold',
-      label: t('home.assetGold'),
-      onSelect: () => setAsset('gold'),
-      className: asset === 'gold' ? assetClassName.active : assetClassName.idle,
+      label: t('home.buyGold'),
+      className: 'flex-1 rounded-xl bg-success py-3 text-sm font-semibold text-white',
+      onSelect: openTrade,
     },
     {
-      id: 'silver',
-      label: t('home.assetSilver'),
-      onSelect: () => setAsset('silver'),
-      className: asset === 'silver' ? assetClassName.active : assetClassName.idle,
+      label: t('home.sellGold'),
+      className: 'flex-1 rounded-xl bg-danger py-3 text-sm font-semibold text-white',
+      onSelect: openTrade,
     },
   ]
 
-  const hero: HomeHeroModel = {
-    eyebrow: t('home.liveNow'),
-    caption: t('home.liveCaption'),
-    value: `$${fmt(quote.price)}`,
-    chipLabel: asset === 'gold' ? t('home.assetGold') : t('home.assetSilver'),
-    chipHint: t('home.unitGram'),
-    protocolLabel: t('home.walletProtocol'),
-    progressLabel: t('home.holdingsProgress', { amount: VAULT_SOT }),
-    onToggleAsset,
-  }
-
-  const statusCards: StatusCard[] = [
+  const wallets: HomeWallet[] = [
     {
-      id: 'last-trade',
-      title: t('home.lastTrade'),
-      when: t('home.lastTradeWhen'),
-      value: `${LAST_TRADE_OZ} oz`,
-      hint: t('home.buyGoldAction'),
-      badgeLabel: t('home.logged'),
-      badgeClassName: 'aurum-status-badge aurum-status-badge--info',
-      BadgeIcon: Check,
+      id: 'cash',
+      label: t('home.walletCash'),
+      value: t('home.cashValue', { amount: CASH_TOMAN }),
+      hint: t('home.cashHint'),
     },
     {
-      id: 'vault',
-      title: t('home.vaultStatus'),
-      when: t('home.vaultWhen'),
+      id: 'gold',
+      label: t('home.walletGold'),
       value: t('home.goldVaultValue', { amount: VAULT_SOT }),
-      hint: t('home.coverHint', { amount: '4' }),
-      badgeLabel: t('home.topUpSoon'),
-      badgeClassName: 'aurum-status-badge aurum-status-badge--warning',
-      BadgeIcon: AlertTriangle,
+      hint: t('home.goldOunces', { amount: '12.50' }),
     },
   ]
 
   const actions: QuickAction[] = [
-    {
-      label: t('home.actionDeposit'),
-      to: '/trade',
-      Icon: ArrowDownToLine,
-      tileClassName: 'aurum-quick-tile aurum-quick-tile--amber',
-    },
-    {
-      label: t('home.actionWithdraw'),
-      to: '/profile',
-      Icon: ArrowUpFromLine,
-      tileClassName: 'aurum-quick-tile aurum-quick-tile--violet',
-    },
-    {
-      label: t('home.actionDelivery'),
-      to: '/profile',
-      Icon: Truck,
-      tileClassName: 'aurum-quick-tile aurum-quick-tile--sky',
-    },
-    {
-      label: t('home.actionInvoices'),
-      to: '/chart',
-      Icon: FileText,
-      tileClassName: 'aurum-quick-tile aurum-quick-tile--rose',
-    },
+    { label: t('home.actionDeposit'), to: '/trade', Icon: ArrowDownToLine, tileClassName: QUICK_TILE_CLASS },
+    { label: t('home.actionWithdraw'), to: '/profile', Icon: ArrowUpFromLine, tileClassName: QUICK_TILE_CLASS },
+    { label: t('home.actionDelivery'), to: '/profile', Icon: Truck, tileClassName: QUICK_TILE_CLASS },
+    { label: t('home.actionInvoices'), to: '/chart', Icon: FileText, tileClassName: QUICK_TILE_CLASS },
   ]
 
-  return {
-    t,
-    header,
-    assetTabs,
-    hero,
-    gaugeTicks,
-    statusCards,
-    actions,
-  }
+  const markets: HomeMarketRow[] = assets.map((asset) => ({
+    id: asset.symbol,
+    name: t(marketNameKey[asset.symbol] ?? 'market.goldSpot'),
+    symbol: asset.symbol,
+    price: asset.price,
+    change: asset.chg,
+    onSelect: openChart,
+    className:
+      'flex w-full items-center justify-between rounded-xl border border-border bg-surface-elevated px-4 py-3 text-start',
+  }))
+
+  const activity: HomeActivityRow[] = recentActivity.map((row, index) => {
+    const isBuy = row.type === 'BUY'
+
+    return {
+      id: `${row.date}-${index}`,
+      sideLabel: isBuy ? t('home.buyGoldAction') : t('home.sellGoldAction'),
+      sideColor: isBuy ? 'success' : 'danger',
+      date: row.date,
+      ouncesLabel: `${row.oz} oz`,
+      priceLabel: `$${fmt(row.price)}`,
+      className: 'flex items-center justify-between rounded-xl border border-border bg-surface-elevated px-4 py-3',
+    }
+  })
+
+  return { t, header, quote, tradeActions, wallets, actions, markets, activity }
 }
 
 export { useHome }

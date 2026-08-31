@@ -22,6 +22,7 @@
       "design-system",
       "shared-components",
       "form",
+      "pull-refresh",
       "apis"
     ],
     "targets": {
@@ -58,6 +59,7 @@
     "@gold/apis": "workspace:*",
     "@gold/design-system": "workspace:*",
     "@gold/form": "workspace:*",
+    "@gold/pull-refresh": "workspace:*",
     "@gold/shared-components": "workspace:*",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "latest",

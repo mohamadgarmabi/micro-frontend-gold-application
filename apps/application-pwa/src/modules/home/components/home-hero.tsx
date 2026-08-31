@@ -1,44 +1,35 @@
 import Typography from '@gold/shared-components/typography'
-import { Coins } from 'lucide-react'
+import Card from '#/modules/shell/components/card'
+import GoldBadge from '#/modules/shell/components/gold-badge'
+import PriceTag from '#/modules/shell/components/price-tag'
 import type { HomeHeroProps } from '../types'
 
-const HomeHero = ({ hero, gaugeTicks }: HomeHeroProps) => {
+const HomeHero = ({ quote, tradeActions }: HomeHeroProps) => {
   return (
-    <section className="aurum-hero-card">
-      <Typography as="p" size="xs" color="subtle" align="center">
-        {hero.eyebrow}
-      </Typography>
-      <div className="aurum-gauge">
-        {gaugeTicks.map((tick) => (
-          <span key={tick.id} className={tick.className} style={tick.style} />
-        ))}
-        <div className="aurum-gauge__center">
-          <Typography as="p" size="xs" color="subtle">
-            {hero.caption}
+    <Card className="aurum-spot-card space-y-4 p-5">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <Typography as="p" size="xs" color="subtle" className="tracking-widest uppercase">
+            {quote.eyebrow}
           </Typography>
-          <Typography as="p" size="display" weight="bold" className="font-mono tracking-tight">
-            {hero.value}
+          <Typography as="h2" size="md" weight="semibold" className="mt-1">
+            {quote.pairLabel}
           </Typography>
         </div>
+        <GoldBadge>{quote.liveLabel}</GoldBadge>
       </div>
-      <button type="button" onClick={hero.onToggleAsset} className="aurum-hero-chip">
-        <Coins size={14} />
-        <Typography as="span" size="xs" weight="semibold">
-          {hero.chipLabel}
-        </Typography>
-        <Typography as="span" size="xs" color="subtle">
-          {hero.chipHint}
-        </Typography>
+      <PriceTag value={quote.price} change={quote.change} size="lg" />
+      <button type="button" onClick={quote.onOpenChart} className="text-xs font-medium text-brand">
+        {quote.chartLabel}
       </button>
-      <div className="mt-5 flex items-end justify-between gap-3">
-        <Typography as="p" size="xs" color="subtle">
-          {hero.protocolLabel}
-        </Typography>
-        <Typography as="p" size="xs" color="subtle">
-          {hero.progressLabel}
-        </Typography>
+      <div className="flex gap-3">
+        {tradeActions.map((action) => (
+          <button key={action.label} type="button" onClick={action.onSelect} className={action.className}>
+            {action.label}
+          </button>
+        ))}
       </div>
-    </section>
+    </Card>
   )
 }
 

@@ -8,8 +8,11 @@ const faMessages: Record<MessageKey, string> = {
   'nav.options': 'تنظیمات',
 
   'home.greeting': 'صبح بخیر',
+  'home.greetingAfternoon': 'ظهر بخیر',
+  'home.greetingEvening': 'عصر بخیر',
   'home.brand': 'اوروم',
   'home.goldSpotPrice': 'قیمت لحظه‌ای طلا',
+  'home.pairXau': 'XAU / USD',
   'home.liveNow': 'امروز • زنده',
   'home.liveCaption': 'قیمت زنده',
   'home.walletProtocol': 'کیف پول: گنجینه طلا',
@@ -31,6 +34,7 @@ const faMessages: Record<MessageKey, string> = {
   'home.walletCash': 'کیف پول تومان',
   'home.walletGold': 'گنجینه طلا',
   'home.cashValue': '{amount} تومان',
+  'home.cashHint': 'قابل معامله',
   'home.goldVaultValue': '{amount} سوت',
   'home.actionDeposit': 'واریز',
   'home.actionWithdraw': 'برداشت',
@@ -198,6 +202,10 @@ const faMessages: Record<MessageKey, string> = {
   'auth.webauthnCancelled': 'احراز هویت زیست‌سنجی لغو شد',
   'auth.webauthnRegistered': 'ورود زیست‌سنجی فعال شد',
   'auth.webauthnRemoved': 'ورود زیست‌سنجی غیرفعال شد',
+
+  'pullRefresh.pull': 'برای تازه‌سازی بکشید',
+  'pullRefresh.release': 'برای تازه‌سازی رها کنید',
+  'pullRefresh.refreshing': 'در حال تازه‌سازی',
 
   'notFound.title': 'صفحه پیدا نشد',
   'notFound.description': 'این صفحه وجود ندارد یا جابه‌جا شده است.',

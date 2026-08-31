@@ -1,10 +1,10 @@
 ---
-globs: packages/{design-system,form,shared-components}/**/*
+globs: packages/{design-system,form,pull-refresh,shared-components}/**/*
 alwaysApply: false
 ---
 # Component Folder Structure
 
-Applies to **packages only** (`design-system`, `form`, `shared-components`). Apps follow this pattern later.
+Applies to **packages only** (`design-system`, `form`, `pull-refresh`, `shared-components`). Apps follow this pattern later.
 
 ## Required layout
 

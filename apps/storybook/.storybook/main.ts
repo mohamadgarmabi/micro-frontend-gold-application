@@ -6,6 +6,7 @@ import { mergeConfig } from 'vite';
 const workspacePackages = [
   '@gold/apis',
   '@gold/form',
+  '@gold/pull-refresh',
   '@gold/shared-components',
 ];
 
@@ -13,14 +14,14 @@ const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@chromatic-com/storybook'],
   framework: '@storybook/react-vite',
-  async viteFinal(config) {
+  viteFinal: async (config) => {
     return mergeConfig(config, {
       plugins: [react({ compiler: true }), tailwindcss()],
       optimizeDeps: {
         exclude: workspacePackages,
       },
-    });
+    })
   },
-};
+}
 
 export default config;

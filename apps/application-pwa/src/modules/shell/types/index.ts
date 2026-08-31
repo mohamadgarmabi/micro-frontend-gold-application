@@ -1,9 +1,15 @@
-import type { ReactNode } from 'react'
+import type { PullRefreshLabels } from '@gold/pull-refresh'
 import type { LucideIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 type AppShellProps = {
   children: ReactNode
   showNav?: boolean
+}
+
+type AppShellModel = {
+  onRefresh: () => Promise<void>
+  pullRefreshLabels: PullRefreshLabels
 }
 
 type AurumNavPage = 'home' | 'chart' | 'trade' | 'profile' | 'options'
@@ -83,6 +89,7 @@ type ViewTransitionInfo = {
 }
 
 export type {
+  AppShellModel,
   AppShellProps,
   AurumNavPage,
   BottomNavItem,

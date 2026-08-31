@@ -197,7 +197,7 @@ ${typeMatch ? `export type { ${propsTypeName} };` : ''}
   );
 }
 
-function migrateButton(slug, content) {
+function migrateButton(slug, _content) {
   writeFile(
     path.join(componentsDir, slug, `${slug}.styles.ts`),
     `import { singleComponentStyles } from '../../lib/styles';

@@ -4,6 +4,7 @@
 @source "../../../packages/apis";
 @source "../../../packages/design-system";
 @source "../../../packages/form";
+@source "../../../packages/pull-refresh";
 @source "../../../packages/shared-components";
 /* nx-tailwind-sources:end */
 
@@ -21,6 +22,7 @@ html,
 body,
 #app {
   min-height: 100%;
+  overscroll-behavior-y: none;
 }
 
 body {

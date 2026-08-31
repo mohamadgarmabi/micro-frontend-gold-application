@@ -11,12 +11,18 @@
     "name": "storybook",
     "projectType": "application",
     "sourceRoot": "apps/storybook/src",
-    "implicitDependencies": ["design-system", "shared-components"],
+    "implicitDependencies": [
+      "design-system",
+      "shared-components",
+      "pull-refresh"
+    ],
     "targets": {
       "dev": {
         "executor": "nx:run-commands",
         "continuous": true,
-        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "syncGenerators": [
+          "@juristr/nx-tailwind-sync:source-directives"
+        ],
         "options": {
           "command": "storybook dev -p 6006 --no-open",
           "cwd": "apps/storybook"
@@ -24,7 +30,9 @@
       },
       "build": {
         "executor": "nx:run-commands",
-        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
+        "syncGenerators": [
+          "@juristr/nx-tailwind-sync:source-directives"
+        ],
         "options": {
           "command": "storybook build -o dist",
           "cwd": "apps/storybook"
@@ -37,6 +45,7 @@
     "@gold/apis": "workspace:*",
     "@gold/design-system": "workspace:*",
     "@gold/form": "workspace:*",
+    "@gold/pull-refresh": "workspace:*",
     "@gold/shared-components": "workspace:*"
   },
   "devDependencies": {

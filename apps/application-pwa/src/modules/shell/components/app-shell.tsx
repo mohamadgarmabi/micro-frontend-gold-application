@@ -1,12 +1,18 @@
+import { PullRefresh } from '@gold/pull-refresh'
+import { useAppShell } from '../hooks/app-shell.hook'
 import type { AppShellProps } from '../types'
-import { appPageStyles, appShellStyles } from './app-shell.styles'
+import { appShellStyles } from './app-shell.styles'
 import BottomNav from './bottom-nav'
 
 const AppShell = ({ children, showNav = true }: AppShellProps) => {
+  const { onRefresh, pullRefreshLabels } = useAppShell()
+
   return (
     <>
       <div className={appShellStyles()}>
-        <div className={appPageStyles()}>{children}</div>
+        <PullRefresh onRefresh={onRefresh} labels={pullRefreshLabels}>
+          {children}
+        </PullRefresh>
       </div>
       {showNav ? <BottomNav /> : null}
     </>

@@ -11,13 +11,22 @@
     "name": "website",
     "projectType": "application",
     "sourceRoot": "apps/website/src",
-    "implicitDependencies": ["design-system", "shared-components", "apis"],
+    "implicitDependencies": [
+      "design-system",
+      "shared-components",
+      "pull-refresh",
+      "apis"
+    ],
     "targets": {
       "dev": {
         "executor": "nx:run-commands",
         "continuous": true,
-        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
-        "dependsOn": ["shared-components:dev"],
+        "syncGenerators": [
+          "@juristr/nx-tailwind-sync:source-directives"
+        ],
+        "dependsOn": [
+          "shared-components:dev"
+        ],
         "options": {
           "command": "vite --port 4300 --strictPort",
           "cwd": "apps/website"
@@ -25,8 +34,12 @@
       },
       "build": {
         "executor": "nx:run-commands",
-        "syncGenerators": ["@juristr/nx-tailwind-sync:source-directives"],
-        "dependsOn": ["shared-components:build"],
+        "syncGenerators": [
+          "@juristr/nx-tailwind-sync:source-directives"
+        ],
+        "dependsOn": [
+          "shared-components:build"
+        ],
         "options": {
           "command": "vite build",
           "cwd": "apps/website"
@@ -38,6 +51,7 @@
     "@gold/apis": "workspace:*",
     "@gold/design-system": "workspace:*",
     "@gold/form": "workspace:*",
+    "@gold/pull-refresh": "workspace:*",
     "@gold/shared-components": "workspace:*",
     "@module-federation/runtime": "^2.4.0",
     "@tanstack/vue-query": "^5.90.2",
@@ -48,9 +62,9 @@
   "devDependencies": {
     "@module-federation/vite": "^1.15.5",
     "@vitejs/plugin-react": "^6.0.2",
-    "oxc-transform-react": "^0.147.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
+    "oxc-transform-react": "^0.147.0",
     "typescript": "~5.9.2",
     "vite": "^8.0.13"
   }
