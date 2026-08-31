@@ -1,4 +1,4 @@
-function useSeparator() {
+const useSeparator = () => {
   return {};
 }
 

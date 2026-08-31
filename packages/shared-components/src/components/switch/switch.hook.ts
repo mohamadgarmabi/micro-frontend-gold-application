@@ -1,4 +1,4 @@
-function useSwitch() {
+const useSwitch = () => {
   return {};
 }
 

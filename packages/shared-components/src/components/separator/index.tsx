@@ -3,7 +3,7 @@ import { mergeClassName } from '../../lib/cn'
 import type { SeparatorProps } from './separator.type'
 import { separatorClassName } from './separator.styles'
 
-function Separator({ className, ...props }: SeparatorProps) {
+const Separator = ({ className, ...props }: SeparatorProps) => {
   return <BaseSeparator className={mergeClassName(separatorClassName(), className)} {...props} />
 }
 

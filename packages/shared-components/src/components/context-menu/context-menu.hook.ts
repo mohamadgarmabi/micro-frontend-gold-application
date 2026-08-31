@@ -1,4 +1,4 @@
-function useContextMenu() {
+const useContextMenu = () => {
   return {};
 }
 

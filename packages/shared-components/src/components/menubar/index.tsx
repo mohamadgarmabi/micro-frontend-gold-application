@@ -3,7 +3,7 @@ import { mergeClassName } from '../../lib/cn'
 import type { MenubarProps } from './menubar.type'
 import { menubarClassName } from './menubar.styles'
 
-function Menubar({ className, ...props }: MenubarProps) {
+const Menubar = ({ className, ...props }: MenubarProps) => {
   return <BaseMenubar className={mergeClassName(menubarClassName(), className)} {...props} />
 }
 

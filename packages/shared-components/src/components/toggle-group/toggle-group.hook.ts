@@ -1,4 +1,4 @@
-function useToggleGroup() {
+const useToggleGroup = () => {
   return {};
 }
 

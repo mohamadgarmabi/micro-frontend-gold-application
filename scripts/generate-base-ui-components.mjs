@@ -128,7 +128,7 @@ function writeComponentFile(slug, fileName, content) {
 }
 
 function hookFile(exportName) {
-  return `function use${exportName}() {
+  return `const use${exportName} = () => {
   return {};
 }
 
@@ -191,7 +191,7 @@ import { mergeClassName } from '../../lib/cn';
 import type { ${exportName}Props } from './${slug}.type';
 import { ${classVar} } from './${slug}.styles';
 
-function ${exportName}({ className, ...props }: ${exportName}Props) {
+const ${exportName} = ({ className, ...props }: ${exportName}Props) => {
   return (
     <Base${exportName}
       className={mergeClassName(${classVar}(), className)}

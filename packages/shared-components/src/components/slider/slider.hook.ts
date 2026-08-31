@@ -1,4 +1,4 @@
-function useSlider() {
+const useSlider = () => {
   return {};
 }
 

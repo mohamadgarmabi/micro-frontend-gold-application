@@ -1,4 +1,4 @@
-function useCheckboxGroup() {
+const useCheckboxGroup = () => {
   return {};
 }
 

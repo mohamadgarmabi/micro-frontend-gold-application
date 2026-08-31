@@ -4,7 +4,7 @@ type SpinnerProps = {
   className?: string;
 };
 
-function Spinner({ className }: SpinnerProps) {
+const Spinner = ({ className }: SpinnerProps) => {
   return (
     <svg
       aria-hidden

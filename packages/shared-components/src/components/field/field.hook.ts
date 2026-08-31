@@ -1,4 +1,4 @@
-function useField() {
+const useField = () => {
   return {};
 }
 

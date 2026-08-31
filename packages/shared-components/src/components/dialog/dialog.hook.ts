@@ -1,4 +1,4 @@
-function useDialog() {
+const useDialog = () => {
   return {};
 }
 

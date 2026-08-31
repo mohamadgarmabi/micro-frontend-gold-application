@@ -1,4 +1,4 @@
-function useCombobox() {
+const useCombobox = () => {
   return {};
 }
 

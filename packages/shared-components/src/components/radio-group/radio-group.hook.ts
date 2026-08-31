@@ -1,4 +1,4 @@
-function useRadioGroup() {
+const useRadioGroup = () => {
   return {};
 }
 

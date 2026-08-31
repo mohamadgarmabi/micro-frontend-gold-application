@@ -1,4 +1,4 @@
-function useFieldset() {
+const useFieldset = () => {
   return {};
 }
 

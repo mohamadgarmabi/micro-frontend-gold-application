@@ -2,7 +2,7 @@ import { cn } from '../../lib/cn'
 import type { PriceDisplayProps, PriceDisplaySize } from './price-display.type'
 import { usePriceDisplay } from './price-display.hook'
 
-function ChangeIcon({ up }: { up: boolean }) {
+const ChangeIcon = ({ up }: { up: boolean }) => {
   return (
     <svg
       aria-hidden
@@ -20,7 +20,7 @@ function ChangeIcon({ up }: { up: boolean }) {
   )
 }
 
-function PriceDisplay({ value, change, size = 'md', formatValue, className }: PriceDisplayProps) {
+const PriceDisplay = ({ value, change, size = 'md', formatValue, className }: PriceDisplayProps) => {
   const { formattedValue, changeLabel, up, valueClassName, changeClassName } = usePriceDisplay({
     value,
     change,

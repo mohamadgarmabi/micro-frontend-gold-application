@@ -3,7 +3,7 @@ import { mergeClassName } from '../../lib/cn'
 import type { ToggleProps } from './toggle.type'
 import { toggleClassName } from './toggle.styles'
 
-function Toggle({ className, ...props }: ToggleProps) {
+const Toggle = ({ className, ...props }: ToggleProps) => {
   return <BaseToggle className={mergeClassName(toggleClassName(), className)} {...props} />
 }
 

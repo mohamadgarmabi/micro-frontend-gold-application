@@ -1,4 +1,4 @@
-function useMenubar() {
+const useMenubar = () => {
   return {};
 }
 

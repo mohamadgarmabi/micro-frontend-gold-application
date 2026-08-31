@@ -29,7 +29,7 @@ export default defineConfig({
         'react-dom': { singleton: true },
       },
     }),
-    react(),
+    react({ compiler: true }),
     tailwindcss(),
   ],
 });

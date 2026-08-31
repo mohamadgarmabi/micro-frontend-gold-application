@@ -6,7 +6,7 @@ import { resolveApiInterceptors } from './resolve-interceptors'
 
 let client: AxiosInstance | null = null
 
-function createClient(): AxiosInstance {
+const createClient = (): AxiosInstance => {
   const { baseURL, timeout, headers, auth, interceptors } = getApiConfig()
 
   const instance = axios.create({
@@ -20,16 +20,18 @@ function createClient(): AxiosInstance {
   return instance
 }
 
-export function configureApis(options: ApiConfig): AxiosInstance {
+const configureApis = (options: ApiConfig): AxiosInstance => {
   setApiConfig(options)
   client = createClient()
   return client
 }
 
-export function getApiClient(): AxiosInstance {
+const getApiClient = (): AxiosInstance => {
   if (!client) {
     client = createClient()
   }
 
   return client
 }
+
+export { configureApis, getApiClient }

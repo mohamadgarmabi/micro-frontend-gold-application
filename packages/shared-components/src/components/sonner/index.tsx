@@ -5,7 +5,7 @@ import { useSonner } from './sonner.hook';
 import { sonnerClassNames } from './sonner.styles';
 import './sonner.css';
 
-function Toaster({
+const Toaster = ({
   className,
   position = 'top-right',
   richColors = true,
@@ -13,7 +13,7 @@ function Toaster({
   theme,
   toastOptions: toastOptionsProp,
   ...props
-}: ToasterProps) {
+}: ToasterProps) => {
   const { dir: resolvedDir, theme: resolvedTheme, toastOptions } = useSonner({ dir, theme });
 
   return (

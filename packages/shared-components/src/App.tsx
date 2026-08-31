@@ -13,7 +13,7 @@ const MailIcon = () => (
   </svg>
 );
 
-export function App() {
+const App = () => {
   return (
     <div className="gold-root min-h-screen bg-gradient-to-br from-gold-50 via-surface to-gold-100">
       <main className="mx-auto flex min-h-screen max-w-3xl flex-col gap-8 p-8">
@@ -98,3 +98,5 @@ export function App() {
 }
 
 export default App;
+
+export { App }

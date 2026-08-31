@@ -1,5 +1,5 @@
-function useDefineFormSchema() {
-  return {};
+const useDefineFormSchema = () => {
+  return {}
 }
 
-export { useDefineFormSchema };
+export { useDefineFormSchema }

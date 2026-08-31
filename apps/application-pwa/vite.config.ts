@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => {
       devtools(),
       tailwindcss(),
       tanstackStart(),
-      viteReact(),
+      viteReact({compiler: true }),
       VitePWA({
         registerType: 'prompt',
         injectRegister: 'auto',

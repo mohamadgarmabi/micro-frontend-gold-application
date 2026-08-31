@@ -1,4 +1,4 @@
-function useMeter() {
+const useMeter = () => {
   return {};
 }
 

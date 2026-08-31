@@ -1,10 +1,10 @@
 import type { ApiAuthConfig, ApiInterceptors } from '../config'
 import { createAuthInterceptors } from '../auth'
 
-export function resolveApiInterceptors(
+const resolveApiInterceptors = (
   auth?: ApiAuthConfig,
   custom?: ApiInterceptors,
-): ApiInterceptors | undefined {
+): ApiInterceptors | undefined => {
   const authInterceptors = auth?.tokenCookieName
     ? createAuthInterceptors()
     : undefined
@@ -24,3 +24,5 @@ export function resolveApiInterceptors(
     ],
   }
 }
+
+export { resolveApiInterceptors }

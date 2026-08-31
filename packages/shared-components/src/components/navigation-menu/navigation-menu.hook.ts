@@ -1,4 +1,4 @@
-function useNavigationMenu() {
+const useNavigationMenu = () => {
   return {};
 }
 

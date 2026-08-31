@@ -1,5 +1,5 @@
-function useIcons() {
-  return {};
+const useIcons = () => {
+  return {}
 }
 
-export { useIcons };
+export { useIcons }

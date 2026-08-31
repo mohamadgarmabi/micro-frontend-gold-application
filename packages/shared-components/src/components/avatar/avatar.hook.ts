@@ -1,4 +1,4 @@
-function useAvatar() {
+const useAvatar = () => {
   return {};
 }
 

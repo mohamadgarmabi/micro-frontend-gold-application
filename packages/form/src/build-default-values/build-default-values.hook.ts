@@ -1,5 +1,5 @@
-function useBuildDefaultValues() {
-  return {};
+const useBuildDefaultValues = () => {
+  return {}
 }
 
-export { useBuildDefaultValues };
+export { useBuildDefaultValues }

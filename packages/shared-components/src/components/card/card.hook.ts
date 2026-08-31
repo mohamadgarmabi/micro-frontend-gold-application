@@ -1,4 +1,4 @@
-function useCard() {
+const useCard = () => {
   return {};
 }
 

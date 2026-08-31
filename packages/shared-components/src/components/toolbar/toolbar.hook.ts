@@ -1,4 +1,4 @@
-function useToolbar() {
+const useToolbar = () => {
   return {};
 }
 

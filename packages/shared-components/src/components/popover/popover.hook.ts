@@ -1,4 +1,4 @@
-function usePopover() {
+const usePopover = () => {
   return {};
 }
 

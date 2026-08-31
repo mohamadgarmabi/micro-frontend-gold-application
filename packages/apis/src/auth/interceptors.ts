@@ -1,7 +1,7 @@
 import type { ApiInterceptors } from '../config'
 import { clearAuthToken, getAuthToken } from './cookie'
 
-export function createAuthInterceptors(): ApiInterceptors {
+const createAuthInterceptors = (): ApiInterceptors => {
   return {
     request: [
       {
@@ -29,3 +29,5 @@ export function createAuthInterceptors(): ApiInterceptors {
     ],
   }
 }
+
+export { createAuthInterceptors }

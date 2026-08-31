@@ -14,7 +14,7 @@ const semantic = [
   { label: 'Info', className: 'bg-info', muted: 'bg-info-muted' },
 ];
 
-function ColorPalette() {
+const ColorPalette = () => {
   return (
     <div className="flex w-full max-w-2xl flex-col gap-8">
       <section>

@@ -1,4 +1,4 @@
-function usePreviewCard() {
+const usePreviewCard = () => {
   return {};
 }
 

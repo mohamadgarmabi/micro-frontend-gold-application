@@ -2,7 +2,7 @@ import { mergeClassName } from '../../lib/cn'
 import type { CardProps } from './card.type'
 import { cardStyles } from './card.styles'
 
-function Card({ children, className, ...props }: CardProps) {
+const Card = ({ children, className, ...props }: CardProps) => {
   return (
     <div className={mergeClassName(cardStyles(), className)} {...props}>
       {children}

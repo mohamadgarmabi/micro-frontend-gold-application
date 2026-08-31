@@ -11,8 +11,20 @@ Never declare a function with the `function` keyword. Always start with `const` 
 ## Wrong
 
 ```ts
-function getToken() {
-  return null
+const useTypes = () => {
+  return {}
+}
+
+const Button = (props: ButtonProps) => {
+  return <button {...props} />
+}
+```
+
+## Wrong
+
+```ts
+function useTypes() {
+  return {}
 }
 
 function Button(props: ButtonProps) {

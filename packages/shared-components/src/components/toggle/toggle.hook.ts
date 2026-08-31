@@ -1,4 +1,4 @@
-function useToggle() {
+const useToggle = () => {
   return {};
 }
 

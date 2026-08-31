@@ -1,7 +1,7 @@
 import type { ToasterProps } from './sonner.type';
 import { sonnerToastOptions } from './sonner.styles';
 
-function useSonner(props: Pick<ToasterProps, 'dir' | 'theme'>) {
+const useSonner = (props: Pick<ToasterProps, 'dir' | 'theme'>) => {
   const dir =
     props.dir ??
     (typeof document !== 'undefined' ? (document.documentElement.dir as 'rtl' | 'ltr') : 'rtl');

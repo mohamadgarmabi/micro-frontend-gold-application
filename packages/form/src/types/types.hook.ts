@@ -1,5 +1,5 @@
-function useTypes() {
-  return {};
+const useTypes = () => {
+  return {}
 }
 
-export { useTypes };
+export { useTypes }

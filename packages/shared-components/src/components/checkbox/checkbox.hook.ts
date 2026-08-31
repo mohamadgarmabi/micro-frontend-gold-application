@@ -1,4 +1,4 @@
-function useCheckbox() {
+const useCheckbox = () => {
   return {};
 }
 

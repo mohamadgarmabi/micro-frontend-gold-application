@@ -1,4 +1,4 @@
-function useAccordion() {
+const useAccordion = () => {
   return {};
 }
 

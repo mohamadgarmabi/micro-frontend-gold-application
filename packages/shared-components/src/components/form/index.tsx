@@ -3,7 +3,7 @@ import { mergeClassName } from '../../lib/cn'
 import type { FormProps } from './form.type'
 import { formClassName } from './form.styles'
 
-function Form({ className, ...props }: FormProps) {
+const Form = ({ className, ...props }: FormProps) => {
   return <BaseForm className={mergeClassName(formClassName(), className)} {...props} />
 }
 

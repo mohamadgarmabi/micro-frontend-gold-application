@@ -1,4 +1,4 @@
-function useTabs() {
+const useTabs = () => {
   return {};
 }
 

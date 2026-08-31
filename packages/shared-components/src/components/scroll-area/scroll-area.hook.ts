@@ -1,4 +1,4 @@
-function useScrollArea() {
+const useScrollArea = () => {
   return {};
 }
 

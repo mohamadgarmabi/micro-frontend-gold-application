@@ -34,7 +34,7 @@ export default defineConfig({
         'react-dom': { singleton: true },
       },
     }),
-    react(),
+    react({compiler: true }),
     vue(),
     tailwindcss(),
   ],

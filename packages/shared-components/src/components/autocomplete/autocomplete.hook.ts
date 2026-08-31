@@ -1,4 +1,4 @@
-function useAutocomplete() {
+const useAutocomplete = () => {
   return {};
 }
 

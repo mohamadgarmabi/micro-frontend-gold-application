@@ -1,10 +1,10 @@
 import type { AxiosInstance } from 'axios'
 import type { ApiInterceptors } from '../config'
 
-export function applyApiInterceptors(
+const applyApiInterceptors = (
   client: AxiosInstance,
   interceptors?: ApiInterceptors,
-): void {
+): void => {
   if (!interceptors) {
     return
   }
@@ -24,3 +24,5 @@ export function applyApiInterceptors(
     )
   }
 }
+
+export { applyApiInterceptors }

@@ -1,4 +1,4 @@
-function useToast() {
+const useToast = () => {
   return {};
 }
 

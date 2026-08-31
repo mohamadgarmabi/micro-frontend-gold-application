@@ -3,7 +3,7 @@ import { mergeClassName } from '../../lib/cn'
 import type { CheckboxGroupProps } from './checkbox-group.type'
 import { checkboxgroupClassName } from './checkbox-group.styles'
 
-function CheckboxGroup({ className, ...props }: CheckboxGroupProps) {
+const CheckboxGroup = ({ className, ...props }: CheckboxGroupProps) => {
   return (
     <BaseCheckboxGroup className={mergeClassName(checkboxgroupClassName(), className)} {...props} />
   )

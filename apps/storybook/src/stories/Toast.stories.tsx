@@ -11,7 +11,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-function ToastDemo() {
+const ToastDemo = () => {
   const { add } = Toast.useToastManager();
 
   return (

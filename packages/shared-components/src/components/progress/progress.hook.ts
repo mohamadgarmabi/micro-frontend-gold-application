@@ -1,4 +1,4 @@
-function useProgress() {
+const useProgress = () => {
   return {};
 }
 

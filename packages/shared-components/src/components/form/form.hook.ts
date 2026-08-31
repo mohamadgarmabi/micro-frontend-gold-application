@@ -1,4 +1,4 @@
-function useForm() {
+const useForm = () => {
   return {};
 }
 

@@ -1,23 +1,23 @@
-import { createElement, type ComponentProps, type ComponentType } from 'react';
-import { cn } from './cn';
+import { createElement, type ComponentProps, type ComponentType } from 'react'
+import { cn } from './cn'
 
-function styledPart<C extends ComponentType<Record<string, unknown>>>(
+const styledPart = <C extends ComponentType<Record<string, unknown>>>(
   Component: C,
-  baseClassName: string
-): C {
+  baseClassName: string,
+): C => {
   const Styled = (props: ComponentProps<C>) => {
     const { className, ...rest } = props as ComponentProps<C> & {
-      className?: string;
-    };
+      className?: string
+    }
 
     return createElement(Component, {
       className: cn(baseClassName, className),
       ...(rest as Record<string, unknown>),
-    } as ComponentProps<C>);
-  };
+    } as ComponentProps<C>)
+  }
 
-  Styled.displayName = `Gold${Component.displayName ?? 'Part'}`;
-  return Styled as C;
+  Styled.displayName = `Gold${Component.displayName ?? 'Part'}`
+  return Styled as C
 }
 
-export { styledPart };
+export { styledPart }

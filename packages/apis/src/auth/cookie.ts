@@ -1,7 +1,7 @@
 import type { ApiCookieOptions } from '../config'
 import { getApiConfig, getAuthCookieName } from '../config'
 
-function readCookie(name: string, cookieSource?: string): string | null {
+const readCookie = (name: string, cookieSource?: string): string | null => {
   const source =
     cookieSource ?? (typeof document !== 'undefined' ? document.cookie : '')
 
@@ -29,11 +29,11 @@ function readCookie(name: string, cookieSource?: string): string | null {
   return null
 }
 
-function writeCookie(
+const writeCookie = (
   name: string,
   value: string,
   options?: ApiCookieOptions,
-): void {
+): void => {
   if (typeof document === 'undefined') {
     return
   }
@@ -63,7 +63,7 @@ function writeCookie(
   document.cookie = segments.join('; ')
 }
 
-function clearCookie(name: string, options?: ApiCookieOptions): void {
+const clearCookie = (name: string, options?: ApiCookieOptions): void => {
   if (typeof document === 'undefined') {
     return
   }
@@ -82,7 +82,7 @@ function clearCookie(name: string, options?: ApiCookieOptions): void {
   document.cookie = segments.join('; ')
 }
 
-export function getAuthToken(cookieSource?: string): string | null {
+const getAuthToken = (cookieSource?: string): string | null => {
   const cookieName = getAuthCookieName()
 
   if (!cookieName) {
@@ -92,11 +92,11 @@ export function getAuthToken(cookieSource?: string): string | null {
   return readCookie(cookieName, cookieSource)
 }
 
-export function hasAuthToken(cookieSource?: string): boolean {
+const hasAuthToken = (cookieSource?: string): boolean => {
   return Boolean(getAuthToken(cookieSource))
 }
 
-export function setAuthToken(token: string): void {
+const setAuthToken = (token: string): void => {
   const { auth } = getApiConfig()
   const cookieName = auth?.tokenCookieName
 
@@ -109,7 +109,7 @@ export function setAuthToken(token: string): void {
   writeCookie(cookieName, token, auth.cookie)
 }
 
-export function clearAuthToken(): void {
+const clearAuthToken = (): void => {
   const { auth } = getApiConfig()
   const cookieName = auth?.tokenCookieName
 
@@ -119,3 +119,5 @@ export function clearAuthToken(): void {
 
   clearCookie(cookieName, auth.cookie)
 }
+
+export { getAuthToken, hasAuthToken, setAuthToken, clearAuthToken }

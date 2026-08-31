@@ -1,4 +1,4 @@
-function useCollapsible() {
+const useCollapsible = () => {
   return {};
 }
 

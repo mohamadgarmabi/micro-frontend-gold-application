@@ -1,4 +1,4 @@
-function useNumberField() {
+const useNumberField = () => {
   return {};
 }
 

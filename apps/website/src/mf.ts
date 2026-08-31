@@ -1,17 +1,13 @@
-import { createInstance } from '@module-federation/runtime';
-import {
-  createElement,
-  type ComponentType,
-  type Attributes,
-} from 'react';
+import { createInstance } from '@module-federation/runtime'
+import { createElement, type Attributes, type ComponentType } from 'react'
 
-function getSharedComponentsEntry() {
+const getSharedComponentsEntry = () => {
   if (typeof window === 'undefined') {
-    return 'http://127.0.0.1:5100/remoteEntry.js';
+    return 'http://127.0.0.1:5100/remoteEntry.js'
   }
 
-  const { protocol, hostname } = window.location;
-  return `${protocol}//${hostname}:5100/remoteEntry.js`;
+  const { protocol, hostname } = window.location
+  return `${protocol}//${hostname}:5100/remoteEntry.js`
 }
 
 const federation = createInstance({
@@ -24,20 +20,20 @@ const federation = createInstance({
       type: 'module',
     },
   ],
-});
+})
 
-export async function loadReactRemote<Props extends Attributes>(
-  exposeName: string
-): Promise<ComponentType<Props>> {
+const loadReactRemote = async <Props extends Attributes>(
+  exposeName: string,
+): Promise<ComponentType<Props>> => {
   const mod = await federation.loadRemote<{ default: ComponentType<Props> }>(
-    `shared_components/${exposeName}`
-  );
+    `shared_components/${exposeName}`,
+  )
 
   if (!mod?.default) {
-    throw new Error(`Failed to load shared_components/${exposeName}`);
+    throw new Error(`Failed to load shared_components/${exposeName}`)
   }
 
-  return mod.default;
+  return mod.default
 }
 
-export { createElement };
+export { createElement, loadReactRemote }

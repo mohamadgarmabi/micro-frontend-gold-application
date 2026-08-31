@@ -1,4 +1,4 @@
-function useTooltip() {
+const useTooltip = () => {
   return {};
 }
 

@@ -1,4 +1,4 @@
-function useRadio() {
+const useRadio = () => {
   return {};
 }
 
