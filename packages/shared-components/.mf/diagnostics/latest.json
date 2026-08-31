@@ -1,10 +1,10 @@
 {
   "latestErrorEvent": {
     "code": "TYPE-001",
-    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"/usr/local/bin/node /Users/m.garmabi/Documents/me/micro-frontend-gold-application/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/bin/tsc --project /Users/m.garmabi/Documents/me/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.4049b8362a3f944122b11e1d19597a9f.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"/usr/local/bin/node /Users/m.garmabi/Documents/me/micro-frontend-gold-application/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/bin/tsc --project /Users/m.garmabi/Documents/me/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.f76f7926908f26032cec4edd445f7c7a.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
     "args": {
-      "cmd": "/usr/local/bin/node /Users/m.garmabi/Documents/me/micro-frontend-gold-application/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/bin/tsc --project /Users/m.garmabi/Documents/me/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.4049b8362a3f944122b11e1d19597a9f.json"
+      "cmd": "/usr/local/bin/node /Users/m.garmabi/Documents/me/micro-frontend-gold-application/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/bin/tsc --project /Users/m.garmabi/Documents/me/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.f76f7926908f26032cec4edd445f7c7a.json"
     },
-    "timestamp": 1787998946869
+    "timestamp": 1788177162106
   }
 }

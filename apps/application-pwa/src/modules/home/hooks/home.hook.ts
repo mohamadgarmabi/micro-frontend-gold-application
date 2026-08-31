@@ -1,31 +1,68 @@
 import { useState } from 'react'
-import { ArrowDown, ArrowDownToLine, ArrowUp, ArrowUpFromLine, FileText, Truck } from 'lucide-react'
-import { priceData, recentActivity } from '#/modules/market/utils/data'
+import { useNavigate } from '@tanstack/react-router'
+import {
+  AlertTriangle,
+  ArrowDownToLine,
+  ArrowUpFromLine,
+  Check,
+  FileText,
+  Truck,
+} from 'lucide-react'
+import { recentActivity } from '#/modules/market/utils/data'
 import { fmt } from '#/modules/market/utils/format'
 import { useI18n } from '#/modules/shell/hooks/i18n.hook'
-import type { MessageKey } from '#/modules/shell/types'
-import type { ActivityRow, AssetId, AssetTab, QuickAction, WalletTile } from '../types'
+import type {
+  AssetId,
+  AssetTab,
+  HomeHeaderModel,
+  HomeHeroModel,
+  QuickAction,
+  StatusCard,
+} from '../types'
+import { gaugeTicks } from '../utils/gauge'
 
-const activityDateKeys: MessageKey[] = [
-  'home.activityToday',
-  'home.activityJun29',
-  'home.activityJun27',
-]
+const VAULT_SOT = '1,250'
+const LAST_TRADE_OZ = recentActivity[0]?.oz ?? 1
 
 const assetClassName = {
   active: 'rounded-full bg-button px-4 py-1.5 text-xs font-semibold text-button-foreground',
-  idle: 'rounded-full bg-surface-muted px-4 py-1.5 text-xs font-medium text-foreground-subtle',
+  idle: 'rounded-full bg-surface-elevated px-4 py-1.5 text-xs font-medium text-foreground-subtle',
 } as const
 
 const quotes = {
-  gold: { price: 3302.45, change: 1.28 },
-  silver: { price: 32.18, change: -0.44 },
+  gold: { price: 3302.45 },
+  silver: { price: 32.18 },
+} as const
+
+const dateLocales = {
+  en: 'en-US',
+  fa: 'fa-IR',
 } as const
 
 const useHome = () => {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
+  const navigate = useNavigate()
   const [asset, setAsset] = useState<AssetId>('gold')
   const quote = quotes[asset]
+
+  const onOpenCalendar = () => {
+    void navigate({ to: '/chart' })
+  }
+
+  const onToggleAsset = () => {
+    setAsset((current) => (current === 'gold' ? 'silver' : 'gold'))
+  }
+
+  const header: HomeHeaderModel = {
+    brandName: t('home.brand'),
+    dateLabel: new Intl.DateTimeFormat(dateLocales[locale], {
+      weekday: 'long',
+      month: 'short',
+      day: 'numeric',
+    }).format(new Date()),
+    streakLabel: '21',
+    onOpenCalendar,
+  }
 
   const assetTabs: AssetTab[] = [
     {
@@ -42,53 +79,75 @@ const useHome = () => {
     },
   ]
 
-  const wallets: WalletTile[] = [
+  const hero: HomeHeroModel = {
+    eyebrow: t('home.liveNow'),
+    caption: t('home.liveCaption'),
+    value: `$${fmt(quote.price)}`,
+    chipLabel: asset === 'gold' ? t('home.assetGold') : t('home.assetSilver'),
+    chipHint: t('home.unitGram'),
+    protocolLabel: t('home.walletProtocol'),
+    progressLabel: t('home.holdingsProgress', { amount: VAULT_SOT }),
+    onToggleAsset,
+  }
+
+  const statusCards: StatusCard[] = [
     {
-      label: t('home.walletCash'),
-      value: t('home.cashValue', { amount: '12,480,000' }),
-      hint: t('profile.availableToTrade'),
+      id: 'last-trade',
+      title: t('home.lastTrade'),
+      when: t('home.lastTradeWhen'),
+      value: `${LAST_TRADE_OZ} oz`,
+      hint: t('home.buyGoldAction'),
+      badgeLabel: t('home.logged'),
+      badgeClassName: 'aurum-status-badge aurum-status-badge--info',
+      BadgeIcon: Check,
     },
     {
-      label: t('home.walletGold'),
-      value: t('home.goldVaultValue', { amount: '1,250' }),
-      hint: t('home.assetGold'),
+      id: 'vault',
+      title: t('home.vaultStatus'),
+      when: t('home.vaultWhen'),
+      value: t('home.goldVaultValue', { amount: VAULT_SOT }),
+      hint: t('home.coverHint', { amount: '4' }),
+      badgeLabel: t('home.topUpSoon'),
+      badgeClassName: 'aurum-status-badge aurum-status-badge--warning',
+      BadgeIcon: AlertTriangle,
     },
   ]
 
   const actions: QuickAction[] = [
-    { label: t('home.actionDeposit'), to: '/trade', Icon: ArrowDownToLine },
-    { label: t('home.actionWithdraw'), to: '/profile', Icon: ArrowUpFromLine },
-    { label: t('home.actionDelivery'), to: '/profile', Icon: Truck },
-    { label: t('home.actionInvoices'), to: '/chart', Icon: FileText },
+    {
+      label: t('home.actionDeposit'),
+      to: '/trade',
+      Icon: ArrowDownToLine,
+      tileClassName: 'aurum-quick-tile aurum-quick-tile--amber',
+    },
+    {
+      label: t('home.actionWithdraw'),
+      to: '/profile',
+      Icon: ArrowUpFromLine,
+      tileClassName: 'aurum-quick-tile aurum-quick-tile--violet',
+    },
+    {
+      label: t('home.actionDelivery'),
+      to: '/profile',
+      Icon: Truck,
+      tileClassName: 'aurum-quick-tile aurum-quick-tile--sky',
+    },
+    {
+      label: t('home.actionInvoices'),
+      to: '/chart',
+      Icon: FileText,
+      tileClassName: 'aurum-quick-tile aurum-quick-tile--rose',
+    },
   ]
-
-  const activity: ActivityRow[] = recentActivity.map((transaction, index) => {
-    const isBuy = transaction.type === 'BUY'
-
-    return {
-      type: transaction.type,
-      title: t(isBuy ? 'home.buyGoldAction' : 'home.sellGoldAction'),
-      date: t(activityDateKeys[index] ?? 'home.activityToday'),
-      ouncesLabel: `${transaction.oz} oz`,
-      priceLabel: `@$${fmt(transaction.price)}`,
-      iconWrapClassName: isBuy
-        ? 'flex h-8 w-8 items-center justify-center rounded-full bg-success-muted'
-        : 'flex h-8 w-8 items-center justify-center rounded-full bg-danger-muted',
-      Icon: isBuy ? ArrowDown : ArrowUp,
-      iconClassName: isBuy ? 'text-success' : 'text-danger',
-    }
-  })
 
   return {
     t,
-    spotPrice: quote.price,
-    change: quote.change,
-    unitLabel: t('home.unitGram'),
-    priceData,
+    header,
     assetTabs,
-    wallets,
+    hero,
+    gaugeTicks,
+    statusCards,
     actions,
-    activity,
   }
 }
 

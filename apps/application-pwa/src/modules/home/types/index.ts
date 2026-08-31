@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import type { LucideIcon } from 'lucide-react'
 
 type AssetId = 'gold' | 'silver'
@@ -19,6 +20,7 @@ type QuickAction = {
   label: string
   to: '/trade' | '/chart' | '/profile'
   Icon: LucideIcon
+  tileClassName: string
 }
 
 type ActivityRow = {
@@ -32,4 +34,55 @@ type ActivityRow = {
   iconClassName: string
 }
 
-export type { ActivityRow, AssetId, AssetTab, QuickAction, WalletTile }
+type GaugeTick = {
+  id: string
+  className: string
+  style: CSSProperties
+}
+
+type HomeHeaderModel = {
+  brandName: string
+  dateLabel: string
+  streakLabel: string
+  onOpenCalendar: () => void
+}
+
+type HomeHeroModel = {
+  eyebrow: string
+  caption: string
+  value: string
+  chipLabel: string
+  chipHint: string
+  protocolLabel: string
+  progressLabel: string
+  onToggleAsset: () => void
+}
+
+type HomeHeroProps = {
+  hero: HomeHeroModel
+  gaugeTicks: GaugeTick[]
+}
+
+type StatusCard = {
+  id: string
+  title: string
+  when: string
+  value: string
+  hint: string
+  badgeLabel: string
+  badgeClassName: string
+  BadgeIcon: LucideIcon
+}
+
+export type {
+  ActivityRow,
+  AssetId,
+  AssetTab,
+  GaugeTick,
+  HomeHeaderModel,
+  HomeHeroModel,
+  HomeHeroProps,
+  QuickAction,
+  StatusCard,
+  WalletTile,
+}
