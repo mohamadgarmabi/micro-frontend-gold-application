@@ -3,6 +3,7 @@ import { QueryClient, VueQueryPlugin } from '@tanstack/vue-query';
 import { createApp } from 'vue';
 import App from './App.vue';
 import { apiConfig } from './config/api';
+import router from './router';
 import './styles.css';
 
 configureApis(apiConfig);
@@ -19,4 +20,5 @@ const queryClient = new QueryClient({
 const app = createApp(App);
 
 app.use(VueQueryPlugin, { queryClient });
+app.use(router);
 app.mount('#root');

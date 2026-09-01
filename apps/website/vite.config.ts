@@ -34,7 +34,10 @@ export default defineConfig({
         'react-dom': { singleton: true },
       },
     }),
-    react({ compiler: true }),
+    react({
+      compiler: true,
+      include: '**/*.{jsx,tsx}',
+    }),
     vue(),
     tailwindcss(),
   ],
