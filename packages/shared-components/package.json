@@ -45,8 +45,8 @@
     }
   },
   "dependencies": {
-    "@base-ui/react": "^1.6.0",
     "@gold/design-system": "workspace:*",
+    "@heroui/react": "^3.2.4",
     "@persian-tools/persian-tools": "^4.0.4",
     "class-variance-authority": "^0.7.1",
     "react": "^19.0.0",
@@ -76,6 +76,7 @@
     "./card": "./src/components/card/index.tsx",
     "./checkbox-group": "./src/components/checkbox-group/index.tsx",
     "./checkbox": "./src/components/checkbox/index.tsx",
+    "./chip": "./src/components/chip/index.tsx",
     "./collapsible": "./src/components/collapsible/index.tsx",
     "./combobox": "./src/components/combobox/index.tsx",
     "./context-menu": "./src/components/context-menu/index.tsx",
@@ -86,7 +87,9 @@
     "./flex": "./src/components/flex/index.tsx",
     "./form": "./src/components/form/index.tsx",
     "./grid": "./src/components/grid/index.tsx",
+    "./link": "./src/components/link/index.tsx",
     "./input": "./src/components/input/index.tsx",
+    "./input-otp": "./src/components/input-otp/index.tsx",
     "./menu": "./src/components/menu/index.tsx",
     "./menubar": "./src/components/menubar/index.tsx",
     "./meter": "./src/components/meter/index.tsx",

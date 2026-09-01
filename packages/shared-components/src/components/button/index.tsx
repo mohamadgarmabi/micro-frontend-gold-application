@@ -1,4 +1,5 @@
-import { Button as BaseButton } from '@base-ui/react/button'
+import type { MouseEvent } from 'react'
+import { Button as HeroButton } from '@heroui/react/button'
 import { mergeClassName } from '../../lib/cn'
 import { Spinner } from '../../lib/spinner'
 import type { ButtonProps } from './button.type'
@@ -11,12 +12,15 @@ const Button = ({
   rightIcon,
   loading = false,
   disabled,
+  isDisabled,
   children,
   size = 'md',
+  onClick,
+  onPress,
   ...props
 }: ButtonProps) => {
-  const { isDisabled } = useButton({
-    disabled,
+  const { isDisabled: hookDisabled } = useButton({
+    disabled: disabled ?? isDisabled,
     loading,
     leftIcon,
     rightIcon,
@@ -26,11 +30,19 @@ const Button = ({
   })
   const iconClassName = buttonIconClassName({ size })
 
+  const handlePress: ButtonProps['onPress'] = (event) => {
+    onPress?.(event)
+    if (onClick) {
+      onClick(event as unknown as MouseEvent<HTMLButtonElement>)
+    }
+  }
+
   return (
-    <BaseButton
+    <HeroButton
       className={mergeClassName(buttonClassName({ size }), className)}
-      disabled={isDisabled}
-      aria-busy={loading || undefined}
+      isDisabled={hookDisabled}
+      size={size}
+      onPress={handlePress}
       {...props}
     >
       {loading ? (
@@ -40,7 +52,7 @@ const Button = ({
       )}
       {children}
       {!loading && rightIcon && <span className={iconClassName}>{rightIcon}</span>}
-    </BaseButton>
+    </HeroButton>
   )
 }
 

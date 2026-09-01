@@ -1,6 +1,5 @@
-import { Separator as BaseSeparator } from '@base-ui/react/separator';
-import type { ComponentProps } from 'react';
+import type { SeparatorRootProps } from '@heroui/react/separator'
 
-type SeparatorProps = ComponentProps<typeof BaseSeparator>;
+type SeparatorProps = SeparatorRootProps
 
-export type { SeparatorProps };
+export type { SeparatorProps }

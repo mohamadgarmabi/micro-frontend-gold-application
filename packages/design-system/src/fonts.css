@@ -1,15 +1,18 @@
+@import '@fontsource-variable/inter/wght.css';
 @import '@fontsource-variable/vazirmatn/wght.css';
 
 :root {
-  --ds-font-sans-ltr: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --ds-font-sans-rtl: 'Vazirmatn Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--ds-font-sans-ltr);
+  --font-inter: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-vazirmatn: 'Vazirmatn Variable', ui-sans-serif, system-ui, sans-serif;
+  --ds-font-sans-ltr: var(--font-inter);
+  --ds-font-sans-rtl: var(--font-vazirmatn);
+  --font-sans: var(--font-vazirmatn), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 [dir='rtl'] {
-  --font-sans: var(--ds-font-sans-rtl);
+  --font-sans: var(--font-vazirmatn), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 [dir='ltr'] {
-  --font-sans: var(--ds-font-sans-ltr);
+  --font-sans: var(--font-inter), var(--font-vazirmatn), ui-sans-serif, system-ui, sans-serif;
 }

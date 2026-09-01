@@ -1,6 +1,5 @@
-import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui/react/checkbox-group';
-import type { ComponentProps } from 'react';
+import type { CheckboxGroupProps } from '@heroui/react/checkbox-group'
 
-type CheckboxGroupProps = ComponentProps<typeof BaseCheckboxGroup>;
+type CheckboxGroupComponentProps = CheckboxGroupProps
 
-export type { CheckboxGroupProps };
+export type { CheckboxGroupComponentProps as CheckboxGroupProps }

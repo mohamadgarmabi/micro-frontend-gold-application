@@ -1,13 +1,5 @@
-import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group'
-import { mergeClassName } from '../../lib/cn'
-import type { ToggleGroupProps } from './toggle-group.type'
-import { togglegroupClassName } from './toggle-group.styles'
+import { ToggleButtonGroup as HeroToggleButtonGroup } from '@heroui/react/toggle-button-group'
 
-const ToggleGroup = ({ className, ...props }: ToggleGroupProps) => {
-  return (
-    <BaseToggleGroup className={mergeClassName(togglegroupClassName(), className)} {...props} />
-  )
-}
+const ToggleGroup = HeroToggleButtonGroup
 
 export default ToggleGroup
-export type { ToggleGroupProps }

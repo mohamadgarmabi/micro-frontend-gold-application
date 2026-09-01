@@ -1,7 +1,5 @@
-import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { alertdialogStyles } from './alert-dialog.styles';
+import { AlertDialog as HeroAlertDialog } from '@heroui/react/alert-dialog'
 
-const AlertDialog = createStyledModule(BaseAlertDialog, alertdialogStyles);
+const AlertDialog = HeroAlertDialog
 
-export default AlertDialog;
+export default AlertDialog

@@ -1,7 +1,5 @@
-import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { tooltipStyles } from './tooltip.styles';
+import { Tooltip as HeroTooltip } from '@heroui/react/tooltip'
 
-const Tooltip = createStyledModule(BaseTooltip, tooltipStyles);
+const Tooltip = HeroTooltip
 
-export default Tooltip;
+export default Tooltip

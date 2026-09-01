@@ -1,7 +1,5 @@
-import { Toast as BaseToast } from '@base-ui/react/toast';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { toastStyles } from './toast.styles';
+import { Toast as HeroToast } from '@heroui/react/toast'
 
-const Toast = createStyledModule(BaseToast, toastStyles);
+const Toast = HeroToast
 
-export default Toast;
+export default Toast

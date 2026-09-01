@@ -1,7 +1,5 @@
-import { Menu as BaseMenu } from '@base-ui/react/menu';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { menuStyles } from './menu.styles';
+import { Menu as HeroMenu } from '@heroui/react/menu'
 
-const Menu = createStyledModule(BaseMenu, menuStyles);
+const Menu = HeroMenu
 
-export default Menu;
+export default Menu

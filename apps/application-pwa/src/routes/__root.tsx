@@ -30,7 +30,7 @@ const RootDocument = ({ children }: { children: React.ReactNode }) => {
         <script dangerouslySetInnerHTML={{ __html: DIRECTION_INIT_SCRIPT }} />
         <HeadContent />
       </head>
-      <body className="gold-root gold-app-chrome font-sans text-foreground antialiased [overflow-wrap:anywhere] selection:bg-gold-600/20">
+      <body className="bg-background selection:bg-accent/20 font-sans text-foreground antialiased gold-root gold-app-chrome [overflow-wrap:anywhere]">
         {children}
         <AppProviders />
         <PwaInstallPrompt />
@@ -71,12 +71,12 @@ export const Route = createRootRouteWithContext<RouterContext>()({
       },
       {
         name: 'description',
-        content: 'Aurum — Gold trading PWA. Trade gold precisely on the go.',
+        content: 'Ayar — Gold trading PWA. Trade gold precisely on the go.',
       },
       { name: 'theme-color', content: THEME_META_COLORS.dark },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
-      { title: 'Aurum — Gold Trading' },
+      { title: 'Ayar — Gold Trading' },
     ],
     links: [
       { rel: 'stylesheet', href: appCss },

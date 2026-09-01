@@ -1,7 +1,5 @@
-import { NumberField as BaseNumberField } from '@base-ui/react/number-field';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { numberfieldStyles } from './number-field.styles';
+import { NumberField as HeroNumberField } from '@heroui/react/number-field'
 
-const NumberField = createStyledModule(BaseNumberField, numberfieldStyles);
+const NumberField = HeroNumberField
 
-export default NumberField;
+export default NumberField

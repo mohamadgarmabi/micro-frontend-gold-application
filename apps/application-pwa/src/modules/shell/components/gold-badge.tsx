@@ -1,11 +1,11 @@
-import Badge from '@gold/shared-components/badge'
+import Chip from '@gold/shared-components/chip'
 import type { GoldBadgeProps } from '../types'
 
 const GoldBadge = ({ children, className }: GoldBadgeProps) => {
   return (
-    <Badge variant="brand" className={className}>
+    <Chip size="sm" variant="soft" color="success" className={className}>
       {children}
-    </Badge>
+    </Chip>
   )
 }
 

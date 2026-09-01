@@ -34,15 +34,15 @@ const features = [
         data-hero="eyebrow"
         class="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-foreground-muted"
       >
-        ✦ به قلمرو خوش آمدید ✦
+        ✦ به عیار خوش آمدید ✦
       </p>
 
       <h1
         data-hero="title"
         class="mb-6 text-5xl font-bold leading-tight text-foreground md:text-7xl"
       >
-        قلمرو طلایی
-        <span class="block text-brand">آوروم</span>
+        عیار
+        <span class="block text-brand">Ayar</span>
       </h1>
 
       <p

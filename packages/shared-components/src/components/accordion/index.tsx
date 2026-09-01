@@ -1,7 +1,5 @@
-import { Accordion as BaseAccordion } from '@base-ui/react/accordion';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { accordionStyles } from './accordion.styles';
+import { Accordion as HeroAccordion } from '@heroui/react/accordion'
 
-const Accordion = createStyledModule(BaseAccordion, accordionStyles);
+const Accordion = HeroAccordion
 
-export default Accordion;
+export default Accordion

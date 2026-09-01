@@ -1,7 +1,36 @@
-import { Switch as BaseSwitch } from '@base-ui/react/switch';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { switchStyles } from './switch.styles';
+import { Switch as HeroSwitch } from '@heroui/react/switch'
+import type { SwitchRootProps } from '@heroui/react/switch'
 
-const Switch = createStyledModule(BaseSwitch, switchStyles);
+type SwitchProps = SwitchRootProps & {
+  checked?: boolean
+  onCheckedChange?: (checked: boolean) => void
+  disabled?: boolean
+}
 
-export default Switch;
+const Switch = ({
+  checked,
+  onCheckedChange,
+  isSelected,
+  onChange,
+  disabled,
+  isDisabled,
+  ...props
+}: SwitchProps) => {
+  const selected = isSelected ?? checked
+  const handleChange: SwitchProps['onChange'] = (value) => {
+    onChange?.(value)
+    onCheckedChange?.(Boolean(value))
+  }
+
+  return (
+    <HeroSwitch
+      isSelected={selected}
+      onChange={handleChange}
+      isDisabled={isDisabled ?? disabled}
+      {...props}
+    />
+  )
+}
+
+export default Switch
+export type { SwitchProps }

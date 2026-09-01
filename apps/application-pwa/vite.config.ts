@@ -53,8 +53,8 @@ export default defineConfig(({ mode }) => {
         injectRegister: 'auto',
         includeAssets: ['icon.svg', 'robots.txt'],
         manifest: {
-          name: 'Aurum — Gold Trading',
-          short_name: 'Aurum',
+          name: 'Ayar — Gold Trading',
+          short_name: 'Ayar',
           description: 'Gold trading PWA — trade XAU/USD precisely on the go',
           theme_color: '#141810',
           background_color: '#141810',

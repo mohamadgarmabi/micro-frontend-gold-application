@@ -10,7 +10,7 @@ import { appUrl } from '../config/app';
         <span
           class="font-bold text-foreground group-hover:text-foreground-muted text-lg tracking-wider"
         >
-          AURUM
+          عیار
         </span>
       </RouterLink>
 

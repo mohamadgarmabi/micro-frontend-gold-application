@@ -1,7 +1,5 @@
-import { Dialog as BaseDialog } from '@base-ui/react/dialog';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { dialogStyles } from './dialog.styles';
+import { Modal as HeroModal } from '@heroui/react/modal'
 
-const Dialog = createStyledModule(BaseDialog, dialogStyles);
+const Dialog = HeroModal
 
-export default Dialog;
+export default Dialog

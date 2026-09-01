@@ -1,15 +1,20 @@
 import type { ComponentProps, HTMLInputTypeAttribute, ReactNode } from 'react'
-import { Input as BaseInput } from '@base-ui/react/input'
 
 type InputSize = 'sm' | 'md' | 'lg'
 
-type InputProps = Omit<ComponentProps<typeof BaseInput>, 'size'> & {
+type InputChangeEventDetails = {
+  event: Event
+  reason: 'input' | 'paste' | 'drop' | 'reset'
+}
+
+type InputProps = Omit<ComponentProps<'input'>, 'size'> & {
   leftIcon?: ReactNode
   rightIcon?: ReactNode
   error?: boolean
   errorMessage?: string
   revealable?: boolean
   size?: InputSize
+  onValueChange?: (value: string, eventDetails: InputChangeEventDetails) => void
 }
 
 type InputRevealToggle = {
@@ -25,4 +30,4 @@ type InputSanitizeType = Extract<
   'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search'
 >
 
-export type { InputProps, InputRevealToggle, InputSanitizeType, InputSize }
+export type { InputProps, InputRevealToggle, InputSanitizeType, InputSize, InputChangeEventDetails }

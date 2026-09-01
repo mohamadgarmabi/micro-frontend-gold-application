@@ -1,3 +1,8 @@
-type CheckboxModule = Record<string, never>;
+import type { CheckboxRootProps } from '@heroui/react/checkbox'
 
-export type { CheckboxModule };
+type CheckboxProps = CheckboxRootProps & {
+  checked?: boolean
+  onCheckedChange?: (checked: boolean) => void
+}
+
+export type { CheckboxProps }

@@ -1,30 +1,27 @@
-import Typography from '@gold/shared-components/typography'
+import Button from '@gold/shared-components/button'
 import { Hexagon, TrendingUp } from 'lucide-react'
 import type { HomeHeaderModel } from '../types'
 
 const HomeHeader = ({ greeting, brandName, onOpenChart }: HomeHeaderModel) => {
   return (
-    <div className="mb-6 flex items-center justify-between">
+    <div className="flex justify-between items-center mb-6">
       <div className="flex items-center gap-3">
-        <span className="aurum-mark flex size-11 items-center justify-center rounded-2xl bg-button text-button-foreground">
+        <span className="flex justify-center items-center bg-accent shadow-sm rounded-[var(--radius)] size-11 text-accent-foreground">
           <Hexagon size={18} strokeWidth={2.4} />
         </span>
         <div>
-          <Typography as="p" size="xs" color="subtle">
-            {greeting}
-          </Typography>
-          <Typography as="h1" size="lg" weight="semibold" className="tracking-tight">
-            {brandName}
-          </Typography>
+          <p className="text-muted text-xs">{greeting}</p>
+          <h1 className="font-semibold text-foreground text-lg tracking-tight">{brandName}</h1>
         </div>
       </div>
-      <button
-        type="button"
-        onClick={onOpenChart}
-        className="flex size-11 items-center justify-center rounded-full border border-border bg-surface-elevated text-foreground"
+      <Button
+        isIconOnly
+        variant="secondary"
+        aria-label="Open chart"
+        onPress={onOpenChart}
       >
         <TrendingUp size={16} />
-      </button>
+      </Button>
     </div>
   )
 }

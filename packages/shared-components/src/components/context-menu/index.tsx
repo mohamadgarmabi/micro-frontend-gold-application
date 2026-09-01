@@ -1,7 +1,5 @@
-import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { contextmenuStyles } from './context-menu.styles';
+import { Dropdown as HeroDropdown } from '@heroui/react/dropdown'
 
-const ContextMenu = createStyledModule(BaseContextMenu, contextmenuStyles);
+const ContextMenu = HeroDropdown
 
-export default ContextMenu;
+export default ContextMenu

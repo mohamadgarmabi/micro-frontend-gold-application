@@ -1,4 +1,4 @@
-import Typography from '@gold/shared-components/typography'
+import Card from '@gold/shared-components/card'
 import { Link } from '@tanstack/react-router'
 import PriceTag from '#/modules/shell/components/price-tag'
 import HomeHeader from '../../components/home-header'
@@ -22,24 +22,18 @@ const HomeView = () => {
       <div className="mt-6 space-y-6 px-5">
         <div className="grid grid-cols-2 gap-3">
           {wallets.map((wallet) => (
-            <article key={wallet.id} className="rounded-xl border border-border bg-surface-elevated p-4">
-              <Typography as="p" size="xs" color="subtle" className="tracking-widest uppercase">
-                {wallet.label}
-              </Typography>
-              <Typography as="p" size="md" weight="semibold" className="mt-2 font-mono">
+            <Card key={wallet.id} className="p-4">
+              <p className="text-xs uppercase tracking-widest text-muted">{wallet.label}</p>
+              <p className="mt-2 font-mono text-base font-semibold text-foreground">
                 {wallet.value}
-              </Typography>
-              <Typography as="p" size="xs" color="subtle" className="mt-1">
-                {wallet.hint}
-              </Typography>
-            </article>
+              </p>
+              <p className="mt-1 text-xs text-muted">{wallet.hint}</p>
+            </Card>
           ))}
         </div>
 
         <div>
-          <Typography as="h2" size="sm" weight="semibold" className="mb-3">
-            {t('home.quickAccess')}
-          </Typography>
+          <h2 className="mb-3 text-sm font-semibold text-foreground">{t('home.quickAccess')}</h2>
           <div className="grid grid-cols-4 gap-3">
             {actions.map((action) => {
               const Icon = action.Icon
@@ -49,9 +43,7 @@ const HomeView = () => {
                   <span className={action.tileClassName}>
                     <Icon size={20} strokeWidth={2} />
                   </span>
-                  <Typography as="span" size="xs" color="subtle" align="center" className="mt-2 block">
-                    {action.label}
-                  </Typography>
+                  <span className="mt-2 block text-center text-xs text-muted">{action.label}</span>
                 </Link>
               )
             })}
@@ -59,19 +51,13 @@ const HomeView = () => {
         </div>
 
         <div>
-          <Typography as="h2" size="sm" weight="semibold" className="mb-3">
-            {t('home.markets')}
-          </Typography>
+          <h2 className="mb-3 text-sm font-semibold text-foreground">{t('home.markets')}</h2>
           <div className="space-y-2">
             {markets.map((row) => (
               <button key={row.id} type="button" onClick={row.onSelect} className={row.className}>
                 <div>
-                  <Typography as="p" size="sm" weight="medium">
-                    {row.name}
-                  </Typography>
-                  <Typography as="p" size="xs" color="subtle">
-                    {row.symbol}
-                  </Typography>
+                  <p className="text-sm font-medium text-foreground">{row.name}</p>
+                  <p className="text-xs text-muted">{row.symbol}</p>
                 </div>
                 <PriceTag value={row.price} change={row.change} size="sm" />
               </button>
@@ -80,27 +66,17 @@ const HomeView = () => {
         </div>
 
         <div>
-          <Typography as="h2" size="sm" weight="semibold" className="mb-3">
-            {t('home.recentActivity')}
-          </Typography>
+          <h2 className="mb-3 text-sm font-semibold text-foreground">{t('home.recentActivity')}</h2>
           <div className="space-y-2">
             {activity.map((row) => (
               <div key={row.id} className={row.className}>
                 <div>
-                  <Typography as="p" size="sm" weight="medium" color={row.sideColor}>
-                    {row.sideLabel}
-                  </Typography>
-                  <Typography as="p" size="xs" color="subtle">
-                    {row.date}
-                  </Typography>
+                  <p className={`text-sm font-medium ${row.sideColorClassName}`}>{row.sideLabel}</p>
+                  <p className="text-xs text-muted">{row.date}</p>
                 </div>
                 <div className="text-end">
-                  <Typography as="p" size="sm" weight="semibold" className="font-mono">
-                    {row.ouncesLabel}
-                  </Typography>
-                  <Typography as="p" size="xs" color="subtle" className="font-mono">
-                    {row.priceLabel}
-                  </Typography>
+                  <p className="font-mono text-sm font-semibold text-foreground">{row.ouncesLabel}</p>
+                  <p className="font-mono text-xs text-muted">{row.priceLabel}</p>
                 </div>
               </div>
             ))}

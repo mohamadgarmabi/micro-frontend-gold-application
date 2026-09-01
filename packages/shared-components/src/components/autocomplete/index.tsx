@@ -1,7 +1,5 @@
-import { Autocomplete as BaseAutocomplete } from '@base-ui/react/autocomplete';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { autocompleteStyles } from './autocomplete.styles';
+import { Autocomplete as HeroAutocomplete } from '@heroui/react/autocomplete'
 
-const Autocomplete = createStyledModule(BaseAutocomplete, autocompleteStyles);
+const Autocomplete = HeroAutocomplete
 
-export default Autocomplete;
+export default Autocomplete

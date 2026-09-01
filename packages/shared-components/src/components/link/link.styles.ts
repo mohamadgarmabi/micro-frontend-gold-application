@@ -1,0 +1,3 @@
+const linkStyles = ''
+
+export { linkStyles }

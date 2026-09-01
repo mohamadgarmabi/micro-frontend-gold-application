@@ -1,7 +1,5 @@
-import { Progress as BaseProgress } from '@base-ui/react/progress';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { progressStyles } from './progress.styles';
+import { ProgressBar as HeroProgressBar } from '@heroui/react/progress-bar'
 
-const Progress = createStyledModule(BaseProgress, progressStyles);
+const Progress = HeroProgressBar
 
-export default Progress;
+export default Progress

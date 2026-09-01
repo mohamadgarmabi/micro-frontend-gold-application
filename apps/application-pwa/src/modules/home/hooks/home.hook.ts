@@ -18,7 +18,7 @@ const CASH_TOMAN = '12,450,000'
 const VAULT_SOT = '1,250'
 const GOLD_CHANGE = 1.28
 const QUICK_TILE_CLASS =
-  'flex size-14 mx-auto items-center justify-center rounded-2xl border border-border bg-surface-elevated text-brand'
+  'flex size-14 mx-auto items-center justify-center rounded-[var(--radius)] border border-border bg-surface text-foreground'
 
 const marketNameKey: Record<string, MessageKey> = {
   'XAU/USD': 'market.goldSpot',
@@ -70,12 +70,12 @@ const useHome = () => {
   const tradeActions: HomeTradeAction[] = [
     {
       label: t('home.buyGold'),
-      className: 'flex-1 rounded-xl bg-success py-3 text-sm font-semibold text-white',
+      variant: 'primary',
       onSelect: openTrade,
     },
     {
       label: t('home.sellGold'),
-      className: 'flex-1 rounded-xl bg-danger py-3 text-sm font-semibold text-white',
+      variant: 'danger',
       onSelect: openTrade,
     },
   ]
@@ -110,7 +110,7 @@ const useHome = () => {
     change: asset.chg,
     onSelect: openChart,
     className:
-      'flex w-full items-center justify-between rounded-xl border border-border bg-surface-elevated px-4 py-3 text-start',
+      'flex w-full items-center justify-between rounded-[var(--radius)] border border-border bg-surface px-4 py-3 text-start',
   }))
 
   const activity: HomeActivityRow[] = recentActivity.map((row, index) => {
@@ -119,11 +119,12 @@ const useHome = () => {
     return {
       id: `${row.date}-${index}`,
       sideLabel: isBuy ? t('home.buyGoldAction') : t('home.sellGoldAction'),
-      sideColor: isBuy ? 'success' : 'danger',
+      sideColorClassName: isBuy ? 'text-success' : 'text-danger',
       date: row.date,
       ouncesLabel: `${row.oz} oz`,
       priceLabel: `$${fmt(row.price)}`,
-      className: 'flex items-center justify-between rounded-xl border border-border bg-surface-elevated px-4 py-3',
+      className:
+        'flex items-center justify-between rounded-[var(--radius)] border border-border bg-surface px-4 py-3',
     }
   })
 

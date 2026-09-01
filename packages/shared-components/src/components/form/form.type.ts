@@ -1,6 +1,5 @@
-import { Form as BaseForm } from '@base-ui/react/form';
-import type { ComponentProps } from 'react';
+import type { FormRootProps } from '@heroui/react/form'
 
-type FormProps = ComponentProps<typeof BaseForm>;
+type FormProps = FormRootProps
 
-export type { FormProps };
+export type { FormProps }

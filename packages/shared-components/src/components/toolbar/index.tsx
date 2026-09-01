@@ -1,7 +1,5 @@
-import { Toolbar as BaseToolbar } from '@base-ui/react/toolbar';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { toolbarStyles } from './toolbar.styles';
+import { Toolbar as HeroToolbar } from '@heroui/react/toolbar'
 
-const Toolbar = createStyledModule(BaseToolbar, toolbarStyles);
+const Toolbar = HeroToolbar
 
-export default Toolbar;
+export default Toolbar

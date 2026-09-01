@@ -1,11 +1,5 @@
-import { Form as BaseForm } from '@base-ui/react/form'
-import { mergeClassName } from '../../lib/cn'
-import type { FormProps } from './form.type'
-import { formClassName } from './form.styles'
+import { Form as HeroForm } from '@heroui/react/form'
 
-const Form = ({ className, ...props }: FormProps) => {
-  return <BaseForm className={mergeClassName(formClassName(), className)} {...props} />
-}
+const Form = HeroForm
 
 export default Form
-export type { FormProps }

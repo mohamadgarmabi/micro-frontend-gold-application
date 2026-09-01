@@ -1,7 +1,5 @@
-import { Fieldset as BaseFieldset } from '@base-ui/react/fieldset';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { fieldsetStyles } from './fieldset.styles';
+import { Fieldset as HeroFieldset } from '@heroui/react/fieldset'
 
-const Fieldset = createStyledModule(BaseFieldset, fieldsetStyles);
+const Fieldset = HeroFieldset
 
-export default Fieldset;
+export default Fieldset

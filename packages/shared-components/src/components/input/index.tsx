@@ -1,4 +1,4 @@
-import { Input as BaseInput } from '@base-ui/react/input'
+import { Input as HeroInput } from '@heroui/react/input'
 import { cn, mergeClassName } from '../../lib/cn'
 import { useInput } from './input.hook'
 import { inputStyles } from './input.styles'
@@ -25,7 +25,6 @@ const Input = (props: InputProps) => {
     value,
     defaultValue,
     onChange,
-    onValueChange,
   } = useInput(props)
 
   return (
@@ -37,7 +36,7 @@ const Input = (props: InputProps) => {
           </span>
         )}
 
-        <BaseInput
+        <HeroInput
           {...rest}
           id={inputId}
           type={type}
@@ -46,7 +45,6 @@ const Input = (props: InputProps) => {
           value={value}
           defaultValue={defaultValue}
           onChange={onChange}
-          onValueChange={onValueChange}
           className={mergeClassName(
             cn(
               inputStyles.base({ size }),

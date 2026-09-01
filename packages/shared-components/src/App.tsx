@@ -15,28 +15,28 @@ const MailIcon = () => (
 
 const App = () => {
   return (
-    <div className="gold-root min-h-screen bg-gradient-to-br from-gold-50 via-surface to-gold-100">
-      <main className="mx-auto flex min-h-screen max-w-3xl flex-col gap-8 p-8">
+    <div className="bg-gradient-to-br from-gold-50 via-surface to-gold-100 min-h-screen gold-root">
+      <main className="flex flex-col gap-8 mx-auto p-8 max-w-3xl min-h-screen">
         <header>
-          <p className="text-xs font-semibold uppercase tracking-wide text-gold-700">
+          <p className="font-semibold text-gold-700 text-xs uppercase tracking-wide">
             @gold/shared-components
           </p>
-          <h1 className="mt-2 text-3xl font-bold text-foreground">
-            Base UI + Gold Design System
+          <h1 className="mt-2 font-bold text-foreground text-3xl">
+            HeroUI + Gold Design System
           </h1>
           <p className="mt-2 text-foreground-muted">
             {componentManifest.length} federated components powered by{' '}
-            <code className="rounded bg-gold-100 px-1.5 py-0.5 text-sm">
-              @base-ui/react
+            <code className="bg-gold-100 px-1.5 py-0.5 rounded text-sm">
+              @heroui/react
             </code>
           </p>
         </header>
 
-        <section className="grid gap-6 rounded-2xl border border-gold-500/20 bg-white p-6 shadow-sm">
+        <section className="gap-6 grid bg-white shadow-sm p-6 border border-gold-500/20 rounded-2xl">
           <div className="flex flex-wrap gap-3">
             <Button leftIcon={<MailIcon />}>With icon</Button>
             <Button loading>Saving</Button>
-            <Button className="border border-gold-500/40 bg-white text-gold-700 hover:bg-gold-50">
+            <Button className="bg-white hover:bg-gold-50 border border-gold-500/40 text-gold-700">
               Secondary
             </Button>
           </div>
@@ -51,12 +51,12 @@ const App = () => {
             defaultValue="bad@"
           />
 
-          <label className="flex items-center gap-2 text-sm text-foreground-muted">
+          <label className="flex items-center gap-2 text-foreground-muted text-sm">
             <Checkbox />
             Accept terms
           </label>
 
-          <label className="flex items-center gap-2 text-sm text-foreground-muted">
+          <label className="flex items-center gap-2 text-foreground-muted text-sm">
             <Switch />
             Notifications
           </label>
@@ -66,30 +66,30 @@ const App = () => {
               <Tabs.Tab value="overview">Overview</Tabs.Tab>
               <Tabs.Tab value="settings">Settings</Tabs.Tab>
             </Tabs.List>
-            <Tabs.Panel value="overview" className="text-sm text-foreground-muted">
-              Base UI primitives styled with Gold tokens.
+            <Tabs.Panel value="overview" className="text-foreground-muted text-sm">
+              HeroUI primitives styled with Gold tokens.
             </Tabs.Panel>
-            <Tabs.Panel value="settings" className="text-sm text-foreground-muted">
+            <Tabs.Panel value="settings" className="text-foreground-muted text-sm">
               Module Federation remote on port 5100.
             </Tabs.Panel>
           </Tabs>
 
           <Dialog>
             <Dialog.Trigger>Open dialog</Dialog.Trigger>
-            <Dialog.Portal>
-              <Dialog.Backdrop />
-              <Dialog.Popup className="fixed top-1/2 left-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2">
-                <Dialog.Title>Gold Dialog</Dialog.Title>
-                <Dialog.Description className="mt-2">
-                  Built with Base UI Dialog primitive.
-                </Dialog.Description>
-                <div className="mt-4 flex justify-end gap-2">
-                  <Dialog.Close className="rounded-lg px-4 py-2 text-sm">
-                    Close
-                  </Dialog.Close>
-                </div>
-              </Dialog.Popup>
-            </Dialog.Portal>
+            <Dialog.Backdrop />
+            <Dialog.Container>
+              <Dialog.Dialog>
+                <Dialog.Header>
+                  <Dialog.Heading>Gold Dialog</Dialog.Heading>
+                </Dialog.Header>
+                <Dialog.Body className="text-foreground-muted text-sm">
+                  Built with HeroUI Modal primitive.
+                </Dialog.Body>
+                <Dialog.Footer>
+                  <Dialog.CloseTrigger>Close</Dialog.CloseTrigger>
+                </Dialog.Footer>
+              </Dialog.Dialog>
+            </Dialog.Container>
           </Dialog>
         </section>
       </main>

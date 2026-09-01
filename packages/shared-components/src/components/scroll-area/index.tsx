@@ -1,7 +1,5 @@
-import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { scrollareaStyles } from './scroll-area.styles';
+import { ScrollShadow as HeroScrollShadow } from '@heroui/react/scroll-shadow'
 
-const ScrollArea = createStyledModule(BaseScrollArea, scrollareaStyles);
+const ScrollArea = HeroScrollShadow
 
-export default ScrollArea;
+export default ScrollArea

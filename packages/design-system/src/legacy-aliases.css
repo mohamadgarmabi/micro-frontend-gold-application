@@ -1,0 +1,55 @@
+/*
+ * Maps legacy @gold workspace Tailwind tokens to HeroUI variables.
+ * Keeps existing apps working while migrating to HeroUI naming.
+ */
+
+@theme inline {
+  --color-brand: var(--accent);
+  --color-brand-surface: var(--background);
+  --color-brand-muted: var(--surface-secondary);
+  --color-brand-accent: var(--accent);
+
+  --color-gold-50: var(--surface-secondary);
+  --color-gold-100: var(--surface-tertiary);
+  --color-gold-200: var(--border);
+  --color-gold-300: var(--muted);
+  --color-gold-400: var(--muted);
+  --color-gold-500: var(--accent);
+  --color-gold-600: var(--accent);
+  --color-gold-700: var(--foreground);
+  --color-gold-800: var(--foreground);
+  --color-gold-900: var(--foreground);
+
+  --color-neutral-50: var(--surface-secondary);
+  --color-neutral-100: var(--surface-tertiary);
+  --color-neutral-200: var(--border);
+  --color-neutral-300: var(--muted);
+  --color-neutral-400: var(--muted);
+  --color-neutral-500: var(--muted);
+  --color-neutral-600: var(--foreground);
+  --color-neutral-700: var(--foreground);
+  --color-neutral-800: var(--foreground);
+  --color-neutral-900: var(--foreground);
+
+  --color-surface-muted: var(--surface-secondary);
+  --color-surface-elevated: var(--surface);
+  --color-surface-accent: var(--surface-tertiary);
+  --color-border-strong: var(--border-secondary);
+
+  --color-foreground-muted: var(--muted);
+  --color-foreground-subtle: var(--muted);
+  --color-foreground-on-brand: var(--accent-foreground);
+
+  --color-button: var(--accent);
+  --color-button-foreground: var(--accent-foreground);
+  --color-button-hover: var(--accent-hover);
+
+  --color-danger-muted: var(--danger-soft);
+  --color-success-muted: var(--success-soft);
+  --color-warning-muted: var(--warning-soft);
+  --color-info: oklch(0.55 0.2 260);
+  --color-info-muted: var(--surface-secondary);
+
+  --shadow-popup: var(--shadow-overlay);
+  --shadow-focus: 0 0 0 3px color-mix(in oklab, var(--focus) 22%, transparent);
+}

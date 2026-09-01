@@ -1,7 +1,5 @@
-import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { navigationmenuStyles } from './navigation-menu.styles';
+import { Dropdown as HeroDropdown } from '@heroui/react/dropdown'
 
-const NavigationMenu = createStyledModule(BaseNavigationMenu, navigationmenuStyles);
+const NavigationMenu = HeroDropdown
 
-export default NavigationMenu;
+export default NavigationMenu

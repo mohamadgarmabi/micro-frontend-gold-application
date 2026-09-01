@@ -1,7 +1,5 @@
-import { Popover as BasePopover } from '@base-ui/react/popover';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { popoverStyles } from './popover.styles';
+import { Popover as HeroPopover } from '@heroui/react/popover'
 
-const Popover = createStyledModule(BasePopover, popoverStyles);
+const Popover = HeroPopover
 
-export default Popover;
+export default Popover

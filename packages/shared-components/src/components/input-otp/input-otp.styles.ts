@@ -1,0 +1,3 @@
+const inputOtpStyles = ''
+
+export { inputOtpStyles }

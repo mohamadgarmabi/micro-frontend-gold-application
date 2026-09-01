@@ -1,6 +1,5 @@
-import { ToggleGroup as BaseToggleGroup } from '@base-ui/react/toggle-group';
-import type { ComponentProps } from 'react';
+import type { ToggleButtonGroupRootProps } from '@heroui/react/toggle-button-group'
 
-type ToggleGroupProps = ComponentProps<typeof BaseToggleGroup>;
+type ToggleGroupProps = ToggleButtonGroupRootProps
 
-export type { ToggleGroupProps };
+export type { ToggleGroupProps }

@@ -1,7 +1,5 @@
-import { Field as BaseField } from '@base-ui/react/field';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { fieldStyles } from './field.styles';
+import { TextField as HeroTextField } from '@heroui/react/textfield'
 
-const Field = createStyledModule(BaseField, fieldStyles);
+const Field = HeroTextField
 
-export default Field;
+export default Field

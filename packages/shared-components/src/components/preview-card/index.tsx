@@ -1,7 +1,5 @@
-import { PreviewCard as BasePreviewCard } from '@base-ui/react/preview-card';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { previewcardStyles } from './preview-card.styles';
+import { Popover as HeroPopover } from '@heroui/react/popover'
 
-const PreviewCard = createStyledModule(BasePreviewCard, previewcardStyles);
+const PreviewCard = HeroPopover
 
-export default PreviewCard;
+export default PreviewCard

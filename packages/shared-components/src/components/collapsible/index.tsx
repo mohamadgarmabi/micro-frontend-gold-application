@@ -1,7 +1,5 @@
-import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { collapsibleStyles } from './collapsible.styles';
+import { Disclosure as HeroDisclosure } from '@heroui/react/disclosure'
 
-const Collapsible = createStyledModule(BaseCollapsible, collapsibleStyles);
+const Collapsible = HeroDisclosure
 
-export default Collapsible;
+export default Collapsible

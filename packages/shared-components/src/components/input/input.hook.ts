@@ -39,10 +39,7 @@ const useInput = (props: InputProps) => {
     }
 
     onChange?.(event)
-  }
-
-  const handleValueChange: NonNullable<InputProps['onValueChange']> = (next, eventDetails) => {
-    onValueChange?.(normalize(next), eventDetails)
+    onValueChange?.(next, { event: event.nativeEvent, reason: 'input' })
   }
 
   const handleRevealToggle = () => {
@@ -70,7 +67,6 @@ const useInput = (props: InputProps) => {
     value: typeof value === 'string' ? normalize(value) : value,
     defaultValue: typeof defaultValue === 'string' ? normalize(defaultValue) : defaultValue,
     onChange: handleChange,
-    onValueChange: onValueChange ? handleValueChange : undefined,
   }
 }
 

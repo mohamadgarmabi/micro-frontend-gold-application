@@ -1,11 +1,5 @@
-import { Menubar as BaseMenubar } from '@base-ui/react/menubar'
-import { mergeClassName } from '../../lib/cn'
-import type { MenubarProps } from './menubar.type'
-import { menubarClassName } from './menubar.styles'
+import { Menu as HeroMenu } from '@heroui/react/menu'
 
-const Menubar = ({ className, ...props }: MenubarProps) => {
-  return <BaseMenubar className={mergeClassName(menubarClassName(), className)} {...props} />
-}
+const Menubar = HeroMenu
 
 export default Menubar
-export type { MenubarProps }

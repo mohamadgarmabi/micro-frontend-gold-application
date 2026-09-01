@@ -1,6 +1,6 @@
-import { Menubar as BaseMenubar } from '@base-ui/react/menubar';
-import type { ComponentProps } from 'react';
+import type { ComponentProps } from 'react'
+import type { Menu as HeroMenu } from '@heroui/react/menu'
 
-type MenubarProps = ComponentProps<typeof BaseMenubar>;
+type MenubarProps = ComponentProps<typeof HeroMenu>
 
-export type { MenubarProps };
+export type { MenubarProps }

@@ -1,7 +1,5 @@
-import { Radio as BaseRadio } from '@base-ui/react/radio';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { radioStyles } from './radio.styles';
+import { Radio as HeroRadio } from '@heroui/react/radio'
 
-const Radio = createStyledModule(BaseRadio, radioStyles);
+const Radio = HeroRadio
 
-export default Radio;
+export default Radio

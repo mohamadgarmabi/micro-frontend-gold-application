@@ -1,6 +1,5 @@
-import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group';
-import type { ComponentProps } from 'react';
+import type { RadioGroupRootProps } from '@heroui/react/radio-group'
 
-type RadioGroupProps = ComponentProps<typeof BaseRadioGroup>;
+type RadioGroupProps = RadioGroupRootProps
 
-export type { RadioGroupProps };
+export type { RadioGroupProps }

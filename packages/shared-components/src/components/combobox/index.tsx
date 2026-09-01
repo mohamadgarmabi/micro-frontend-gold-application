@@ -1,7 +1,5 @@
-import { Combobox as BaseCombobox } from '@base-ui/react/combobox';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { comboboxStyles } from './combobox.styles';
+import { ComboBox as HeroComboBox } from '@heroui/react/combo-box'
 
-const Combobox = createStyledModule(BaseCombobox, comboboxStyles);
+const Combobox = HeroComboBox
 
-export default Combobox;
+export default Combobox

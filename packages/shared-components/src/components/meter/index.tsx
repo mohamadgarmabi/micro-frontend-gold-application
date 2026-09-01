@@ -1,7 +1,5 @@
-import { Meter as BaseMeter } from '@base-ui/react/meter';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { meterStyles } from './meter.styles';
+import { Meter as HeroMeter } from '@heroui/react/meter'
 
-const Meter = createStyledModule(BaseMeter, meterStyles);
+const Meter = HeroMeter
 
-export default Meter;
+export default Meter

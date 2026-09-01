@@ -20,7 +20,7 @@ type HomeQuoteModel = {
 
 type HomeTradeAction = {
   label: string
-  className: string
+  variant: 'primary' | 'danger'
   onSelect: () => void
 }
 
@@ -56,7 +56,7 @@ type HomeMarketRow = {
 type HomeActivityRow = {
   id: string
   sideLabel: string
-  sideColor: 'success' | 'danger'
+  sideColorClassName: string
   date: string
   ouncesLabel: string
   priceLabel: string

@@ -1,7 +1,5 @@
-import { Slider as BaseSlider } from '@base-ui/react/slider';
-import { createStyledModule } from '../../lib/create-styled-module';
-import { sliderStyles } from './slider.styles';
+import { Slider as HeroSlider } from '@heroui/react/slider'
 
-const Slider = createStyledModule(BaseSlider, sliderStyles);
+const Slider = HeroSlider
 
-export default Slider;
+export default Slider
