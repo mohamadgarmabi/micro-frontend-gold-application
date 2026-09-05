@@ -1,5 +1,6 @@
 import Drawer from '@gold/shared-components/drawer'
 import OTPField from '@gold/shared-components/otp-field'
+import Typography from '@gold/shared-components/typography'
 import { ChevronRight } from 'lucide-react'
 import { PIN_LENGTH } from '#/config/security.constants'
 import { usePinDrawer } from '#/modules/auth/hooks/pin.hook'
@@ -25,7 +26,9 @@ const PinDrawer = () => {
         onClick={handleOpen}
         className="flex w-full items-center justify-between rounded-xl border border-border bg-surface-elevated p-4 transition-all hover:border-gold-600/30"
       >
-        <span className="text-sm text-foreground">{rowLabel}</span>
+        <Typography as="span" size="sm">
+          {rowLabel}
+        </Typography>
         <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
       </button>
 
@@ -50,7 +53,11 @@ const PinDrawer = () => {
               ))}
             </OTPField>
 
-            {error ? <p className="mb-3 text-center text-sm text-danger">{error}</p> : null}
+            {error ? (
+              <Typography size="sm" color="danger" align="center" className="mb-3">
+                {error}
+              </Typography>
+            ) : null}
           </Drawer.Content>
         </Drawer.Portal>
       </Drawer>

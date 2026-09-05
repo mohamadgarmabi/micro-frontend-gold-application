@@ -1,6 +1,7 @@
 import Button from '@gold/shared-components/button'
 import Input from '@gold/shared-components/input'
 import Tabs from '@gold/shared-components/tabs'
+import Typography from '@gold/shared-components/typography'
 import { Minus, Plus } from 'lucide-react'
 import Card from '#/modules/shell/components/card'
 import GoldBadge from '#/modules/shell/components/gold-badge'
@@ -28,10 +29,12 @@ const TradeView = () => {
   return (
     <div className="min-h-screen pb-24">
       <div className="px-5 pt-12 pb-6">
-        <h2 className="aurum-serif mb-1 text-xl font-semibold text-foreground">
+        <Typography as="h2" size="xl" weight="semibold" className="aurum-serif mb-1">
           {t('trade.title')}
-        </h2>
-        <p className="text-xs text-foreground-subtle">{t('trade.subtitle')}</p>
+        </Typography>
+        <Typography size="xs" weight="regular" color="subtle">
+          {t('trade.subtitle')}
+        </Typography>
       </div>
 
       <div className="space-y-4 px-5">
@@ -54,19 +57,29 @@ const TradeView = () => {
 
         <Card>
           <div className="mb-1 flex items-center justify-between">
-            <span className="text-xs tracking-widest text-foreground-subtle uppercase">
+            <Typography as="span" size="xs" weight="regular" color="subtle" className="tracking-widest uppercase">
               {t('trade.executionPrice')}
-            </span>
+            </Typography>
             <GoldBadge>{t('trade.live')}</GoldBadge>
           </div>
-          <p className="font-mono text-2xl font-medium text-foreground">{execPriceLabel}</p>
-          <p className="mt-1 text-xs text-foreground-subtle">{spreadSpotLabel}</p>
+          <Typography size="display" weight="medium" className="font-mono text-2xl">
+            {execPriceLabel}
+          </Typography>
+          <Typography size="xs" weight="regular" color="subtle" className="mt-1">
+            {spreadSpotLabel}
+          </Typography>
         </Card>
 
         <div>
-          <label className="mb-2 block text-xs tracking-widest text-foreground-subtle uppercase">
+          <Typography
+            as="label"
+            size="xs"
+            weight="regular"
+            color="subtle"
+            className="mb-2 block tracking-widest uppercase"
+          >
             {t('trade.amount')}
-          </label>
+          </Typography>
           <div className="flex items-center gap-3">
             <Button
               type="button"
@@ -104,18 +117,26 @@ const TradeView = () => {
         </div>
 
         <Card className="space-y-3">
-          <p className="text-xs tracking-widest text-foreground-subtle uppercase">
+          <Typography size="xs" weight="regular" color="subtle" className="tracking-widest uppercase">
             {t('trade.orderSummary')}
-          </p>
+          </Typography>
           {orderRows.map((row) => (
             <div key={row.label} className="flex items-center justify-between">
-              <span className="text-sm text-foreground-subtle">{row.label}</span>
-              <span className="font-mono text-sm text-foreground">{row.value}</span>
+              <Typography as="span" size="sm" color="subtle">
+                {row.label}
+              </Typography>
+              <Typography as="span" size="sm" className="font-mono">
+                {row.value}
+              </Typography>
             </div>
           ))}
           <div className="flex items-center justify-between border-t border-border pt-2">
-            <span className="text-sm font-semibold text-foreground">{t('trade.total')}</span>
-            <span className="font-mono text-base font-semibold text-gold-600">{totalLabel}</span>
+            <Typography as="span" size="sm" weight="semibold">
+              {t('trade.total')}
+            </Typography>
+            <Typography as="span" size="md" weight="semibold" color="brand" className="font-mono">
+              {totalLabel}
+            </Typography>
           </div>
         </Card>
 
@@ -127,7 +148,9 @@ const TradeView = () => {
           {submitLabel}
         </Button>
 
-        <p className="text-center text-[10px] text-foreground-subtle">{t('trade.disclaimer')}</p>
+        <Typography size="xs" weight="regular" color="subtle" align="center" className="text-[10px]">
+          {t('trade.disclaimer')}
+        </Typography>
       </div>
     </div>
   )

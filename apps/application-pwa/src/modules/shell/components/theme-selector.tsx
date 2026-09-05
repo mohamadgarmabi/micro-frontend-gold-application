@@ -1,3 +1,4 @@
+import Typography from '@gold/shared-components/typography'
 import { useThemeSelector } from '../hooks/theme-selector.hook'
 import type { ThemePreference } from '../types'
 
@@ -25,7 +26,9 @@ const ThemeSelector = ({ value, onChange }: ThemeSelectorProps) => {
             <span className={option.iconWrapClassName}>
               <Icon size={18} />
             </span>
-            <span className="text-xs font-medium">{option.label}</span>
+            <Typography as="span" size="xs" weight="medium">
+              {option.label}
+            </Typography>
           </button>
         )
       })}

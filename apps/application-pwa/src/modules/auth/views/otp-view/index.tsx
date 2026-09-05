@@ -1,6 +1,7 @@
 import Button from '@gold/shared-components/button'
 import InputOTP from '@gold/shared-components/input-otp'
 import Link from '@gold/shared-components/link'
+import Typography from '@gold/shared-components/typography'
 import { ChevronLeft } from 'lucide-react'
 import { useOtp } from '../../hooks/otp.hook'
 
@@ -16,18 +17,18 @@ const OtpView = () => {
 
       <div className="mx-auto flex w-full max-w-sm flex-1 flex-col">
         <div className="mb-8">
-          <h2 className="mb-2 text-2xl font-semibold text-foreground">{t('auth.verifyTitle')}</h2>
-          <p className="text-sm text-muted">
-            {t('auth.verifyHint')} <span className="text-foreground">+1 (555) 000-0000</span>
-          </p>
+          <Typography as="h2" size="display" weight="semibold" className="mb-2 text-2xl">
+            {t('auth.verifyTitle')}
+          </Typography>
+          <Typography size="sm" color="muted">
+            {t('auth.verifyHint')}{' '}
+            <Typography as="span" size="sm">
+              +1 (555) 000-0000
+            </Typography>
+          </Typography>
         </div>
 
-        <InputOTP
-          maxLength={6}
-          value={otp}
-          onChange={setOtp}
-          className="mb-8"
-        >
+        <InputOTP maxLength={6} value={otp} onChange={setOtp} className="mb-8">
           <InputOTP.Group className="flex gap-3">
             {otpSlots.map((slot) => (
               <InputOTP.Slot key={slot} index={slot} />

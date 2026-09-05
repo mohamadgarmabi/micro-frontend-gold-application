@@ -1,3 +1,4 @@
+import Typography from '@gold/shared-components/typography'
 import { usePwaInstall } from '#/modules/shell/hooks/pwa-install.hook'
 
 const PwaInstallPrompt = () => {
@@ -6,7 +7,9 @@ const PwaInstallPrompt = () => {
   if (showUpdate) {
     return (
       <div className="pwa-banner" role="status">
-        <p className="m-0 text-sm">{t('pwa.updateAvailable')}</p>
+        <Typography size="sm" className="m-0">
+          {t('pwa.updateAvailable')}
+        </Typography>
         <button type="button" className="pwa-banner__action" onClick={handleReload}>
           {t('pwa.reload')}
         </button>
@@ -17,7 +20,9 @@ const PwaInstallPrompt = () => {
   if (showInstall) {
     return (
       <div className="pwa-banner" role="dialog" aria-label={t('pwa.installLabel')}>
-        <p className="m-0 text-sm">{t('pwa.installHint')}</p>
+        <Typography size="sm" className="m-0">
+          {t('pwa.installHint')}
+        </Typography>
         <div className="flex gap-2">
           <button type="button" className="pwa-banner__action" onClick={handleInstall}>
             {t('pwa.install')}

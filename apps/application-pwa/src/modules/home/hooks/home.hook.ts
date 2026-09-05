@@ -119,7 +119,7 @@ const useHome = () => {
     return {
       id: `${row.date}-${index}`,
       sideLabel: isBuy ? t('home.buyGoldAction') : t('home.sellGoldAction'),
-      sideColorClassName: isBuy ? 'text-success' : 'text-danger',
+      sideColor: isBuy ? 'success' : 'danger',
       date: row.date,
       ouncesLabel: `${row.oz} oz`,
       priceLabel: `$${fmt(row.price)}`,

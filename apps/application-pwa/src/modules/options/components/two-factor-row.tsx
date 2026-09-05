@@ -1,3 +1,4 @@
+import Typography from '@gold/shared-components/typography'
 import GoldBadge from '#/modules/shell/components/gold-badge'
 import Toggle from '#/modules/shell/components/toggle'
 import { useTwoFactor } from '#/modules/auth/hooks/two-factor.hook'
@@ -8,8 +9,10 @@ const TwoFactorRow = () => {
   return (
     <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
       <div>
-        <p className="text-sm text-foreground">{t('options.twoFactor')}</p>
-        <p className="text-xs text-foreground-subtle">{t('options.twoFactorHint')}</p>
+        <Typography size="sm">{t('options.twoFactor')}</Typography>
+        <Typography size="xs" weight="regular" color="subtle">
+          {t('options.twoFactorHint')}
+        </Typography>
       </div>
       <div className="flex items-center gap-2">
         {twoFactorEnabled ? <GoldBadge>{statusLabel}</GoldBadge> : null}

@@ -18,6 +18,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit -p apps/application-pwa/tsconfig.json && tsc --noEmit -p packages/shared-components/tsconfig.json && tsc --noEmit -p packages/form/tsconfig.json",
+    "test": "nx run-many -t test -p form,apis,shared-components -- --run",
+    "test:watch": "nx run-many -t test -p form,apis,shared-components",
     "preview:components": "nx preview shared-components",
     "preview:form": "nx preview form",
     "preview:storybook": "nx preview storybook",

@@ -1,6 +1,7 @@
 import Button from '@gold/shared-components/button'
 import Input from '@gold/shared-components/input'
 import Select from '@gold/shared-components/select'
+import Typography from '@gold/shared-components/typography'
 import { ChevronRight } from 'lucide-react'
 import Card from '#/modules/shell/components/card'
 import ThemeSelector from '#/modules/shell/components/theme-selector'
@@ -36,41 +37,58 @@ const OptionsView = () => {
   return (
     <div className="min-h-screen pb-24">
       <div className="px-5 pt-12 pb-6">
-        <h2 className="aurum-serif text-xl font-semibold text-foreground">{t('options.title')}</h2>
-        <p className="mt-1 text-xs text-foreground-subtle">{t('options.subtitle')}</p>
+        <Typography as="h2" size="xl" weight="semibold" className="aurum-serif">
+          {t('options.title')}
+        </Typography>
+        <Typography size="xs" weight="regular" color="subtle" className="mt-1">
+          {t('options.subtitle')}
+        </Typography>
       </div>
 
       <div className="space-y-5 px-5">
         <div>
-          <p className="mb-2 text-xs tracking-widest text-foreground-subtle uppercase">
+          <Typography
+            size="xs"
+            weight="regular"
+            color="subtle"
+            className="mb-2 tracking-widest uppercase"
+          >
             {t('options.appearance')}
-          </p>
+          </Typography>
           <div className="space-y-1">
             <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
               <div>
-                <p className="text-sm text-foreground">{t('options.language')}</p>
-                <p className="text-xs text-foreground-subtle">{t('options.languageHint')}</p>
+                <Typography size="sm">{t('options.language')}</Typography>
+                <Typography size="xs" weight="regular" color="subtle">
+                  {t('options.languageHint')}
+                </Typography>
               </div>
               <Toggle value={isRtl} onChange={handleDirectionChange} />
             </div>
             <div className="rounded-xl border border-border bg-surface-elevated p-4">
               <div className="mb-3">
-                <p className="text-sm text-foreground">{t('options.theme')}</p>
-                <p className="text-xs text-foreground-subtle">{t('options.themeHint')}</p>
+                <Typography size="sm">{t('options.theme')}</Typography>
+                <Typography size="xs" weight="regular" color="subtle">
+                  {t('options.themeHint')}
+                </Typography>
               </div>
               <ThemeSelector value={preference} onChange={handleThemeChange} />
             </div>
             <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
               <div>
-                <p className="text-sm text-foreground">{t('options.viewTransition')}</p>
-                <p className="text-xs text-foreground-subtle">{t('options.viewTransitionHint')}</p>
+                <Typography size="sm">{t('options.viewTransition')}</Typography>
+                <Typography size="xs" weight="regular" color="subtle">
+                  {t('options.viewTransitionHint')}
+                </Typography>
               </div>
               <Toggle value={viewTransitionEnabled} onChange={handleViewTransitionChange} />
             </div>
             <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
               <div>
-                <p className="text-sm text-foreground">{t('options.currency')}</p>
-                <p className="text-xs text-foreground-subtle">{t('options.currencyHint')}</p>
+                <Typography size="sm">{t('options.currency')}</Typography>
+                <Typography size="xs" weight="regular" color="subtle">
+                  {t('options.currencyHint')}
+                </Typography>
               </div>
               <Select
                 value={currency}
@@ -85,27 +103,43 @@ const OptionsView = () => {
         </div>
 
         <div>
-          <p className="mb-2 text-xs tracking-widest text-foreground-subtle uppercase">
+          <Typography
+            size="xs"
+            weight="regular"
+            color="subtle"
+            className="mb-2 tracking-widest uppercase"
+          >
             {t('options.notifications')}
-          </p>
+          </Typography>
           <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
             <div>
-              <p className="text-sm text-foreground">{t('options.pushNotifications')}</p>
-              <p className="text-xs text-foreground-subtle">{t('options.pushHint')}</p>
+              <Typography size="sm">{t('options.pushNotifications')}</Typography>
+              <Typography size="xs" weight="regular" color="subtle">
+                {t('options.pushHint')}
+              </Typography>
             </div>
             <Toggle value={notifications} onChange={setNotifications} />
           </div>
         </div>
 
         <div>
-          <p className="mb-2 text-xs tracking-widest text-foreground-subtle uppercase">
+          <Typography
+            size="xs"
+            weight="regular"
+            color="subtle"
+            className="mb-2 tracking-widest uppercase"
+          >
             {t('options.priceAlert')}
-          </p>
+          </Typography>
           <Card>
-            <p className="mb-3 text-sm text-foreground">{t('options.alertWhen')}</p>
+            <Typography size="sm" className="mb-3">
+              {t('options.alertWhen')}
+            </Typography>
             <div className="flex gap-2">
               <div className="flex flex-1 items-center gap-2 rounded-xl border border-border bg-surface-muted px-4 py-3">
-                <span className="text-sm text-foreground-subtle">$</span>
+                <Typography as="span" size="sm" color="subtle">
+                  $
+                </Typography>
                 <Input
                   type="number"
                   value={['3,400']}
@@ -131,11 +165,17 @@ const OptionsView = () => {
                   <div key={alert.price} className={alert.rowClassName}>
                     <div className="flex items-center gap-2">
                       <Icon size={12} className={alert.iconClassName} />
-                      <span className="font-mono text-xs text-foreground">{alert.price}</span>
-                      <span className="text-xs text-foreground-subtle">{alert.directionLabel}</span>
+                      <Typography as="span" size="xs" weight="regular" className="font-mono">
+                        {alert.price}
+                      </Typography>
+                      <Typography as="span" size="xs" weight="regular" color="subtle">
+                        {alert.directionLabel}
+                      </Typography>
                     </div>
-                    <button type="button" className="text-xs text-danger hover:opacity-70">
-                      {t('options.remove')}
+                    <button type="button" className="hover:opacity-70">
+                      <Typography as="span" size="xs" weight="regular" color="danger">
+                        {t('options.remove')}
+                      </Typography>
                     </button>
                   </div>
                 )
@@ -145,9 +185,14 @@ const OptionsView = () => {
         </div>
 
         <div>
-          <p className="mb-2 text-xs tracking-widest text-foreground-subtle uppercase">
+          <Typography
+            size="xs"
+            weight="regular"
+            color="subtle"
+            className="mb-2 tracking-widest uppercase"
+          >
             {t('options.security')}
-          </p>
+          </Typography>
           <div className="space-y-1">
             <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
               <div className="flex items-center gap-3">
@@ -155,8 +200,10 @@ const OptionsView = () => {
                   {biometricIcon}
                 </div>
                 <div>
-                  <p className="text-sm text-foreground">{t('options.biometric')}</p>
-                  <p className="text-xs text-foreground-subtle">{biometricHint}</p>
+                  <Typography size="sm">{t('options.biometric')}</Typography>
+                  <Typography size="xs" weight="regular" color="subtle">
+                    {biometricHint}
+                  </Typography>
                 </div>
               </div>
               <Toggle
@@ -171,9 +218,14 @@ const OptionsView = () => {
         </div>
 
         <div>
-          <p className="mb-2 text-xs tracking-widest text-foreground-subtle uppercase">
+          <Typography
+            size="xs"
+            weight="regular"
+            color="subtle"
+            className="mb-2 tracking-widest uppercase"
+          >
             {t('options.about')}
-          </p>
+          </Typography>
           <div className="space-y-1">
             {aboutItems.map((item) => (
               <button
@@ -181,13 +233,15 @@ const OptionsView = () => {
                 type="button"
                 className="flex w-full items-center justify-between rounded-xl border border-border bg-surface-elevated p-4 transition-all hover:border-gold-600/30"
               >
-                <span className="text-sm text-foreground">{item}</span>
+                <Typography as="span" size="sm">
+                  {item}
+                </Typography>
                 <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
               </button>
             ))}
-            <div className="p-4 text-center text-xs text-foreground-subtle">
+            <Typography size="xs" weight="regular" color="subtle" align="center" className="p-4">
               {t('options.footer')}
-            </div>
+            </Typography>
           </div>
         </div>
       </div>

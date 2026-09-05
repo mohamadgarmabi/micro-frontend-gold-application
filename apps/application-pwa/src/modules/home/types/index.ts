@@ -56,7 +56,7 @@ type HomeMarketRow = {
 type HomeActivityRow = {
   id: string
   sideLabel: string
-  sideColorClassName: string
+  sideColor: 'success' | 'danger'
   date: string
   ouncesLabel: string
   priceLabel: string

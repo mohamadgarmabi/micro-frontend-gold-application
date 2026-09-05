@@ -1,5 +1,6 @@
 import Button from '@gold/shared-components/button'
 import InputOTP from '@gold/shared-components/input-otp'
+import Typography from '@gold/shared-components/typography'
 import { PIN_LENGTH } from '#/config/security.constants'
 import { usePinUnlock } from '../../hooks/pin-unlock.hook'
 
@@ -10,16 +11,15 @@ const PinView = () => {
     <div className="aurum-gradient-bg flex min-h-screen flex-col bg-background px-6 pt-16">
       <div className="mx-auto flex w-full max-w-sm flex-1 flex-col">
         <div className="mb-8">
-          <h2 className="mb-2 text-2xl font-semibold text-foreground">{t('auth.pinTitle')}</h2>
-          <p className="text-sm text-muted">{t('auth.pinHint')}</p>
+          <Typography as="h2" size="display" weight="semibold" className="mb-2 text-2xl">
+            {t('auth.pinTitle')}
+          </Typography>
+          <Typography size="sm" color="muted">
+            {t('auth.pinHint')}
+          </Typography>
         </div>
 
-        <InputOTP
-          maxLength={PIN_LENGTH}
-          value={pin}
-          onChange={handlePinChange}
-          className="mb-4"
-        >
+        <InputOTP maxLength={PIN_LENGTH} value={pin} onChange={handlePinChange} className="mb-4">
           <InputOTP.Group className="flex gap-3">
             {pinSlots.map((slot) => (
               <InputOTP.Slot key={slot} index={slot} />
@@ -27,7 +27,11 @@ const PinView = () => {
           </InputOTP.Group>
         </InputOTP>
 
-        {error ? <p className="mb-4 text-center text-sm text-danger">{error}</p> : null}
+        {error ? (
+          <Typography size="sm" color="danger" align="center" className="mb-4">
+            {error}
+          </Typography>
+        ) : null}
 
         <Button
           type="button"
