@@ -67,6 +67,112 @@ body,
   background: var(--background);
 }
 
+.ayar-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--background);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.42s cubic-bezier(0.23, 1, 0.32, 1),
+    visibility 0.42s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html.ayar-splash-done .ayar-splash {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ayar-splash__glow {
+  position: absolute;
+  width: min(28rem, 90vw);
+  height: min(28rem, 90vw);
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--accent) 28%, transparent) 0%,
+    transparent 68%
+  );
+  filter: blur(8px);
+  animation: ayar-splash-pulse 2.4s ease-in-out infinite;
+}
+
+.ayar-splash__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  animation: ayar-splash-rise 0.7s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.ayar-splash__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  box-shadow:
+    0 18px 36px color-mix(in oklab, var(--accent) 24%, transparent),
+    inset 0 1px 0 color-mix(in oklab, #fff 42%, transparent);
+}
+
+.ayar-splash__brand {
+  letter-spacing: -0.03em;
+}
+
+.ayar-splash__tagline {
+  margin-top: 0.35rem;
+}
+
+@keyframes ayar-splash-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ayar-splash-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ayar-splash,
+  .ayar-splash__content,
+  .ayar-splash__glow {
+    animation: none;
+    transition: none;
+  }
+}
+
 .aurum-spot-card {
   border: 1px solid var(--border);
   background: var(--surface);

@@ -11,6 +11,7 @@ import { getDirectionPreference } from '#/modules/shell/apis/get-direction'
 import { directionStore } from '#/modules/shell/stores/direction.store'
 import { THEME_INIT_SCRIPT, THEME_META_COLORS } from '#/config/theme.constants'
 import { DIRECTION_INIT_SCRIPT } from '#/config/direction.constants'
+import SplashScreen from '#/modules/shell/components/splash-screen'
 import NotFoundView from '#/modules/shell/views/not-found-view'
 import AppProviders from '../components/AppProviders'
 import PwaInstallPrompt from '../components/PwaInstallPrompt'
@@ -32,6 +33,7 @@ const RootDocument = ({ children }: { children: React.ReactNode }) => {
       </head>
       <body className="bg-background selection:bg-accent/20 font-sans text-foreground antialiased gold-root gold-app-chrome [overflow-wrap:anywhere]">
         {children}
+        <SplashScreen />
         <AppProviders />
         <PwaInstallPrompt />
         <TanStackDevtools
