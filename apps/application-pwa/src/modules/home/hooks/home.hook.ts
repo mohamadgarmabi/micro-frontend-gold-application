@@ -1,6 +1,7 @@
+import { marketController } from '@gold/apis'
+import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { ArrowDownToLine, ArrowUpFromLine, FileText, Truck } from 'lucide-react'
-import { assets, recentActivity, SPOT_PRICE } from '#/modules/market/utils/data'
 import { fmt } from '#/modules/market/utils/format'
 import { useI18n } from '#/modules/shell/hooks/i18n.hook'
 import type { MessageKey } from '#/modules/shell/types'
@@ -16,7 +17,6 @@ import type {
 
 const CASH_TOMAN = '12,450,000'
 const VAULT_SOT = '1,250'
-const GOLD_CHANGE = 1.28
 const QUICK_TILE_CLASS =
   'flex size-14 mx-auto items-center justify-center rounded-[var(--radius)] border border-border bg-surface text-foreground'
 
@@ -42,6 +42,14 @@ const greetingKey = (hour: number) => {
 const useHome = () => {
   const { t } = useI18n()
   const navigate = useNavigate()
+  const { data: overview } = useQuery(marketController.getOverview())
+
+  const spotPrice = overview?.spotPrice ?? 0
+  const goldChange = overview?.change ?? 0
+  const assets = overview?.assets ?? []
+  const recentActivity = overview?.recentActivity ?? []
+
+  console.log({overview})
 
   const openChart = () => {
     void navigate({ to: '/chart' })
@@ -62,8 +70,8 @@ const useHome = () => {
     pairLabel: t('home.pairXau'),
     liveLabel: t('home.liveNow'),
     chartLabel: t('home.viewChart'),
-    price: SPOT_PRICE,
-    change: GOLD_CHANGE,
+    price: spotPrice,
+    change: goldChange,
     onOpenChart: openChart,
   }
 

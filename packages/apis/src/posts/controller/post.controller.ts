@@ -3,20 +3,18 @@ import { getApiClient } from '../../client'
 import type { CreatePostDto, PostDto, UpdatePostDto } from '../dto'
 import { endpoint } from '../endpoints'
 
-export type GetPostListParams = {
+type GetPostListParams = {
   limit?: number
 }
 
-export const postController = {
+const postController = {
   getPostList: (params: GetPostListParams = {}) =>
     queryOptions({
       queryKey: [endpoint.post.get, params] as const,
       queryFn: async () => {
-        const { data } = await getApiClient().get<PostDto[]>(endpoint.post.get, {
-          params: { _limit: params.limit ?? 8 },
+        return getApiClient().get<PostDto[]>(endpoint.post.get, {
+          query: { _limit: params.limit ?? 8 },
         })
-
-        return data
       },
     }),
 
@@ -24,8 +22,7 @@ export const postController = {
     queryOptions({
       queryKey: [endpoint.post.getById(id), id] as const,
       queryFn: async () => {
-        const { data } = await getApiClient().get<PostDto>(endpoint.post.getById(id))
-        return data
+        return getApiClient().get<PostDto>(endpoint.post.getById(id))
       },
       enabled: id > 0,
     }),
@@ -34,8 +31,7 @@ export const postController = {
     mutationOptions({
       mutationKey: [endpoint.post.get, 'create'] as const,
       mutationFn: async (input: CreatePostDto) => {
-        const { data } = await getApiClient().post<PostDto>(endpoint.post.get, input)
-        return data
+        return getApiClient().post<PostDto>(endpoint.post.get, { body: input })
       },
     }),
 
@@ -43,11 +39,7 @@ export const postController = {
     mutationOptions({
       mutationKey: [endpoint.post.getById(id), 'update'] as const,
       mutationFn: async (input: UpdatePostDto) => {
-        const { data } = await getApiClient().patch<PostDto>(
-          endpoint.post.getById(id),
-          input,
-        )
-        return data
+        return getApiClient().patch<PostDto>(endpoint.post.getById(id), { body: input })
       },
     }),
 
@@ -59,3 +51,6 @@ export const postController = {
       },
     }),
 }
+
+export { postController }
+export type { GetPostListParams }

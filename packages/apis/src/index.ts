@@ -6,16 +6,17 @@ export {
   setApiConfig,
 } from './config'
 export type { ApiAuthConfig, ApiConfig, ApiCookieOptions, ResolvedApiConfig } from './config'
-export type { ApiInterceptors, ApiRequestInterceptor, ApiResponseInterceptor } from './config'
+export type { ApiMockConfig, ApiMockHandler, ApiMockMethod, ApiMockRoute } from './config'
 
 export {
   clearAuthToken,
-  createAuthInterceptors,
   getAuthToken,
   hasAuthToken,
   setAuthToken,
 } from './auth'
 
 export { configureApis, getApiClient } from './client'
+export type { ApiClient } from './client'
 
 export * from './posts'
+export * from './market'

@@ -1,2 +1,2 @@
-export { configureApis, getApiClient } from './axios-client'
-export { applyApiInterceptors } from './apply-interceptors'
+export { configureApis, getApiClient } from './fetch-client'
+export type { ApiClient } from './fetch-client'

@@ -1,9 +1,7 @@
 import type { ApiConfig } from '@gold/apis/config'
 
-export const apiConfig = {
-  baseURL:
-    import.meta.env.VITE_APP_API_URL ??
-    'https://jsonplaceholder.typicode.com',
+const apiConfig = {
+  baseURL: import.meta.env.VITE_APP_API_URL ?? 'https://jsonplaceholder.typicode.com',
   auth: {
     tokenCookieName: 'gold_auth_token',
     cookie: {
@@ -13,3 +11,5 @@ export const apiConfig = {
     },
   },
 } satisfies ApiConfig
+
+export { apiConfig }

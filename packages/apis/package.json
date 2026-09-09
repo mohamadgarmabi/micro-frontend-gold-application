@@ -13,6 +13,11 @@
     "./posts/controller": "./src/posts/controller/index.ts",
     "./posts/endpoints": "./src/posts/endpoints/index.ts",
     "./posts/dto": "./src/posts/dto/index.ts",
+    "./market": "./src/market/index.ts",
+    "./market/controller": "./src/market/controller/index.ts",
+    "./market/endpoints": "./src/market/endpoints/index.ts",
+    "./market/dto": "./src/market/dto/index.ts",
+    "./market/mock": "./src/market/mock/index.ts",
     "./webauthn": "./src/webauthn/index.ts",
     "./webauthn/controller": "./src/webauthn/controller/index.ts",
     "./webauthn/endpoints": "./src/webauthn/endpoints/index.ts",
@@ -34,7 +39,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.101.2",
-    "axios": "^1.13.2"
+    "tanstack-fetch": "^1.0.1"
   },
   "devDependencies": {
     "typescript": "~5.9.2"

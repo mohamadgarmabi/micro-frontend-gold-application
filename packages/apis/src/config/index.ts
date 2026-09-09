@@ -7,8 +7,4 @@ export {
 } from './store'
 export type { ApiAuthConfig, ApiCookieOptions } from './auth'
 export type { ApiConfig, ResolvedApiConfig } from './types'
-export type {
-  ApiInterceptors,
-  ApiRequestInterceptor,
-  ApiResponseInterceptor,
-} from './interceptors'
+export type { ApiMockConfig, ApiMockHandler, ApiMockMethod, ApiMockRoute } from './mock'

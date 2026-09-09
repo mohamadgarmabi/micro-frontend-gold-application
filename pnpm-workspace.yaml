@@ -11,5 +11,7 @@ allowBuilds:
   unrs-resolver: false
   vue-demi: false
 autoInstallPeers: true
+minimumReleaseAgeExclude:
+  - tanstack-fetch@1.0.1
 onlyBuiltDependencies:
   - "nx"

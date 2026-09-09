@@ -12,38 +12,26 @@ import type {
 import { endpoint } from '../endpoints'
 
 const requestRegisterOptions = async () => {
-  const { data } = await getApiClient().post<WebAuthnRegisterOptionsDto>(
-    endpoint.webauthn.registerOptions,
-  )
-
-  return data
+  return getApiClient().post<WebAuthnRegisterOptionsDto>(endpoint.webauthn.registerOptions)
 }
 
 const requestRegisterVerify = async (credential: WebAuthnRegisterCredentialDto) => {
-  const { data } = await getApiClient().post<WebAuthnRegisterResultDto>(
-    endpoint.webauthn.registerVerify,
-    credential,
-  )
-
-  return data
+  return getApiClient().post<WebAuthnRegisterResultDto>(endpoint.webauthn.registerVerify, {
+    body: credential,
+  })
 }
 
 const requestAuthenticateOptions = async (input: WebAuthnAuthenticateOptionsRequestDto = {}) => {
-  const { data } = await getApiClient().post<WebAuthnAuthenticateOptionsDto>(
+  return getApiClient().post<WebAuthnAuthenticateOptionsDto>(
     endpoint.webauthn.authenticateOptions,
-    input,
+    { body: input },
   )
-
-  return data
 }
 
 const requestAuthenticateVerify = async (credential: WebAuthnAuthenticateCredentialDto) => {
-  const { data } = await getApiClient().post<WebAuthnSessionDto>(
-    endpoint.webauthn.authenticateVerify,
-    credential,
-  )
-
-  return data
+  return getApiClient().post<WebAuthnSessionDto>(endpoint.webauthn.authenticateVerify, {
+    body: credential,
+  })
 }
 
 const requestRemoveCredentials = async () => {
