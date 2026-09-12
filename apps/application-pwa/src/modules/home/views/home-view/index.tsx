@@ -10,7 +10,7 @@ const HomeView = () => {
   const { t, header, quote, tradeActions, wallets, actions, markets, activity } = useHome()
 
   return (
-    <div className="min-h-full pb-28">
+    <div className="pb-28 min-h-full">
       <div className="px-5 pt-12">
         <HomeHeader
           greeting={header.greeting}
@@ -20,8 +20,8 @@ const HomeView = () => {
         <HomeHero quote={quote} tradeActions={tradeActions} />
       </div>
 
-      <div className="mt-6 space-y-6 px-5">
-        <div className="grid grid-cols-2 gap-3">
+      <div className="space-y-6 mt-6 px-5">
+        <div className="gap-3 grid grid-cols-2">
           {wallets.map((wallet) => (
             <Card key={wallet.id} className="p-4">
               <Typography size="xs" weight="regular" color="muted" className="uppercase tracking-widest">
@@ -41,7 +41,7 @@ const HomeView = () => {
           <Typography as="h2" size="sm" weight="semibold" className="mb-3">
             {t('home.quickAccess')}
           </Typography>
-          <div className="grid grid-cols-4 gap-3">
+          <div className="gap-3 grid grid-cols-4">
             {actions.map((action) => {
               const Icon = action.Icon
 
@@ -56,7 +56,7 @@ const HomeView = () => {
                     weight="regular"
                     color="muted"
                     align="center"
-                    className="mt-2 block"
+                    className="block mt-2"
                   >
                     {action.label}
                   </Typography>

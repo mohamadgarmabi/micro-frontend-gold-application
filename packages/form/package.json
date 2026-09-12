@@ -39,6 +39,6 @@
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
-    "typescript": "~5.9.2"
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }

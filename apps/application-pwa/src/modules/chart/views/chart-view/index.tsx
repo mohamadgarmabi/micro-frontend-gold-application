@@ -32,11 +32,11 @@ const ChartView = () => {
   } = useChart()
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className="pb-24 min-h-screen">
       <div className="px-5 pt-12 pb-4">
-        <div className="mb-1 flex items-center justify-between">
+        <div className="flex justify-between items-center mb-1">
           <div>
-            <Typography size="xs" weight="regular" color="subtle" className="tracking-widest uppercase">
+            <Typography size="xs" weight="regular" color="subtle" className="uppercase tracking-widest">
               {t('chart.goldSpot')}
             </Typography>
             <Typography as="h2" size="xl" weight="semibold" className="aurum-serif">
@@ -117,14 +117,14 @@ const ChartView = () => {
         </ResponsiveContainer>
       </div>
 
-      <div className="mb-5 grid grid-cols-2 gap-3 px-5">
+      <div className="gap-3 grid grid-cols-2 mb-5 px-5">
         {stats.map((stat) => (
           <Card key={stat.label} className="py-3">
             <Typography
               size="xs"
               weight="regular"
               color="subtle"
-              className="mb-1 tracking-widest uppercase"
+              className="mb-1 uppercase tracking-widest"
             >
               {stat.label}
             </Typography>
@@ -141,17 +141,17 @@ const ChartView = () => {
             size="xs"
             weight="regular"
             color="subtle"
-            className="mb-3 tracking-widest uppercase"
+            className="mb-3 uppercase tracking-widest"
           >
             {t('chart.orderBook')}
           </Typography>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="gap-4 grid grid-cols-2">
             <div>
               <Typography size="xs" weight="regular" color="success" className="mb-2">
                 {t('chart.bids')}
               </Typography>
               {bids.map((row) => (
-                <div key={row.price} className="mb-1.5 flex justify-between">
+                <div key={row.price} className="flex justify-between mb-1.5">
                   <Typography as="span" size="xs" weight="regular" color="success" className="font-mono">
                     {row.price}
                   </Typography>
@@ -166,7 +166,7 @@ const ChartView = () => {
                 {t('chart.asks')}
               </Typography>
               {asks.map((row) => (
-                <div key={row.price} className="mb-1.5 flex justify-between">
+                <div key={row.price} className="flex justify-between mb-1.5">
                   <Typography as="span" size="xs" weight="regular" color="danger" className="font-mono">
                     {row.price}
                   </Typography>

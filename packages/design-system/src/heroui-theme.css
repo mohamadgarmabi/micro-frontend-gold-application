@@ -1,7 +1,6 @@
 /*
- * HeroUI Theme Customization
- * Overrides default theme after @heroui/styles
- * @see https://heroui.com/docs/react/getting-started/theming
+ * Ayar palette — "Ledger Gold"
+ * Cool stone surfaces + burnished gold accent (fintech, not cream/terracotta).
  */
 
 :root,
@@ -9,77 +8,120 @@
 .default,
 [data-theme='light'],
 [data-theme='default'] {
-  --accent: oklch(0 0 0);
-  --accent-foreground: oklch(99.11% 0 0);
-  --background: oklch(97.02% 0 0);
-  --border: oklch(90% 0 0);
-  --danger: oklch(0.573 0.2249 21.97);
-  --danger-foreground: oklch(98% 0.02 21.97);
-  --default: oklch(94% 0 0);
-  --default-foreground: oklch(21.03% 0.0059 0);
-  --field-background: oklch(100% 0 0);
-  --field-border: transparent;
-  --field-foreground: oklch(21.03% 0 0);
-  --field-placeholder: oklch(55.17% 0 0);
-  --focus: oklch(0 0 0);
-  --foreground: oklch(21.03% 0 0);
-  --muted: oklch(55.17% 0 0);
-  --overlay: oklch(100% 0 0);
-  --overlay-foreground: oklch(21.03% 0 0);
-  --scrollbar: oklch(87.1% 0 0);
-  --segment: oklch(100% 0 0);
-  --segment-foreground: oklch(21.03% 0 0);
-  --separator: oklch(92% 0 0);
-  --success: oklch(0.6277 0.1604 153.06);
-  --success-foreground: oklch(98% 0.016 153.06);
-  --surface: oklch(100% 0 0);
-  --surface-foreground: oklch(21.03% 0 0);
-  --surface-secondary: oklch(95.24% 0 0);
-  --surface-secondary-foreground: oklch(21.03% 0 0);
-  --surface-tertiary: oklch(93.73% 0 0);
-  --surface-tertiary-foreground: oklch(21.03% 0 0);
-  --warning: oklch(0.8446 0.1525 80.6);
-  --warning-foreground: oklch(15% 0.0457 80.6);
-  --accent-soft-foreground: oklch(0 0 0);
+  --accent: oklch(0.68 0.115 84);
+  --accent-hover: oklch(0.61 0.12 82);
+  --accent-foreground: oklch(0.2 0.035 75);
+  --accent-soft-foreground: oklch(0.42 0.08 80);
 
-  --radius: 0.25rem;
-  --field-radius: 0.25rem;
+  --background: oklch(0.975 0.008 250);
+  --foreground: oklch(0.23 0.022 255);
+
+  --border: oklch(0.88 0.014 250);
+  --border-secondary: oklch(0.82 0.016 250);
+
+  --danger: oklch(0.55 0.185 25);
+  --danger-foreground: oklch(0.98 0.01 25);
+
+  --default: oklch(0.94 0.01 250);
+  --default-foreground: oklch(0.23 0.022 255);
+
+  --field-background: oklch(0.995 0.004 250);
+  --field-border: transparent;
+  --field-foreground: oklch(0.23 0.022 255);
+  --field-placeholder: oklch(0.52 0.02 255);
+
+  --focus: oklch(0.68 0.115 84);
+  --muted: oklch(0.52 0.02 255);
+
+  --overlay: oklch(0.995 0.004 250);
+  --overlay-foreground: oklch(0.23 0.022 255);
+
+  --scrollbar: oklch(0.82 0.014 250);
+  --segment: oklch(0.995 0.004 250);
+  --segment-foreground: oklch(0.23 0.022 255);
+  --separator: oklch(0.9 0.012 250);
+
+  --success: oklch(0.55 0.125 160);
+  --success-foreground: oklch(0.98 0.01 160);
+
+  --surface: oklch(0.995 0.004 250);
+  --surface-foreground: oklch(0.23 0.022 255);
+  --surface-secondary: oklch(0.955 0.01 250);
+  --surface-secondary-foreground: oklch(0.23 0.022 255);
+  --surface-tertiary: oklch(0.93 0.012 250);
+  --surface-tertiary-foreground: oklch(0.23 0.022 255);
+
+  --warning: oklch(0.78 0.13 78);
+  --warning-foreground: oklch(0.28 0.05 75);
+
+  --radius: 0.375rem;
+  --field-radius: 0.375rem;
+
+  /* App bridges used outside Tailwind class tokens */
+  --ds-brand: var(--accent);
+  --ds-danger: var(--danger);
+  --ds-border: var(--border);
+  --ds-foreground: var(--foreground);
+  --ds-foreground-subtle: var(--muted);
+  --ds-surface-elevated: var(--surface);
+  --ds-shadow-focus: 0 0 0 3px color-mix(in oklab, var(--focus) 22%, transparent);
 }
 
 .dark,
 [data-theme='dark'] {
   color-scheme: dark;
 
-  --accent: oklch(0.9848 0 0);
-  --accent-foreground: oklch(15% 0 0);
-  --background: oklch(12% 0 0);
-  --border: oklch(28% 0 0);
-  --danger: oklch(0.7044 0.1872 23.19);
-  --danger-foreground: oklch(15% 0.05 23.19);
-  --default: oklch(27.4% 0 0);
-  --default-foreground: oklch(99.11% 0 0);
-  --field-background: oklch(21.03% 0 0);
+  --accent: oklch(0.82 0.12 88);
+  --accent-hover: oklch(0.88 0.11 90);
+  --accent-foreground: oklch(0.18 0.04 75);
+  --accent-soft-foreground: oklch(0.88 0.1 88);
+
+  --background: oklch(0.16 0.016 255);
+  --foreground: oklch(0.96 0.008 95);
+
+  --border: oklch(0.3 0.018 255);
+  --border-secondary: oklch(0.36 0.02 255);
+
+  --danger: oklch(0.68 0.17 25);
+  --danger-foreground: oklch(0.18 0.04 25);
+
+  --default: oklch(0.26 0.018 255);
+  --default-foreground: oklch(0.96 0.008 95);
+
+  --field-background: oklch(0.21 0.018 255);
   --field-border: transparent;
-  --field-foreground: oklch(99.11% 0 0);
-  --field-placeholder: oklch(70.5% 0 0);
-  --focus: oklch(0.9848 0 0);
-  --foreground: oklch(99.11% 0 0);
-  --muted: oklch(70.5% 0 0);
-  --overlay: oklch(21.03% 0 0);
-  --overlay-foreground: oklch(99.11% 0 0);
-  --scrollbar: oklch(70.5% 0 0);
-  --segment: oklch(39.64% 0 0);
-  --segment-foreground: oklch(99.11% 0 0);
-  --separator: oklch(25% 0 0);
-  --success: oklch(0.6514 0.1321 156.22);
-  --success-foreground: oklch(15% 0.0396 156.22);
-  --surface: oklch(21.03% 0 0);
-  --surface-foreground: oklch(99.11% 0 0);
-  --surface-secondary: oklch(25.7% 0 0);
-  --surface-secondary-foreground: oklch(99.11% 0 0);
-  --surface-tertiary: oklch(27.21% 0 0);
-  --surface-tertiary-foreground: oklch(99.11% 0 0);
-  --warning: oklch(0.8803 0.1348 86.06);
-  --warning-foreground: oklch(15% 0.0404 86.06);
-  --accent-soft-foreground: oklch(0.9848 0 0);
+  --field-foreground: oklch(0.96 0.008 95);
+  --field-placeholder: oklch(0.68 0.02 255);
+
+  --focus: oklch(0.82 0.12 88);
+  --muted: oklch(0.68 0.02 255);
+
+  --overlay: oklch(0.21 0.018 255);
+  --overlay-foreground: oklch(0.96 0.008 95);
+
+  --scrollbar: oklch(0.42 0.02 255);
+  --segment: oklch(0.34 0.02 255);
+  --segment-foreground: oklch(0.96 0.008 95);
+  --separator: oklch(0.28 0.016 255);
+
+  --success: oklch(0.72 0.12 160);
+  --success-foreground: oklch(0.18 0.04 160);
+
+  --surface: oklch(0.21 0.018 255);
+  --surface-foreground: oklch(0.96 0.008 95);
+  --surface-secondary: oklch(0.25 0.02 255);
+  --surface-secondary-foreground: oklch(0.96 0.008 95);
+  --surface-tertiary: oklch(0.28 0.02 255);
+  --surface-tertiary-foreground: oklch(0.96 0.008 95);
+
+  --warning: oklch(0.84 0.12 85);
+  --warning-foreground: oklch(0.22 0.05 75);
+
+  --ds-brand: var(--accent);
+  --ds-danger: var(--danger);
+  --ds-border: var(--border);
+  --ds-foreground: var(--foreground);
+  --ds-foreground-subtle: var(--muted);
+  --ds-surface-elevated: var(--surface);
+  --ds-shadow-focus: 0 0 0 3px color-mix(in oklab, var(--focus) 28%, transparent);
 }
