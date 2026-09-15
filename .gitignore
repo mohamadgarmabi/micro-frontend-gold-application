@@ -4,6 +4,8 @@
 dist
 tmp
 out-tsc
+**/dev-dist/**
+**/storybook-static/**
 
 # dependencies
 node_modules
