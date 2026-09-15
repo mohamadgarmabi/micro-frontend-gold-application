@@ -248,7 +248,7 @@ pnpm check:no-js
 
 Root scripts: `pnpm lint`, `pnpm format`, `pnpm format:check`, `pnpm typecheck`, `pnpm check:no-js`.
 
-Maintainable source under `apps/`, `packages/`, and root `scripts/` MUST be TypeScript (`.ts` / `.tsx`). New `.js` / `.mjs` / `.cjs` under those roots is disallowed (generated trees like `dist/`, `dev-dist/`, `storybook-static/` are exempt). Enforcement: `pnpm check:no-js` (also in the pre-commit hook). Workspace configs such as `eslint.config.mjs` remain documented exceptions for now.
+Maintainable source under `apps/`, `packages/`, and root `scripts/` MUST be TypeScript (`.ts` / `.tsx`). New `.js` / `.mjs` / `.cjs` under those roots is disallowed (generated trees like `dist/` and `dev-dist/` are exempt). Enforcement: `pnpm check:no-js` (also in the pre-commit hook). Workspace configs such as `eslint.config.mjs` remain documented exceptions for now.
 
 | Check      | Command                                    | Bar                                                                     |
 | ---------- | ------------------------------------------ | ----------------------------------------------------------------------- |

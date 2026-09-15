@@ -21,7 +21,6 @@
   "tailwindCSS.experimental.configFile": {
     "apps/application-pwa/src/styles.css": "apps/application-pwa/**",
     "apps/website/src/styles.css": "apps/website/**",
-    "apps/storybook/src/styles.css": "apps/storybook/**",
     "packages/design-system/src/styles.css": "packages/**"
   }
 }
