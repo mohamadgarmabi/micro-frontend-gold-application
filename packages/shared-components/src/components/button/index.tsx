@@ -44,6 +44,7 @@ const Button = ({
       size={size}
       onPress={handlePress}
       {...props}
+      isPending={loading}
     >
       {loading ? (
         <Spinner className={iconClassName} />

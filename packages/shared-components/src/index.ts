@@ -5,8 +5,9 @@ import Avatar from './components/avatar'
 import Badge from './components/badge'
 import Button from './components/button'
 import Card from './components/card'
-import CheckboxGroup from './components/checkbox-group'
 import Checkbox from './components/checkbox'
+import CheckboxGroup from './components/checkbox-group'
+import Chip from './components/chip'
 import Collapsible from './components/collapsible'
 import Combobox from './components/combobox'
 import ContextMenu from './components/context-menu'
@@ -18,6 +19,8 @@ import Flex from './components/flex'
 import Form from './components/form'
 import Grid from './components/grid'
 import Input from './components/input'
+import InputOtp from './components/input-otp'
+import Link from './components/link'
 import Menu from './components/menu'
 import Menubar from './components/menubar'
 import Meter from './components/meter'
@@ -25,12 +28,12 @@ import NavigationMenu from './components/navigation-menu'
 import NumberField from './components/number-field'
 import OTPField from './components/otp-field'
 import Popover from './components/popover'
-import PriceDisplay from './components/price-display'
 import PreviewCard from './components/preview-card'
+import PriceDisplay from './components/price-display'
 import Progress from './components/progress'
 import PullRefresh from './components/pull-refresh'
-import RadioGroup from './components/radio-group'
 import Radio from './components/radio'
+import RadioGroup from './components/radio-group'
 import ScrollArea from './components/scroll-area'
 import Select from './components/select'
 import Separator from './components/separator'
@@ -40,8 +43,8 @@ import { toast } from './components/sonner'
 import Switch from './components/switch'
 import Tabs from './components/tabs'
 import Toast from './components/toast'
-import ToggleGroup from './components/toggle-group'
 import Toggle from './components/toggle'
+import ToggleGroup from './components/toggle-group'
 import Toolbar from './components/toolbar'
 import Tooltip from './components/tooltip'
 import Typography from './components/typography'
@@ -55,8 +58,9 @@ export {
   Badge,
   Button,
   Card,
-  CheckboxGroup,
   Checkbox,
+  CheckboxGroup,
+  Chip,
   Collapsible,
   Combobox,
   ContextMenu,
@@ -68,6 +72,8 @@ export {
   Form,
   Grid,
   Input,
+  InputOtp,
+  Link,
   Menu,
   Menubar,
   Meter,
@@ -75,12 +81,12 @@ export {
   NumberField,
   OTPField,
   Popover,
-  PriceDisplay,
   PreviewCard,
+  PriceDisplay,
   Progress,
   PullRefresh,
-  RadioGroup,
   Radio,
+  RadioGroup,
   ScrollArea,
   Select,
   Separator,
@@ -90,8 +96,8 @@ export {
   Switch,
   Tabs,
   Toast,
-  ToggleGroup,
   Toggle,
+  ToggleGroup,
   Toolbar,
   Tooltip,
   Typography,

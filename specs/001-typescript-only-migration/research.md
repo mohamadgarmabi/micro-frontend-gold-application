@@ -11,6 +11,7 @@ source. App trees only contain generated service-worker/PWA and Storybook static
 bundles. Real debt is `scripts/*.mjs` (three files).
 
 **Alternatives considered**:
+
 - Counting all nested `.js` under apps as in-scope — rejected; contradicts
   generated-output exemption and would force deleting or rewriting build artifacts.
 - Converting root configs in this feature — rejected by clarification Option C.
@@ -26,6 +27,7 @@ compile/emit step and matches common monorepo practice. Keeps `package.json`
 entries simple (`tsx scripts/generate-base-ui-components.ts`).
 
 **Alternatives considered**:
+
 - `node --experimental-strip-types` — possible on newer Node, less portable across
   contributor environments.
 - Compile scripts to `scripts/dist` with `tsc` — more moving parts for little gain.
@@ -56,6 +58,7 @@ script is simple, language-agnostic, and hard to accidentally bypass. ESLint alo
 may not run on files that are never linted if someone adds a bare `.js`.
 
 **Alternatives considered**:
+
 - Policy-only — rejected by clarification B.
 - ESLint-only on `**/*.{js,mjs,cjs}` with `files` error rule — good complement but
   weaker alone if lint ignores those paths.

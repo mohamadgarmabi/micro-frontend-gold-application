@@ -26,9 +26,9 @@ Validation uses inventory checks, workspace quality gates, generator runs, and s
 
 **Purpose**: Tooling and feature docs scaffolding for the migration
 
-- [ ] T001 Add `tsx` as a workspace `devDependency` in `package.json` and install with pnpm
-- [ ] T002 [P] Create strict `scripts/tsconfig.json` (`strict`, `noUnusedLocals`, `noUnusedParameters`, Node types, ESM) for converted scripts
-- [ ] T003 [P] Create `specs/001-typescript-only-migration/exceptions.md` from `specs/001-typescript-only-migration/contracts/exceptions-register.md` (include `eslint.config.mjs`, `commitlint.config.mjs`, and agent skill `.mjs` trees with reasons)
+- [x] T001 Add `tsx` as a workspace `devDependency` in `package.json` and install with pnpm
+- [x] T002 [P] Create strict `scripts/tsconfig.json` (`strict`, `noUnusedLocals`, `noUnusedParameters`, Node types, ESM) for converted scripts
+- [x] T003 [P] Create `specs/001-typescript-only-migration/exceptions.md` from `specs/001-typescript-only-migration/contracts/exceptions-register.md` (include `eslint.config.mjs`, `commitlint.config.mjs`, and agent skill `.mjs` trees with reasons)
 
 ---
 
@@ -38,9 +38,9 @@ Validation uses inventory checks, workspace quality gates, generator runs, and s
 
 **⚠️ CRITICAL**: No user story conversion work should finish until inventory is baseline-documented
 
-- [ ] T004 Produce baseline inventory table in `specs/001-typescript-only-migration/inventory.md` listing every `*.{js,mjs,cjs}` under `apps/`, `packages/`, `scripts/` with classification enum values from `data-model.md` (`in_scope_js` | `typed_replacement` | `generated` | `documented_exception` | `removed`)
-- [ ] T005 Document generated exclude globs in `specs/001-typescript-only-migration/inventory.md` (`**/node_modules/**`, `**/dist/**`, `**/dev-dist/**`, `**/storybook-static/**`, `**/coverage/**`) and mark matching paths as `generated`
-- [ ] T006 Add `typecheck:scripts` script in `package.json` that runs `tsc --noEmit -p scripts/tsconfig.json` (may fail until conversions land; keep wired)
+- [x] T004 Produce baseline inventory table in `specs/001-typescript-only-migration/inventory.md` listing every `*.{js,mjs,cjs}` under `apps/`, `packages/`, `scripts/` with classification enum values from `data-model.md` (`in_scope_js` | `typed_replacement` | `generated` | `documented_exception` | `removed`)
+- [x] T005 Document generated exclude globs in `specs/001-typescript-only-migration/inventory.md` (`**/node_modules/**`, `**/dist/**`, `**/dev-dist/**`, `**/storybook-static/**`, `**/coverage/**`) and mark matching paths as `generated`
+- [x] T006 Add `typecheck:scripts` script in `package.json` that runs `tsc --noEmit -p scripts/tsconfig.json` (may fail until conversions land; keep wired)
 
 **Checkpoint**: Inventory + exceptions register + scripts tsconfig ready — conversion can begin
 
@@ -54,13 +54,13 @@ Validation uses inventory checks, workspace quality gates, generator runs, and s
 
 ### Implementation for User Story 1
 
-- [ ] T007 [P] [US1] Convert `scripts/generate-base-ui-components.mjs` → `scripts/generate-base-ui-components.ts` (arrow functions, bottom exports, no `any` / `@ts-ignore` / `@ts-expect-error`)
-- [ ] T008 [P] [US1] Convert `scripts/generate-storybook-stories.mjs` → `scripts/generate-storybook-stories.ts` (arrow functions, bottom exports, no silencers)
-- [ ] T009 [US1] Decide convert-or-remove for `scripts/migrate-component-structure.mjs`: if unused (no `package.json` / docs references), delete it; otherwise convert to `scripts/migrate-component-structure.ts` with the same strict rules
-- [ ] T010 [US1] Update `package.json` scripts `generate:components` and `generate:stories` to run via `tsx` against the new `.ts` paths; update any other references to the old `.mjs` paths
-- [ ] T011 [US1] Delete converted/obsolete `.mjs` files under `scripts/` (`generate-base-ui-components.mjs`, `generate-storybook-stories.mjs`, and `migrate-component-structure.mjs` if removed/converted)
-- [ ] T012 [US1] Re-scan `apps/`, `packages/`, `scripts/` for remaining in-scope `*.{js,mjs,cjs}` (excluding generated globs); convert or remove any newly found maintainable files and update `specs/001-typescript-only-migration/inventory.md` so `in_scope_js` count is 0
-- [ ] T013 [US1] Update `specs/001-typescript-only-migration/inventory.md` rows to `typed_replacement` or `removed` for all former in-scope JS items
+- [x] T007 [P] [US1] Convert `scripts/generate-base-ui-components.mjs` → `scripts/generate-base-ui-components.ts` (arrow functions, bottom exports, no `any` / `@ts-ignore` / `@ts-expect-error`)
+- [x] T008 [P] [US1] Convert `scripts/generate-storybook-stories.mjs` → `scripts/generate-storybook-stories.ts` (arrow functions, bottom exports, no silencers)
+- [x] T009 [US1] Decide convert-or-remove for `scripts/migrate-component-structure.mjs`: if unused (no `package.json` / docs references), delete it; otherwise convert to `scripts/migrate-component-structure.ts` with the same strict rules
+- [x] T010 [US1] Update `package.json` scripts `generate:components` and `generate:stories` to run via `tsx` against the new `.ts` paths; update any other references to the old `.mjs` paths
+- [x] T011 [US1] Delete converted/obsolete `.mjs` files under `scripts/` (`generate-base-ui-components.mjs`, `generate-storybook-stories.mjs`, and `migrate-component-structure.mjs` if removed/converted)
+- [x] T012 [US1] Re-scan `apps/`, `packages/`, `scripts/` for remaining in-scope `*.{js,mjs,cjs}` (excluding generated globs); convert or remove any newly found maintainable files and update `specs/001-typescript-only-migration/inventory.md` so `in_scope_js` count is 0
+- [x] T013 [US1] Update `specs/001-typescript-only-migration/inventory.md` rows to `typed_replacement` or `removed` for all former in-scope JS items
 
 **Checkpoint**: In-scope maintainable JS count is 0; typed script replacements exist
 
@@ -74,11 +74,11 @@ Validation uses inventory checks, workspace quality gates, generator runs, and s
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] Make `pnpm typecheck:scripts` pass for all files under `scripts/*.ts` using `scripts/tsconfig.json` with no silencers
-- [ ] T015 [US2] Extend root `typecheck` in `package.json` to also run `typecheck:scripts` (or document equivalent combined gate) so scripts are covered by the standard check
-- [ ] T016 [US2] Run `pnpm exec prettier --write` on touched files under `scripts/` and `specs/001-typescript-only-migration/`, then ensure `pnpm format:check` passes for those paths
-- [ ] T017 [US2] Run `pnpm lint` and fix any migration-caused lint errors in touched files (keep constitution arrow-function / unused-import rules)
-- [ ] T018 [US2] Run `pnpm typecheck`, `pnpm test`, and `pnpm build`; fix migration-caused failures until all pass
+- [x] T014 [US2] Make `pnpm typecheck:scripts` pass for all files under `scripts/*.ts` using `scripts/tsconfig.json` with no silencers
+- [x] T015 [US2] Extend root `typecheck` in `package.json` to also run `typecheck:scripts` (or document equivalent combined gate) so scripts are covered by the standard check
+- [x] T016 [US2] Run `pnpm exec prettier --write` on touched files under `scripts/` and `specs/001-typescript-only-migration/`, then ensure `pnpm format:check` passes for those paths
+- [x] T017 [US2] Run `pnpm lint` and fix any migration-caused lint errors in touched files (keep constitution arrow-function / unused-import rules)
+- [x] T018 [US2] Run `pnpm typecheck`, `pnpm test`, and `pnpm build`; fix migration-caused failures until all pass
 
 **Checkpoint**: Workspace health gates green after migration
 
@@ -92,10 +92,10 @@ Validation uses inventory checks, workspace quality gates, generator runs, and s
 
 ### Implementation for User Story 3
 
-- [ ] T019 [US3] Run `pnpm generate:components` and confirm generators complete without error and do not recreate in-scope `.mjs` under `scripts/`
-- [ ] T020 [US3] Run `pnpm generate:stories` and confirm Storybook story generation completes without error
-- [ ] T021 [P] [US3] Smoke primary flows via `pnpm dev:application-pwa` (or preview) and record pass/fail notes in `specs/001-typescript-only-migration/smoke-notes.md`
-- [ ] T022 [P] [US3] Smoke primary flows via `pnpm dev:website` (or preview) and append pass/fail notes in `specs/001-typescript-only-migration/smoke-notes.md`
+- [x] T019 [US3] Run `pnpm generate:components` and confirm generators complete without error and do not recreate in-scope `.mjs` under `scripts/`
+- [x] T020 [US3] Run `pnpm generate:stories` and confirm Storybook story generation completes without error
+- [x] T021 [P] [US3] Smoke primary flows via `pnpm dev:application-pwa` (or preview) and record pass/fail notes in `specs/001-typescript-only-migration/smoke-notes.md`
+- [x] T022 [P] [US3] Smoke primary flows via `pnpm dev:website` (or preview) and append pass/fail notes in `specs/001-typescript-only-migration/smoke-notes.md`
 
 **Checkpoint**: Generators + primary apps show no migration regressions
 
@@ -109,11 +109,11 @@ Validation uses inventory checks, workspace quality gates, generator runs, and s
 
 ### Implementation for User Story 4
 
-- [ ] T023 [US4] Implement `scripts/check-no-js-source.ts` per `specs/001-typescript-only-migration/contracts/no-js-source-gate.md` (scan `apps/`, `packages/`, `scripts/`; exclude generated globs; exit non-zero listing offenders)
-- [ ] T024 [US4] Add `check:no-js` script to `package.json` that runs `tsx scripts/check-no-js-source.ts`
-- [ ] T025 [US4] Wire `pnpm check:no-js` into CI (existing GitHub Actions / Nx Cloud workflow under `.github/workflows/` or project CI config) so PRs fail on in-scope JS
-- [ ] T026 [US4] Update `AGENTS.md` (and `.cursor/rules/` only if needed for consistency) to state new in-scope JavaScript under `apps/`, `packages/`, `scripts/` is disallowed and enforced by `pnpm check:no-js`
-- [ ] T027 [US4] Verify gate: temporarily add `scripts/probe-temp.js`, confirm `pnpm check:no-js` fails, delete the probe, confirm it passes
+- [x] T023 [US4] Implement `scripts/check-no-js-source.ts` per `specs/001-typescript-only-migration/contracts/no-js-source-gate.md` (scan `apps/`, `packages/`, `scripts/`; exclude generated globs; exit non-zero listing offenders)
+- [x] T024 [US4] Add `check:no-js` script to `package.json` that runs `tsx scripts/check-no-js-source.ts`
+- [x] T025 [US4] Wire `pnpm check:no-js` into CI (existing GitHub Actions / Nx Cloud workflow under `.github/workflows/` or project CI config) so PRs fail on in-scope JS
+- [x] T026 [US4] Update `AGENTS.md` (and `.cursor/rules/` only if needed for consistency) to state new in-scope JavaScript under `apps/`, `packages/`, `scripts/` is disallowed and enforced by `pnpm check:no-js`
+- [x] T027 [US4] Verify gate: temporarily add `scripts/probe-temp.js`, confirm `pnpm check:no-js` fails, delete the probe, confirm it passes
 
 **Checkpoint**: Policy + automated prevention gate verified
 
@@ -123,10 +123,10 @@ Validation uses inventory checks, workspace quality gates, generator runs, and s
 
 **Purpose**: Final documentation alignment and end-to-end quickstart validation
 
-- [ ] T028 [P] Ensure `specs/001-typescript-only-migration/exceptions.md` matches final deferred paths and reasons
-- [ ] T029 [P] Sync any stale `.mjs` path mentions in `README.md` / `AGENTS.md` / package docs to `.ts` entrypoints
-- [ ] T030 Run full validation from `specs/001-typescript-only-migration/quickstart.md` (inventory zero-count, exceptions, quality gates, generators, smoke, prevention probe) and note results in `specs/001-typescript-only-migration/smoke-notes.md`
-- [ ] T031 Mark feature checklist readiness: confirm `specs/001-typescript-only-migration/checklists/requirements.md` still reflects the clarified/planned scope
+- [x] T028 [P] Ensure `specs/001-typescript-only-migration/exceptions.md` matches final deferred paths and reasons
+- [x] T029 [P] Sync any stale `.mjs` path mentions in `README.md` / `AGENTS.md` / package docs to `.ts` entrypoints
+- [x] T030 Run full validation from `specs/001-typescript-only-migration/quickstart.md` (inventory zero-count, exceptions, quality gates, generators, smoke, prevention probe) and note results in `specs/001-typescript-only-migration/smoke-notes.md`
+- [x] T031 Mark feature checklist readiness: confirm `specs/001-typescript-only-migration/checklists/requirements.md` still reflects the clarified/planned scope
 
 ---
 

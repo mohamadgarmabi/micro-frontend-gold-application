@@ -44,17 +44,17 @@ packages source already TypeScript
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Gate | Status | Notes |
-|------|--------|-------|
-| I. TypeScript-Only Source | PASS (design) | Plan converts in-scope JS; documents config/skill exceptions per clarified scope |
-| II. UI in Views, Logic in Hooks | PASS | No UI feature work; generators must not emit non-compliant component logic |
-| III. Arrow Functions and Bottom Exports | PASS | Converted scripts/modules must follow these rules |
-| IV. Structured Folders | PASS | No new package layout; keep existing module/component patterns |
-| V. Simplicity and Type Safety Gates | PASS | No silencers; pass prettier/eslint/tsc |
-| Quality gates before merge | PASS | plan requires format, lint, typecheck, build/test as applicable |
-| Commit message format | PASS | Implementation commits use `type(scope): description` |
+| Gate                                    | Status        | Notes                                                                            |
+| --------------------------------------- | ------------- | -------------------------------------------------------------------------------- |
+| I. TypeScript-Only Source               | PASS (design) | Plan converts in-scope JS; documents config/skill exceptions per clarified scope |
+| II. UI in Views, Logic in Hooks         | PASS          | No UI feature work; generators must not emit non-compliant component logic       |
+| III. Arrow Functions and Bottom Exports | PASS          | Converted scripts/modules must follow these rules                                |
+| IV. Structured Folders                  | PASS          | No new package layout; keep existing module/component patterns                   |
+| V. Simplicity and Type Safety Gates     | PASS          | No silencers; pass prettier/eslint/tsc                                           |
+| Quality gates before merge              | PASS          | plan requires format, lint, typecheck, build/test as applicable                  |
+| Commit message format                   | PASS          | Implementation commits use `type(scope): description`                            |
 
 **Post-design re-check**: PASS — artifacts stay documentation + script conversion;
 prevention gate is a small ESLint/CI check (simplest enforceable approach).

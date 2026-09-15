@@ -1,3 +1,5 @@
+type ManifestEntry = { slug: string; name: string; file?: string }
+
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -7,15 +9,17 @@ const root = path.resolve(__dirname, '..')
 const manifestPath = path.join(root, 'packages/shared-components/src/component-manifest.ts')
 const storiesDir = path.join(root, 'apps/storybook/src/stories')
 
-const manifest = JSON.parse(
-  fs
-    .readFileSync(manifestPath, 'utf8')
-    .match(/const componentManifest = (\[[\s\S]*?\])\s+as const/)[1],
-)
+const manifestMatch = fs
+  .readFileSync(manifestPath, 'utf8')
+  .match(/const componentManifest = (\[[\s\S]*?\])\s+as const/)
+if (!manifestMatch?.[1]) {
+  throw new Error('Unable to parse componentManifest from component-manifest.ts')
+}
+const manifest = JSON.parse(manifestMatch[1]) as ManifestEntry[]
 
 const SKIP = new Set(['Button', 'Input', 'Checkbox', 'Switch', 'Tabs', 'Dialog'])
 
-const STORY_BODY = {
+const STORY_BODY: Record<string, string> = {
   badge: `export const Default: Story = { args: { children: 'Gold', variant: 'brand' } };
 export const Success: Story = { args: { children: 'Verified', variant: 'success' } };`,
 
@@ -500,7 +504,7 @@ export const Default: Story = {
 };`,
 }
 
-const EXTRA_IMPORTS = {
+const EXTRA_IMPORTS: Record<string, string> = {
   sonner: `import Button from '@gold/shared-components/button';`,
   toast: `import Button from '@gold/shared-components/button';`,
   'checkbox-group': `import Checkbox from '@gold/shared-components/checkbox';`,
@@ -512,7 +516,7 @@ import Field from '@gold/shared-components/field';`,
   menubar: `import Menu from '@gold/shared-components/menu';`,
 }
 
-function storyFile({ slug, name }) {
+const storyFile = ({ slug, name }: ManifestEntry) => {
   const extraImport = EXTRA_IMPORTS[slug] ?? ''
   const importLine =
     slug === 'sonner'

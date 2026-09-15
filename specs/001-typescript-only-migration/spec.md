@@ -16,7 +16,7 @@
 - Q: For this feature to be done, how must the team stop new JavaScript from being added under in-scope paths? → A: Policy plus automated check — lint/CI must fail on new in-scope JavaScript source.
 - Q: After converting in-scope JavaScript to typed source, what typing quality is required for this feature to be done? → A: Strict — converted code must pass existing strict typecheck; no silenced typing for migration.
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Maintainers work only in typed source (Priority: P1)
 
@@ -85,7 +85,7 @@ As a maintainer, I am blocked from merging new in-scope JavaScript source by bot
 - Empty or unused JavaScript files under in-scope paths must be removed rather than converted if they provide no required behavior.
 - Partial migration of an in-scope package/app/script area is not acceptable for “done”: each in-scope area must reach zero remaining maintainable JavaScript source.
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -106,7 +106,7 @@ As a maintainer, I am blocked from merging new in-scope JavaScript source by bot
 - **Documented exception**: A path allowed to remain non-typed, with owner-visible reason and review expectation.
 - **Quality gate result**: Pass/fail outcome of format, lint, typecheck, build, and configured tests for affected projects.
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 

@@ -243,13 +243,19 @@ Code is not done until it is formatted and type-safe.
 pnpm exec prettier --write <files>
 pnpm exec eslint --fix <files>
 pnpm typecheck
+pnpm check:no-js
 ```
 
-| Check      | Command                             | Bar                                              |
-| ---------- | ----------------------------------- | ------------------------------------------------ |
-| Prettier   | `pnpm format` / `pnpm format:check` | `.prettierrc`                                    |
-| ESLint     | `pnpm lint`                         | `eslint.config.mjs` — errors are blockers        |
-| TypeScript | `pnpm typecheck`                    | `strict`, unused locals/params — no `tsc` errors |
+Root scripts: `pnpm lint`, `pnpm format`, `pnpm format:check`, `pnpm typecheck`, `pnpm check:no-js`.
+
+Maintainable source under `apps/`, `packages/`, and root `scripts/` MUST be TypeScript (`.ts` / `.tsx`). New `.js` / `.mjs` / `.cjs` under those roots is disallowed (generated trees like `dist/`, `dev-dist/`, `storybook-static/` are exempt). Enforcement: `pnpm check:no-js` (also in the pre-commit hook). Workspace configs such as `eslint.config.mjs` remain documented exceptions for now.
+
+| Check      | Command                                    | Bar                                                                     |
+| ---------- | ------------------------------------------ | ----------------------------------------------------------------------- |
+| Prettier   | `pnpm format` / `pnpm format:check`        | `.prettierrc`                                                           |
+| ESLint     | `pnpm lint`                                | `eslint.config.mjs` — errors are blockers                               |
+| TypeScript | `pnpm typecheck`                           | `strict`, unused locals/params — no `tsc` errors                        |
+| No JS      | `pnpm check:no-js`                         | zero in-scope `.js` / `.mjs` / `.cjs` source                            |
 | Unused     | ESLint `@typescript-eslint/no-unused-vars` | Unused imports and variables are errors; prefix with `_` if intentional |
 
 Do not use `@ts-ignore`, `@ts-expect-error`, or `any` to hide errors. If Prettier and ESLint conflict, Prettier wins. `function` declarations are lint errors — use `const name = () => {}`.
