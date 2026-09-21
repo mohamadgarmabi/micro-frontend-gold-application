@@ -1,10 +1,10 @@
 {
   "latestErrorEvent": {
     "code": "TYPE-001",
-    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"/usr/local/bin/node /Users/m.garmabi/Documents/me/micro-frontend-gold-application/node_modules/.pnpm/@typescript+typescript6@6.0.2/node_modules/@typescript/typescript6/bin/tsc --project /Users/m.garmabi/Documents/me/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.dcbfcbc65d1f616e647bf26913d1d019.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"/usr/local/bin/node /Users/m.garmabi/Documents/me/micro-frontend-gold-application/node_modules/.pnpm/@typescript+typescript6@6.0.2/node_modules/@typescript/typescript6/bin/tsc --project /Users/m.garmabi/Documents/me/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.ff96a74372eb71cccb0858fdb96110c3.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
     "args": {
-      "cmd": "/usr/local/bin/node /Users/m.garmabi/Documents/me/micro-frontend-gold-application/node_modules/.pnpm/@typescript+typescript6@6.0.2/node_modules/@typescript/typescript6/bin/tsc --project /Users/m.garmabi/Documents/me/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.dcbfcbc65d1f616e647bf26913d1d019.json"
+      "cmd": "/usr/local/bin/node /Users/m.garmabi/Documents/me/micro-frontend-gold-application/node_modules/.pnpm/@typescript+typescript6@6.0.2/node_modules/@typescript/typescript6/bin/tsc --project /Users/m.garmabi/Documents/me/micro-frontend-gold-application/packages/shared-components/node_modules/.federation/tsconfig.ff96a74372eb71cccb0858fdb96110c3.json"
     },
-    "timestamp": 1789982364462
+    "timestamp": 1789983015586
   }
 }

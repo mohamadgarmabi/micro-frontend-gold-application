@@ -1,12 +1,22 @@
-import { createContext, useContext, type ReactNode } from 'react'
-import { InputOTP } from '@heroui/react/input-otp'
-import { useOTPField } from './otp-field.hook'
-import type { OTPFieldInputProps, OTPFieldProps } from './otp-field.type'
+import { createContext, useContext, type ReactNode } from "react"
+import { InputOTP } from "@heroui/react/input-otp"
+import { useOTPField } from "./otp-field.hook"
+import type { OTPFieldInputProps, OTPFieldProps } from "./otp-field.type"
 
 const OTPFieldSlotIndexContext = createContext<(() => number) | null>(null)
 
 const OTPFieldRoot = (props: OTPFieldProps) => {
-  const { length, maxLength, className, children, ...rest } = props
+  const {
+    length,
+    maxLength,
+    className,
+    children,
+    value: _value,
+    defaultValue: _defaultValue,
+    onValueChange: _onValueChange,
+    validationType: _validationType,
+    ...rest
+  } = props
   const normalized = useOTPField(props)
   const slotLength = length ?? maxLength ?? 6
   let slotIndex = 0
@@ -17,6 +27,7 @@ const OTPFieldRoot = (props: OTPFieldProps) => {
       maxLength={slotLength}
       value={normalized.value}
       onChange={normalized.onValueChange}
+      inputMode={normalized.inputMode}
       className={className}
       {...rest}
     >

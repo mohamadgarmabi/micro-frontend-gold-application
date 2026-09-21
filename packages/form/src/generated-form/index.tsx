@@ -1,22 +1,22 @@
-import Button from '@gold/shared-components/button'
-import Checkbox from '@gold/shared-components/checkbox'
-import Input from '@gold/shared-components/input'
-import type { InputSize } from '@gold/shared-components/input'
-import type { FormFieldDefinition, FormFieldValue, FormSchema, InferFormValues } from '../types'
-import type { GeneratedFormProps } from './generated-form.type'
-import { useGeneratedForm } from './generated-form.hook'
-import { generatedFormFooterStyles, generatedFormStyles } from './generated-form.styles'
+import Button from "@gold/shared-components/button"
+import Checkbox from "@gold/shared-components/checkbox"
+import Input from "@gold/shared-components/input"
+import type { InputSize } from "@gold/shared-components/input"
+import type { FormFieldDefinition, FormFieldValue, FormSchema, InferFormValues } from "../types"
+import type { GeneratedFormProps } from "./generated-form.type"
+import { useGeneratedForm } from "./generated-form.hook"
+import { generatedFormFooterStyles, generatedFormStyles } from "./generated-form.styles"
 
-const renderField = <TName extends string, TType extends FormFieldDefinition<TName>['type']>(
+const renderField = <TName extends string, TType extends FormFieldDefinition<TName>["type"]>(
   field: FormFieldDefinition<TName, TType>,
   value: FormFieldValue<TType>,
   onChange: (next: FormFieldValue<TType>) => void,
   error: string | undefined,
   inputSize: InputSize,
 ) => {
-  if (field.type === 'checkbox') {
+  if (field.type === "checkbox") {
     return (
-      <label className="flex items-center gap-2 text-sm text-foreground-muted">
+      <label className="text-foreground-muted flex items-center gap-2 text-sm">
         <Checkbox
           checked={Boolean(value)}
           onCheckedChange={(checked) => onChange(Boolean(checked) as FormFieldValue<TType>)}
@@ -28,12 +28,12 @@ const renderField = <TName extends string, TType extends FormFieldDefinition<TNa
 
   return (
     <label className="flex flex-col gap-1.5">
-      <span className="text-sm font-medium text-foreground">{field.label}</span>
+      <span className="text-foreground text-sm font-medium">{field.label}</span>
       <Input
         name={field.name}
         type={field.type}
         placeholder={field.placeholder}
-        value={String(value ?? '')}
+        value={String(value ?? "")}
         onValueChange={(next) => onChange(next as FormFieldValue<TType>)}
         leftIcon={field.leftIcon}
         rightIcon={field.rightIcon}
@@ -47,7 +47,8 @@ const renderField = <TName extends string, TType extends FormFieldDefinition<TNa
 
 const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
   const { fields, className } = props
-  const { form, handleFormSubmit, cancelButton, submitButton, inputSize } = useGeneratedForm(props)
+  const { form, handleFormSubmit, cancelButton, submitButton, inputSize, createRequiredValidator } =
+    useGeneratedForm(props)
 
   return (
     <form className={className ?? generatedFormStyles()} onSubmit={handleFormSubmit}>
@@ -56,13 +57,7 @@ const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
           key={field.name}
           name={field.name as keyof InferFormValues<T> & string}
           validators={{
-            onChange: ({ value }) => {
-              if (!field.required) return undefined
-              if (field.type === 'checkbox') {
-                return value ? undefined : `${field.label} is required`
-              }
-              return String(value ?? '').trim() ? undefined : `${field.label} is required`
-            },
+            onChange: createRequiredValidator(field),
           }}
         >
           {(fieldApi) =>
@@ -88,4 +83,9 @@ const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
 }
 
 export default GeneratedForm
-export type { GeneratedFormProps, GeneratedFormSizes, FooterButtons } from './generated-form.type'
+export type {
+  GeneratedFormProps,
+  GeneratedFormSizes,
+  FooterButtons,
+  FormatRequiredError,
+} from "./generated-form.type"

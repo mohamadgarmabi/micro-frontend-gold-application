@@ -1,8 +1,8 @@
-import { Input as HeroInput } from '@heroui/react/input'
-import { cn, mergeClassName } from '../../lib/cn'
-import { useInput } from './input.hook'
-import { inputStyles } from './input.styles'
-import type { InputProps } from './input.type'
+import { Input as HeroInput } from "@heroui/react/input"
+import { cn, mergeClassName } from "../../lib/cn"
+import { useInput } from "./input.hook"
+import { inputStyles } from "./input.styles"
+import type { InputProps } from "./input.type"
 
 const Input = (props: InputProps) => {
   const {
@@ -11,7 +11,9 @@ const Input = (props: InputProps) => {
     rightIcon,
     error = false,
     errorMessage,
-    size = 'md',
+    size = "md",
+    revealable: _revealable,
+    onValueChange: _onValueChange,
     ...rest
   } = props
   const {
@@ -45,6 +47,7 @@ const Input = (props: InputProps) => {
           value={value}
           defaultValue={defaultValue}
           onChange={onChange}
+          suppressHydrationWarning
           className={mergeClassName(
             cn(
               inputStyles.base({ size }),
@@ -87,4 +90,4 @@ const Input = (props: InputProps) => {
 }
 
 export default Input
-export type { InputProps, InputSize } from './input.type'
+export type { InputProps, InputSize } from "./input.type"

@@ -34,7 +34,10 @@ const RootDocument = ({ children }: { children: React.ReactNode }) => {
       </head>
       <body className="bg-background selection:bg-accent/20 text-foreground gold-root gold-app-chrome font-sans [overflow-wrap:anywhere] antialiased">
         <div suppressHydrationWarning dangerouslySetInnerHTML={{ __html: splashMarkup }} />
-        <script dangerouslySetInnerHTML={{ __html: splashRuntimeScript }} />
+        <script
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: splashRuntimeScript }}
+        />
         {children}
         <AppProviders />
         <PwaInstallPrompt />

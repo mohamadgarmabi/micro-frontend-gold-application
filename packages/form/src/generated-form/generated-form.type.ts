@@ -1,6 +1,6 @@
-import type { ButtonProps } from '@gold/shared-components/button'
-import type { InputSize } from '@gold/shared-components/input'
-import type { FormFieldDefinition, FormFieldValue, FormSchema, InferFormValues } from '../types'
+import type { ButtonProps } from "@gold/shared-components/button"
+import type { InputSize } from "@gold/shared-components/input"
+import type { FormFieldDefinition, FormFieldValue, FormSchema, InferFormValues } from "../types"
 
 type FooterButtons = {
   cancel?: ButtonProps
@@ -9,8 +9,10 @@ type FooterButtons = {
 
 type GeneratedFormSizes = {
   input?: InputSize
-  button?: ButtonProps['size']
+  button?: ButtonProps["size"]
 }
+
+type FormatRequiredError = (label: string) => string
 
 type GeneratedFormProps<T extends FormSchema> = {
   fields: T
@@ -18,6 +20,7 @@ type GeneratedFormProps<T extends FormSchema> = {
   footerButtons?: FooterButtons
   className?: string
   sizes?: GeneratedFormSizes
+  formatRequiredError?: FormatRequiredError
   onSubmit: (values: InferFormValues<T>) => void | Promise<void>
 }
 
@@ -25,6 +28,7 @@ export type {
   GeneratedFormProps,
   GeneratedFormSizes,
   FooterButtons,
+  FormatRequiredError,
   FormFieldDefinition,
   FormFieldValue,
 }

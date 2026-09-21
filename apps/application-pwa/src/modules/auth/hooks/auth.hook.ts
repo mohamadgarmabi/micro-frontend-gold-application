@@ -1,19 +1,19 @@
-import { toast } from '@gold/shared-components/sonner'
-import { useSelector } from '@tanstack/react-store'
-import { useNavigate, useRouter, useSearch } from '@tanstack/react-router'
+import { toast } from "@gold/shared-components/sonner"
+import { useSelector } from "@tanstack/react-store"
+import { useNavigate, useRouter, useSearch } from "@tanstack/react-router"
 import {
   LockIcon,
   MailIcon,
   buildDefaultValues,
   defineFormSchema,
   type FooterButtons,
-} from '@gold/form'
-import { createElement } from 'react'
-import { DEMO_OTP_CODE } from '#/config/security.constants'
-import { useI18n } from '#/modules/shell/hooks/i18n.hook'
-import { authStore } from '../stores/auth.store'
-import { securityStore } from '../stores/security.store'
-import { useWebAuthn } from './webauthn.hook'
+} from "@gold/form"
+import { createElement } from "react"
+import { DEMO_OTP_CODE } from "#/config/security.constants"
+import { useI18n } from "#/modules/shell/hooks/i18n.hook"
+import { authStore } from "../stores/auth.store"
+import { securityStore } from "../stores/security.store"
+import { useWebAuthn } from "./webauthn.hook"
 
 const useAuth = () => {
   const router = useRouter()
@@ -40,7 +40,7 @@ const useAuth = () => {
 
   const continueAfterAuth = (redirectTo: string) => {
     if (securityStore.state.pinHash) {
-      void router.navigate({ to: '/pin', search: { redirect: redirectTo } })
+      void router.navigate({ to: "/pin", search: { redirect: redirectTo } })
       return
     }
 
@@ -60,7 +60,7 @@ const useLogin = () => {
   const navigate = useNavigate()
   const { login, continueAfterAuth } = useAuth()
   const { t } = useI18n()
-  const { redirect } = useSearch({ from: '/(auth)/login' })
+  const { redirect } = useSearch({ from: "/(auth)/login" })
   const twoFactorEnabled = useSelector(securityStore, (state) => state.twoFactorEnabled)
   const {
     isSupported,
@@ -77,13 +77,13 @@ const useLogin = () => {
 
   const handlePasswordSignIn = () => {
     if (twoFactorEnabled) {
-      toast.success(t('auth.otpSentDemo', { code: DEMO_OTP_CODE }))
-      navigate({ to: '/otp', search: { redirect } })
+      toast.success(t("auth.otpSentDemo", { code: DEMO_OTP_CODE }))
+      navigate({ to: "/otp", search: { redirect } })
       return
     }
 
     login(`aurum-demo-token-${Date.now()}`)
-    toast.success(t('auth.loginSuccess'))
+    toast.success(t("auth.loginSuccess"))
     continueAfterAuth(redirect)
   }
 
@@ -91,7 +91,7 @@ const useLogin = () => {
     void signIn()
       .then((session) => {
         login(session.token)
-        toast.success(t('auth.webauthnSuccess'))
+        toast.success(t("auth.webauthnSuccess"))
         continueAfterAuth(redirect)
       })
       .catch(showCancelledOrFailed)
@@ -99,30 +99,32 @@ const useLogin = () => {
 
   const passwordSchema = defineFormSchema([
     {
-      name: 'email',
-      type: 'email',
-      label: t('auth.email'),
-      placeholder: 'you@example.com',
+      name: "email",
+      type: "email",
+      label: t("auth.email"),
+      placeholder: "you@example.com",
       required: true,
       leftIcon: createElement(MailIcon),
     },
     {
-      name: 'password',
-      type: 'password',
-      label: t('auth.password'),
-      placeholder: '••••••••',
+      name: "password",
+      type: "password",
+      label: t("auth.password"),
+      placeholder: "••••••••",
       required: true,
       leftIcon: createElement(LockIcon),
     },
   ] as const)
 
-  const trustBadges = [t('auth.ssl'), t('auth.fdic'), t('auth.licensed')]
+  const trustBadges = [t("auth.ssl"), t("auth.fdic"), t("auth.licensed")]
 
   const footerButtons: FooterButtons = {
     submit: {
-      children: t('auth.signInPassword'),
+      children: t("auth.signInPassword"),
     },
   }
+
+  const formatRequiredError = (label: string) => t("validation.required", { label })
 
   return {
     t,
@@ -131,13 +133,14 @@ const useLogin = () => {
     passwordDefaults: buildDefaultValues(passwordSchema),
     trustBadges,
     footerButtons,
+    formatRequiredError,
     showWebAuthn,
     webAuthnBusy,
     scanClassName,
     scanIcon,
     scanTitle,
     scanHint,
-    orPasswordLabel: t('auth.orPassword'),
+    orPasswordLabel: t("auth.orPassword"),
     handleWebAuthnLogin,
   }
 }
