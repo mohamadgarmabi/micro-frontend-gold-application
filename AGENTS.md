@@ -282,7 +282,7 @@ Husky `commit-msg` runs commitlint and rejects anything else.
 
 Existing flat files have been migrated to the folder pattern in `shared-components` and `form`.
 
-`design-system` is CSS-only today (tokens and Base UI styles). When React components are added, use the same folder pattern.
+`design-system` is CSS-only today (tokens and global styles). When React components are added, use the same folder pattern.
 
 TanStack apps use the module folder pattern. Export conventions and arrow functions apply to all packages and apps.
 

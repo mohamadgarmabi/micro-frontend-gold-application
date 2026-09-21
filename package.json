@@ -4,7 +4,6 @@
   "license": "MIT",
   "scripts": {
     "stop": "for port in 4200 4300 4400 5100; do lsof -ti tcp:$port | xargs kill -9 2>/dev/null; done || true",
-    "generate:components": "tsx scripts/generate-base-ui-components.ts",
     "check:no-js": "tsx scripts/check-no-js-source.ts",
     "typecheck:scripts": "tsc --noEmit -p scripts/tsconfig.json",
     "predev:react": "pnpm stop",

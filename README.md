@@ -1,13 +1,13 @@
 # Gold
 
-Nx monorepo with **Tailwind CSS v4 design tokens**, **Base UI** shared components, and sample **React** + **Vue** apps.
+Nx monorepo with **Tailwind CSS v4 design tokens**, **HeroUI** shared components, and sample **React** + **Vue** apps.
 
 ## Structure
 
 ```
 packages/
-  design-system/       # Tailwind v4 tokens + Base UI global CSS
-  shared-components/   # 38 Base UI components — Module Federation provider
+  design-system/       # Tailwind v4 tokens + global CSS
+  shared-components/   # Shared UI components — Module Federation provider
 apps/
   website/             # Vue consumer (loads React remotes)
 ```
@@ -16,20 +16,8 @@ apps/
 
 | Package | Description |
 |---------|-------------|
-| `@gold/design-system` | Gold tokens, Base UI portal setup, component utilities |
-| `@gold/shared-components` | Styled `@base-ui/react` components (MF remote, port **5100**) |
-
-## Base UI components (38)
-
-All exposed via Module Federation as `shared_components/<Name>`:
-
-Accordion, AlertDialog, Autocomplete, Avatar, Button, Checkbox, CheckboxGroup, Collapsible, Combobox, ContextMenu, Dialog, Drawer, Field, Fieldset, Form, Input, Menu, Menubar, Meter, NavigationMenu, NumberField, OTPField, Popover, PreviewCard, Progress, Radio, RadioGroup, ScrollArea, Select, Separator, Slider, Switch, Tabs, Toast, Toggle, ToggleGroup, Toolbar, Tooltip
-
-Regenerate wrappers after Base UI updates:
-
-```bash
-pnpm generate:components
-```
+| `@gold/design-system` | Gold tokens, portal setup, component utilities |
+| `@gold/shared-components` | Styled UI components (MF remote, port **5100**) |
 
 ## Getting started
 
