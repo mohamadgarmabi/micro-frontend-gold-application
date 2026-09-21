@@ -54,3 +54,4 @@ vitest.config.*.timestamp*
 .opencode
 
 pnpm-store/
+./pnpm-store
