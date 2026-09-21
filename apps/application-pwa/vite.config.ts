@@ -1,26 +1,23 @@
-import { defineConfig, loadEnv } from 'vite'
-import { devtools } from '@tanstack/devtools-vite'
-import { tanstackStart } from '@tanstack/react-start/plugin/vite'
-import viteReact from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import { VitePWA } from 'vite-plugin-pwa'
+import { defineConfig, loadEnv } from "vite"
+import { devtools } from "@tanstack/devtools-vite"
+import { tanstackStart } from "@tanstack/react-start/plugin/vite"
+import viteReact from "@vitejs/plugin-react"
+import tailwindcss from "@tailwindcss/vite"
+import { VitePWA } from "vite-plugin-pwa"
+import { createSplashPlugins } from "./splash.config"
 
 const PORT = 4400
-const DEFAULT_API_URL = 'https://jsonplaceholder.typicode.com'
+const DEFAULT_API_URL = "https://jsonplaceholder.typicode.com"
 
-const workspacePackages = [
-  '@gold/apis',
-  '@gold/form',
-  '@gold/shared-components',
-]
+const workspacePackages = ["@gold/apis", "@gold/form", "@gold/shared-components"]
 
 const toApiUrlPattern = (baseURL: string): RegExp => {
-  const escaped = baseURL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  return new RegExp(`^${escaped}/.*`, 'i')
+  const escaped = baseURL.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  return new RegExp(`^${escaped}/.*`, "i")
 }
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, import.meta.dirname, '')
+  const env = loadEnv(mode, import.meta.dirname, "")
   const apiBaseURL = env.VITE_APP_API_URL || DEFAULT_API_URL
 
   return {
@@ -48,45 +45,46 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       tanstackStart(),
       viteReact({ compiler: true }),
+      ...createSplashPlugins(),
       VitePWA({
-        registerType: 'prompt',
-        injectRegister: 'auto',
-        includeAssets: ['icon.svg', 'robots.txt'],
+        registerType: "prompt",
+        injectRegister: "auto",
+        includeAssets: ["icon.svg", "robots.txt"],
         manifest: {
-          name: 'Ayar — Gold Trading',
-          short_name: 'Ayar',
-          description: 'Gold trading PWA — trade XAU/USD precisely on the go',
-          theme_color: '#141810',
-          background_color: '#141810',
-          display: 'standalone',
-          orientation: 'portrait',
-          scope: '/',
-          start_url: '/',
-          categories: ['productivity', 'utilities'],
+          name: "Ayar — Gold Trading",
+          short_name: "Ayar",
+          description: "Gold trading PWA — trade XAU/USD precisely on the go",
+          theme_color: "#141810",
+          background_color: "#141810",
+          display: "standalone",
+          orientation: "portrait",
+          scope: "/",
+          start_url: "/",
+          categories: ["productivity", "utilities"],
           icons: [
             {
-              src: 'icon.svg',
-              sizes: 'any',
-              type: 'image/svg+xml',
-              purpose: 'any',
+              src: "icon.svg",
+              sizes: "any",
+              type: "image/svg+xml",
+              purpose: "any",
             },
             {
-              src: 'icon.svg',
-              sizes: 'any',
-              type: 'image/svg+xml',
-              purpose: 'maskable',
+              src: "icon.svg",
+              sizes: "any",
+              type: "image/svg+xml",
+              purpose: "maskable",
             },
           ],
         },
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+          globPatterns: ["**/*.{js,css,html,ico,png,svg,woff2}"],
           navigateFallback: null,
           runtimeCaching: [
             {
               urlPattern: toApiUrlPattern(apiBaseURL),
-              handler: 'StaleWhileRevalidate',
+              handler: "StaleWhileRevalidate",
               options: {
-                cacheName: 'api-cache',
+                cacheName: "api-cache",
                 expiration: {
                   maxEntries: 50,
                   maxAgeSeconds: 60 * 60 * 24,
@@ -100,7 +98,7 @@ export default defineConfig(({ mode }) => {
         },
         devOptions: {
           enabled: true,
-          type: 'module',
+          type: "module",
           // dev-dist only contains sw.js + workbox-*.js (both ignored) — no app assets on disk in dev
           suppressWarnings: true,
         },

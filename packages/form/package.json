@@ -33,12 +33,12 @@
   "dependencies": {
     "@gold/design-system": "workspace:*",
     "@gold/shared-components": "workspace:*",
-    "@tanstack/react-form": "^1.19.2",
+    "@tanstack/react-form": "^1.33.5",
     "class-variance-authority": "^0.7.1",
-    "react": "^19.0.0"
+    "react": "^19.3.0"
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
+    "@types/react": "^19.3.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }

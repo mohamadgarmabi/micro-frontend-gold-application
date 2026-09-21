@@ -46,12 +46,12 @@
   },
   "dependencies": {
     "@gold/design-system": "workspace:*",
-    "@heroui/react": "^3.2.4",
+    "@heroui/react": "^3.2.6",
     "@persian-tools/persian-tools": "^4.0.4",
     "class-variance-authority": "^0.7.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "sonner": "^2.0.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "sonner": "^2.0.8",
     "vaul": "^1.1.2"
   },
   "sideEffects": false,
@@ -116,12 +116,12 @@
     "./typography": "./src/components/typography/index.tsx"
   },
   "devDependencies": {
-    "@module-federation/vite": "^1.15.5",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@vitejs/plugin-react": "^6.0.2",
-    "oxc-transform-react": "^0.147.0",
+    "@module-federation/vite": "^1.22.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxc-transform-react": "^0.145.0",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "vite": "^8.0.13"
+    "vite": "^8.3.0"
   }
 }

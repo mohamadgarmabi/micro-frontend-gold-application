@@ -13,5 +13,6 @@ allowBuilds:
 autoInstallPeers: true
 minimumReleaseAgeExclude:
   - tanstack-fetch@1.0.1
+  - vite-plugin-react-splash@1.1.0
 onlyBuiltDependencies:
   - "nx"
