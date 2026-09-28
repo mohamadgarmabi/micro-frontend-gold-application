@@ -1,6 +1,6 @@
-import type { ApiConfig, ResolvedApiConfig } from './types'
+import type { ApiConfig, ResolvedApiConfig } from "./types"
 
-const DEFAULT_BASE_URL = 'https://jsonplaceholder.typicode.com'
+const DEFAULT_BASE_URL = "https://jsonplaceholder.typicode.com"
 const DEFAULT_TIMEOUT = 30_000
 
 let config: ApiConfig = {}
@@ -18,10 +18,7 @@ const getApiConfig = (): ResolvedApiConfig => {
     auth: config.auth,
     getToken: config.getToken,
     mocks: config.mocks,
-    onUnauthorized: config.onUnauthorized,
-    onForbidden: config.onForbidden,
-    onNotFound: config.onNotFound,
-    onServerError: config.onServerError,
+    enableDevtools: config.enableDevtools,
     plugins: config.plugins,
     credentials: config.credentials,
     maxRetries: config.maxRetries,
@@ -31,6 +28,21 @@ const getApiConfig = (): ResolvedApiConfig => {
     throwOnError: config.throwOnError,
     source: config.source,
     incoming: config.incoming,
+    onBadRequest: config.onBadRequest,
+    onUnauthorized: config.onUnauthorized,
+    onForbidden: config.onForbidden,
+    onNotFound: config.onNotFound,
+    onMethodNotAllowed: config.onMethodNotAllowed,
+    onRequestTimeout: config.onRequestTimeout,
+    onConflict: config.onConflict,
+    onGone: config.onGone,
+    onPayloadTooLarge: config.onPayloadTooLarge,
+    onUnsupportedMediaType: config.onUnsupportedMediaType,
+    onUnprocessableEntity: config.onUnprocessableEntity,
+    onTooManyRequests: config.onTooManyRequests,
+    onUnavailableForLegalReasons: config.onUnavailableForLegalReasons,
+    onClientError: config.onClientError,
+    onServerError: config.onServerError,
   }
 }
 

@@ -1,3 +1,3 @@
-import { getMarketOverviewMock, marketOverviewMock } from './market.mock'
+import { getMarketOverviewMock, marketOverviewMock, streamMarketTicksMock } from "./market.mock"
 
-export { getMarketOverviewMock, marketOverviewMock }
+export { getMarketOverviewMock, marketOverviewMock, streamMarketTicksMock }

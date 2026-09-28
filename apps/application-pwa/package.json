@@ -61,7 +61,7 @@
     "@gold/shared-components": "workspace:*",
     "@tailwindcss/vite": "^4.3.3",
     "@tanstack/react-devtools": "latest",
-    "@tanstack/react-query": "latest",
+    "@tanstack/react-query": "5.104.0",
     "@tanstack/react-router": "latest",
     "@tanstack/react-router-devtools": "latest",
     "@tanstack/react-router-ssr-query": "latest",

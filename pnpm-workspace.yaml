@@ -2,8 +2,8 @@ packages:
   - "apps/*"
   - "packages/*"
 allowBuilds:
-  '@parcel/watcher': false
-  '@swc/core': true
+  "@parcel/watcher": false
+  "@swc/core": true
   core-js-pure: false
   esbuild: true
   less: false
@@ -12,7 +12,7 @@ allowBuilds:
   vue-demi: false
 autoInstallPeers: true
 minimumReleaseAgeExclude:
-  - tanstack-fetch@1.0.1
+  - tanstack-fetch@1.0.1 || 1.4.0 || 1.4.2
   - vite-plugin-react-splash@1.1.0
 onlyBuiltDependencies:
   - "nx"

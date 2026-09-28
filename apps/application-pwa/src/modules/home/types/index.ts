@@ -1,6 +1,6 @@
-import type { LucideIcon } from 'lucide-react'
+import type { LucideIcon } from "lucide-react"
 
-type AssetId = 'gold' | 'silver'
+type AssetId = "gold" | "silver"
 
 type HomeHeaderModel = {
   greeting: string
@@ -12,6 +12,7 @@ type HomeQuoteModel = {
   eyebrow: string
   pairLabel: string
   liveLabel: string
+  liveColor: "success" | "warning" | "danger"
   chartLabel: string
   price: number
   change: number
@@ -20,7 +21,7 @@ type HomeQuoteModel = {
 
 type HomeTradeAction = {
   label: string
-  variant: 'primary' | 'danger'
+  variant: "primary" | "danger"
   onSelect: () => void
 }
 
@@ -38,7 +39,7 @@ type HomeWallet = {
 
 type QuickAction = {
   label: string
-  to: '/trade' | '/chart' | '/profile'
+  to: "/trade" | "/chart" | "/profile"
   Icon: LucideIcon
   tileClassName: string
 }
@@ -56,7 +57,7 @@ type HomeMarketRow = {
 type HomeActivityRow = {
   id: string
   sideLabel: string
-  sideColor: 'success' | 'danger'
+  sideColor: "success" | "danger"
   date: string
   ouncesLabel: string
   priceLabel: string

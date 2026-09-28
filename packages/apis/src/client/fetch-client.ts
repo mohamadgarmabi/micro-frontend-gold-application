@@ -1,16 +1,13 @@
-import { createFetch, type FetchClient } from 'tanstack-fetch'
-import { clearAuthToken, getAuthToken } from '../auth/cookie'
-import { getApiConfig, setApiConfig } from '../config'
-import type { ApiConfig } from '../config'
-import { createMockFetch } from './create-mock-fetch'
+import { createFetch, type FetchClient } from "tanstack-fetch/sse"
+import { clearAuthToken, getAuthToken } from "../auth/cookie"
+import { getApiConfig, setApiConfig } from "../config"
+import type { ApiConfig } from "../config"
+import { createMockFetch } from "./create-mock-fetch"
 
-type ApiClient = Omit<FetchClient, 'sse'>
+type ApiClient = FetchClient
 
 let client: ApiClient | null = null
-
-const resolveBaseUrl = (options: ReturnType<typeof getApiConfig>) => {
-  return options.baseURL
-}
+let destroyDevtools: (() => void) | null = null
 
 const resolveGetToken = (options: ReturnType<typeof getApiConfig>) => {
   if (options.getToken) {
@@ -24,12 +21,39 @@ const resolveGetToken = (options: ReturnType<typeof getApiConfig>) => {
   return undefined
 }
 
+const shouldEnableDevtools = (enabled: boolean | undefined) => {
+  if (enabled !== true) {
+    return false
+  }
+
+  return typeof window !== "undefined"
+}
+
+const attachDevtools = (api: ApiClient, enabled: boolean | undefined) => {
+  destroyDevtools?.()
+  destroyDevtools = null
+
+  if (!shouldEnableDevtools(enabled)) {
+    return
+  }
+
+  void import("tanstack-fetch/devtools").then(({ setupDevtools }) => {
+    const panel = setupDevtools(api, {
+      http: true,
+      sse: true,
+      ssr: true,
+      open: false,
+    })
+    destroyDevtools = panel.destroy
+  })
+}
+
 const createApiClient = (): ApiClient => {
   const options = getApiConfig()
   const fallbackFetch = options.fetch ?? globalThis.fetch.bind(globalThis)
 
-  return createFetch({
-    baseUrl: resolveBaseUrl(options),
+  const nextClient = createFetch({
+    baseUrl: options.baseURL,
     timeoutMs: options.timeout,
     headers: options.headers,
     plugins: options.plugins,
@@ -41,6 +65,7 @@ const createApiClient = (): ApiClient => {
     source: options.source,
     incoming: options.incoming,
     getToken: resolveGetToken(options),
+    onBadRequest: options.onBadRequest,
     onUnauthorized: (input) => {
       if (options.auth?.tokenCookieName) {
         clearAuthToken()
@@ -50,9 +75,23 @@ const createApiClient = (): ApiClient => {
     },
     onForbidden: options.onForbidden,
     onNotFound: options.onNotFound,
+    onMethodNotAllowed: options.onMethodNotAllowed,
+    onRequestTimeout: options.onRequestTimeout,
+    onConflict: options.onConflict,
+    onGone: options.onGone,
+    onPayloadTooLarge: options.onPayloadTooLarge,
+    onUnsupportedMediaType: options.onUnsupportedMediaType,
+    onUnprocessableEntity: options.onUnprocessableEntity,
+    onTooManyRequests: options.onTooManyRequests,
+    onUnavailableForLegalReasons: options.onUnavailableForLegalReasons,
+    onClientError: options.onClientError,
     onServerError: options.onServerError,
     fetch: createMockFetch(options.mocks, fallbackFetch),
   })
+
+  attachDevtools(nextClient, options.enableDevtools)
+
+  return nextClient
 }
 
 const configureApis = (options: ApiConfig): ApiClient => {

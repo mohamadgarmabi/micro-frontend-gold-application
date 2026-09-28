@@ -1,6 +1,6 @@
-import type { PullRefreshLabels } from '@gold/shared-components/pull-refresh'
-import type { LucideIcon } from 'lucide-react'
-import type { ReactNode } from 'react'
+import type { PullRefreshLabels } from "@gold/shared-components/pull-refresh"
+import type { LucideIcon } from "lucide-react"
+import type { ReactNode } from "react"
 
 type AppShellProps = {
   children: ReactNode
@@ -12,7 +12,7 @@ type AppShellModel = {
   pullRefreshLabels: PullRefreshLabels
 }
 
-type AurumNavPage = 'home' | 'chart' | 'trade' | 'profile' | 'options'
+type AurumNavPage = "home" | "chart" | "trade" | "profile" | "options"
 
 type CardProps = {
   children: ReactNode
@@ -22,12 +22,13 @@ type CardProps = {
 type GoldBadgeProps = {
   children: ReactNode
   className?: string
+  color?: "success" | "warning" | "danger"
 }
 
 type PriceTagProps = {
   value: number
   change: number
-  size?: 'sm' | 'md' | 'lg'
+  size?: "sm" | "md" | "lg"
 }
 
 type ToggleProps = {
@@ -36,17 +37,17 @@ type ToggleProps = {
   disabled?: boolean
 }
 
-type Direction = 'rtl' | 'ltr'
+type Direction = "rtl" | "ltr"
 
-type Locale = 'en' | 'fa'
+type Locale = "en" | "fa"
 
 type TranslateValues = Record<string, string | number>
 
-type MessageKey = keyof typeof import('../utils/i18n.en').enMessages
+type MessageKey = keyof typeof import("../utils/i18n.en").enMessages
 
-type ThemePreference = 'light' | 'dark' | 'system'
+type ThemePreference = "light" | "dark" | "system"
 
-type ResolvedTheme = 'light' | 'dark'
+type ResolvedTheme = "light" | "dark"
 
 type ThemeSelectorOption = {
   value: ThemePreference
@@ -60,7 +61,7 @@ type ThemeSelectorOption = {
 
 type BottomNavItem = {
   page: AurumNavPage
-  to: '/home' | '/chart' | '/trade' | '/profile' | '/options'
+  to: "/home" | "/chart" | "/trade" | "/profile" | "/options"
   icon: LucideIcon
   label: string
   isActive: boolean
@@ -74,7 +75,7 @@ type BottomNavSlider = {
   isReady: boolean
 }
 
-type ViewTransitionType = 'slide-forward' | 'slide-back' | 'fade'
+type ViewTransitionType = "slide-forward" | "slide-back" | "fade"
 
 type ViewTransitionLocation = {
   pathname: string
