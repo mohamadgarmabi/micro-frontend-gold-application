@@ -1,18 +1,79 @@
-@import '@heroui/styles';
+@import "@heroui/styles";
 
 /* nx-tailwind-sources:start */
 /* nx-tailwind-sources:end */
 
-@import './heroui-theme.css';
-@import './legacy-aliases.css';
-@import './fonts.css';
-@import './base-ui.css';
-@import './components.css';
-@import './rtl.css';
+@import "./heroui-theme.css";
+@import "./fonts.css";
+@import "./base-ui.css";
+@import "./components.css";
+@import "./rtl.css";
 
 @custom-variant rtl (&:where([dir='rtl'], [dir='rtl'] *));
 @custom-variant ltr (&:where([dir='ltr'], [dir='ltr'] *));
 
 @theme inline {
   --font-sans: var(--font-vazirmatn), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand: var(--accent);
+  --color-brand-surface: var(--background);
+  --color-brand-muted: var(--surface-secondary);
+  --color-brand-accent: var(--accent);
+
+  --color-gold-50: oklch(0.97 0.02 90);
+  --color-gold-100: oklch(0.94 0.035 88);
+  --color-gold-200: oklch(0.88 0.06 86);
+  --color-gold-300: oklch(0.8 0.09 85);
+  --color-gold-400: oklch(0.74 0.11 84);
+  --color-gold-500: var(--accent);
+  --color-gold-600: var(--accent-hover);
+  --color-gold-700: oklch(0.52 0.1 78);
+  --color-gold-800: oklch(0.4 0.08 75);
+  --color-gold-900: oklch(0.3 0.06 72);
+
+  --color-neutral-50: var(--surface-secondary);
+  --color-neutral-100: var(--surface-tertiary);
+  --color-neutral-200: var(--border);
+  --color-neutral-300: var(--muted);
+  --color-neutral-400: var(--muted);
+  --color-neutral-500: var(--muted);
+  --color-neutral-600: var(--foreground);
+  --color-neutral-700: var(--foreground);
+  --color-neutral-800: var(--foreground);
+  --color-neutral-900: var(--foreground);
+
+  --color-surface-muted: var(--surface-secondary);
+  --color-surface-elevated: var(--surface);
+  --color-surface-accent: var(--surface-tertiary);
+  --color-border-strong: var(--border-secondary);
+
+  --color-foreground-muted: var(--muted);
+  --color-foreground-subtle: var(--muted);
+  --color-foreground-on-brand: var(--accent-foreground);
+
+  --color-button: var(--accent);
+  --color-button-foreground: var(--accent-foreground);
+  --color-button-hover: var(--accent-hover);
+
+  --color-danger-muted: var(--danger-soft);
+  --color-success-muted: var(--success-soft);
+  --color-warning-muted: var(--warning-soft);
+  --color-info: oklch(0.55 0.1 250);
+  --color-info-muted: color-mix(in oklab, oklch(0.55 0.1 250) 12%, var(--surface));
+
+  --shadow-popup: var(--shadow-overlay);
+  --shadow-focus: 0 0 0 3px color-mix(in oklab, var(--focus) 22%, transparent);
+
+  --text-display: 1.875rem;
+  --text-display--line-height: 2.25rem;
+  --text-title: 1.25rem;
+  --text-title--line-height: 1.75rem;
+  --text-heading: 1.125rem;
+  --text-heading--line-height: 1.75rem;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5rem;
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.25rem;
+  --text-overline: 0.75rem;
+  --text-overline--line-height: 1rem;
 }

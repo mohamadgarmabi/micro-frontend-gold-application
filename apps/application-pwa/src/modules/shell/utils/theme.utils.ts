@@ -1,25 +1,31 @@
-import { THEME_META_COLORS, THEME_STORAGE_KEY } from '#/config/theme.constants'
-import type { ResolvedTheme, ThemePreference } from '../types'
+import {
+  THEME_META_COLORS,
+  THEME_STORAGE_KEY,
+  DEFAULT_THEME_PREFERENCE,
+} from "#/config/theme.constants"
+import type { ResolvedTheme, ThemePreference } from "../types"
 
 const readSystemTheme = (): ResolvedTheme => {
-  if (typeof window === 'undefined') {
-    return 'dark'
+  if (typeof window === "undefined") {
+    return "dark"
   }
 
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 }
 
 const readThemePreference = (): ThemePreference => {
-  if (typeof window === 'undefined') {
-    return 'system'
+  if (typeof window === "undefined") {
+    return DEFAULT_THEME_PREFERENCE
   }
 
   const stored = localStorage.getItem(THEME_STORAGE_KEY)
-  return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system'
+  return stored === "light" || stored === "dark" || stored === "system"
+    ? stored
+    : DEFAULT_THEME_PREFERENCE
 }
 
 const resolveTheme = (preference: ThemePreference): ResolvedTheme => {
-  if (preference === 'system') {
+  if (preference === "system") {
     return readSystemTheme()
   }
 
@@ -27,7 +33,7 @@ const resolveTheme = (preference: ThemePreference): ResolvedTheme => {
 }
 
 const updateThemeColorMeta = (theme: ResolvedTheme): void => {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return
   }
 
@@ -36,28 +42,28 @@ const updateThemeColorMeta = (theme: ResolvedTheme): void => {
     return
   }
 
-  meta.setAttribute('content', THEME_META_COLORS[theme])
+  meta.setAttribute("content", THEME_META_COLORS[theme])
 }
 
 const applyTheme = (theme: ResolvedTheme): void => {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return
   }
 
   const root = document.documentElement
-  root.classList.add('theme-transition')
-  root.classList.remove('light', 'dark')
+  root.classList.add("theme-transition")
+  root.classList.remove("light", "dark")
   root.classList.add(theme)
   root.style.colorScheme = theme
   updateThemeColorMeta(theme)
 
   window.setTimeout(() => {
-    root.classList.remove('theme-transition')
+    root.classList.remove("theme-transition")
   }, 300)
 }
 
 const persistThemePreference = (preference: ThemePreference): void => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return
   }
 

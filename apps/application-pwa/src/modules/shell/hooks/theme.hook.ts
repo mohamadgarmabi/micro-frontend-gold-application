@@ -8,8 +8,8 @@ import {
   resolveTheme,
 } from "../utils/theme.utils"
 
-/** Stable SSR defaults — must match `readThemePreference` / `readSystemTheme` without `window`. */
-const SSR_THEME_PREFERENCE: ThemePreference = "system"
+/** Stable SSR defaults — dark is the product default. */
+const SSR_THEME_PREFERENCE: ThemePreference = "dark"
 const SSR_RESOLVED_THEME: ResolvedTheme = "dark"
 
 const useTheme = () => {

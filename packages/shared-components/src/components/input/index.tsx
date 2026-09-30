@@ -31,7 +31,7 @@ const Input = (props: InputProps) => {
 
   return (
     <div className="flex w-full flex-col gap-1.5">
-      <div className={inputStyles.wrapper()}>
+      <div className={inputStyles.wrapper()} dir={dir}>
         {leftIcon && (
           <span className={cn(inputStyles.iconSlot(), inputStyles.iconLeft())} aria-hidden>
             <span className={inputStyles.icon({ size })}>{leftIcon}</span>

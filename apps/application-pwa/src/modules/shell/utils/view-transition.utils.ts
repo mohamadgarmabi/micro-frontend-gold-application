@@ -1,14 +1,14 @@
 import {
   DEFAULT_VIEW_TRANSITION_ENABLED,
   VIEW_TRANSITION_STORAGE_KEY,
-} from '#/config/view-transition.constants'
-import type { ViewTransitionInfo, ViewTransitionType } from '../types'
+} from "#/config/view-transition.constants"
+import type { ViewTransitionInfo, ViewTransitionType } from "../types"
 
-const APP_TAB_PATHS = ['/home', '/chart', '/trade', '/profile', '/options'] as const
+const APP_TAB_PATHS = ["/home", "/chart", "/trade", "/profile", "/options"] as const
 
 const normalizePathname = (pathname: string) => {
-  if (pathname === '/') {
-    return '/home'
+  if (pathname === "/") {
+    return "/home"
   }
 
   return pathname
@@ -23,7 +23,7 @@ const resolveViewTransitionTypes = ({
   toLocation,
 }: ViewTransitionInfo): ViewTransitionType[] => {
   if (!fromLocation) {
-    return ['fade']
+    return ["fade"]
   }
 
   const fromPath = normalizePathname(fromLocation.pathname)
@@ -33,48 +33,40 @@ const resolveViewTransitionTypes = ({
 
   if (fromTab >= 0 && toTab >= 0) {
     if (fromTab === toTab) {
-      return ['fade']
+      return ["fade"]
     }
 
-    return fromTab < toTab ? ['slide-forward'] : ['slide-back']
+    return fromTab < toTab ? ["slide-forward"] : ["slide-back"]
   }
 
-  if (fromPath === '/login' && toPath === '/otp') {
-    return ['slide-forward']
+  if (fromPath === "/login" && toPath === "/pin") {
+    return ["slide-forward"]
   }
 
-  if (fromPath === '/otp' && toPath === '/login') {
-    return ['slide-back']
-  }
-
-  if ((fromPath === '/login' || fromPath === '/otp') && toPath === '/pin') {
-    return ['slide-forward']
-  }
-
-  if (fromPath === '/pin' && (toPath === '/login' || toPath === '/otp')) {
-    return ['slide-back']
+  if (fromPath === "/pin" && toPath === "/login") {
+    return ["slide-back"]
   }
 
   const fromHistory = fromLocation.state.__TSR_index
   const toHistory = toLocation.state.__TSR_index
 
   if (
-    typeof fromHistory === 'number' &&
-    typeof toHistory === 'number' &&
+    typeof fromHistory === "number" &&
+    typeof toHistory === "number" &&
     fromHistory !== toHistory
   ) {
-    return fromHistory < toHistory ? ['slide-forward'] : ['slide-back']
+    return fromHistory < toHistory ? ["slide-forward"] : ["slide-back"]
   }
 
-  return ['fade']
+  return ["fade"]
 }
 
 const isViewTransitionEnabled = (value: string | null) => {
-  if (value === 'true') {
+  if (value === "true") {
     return true
   }
 
-  if (value === 'false') {
+  if (value === "false") {
     return false
   }
 
@@ -82,7 +74,7 @@ const isViewTransitionEnabled = (value: string | null) => {
 }
 
 const readViewTransitionEnabled = () => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return DEFAULT_VIEW_TRANSITION_ENABLED
   }
 
@@ -90,7 +82,7 @@ const readViewTransitionEnabled = () => {
 }
 
 const persistViewTransitionEnabled = (enabled: boolean) => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return
   }
 

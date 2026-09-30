@@ -1,5 +1,6 @@
 import type { ButtonProps } from "@gold/shared-components/button"
 import type { InputSize } from "@gold/shared-components/input"
+import type { ReactNode } from "react"
 import type { FormFieldDefinition, FormFieldValue, FormSchema, InferFormValues } from "../types"
 
 type FooterButtons = {
@@ -18,7 +19,9 @@ type GeneratedFormProps<T extends FormSchema> = {
   fields: T
   defaultValues?: Partial<InferFormValues<T>>
   footerButtons?: FooterButtons
+  beforeFooter?: ReactNode
   className?: string
+  footerClassName?: string
   sizes?: GeneratedFormSizes
   formatRequiredError?: FormatRequiredError
   onSubmit: (values: InferFormValues<T>) => void | Promise<void>

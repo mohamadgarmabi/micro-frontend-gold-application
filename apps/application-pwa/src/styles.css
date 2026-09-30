@@ -332,22 +332,53 @@ body,
     inset 0 1px 0 color-mix(in oklab, #fff 42%, transparent);
 }
 
-.aurum-login-card {
-  border: 1px solid color-mix(in oklab, var(--foreground) 8%, transparent);
-  background: color-mix(in oklab, var(--surface) 78%, transparent);
-  box-shadow:
-    0 24px 60px color-mix(in oklab, #000 8%, transparent),
-    inset 0 1px 0 color-mix(in oklab, #fff 40%, transparent);
-  backdrop-filter: blur(22px) saturate(1.35);
-  -webkit-backdrop-filter: blur(22px) saturate(1.35);
+@keyframes aurum-login-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.dark .aurum-login-card {
-  border-color: color-mix(in oklab, #fff 10%, transparent);
-  background: color-mix(in oklab, var(--surface) 62%, transparent);
-  box-shadow:
-    0 28px 70px color-mix(in oklab, #000 38%, transparent),
-    inset 0 1px 0 color-mix(in oklab, #fff 12%, transparent);
+@keyframes aurum-login-mark-soft {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 12px 28px color-mix(in oklab, var(--accent) 22%, transparent);
+  }
+
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 16px 36px color-mix(in oklab, var(--accent) 32%, transparent);
+  }
+}
+
+.aurum-login-enter {
+  animation: aurum-login-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.aurum-login-enter-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.aurum-login-enter-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.aurum-login-mark {
+  box-shadow: 0 12px 28px color-mix(in oklab, var(--accent) 22%, transparent);
+  animation: aurum-login-mark-soft 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurum-login-enter,
+  .aurum-login-mark {
+    animation: none;
+  }
 }
 
 .aurum-bio-scan {

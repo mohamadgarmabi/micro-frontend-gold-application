@@ -46,9 +46,10 @@ const renderField = <TName extends string, TType extends FormFieldDefinition<TNa
 }
 
 const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
-  const { fields, className } = props
+  const { fields, className, beforeFooter, footerClassName } = props
   const { form, handleFormSubmit, cancelButton, submitButton, inputSize, createRequiredValidator } =
     useGeneratedForm(props)
+  const showFooter = Boolean(beforeFooter || cancelButton || submitButton)
 
   return (
     <form className={className ?? generatedFormStyles()} onSubmit={handleFormSubmit}>
@@ -72,12 +73,22 @@ const GeneratedForm = <T extends FormSchema>(props: GeneratedFormProps<T>) => {
         </form.Field>
       ))}
 
-      {(cancelButton || submitButton) && (
-        <div className={generatedFormFooterStyles()}>
-          {cancelButton ? <Button {...cancelButton} /> : null}
-          {submitButton ? <Button {...submitButton} /> : null}
+      {showFooter ? (
+        <div className={footerClassName ?? generatedFormFooterStyles()}>
+          {beforeFooter}
+          {beforeFooter && (cancelButton || submitButton) ? (
+            <div className={generatedFormFooterStyles()}>
+              {cancelButton ? <Button {...cancelButton} /> : null}
+              {submitButton ? <Button {...submitButton} /> : null}
+            </div>
+          ) : (
+            <>
+              {cancelButton ? <Button {...cancelButton} /> : null}
+              {submitButton ? <Button {...submitButton} /> : null}
+            </>
+          )}
         </div>
-      )}
+      ) : null}
     </form>
   )
 }

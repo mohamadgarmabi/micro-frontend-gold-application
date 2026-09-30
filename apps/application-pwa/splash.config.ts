@@ -22,10 +22,15 @@ const splashScreenOptions: SplashScreenOptions = {
     dark: appLogoSvg,
   },
   text: "Ayar",
+  version: "Gold",
   waitUntilReady: true,
-  minDuration: 1200,
-  animation: "pulse",
-  mode: "auto",
+  minDuration: 900,
+  animation: "gradient-mesh",
+  backgroundAnimation: "breath",
+  mode: "dark",
+  onlyStandalone: true,
+  showOnce: true,
+  showOnceStorage: "local",
   respectReducedMotion: true,
   theme: {
     light: {
