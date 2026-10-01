@@ -1,4 +1,4 @@
-import { mutationOptions, queryOptions } from "@tanstack/react-query"
+import { mutationOptions, queryOptions } from "@tanstack/vue-query"
 import type { NoParams } from "tanstack-fetch"
 import { getApiClient } from "../../client"
 import type { PostListQueryDto, PostParamsDto, PostRequestDto, PostResponseDto } from "../dto"

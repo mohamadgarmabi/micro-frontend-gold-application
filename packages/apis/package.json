@@ -38,11 +38,24 @@
       }
     }
   },
-  "dependencies": {
+  "peerDependencies": {
     "@tanstack/react-query": "^5.104.0",
+    "@tanstack/vue-query": "^5.103.0"
+  },
+  "peerDependenciesMeta": {
+    "@tanstack/react-query": {
+      "optional": true
+    },
+    "@tanstack/vue-query": {
+      "optional": true
+    }
+  },
+  "dependencies": {
     "tanstack-fetch": "^1.6.1"
   },
   "devDependencies": {
+    "@tanstack/react-query": "^5.104.0",
+    "@tanstack/vue-query": "^5.103.1",
     "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }
