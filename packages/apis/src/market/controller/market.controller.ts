@@ -1,7 +1,7 @@
 import { queryOptions } from "@tanstack/react-query"
 import type { SseCallOptions, SseSubscription } from "tanstack-fetch"
 import { getApiClient } from "../../client"
-import type { MarketOverviewDto, MarketTickDto } from "../dto"
+import type { MarketOverviewResponseDto, MarketTickResponseDto } from "../dto"
 import { marketEndpoint } from "../endpoints"
 
 const marketController = {
@@ -9,7 +9,7 @@ const marketController = {
     queryOptions({
       queryKey: [marketEndpoint.overview] as const,
       queryFn: async () => {
-        return getApiClient().get<MarketOverviewDto>(marketEndpoint.overview)
+        return getApiClient().get<MarketOverviewResponseDto>(marketEndpoint.overview, {})
       },
     }),
 
@@ -18,15 +18,17 @@ const marketController = {
    * Prefer updating the overview cache with `setQueryData` on each message.
    */
   subscribeTicks: (
-    handlers: SseCallOptions<MarketTickDto> &
+    handlers: SseCallOptions<MarketTickResponseDto> &
       (
-        | { onMessage: NonNullable<SseCallOptions<MarketTickDto>["onMessage"]> }
         | {
-            onEvent: NonNullable<SseCallOptions<MarketTickDto>["onEvent"]>
+            onMessage: NonNullable<SseCallOptions<MarketTickResponseDto>["onMessage"]>
+          }
+        | {
+            onEvent: NonNullable<SseCallOptions<MarketTickResponseDto>["onEvent"]>
           }
       ),
   ): SseSubscription => {
-    return getApiClient().sse<MarketTickDto>(marketEndpoint.ticks, handlers)
+    return getApiClient().sse<MarketTickResponseDto>(marketEndpoint.ticks, handlers)
   },
 }
 

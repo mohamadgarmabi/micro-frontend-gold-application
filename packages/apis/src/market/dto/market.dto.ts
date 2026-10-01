@@ -1,30 +1,35 @@
-type MarketAssetDto = {
+type MarketAssetResponseDto = {
   name: string
   symbol: string
   price: number
   chg: number
 }
 
-type MarketActivityDto = {
+type MarketActivityResponseDto = {
   type: "BUY" | "SELL"
   oz: number
   price: number
   date: string
 }
 
-type MarketOverviewDto = {
+type MarketOverviewResponseDto = {
   spotPrice: number
   change: number
-  assets: MarketAssetDto[]
-  recentActivity: MarketActivityDto[]
+  assets: MarketAssetResponseDto[]
+  recentActivity: MarketActivityResponseDto[]
 }
 
 /** Live quote tick pushed over SSE (`/v1/market/ticks`). */
-type MarketTickDto = {
+type MarketTickResponseDto = {
   spotPrice: number
   change: number
-  assets: MarketAssetDto[]
+  assets: MarketAssetResponseDto[]
   at: string
 }
 
-export type { MarketActivityDto, MarketAssetDto, MarketOverviewDto, MarketTickDto }
+export type {
+  MarketActivityResponseDto,
+  MarketAssetResponseDto,
+  MarketOverviewResponseDto,
+  MarketTickResponseDto,
+}

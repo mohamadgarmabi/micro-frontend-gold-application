@@ -5,7 +5,7 @@ import {
   requestRegisterVerify,
   requestRemoveCredentials,
   webauthnController,
-} from './webauthn.controller'
+} from "./webauthn.controller"
 
 export {
   requestAuthenticateOptions,

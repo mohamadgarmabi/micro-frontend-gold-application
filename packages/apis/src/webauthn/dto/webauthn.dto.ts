@@ -14,7 +14,7 @@ type WebAuthnUserEntity = {
 }
 
 type WebAuthnPubKeyCredParam = {
-  type: 'public-key'
+  type: "public-key"
   alg: number
 }
 
@@ -27,11 +27,11 @@ type WebAuthnAuthenticatorSelection = {
 
 type WebAuthnCredentialDescriptor = {
   id: WebAuthnBase64Url
-  type: 'public-key'
+  type: "public-key"
   transports?: WebAuthnTransport[]
 }
 
-type WebAuthnRegisterOptionsDto = {
+type WebAuthnRegisterOptionsResponseDto = {
   challenge: WebAuthnBase64Url
   rp: WebAuthnRpEntity
   user: WebAuthnUserEntity
@@ -48,14 +48,14 @@ type WebAuthnAttestationResponseDto = {
   transports?: WebAuthnTransport[]
 }
 
-type WebAuthnRegisterCredentialDto = {
+type WebAuthnRegisterCredentialRequestDto = {
   id: string
   rawId: WebAuthnBase64Url
-  type: 'public-key'
+  type: "public-key"
   response: WebAuthnAttestationResponseDto
 }
 
-type WebAuthnRegisterResultDto = {
+type WebAuthnRegisterResultResponseDto = {
   credentialId: string
 }
 
@@ -63,7 +63,7 @@ type WebAuthnAuthenticateOptionsRequestDto = {
   credentialId?: string
 }
 
-type WebAuthnAuthenticateOptionsDto = {
+type WebAuthnAuthenticateOptionsResponseDto = {
   challenge: WebAuthnBase64Url
   timeout?: number
   rpId?: string
@@ -78,32 +78,32 @@ type WebAuthnAssertionResponseDto = {
   userHandle?: WebAuthnBase64Url | null
 }
 
-type WebAuthnAuthenticateCredentialDto = {
+type WebAuthnAuthenticateCredentialRequestDto = {
   id: string
   rawId: WebAuthnBase64Url
-  type: 'public-key'
+  type: "public-key"
   response: WebAuthnAssertionResponseDto
 }
 
-type WebAuthnSessionDto = {
+type WebAuthnSessionResponseDto = {
   token: string
 }
 
 export type {
   WebAuthnAssertionResponseDto,
   WebAuthnAttestationResponseDto,
-  WebAuthnAuthenticateCredentialDto,
-  WebAuthnAuthenticateOptionsDto,
+  WebAuthnAuthenticateCredentialRequestDto,
   WebAuthnAuthenticateOptionsRequestDto,
+  WebAuthnAuthenticateOptionsResponseDto,
   WebAuthnAuthenticatorSelection,
   WebAuthnBase64Url,
   WebAuthnCredentialDescriptor,
   WebAuthnPubKeyCredParam,
-  WebAuthnRegisterCredentialDto,
-  WebAuthnRegisterOptionsDto,
-  WebAuthnRegisterResultDto,
+  WebAuthnRegisterCredentialRequestDto,
+  WebAuthnRegisterOptionsResponseDto,
+  WebAuthnRegisterResultResponseDto,
   WebAuthnRpEntity,
-  WebAuthnSessionDto,
+  WebAuthnSessionResponseDto,
   WebAuthnTransport,
   WebAuthnUserEntity,
 }

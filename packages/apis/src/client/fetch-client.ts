@@ -61,7 +61,6 @@ const createApiClient = (): ApiClient => {
     maxRetries: options.maxRetries,
     interceptors: options.interceptors,
     onStatus: options.onStatus,
-    throwOnError: options.throwOnError,
     source: options.source,
     incoming: options.incoming,
     getToken: resolveGetToken(options),

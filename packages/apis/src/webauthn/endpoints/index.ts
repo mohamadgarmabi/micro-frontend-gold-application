@@ -1,3 +1,3 @@
-import { endpoint } from './webauthn.endpoint'
+import { endpoint } from "./webauthn.endpoint"
 
 export { endpoint }

@@ -1,56 +1,64 @@
-import { mutationOptions, queryOptions } from '@tanstack/react-query'
-import { getApiClient } from '../../client'
-import type { CreatePostDto, PostDto, UpdatePostDto } from '../dto'
-import { endpoint } from '../endpoints'
-
-type GetPostListParams = {
-  limit?: number
-}
+import { mutationOptions, queryOptions } from "@tanstack/react-query"
+import type { NoParams } from "tanstack-fetch"
+import { getApiClient } from "../../client"
+import type { PostListQueryDto, PostParamsDto, PostRequestDto, PostResponseDto } from "../dto"
+import { endpoint } from "../endpoints"
 
 const postController = {
-  getPostList: (params: GetPostListParams = {}) =>
+  getPostList: (query: PostListQueryDto = {}) =>
     queryOptions({
-      queryKey: [endpoint.post.get, params] as const,
+      queryKey: [endpoint.post.get, query] as const,
       queryFn: async () => {
-        return getApiClient().get<PostDto[]>(endpoint.post.get, {
-          query: { _limit: params.limit ?? 8 },
+        return getApiClient().get<PostResponseDto[]>(endpoint.post.get, {
+          query: { _limit: query.limit ?? 8 },
         })
       },
     }),
 
-  getPostById: (id: number) =>
+  getPostById: (params: PostParamsDto) =>
     queryOptions({
-      queryKey: [endpoint.post.getById(id), id] as const,
+      queryKey: [endpoint.post.getById, params] as const,
       queryFn: async () => {
-        return getApiClient().get<PostDto>(endpoint.post.getById(id))
+        return getApiClient().get<PostResponseDto, PostParamsDto>(endpoint.post.getById, {
+          params,
+        })
       },
-      enabled: id > 0,
+      enabled: params.id > 0,
     }),
 
   createPost: () =>
     mutationOptions({
-      mutationKey: [endpoint.post.get, 'create'] as const,
-      mutationFn: async (input: CreatePostDto) => {
-        return getApiClient().post<PostDto>(endpoint.post.get, { body: input })
+      mutationKey: [endpoint.post.get, "create"] as const,
+      mutationFn: async (body: PostRequestDto) => {
+        return getApiClient().post<PostResponseDto, NoParams, PostRequestDto>(endpoint.post.get, {
+          body,
+        })
       },
     }),
 
-  updatePost: (id: number) =>
+  updatePost: (params: PostParamsDto) =>
     mutationOptions({
-      mutationKey: [endpoint.post.getById(id), 'update'] as const,
-      mutationFn: async (input: UpdatePostDto) => {
-        return getApiClient().patch<PostDto>(endpoint.post.getById(id), { body: input })
+      mutationKey: [endpoint.post.getById, params, "update"] as const,
+      mutationFn: async (body: Partial<PostRequestDto>) => {
+        return getApiClient().patch<PostResponseDto, PostParamsDto, Partial<PostRequestDto>>(
+          endpoint.post.getById,
+          {
+            params,
+            body,
+          },
+        )
       },
     }),
 
-  removePost: (id: number) =>
+  removePost: (params: PostParamsDto) =>
     mutationOptions({
-      mutationKey: [endpoint.post.getById(id), 'remove'] as const,
+      mutationKey: [endpoint.post.getById, params, "remove"] as const,
       mutationFn: async () => {
-        await getApiClient().delete(endpoint.post.getById(id))
+        await getApiClient().delete<unknown, PostParamsDto>(endpoint.post.getById, {
+          params,
+        })
       },
     }),
 }
 
 export { postController }
-export type { GetPostListParams }

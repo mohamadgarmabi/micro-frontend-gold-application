@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.104.0",
-    "tanstack-fetch": "^1.4.2"
+    "tanstack-fetch": "^1.6.1"
   },
   "devDependencies": {
     "typescript": "npm:@typescript/typescript6@^6.0.2"

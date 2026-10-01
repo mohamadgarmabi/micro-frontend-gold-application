@@ -39,7 +39,6 @@ type ResolvedApiConfig = {
   fetch?: CreateFetchOptions["fetch"]
   interceptors?: CreateFetchOptions["interceptors"]
   onStatus?: CreateFetchOptions["onStatus"]
-  throwOnError?: CreateFetchOptions["throwOnError"]
   source?: CreateFetchOptions["source"]
   incoming?: CreateFetchOptions["incoming"]
   onBadRequest?: StatusHandler

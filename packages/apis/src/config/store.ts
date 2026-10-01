@@ -25,7 +25,6 @@ const getApiConfig = (): ResolvedApiConfig => {
     fetch: config.fetch,
     interceptors: config.interceptors,
     onStatus: config.onStatus,
-    throwOnError: config.throwOnError,
     source: config.source,
     incoming: config.incoming,
     onBadRequest: config.onBadRequest,

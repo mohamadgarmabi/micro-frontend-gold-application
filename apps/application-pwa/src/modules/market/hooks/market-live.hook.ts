@@ -2,8 +2,8 @@ import {
   getApiClient,
   marketController,
   marketEndpoint,
-  type MarketOverviewDto,
-  type MarketTickDto,
+  type MarketOverviewResponseDto,
+  type MarketTickResponseDto,
 } from "@gold/apis"
 import { useSse, type SseStatus } from "@gold/apis/react"
 import { useQueryClient } from "@tanstack/react-query"
@@ -14,9 +14,9 @@ type UseMarketLiveOptions = {
 }
 
 const applyTickToOverview = (
-  overview: MarketOverviewDto | undefined,
-  tick: MarketTickDto,
-): MarketOverviewDto | undefined => {
+  overview: MarketOverviewResponseDto | undefined,
+  tick: MarketTickResponseDto,
+): MarketOverviewResponseDto | undefined => {
   if (!overview) {
     return overview
   }
@@ -39,7 +39,7 @@ const useMarketLive = ({ enabled = true }: UseMarketLiveOptions = {}) => {
   const statusRef = useRef<SseStatus>("disconnected")
   const streamEnabled = enabled && typeof window !== "undefined"
 
-  const { data, status, error } = useSse<MarketTickDto>(marketEndpoint.ticks, {
+  const { data, status, error } = useSse<MarketTickResponseDto>(marketEndpoint.ticks, {
     client,
     enabled: streamEnabled,
     onMessage: (tick) => {
@@ -49,7 +49,7 @@ const useMarketLive = ({ enabled = true }: UseMarketLiveOptions = {}) => {
       }
 
       queryClient.setQueryData(marketController.getOverview().queryKey, (current) =>
-        applyTickToOverview(current as MarketOverviewDto | undefined, tick),
+        applyTickToOverview(current as MarketOverviewResponseDto | undefined, tick),
       )
     },
   })

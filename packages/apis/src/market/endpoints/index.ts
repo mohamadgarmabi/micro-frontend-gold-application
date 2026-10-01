@@ -1,3 +1,3 @@
-import { marketEndpoint } from './market.endpoint'
+import { marketEndpoint } from "./market.endpoint"
 
 export { marketEndpoint }

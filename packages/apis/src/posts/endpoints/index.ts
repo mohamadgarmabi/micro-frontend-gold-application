@@ -1,1 +1,1 @@
-export { endpoint } from './post.endpoint'
+export { endpoint } from "./post.endpoint"

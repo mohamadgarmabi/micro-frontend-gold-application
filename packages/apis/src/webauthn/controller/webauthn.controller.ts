@@ -1,41 +1,54 @@
-import { mutationOptions } from '@tanstack/react-query'
-import { getApiClient } from '../../client'
+import { mutationOptions } from "@tanstack/react-query"
+import type { NoParams } from "tanstack-fetch"
+import { getApiClient } from "../../client"
 import type {
-  WebAuthnAuthenticateCredentialDto,
-  WebAuthnAuthenticateOptionsDto,
+  WebAuthnAuthenticateCredentialRequestDto,
   WebAuthnAuthenticateOptionsRequestDto,
-  WebAuthnRegisterCredentialDto,
-  WebAuthnRegisterOptionsDto,
-  WebAuthnRegisterResultDto,
-  WebAuthnSessionDto,
-} from '../dto'
-import { endpoint } from '../endpoints'
+  WebAuthnAuthenticateOptionsResponseDto,
+  WebAuthnRegisterCredentialRequestDto,
+  WebAuthnRegisterOptionsResponseDto,
+  WebAuthnRegisterResultResponseDto,
+  WebAuthnSessionResponseDto,
+} from "../dto"
+import { endpoint } from "../endpoints"
 
 const requestRegisterOptions = async () => {
-  return getApiClient().post<WebAuthnRegisterOptionsDto>(endpoint.webauthn.registerOptions)
-}
-
-const requestRegisterVerify = async (credential: WebAuthnRegisterCredentialDto) => {
-  return getApiClient().post<WebAuthnRegisterResultDto>(endpoint.webauthn.registerVerify, {
-    body: credential,
-  })
-}
-
-const requestAuthenticateOptions = async (input: WebAuthnAuthenticateOptionsRequestDto = {}) => {
-  return getApiClient().post<WebAuthnAuthenticateOptionsDto>(
-    endpoint.webauthn.authenticateOptions,
-    { body: input },
+  return getApiClient().post<WebAuthnRegisterOptionsResponseDto>(
+    endpoint.webauthn.registerOptions,
+    {},
   )
 }
 
-const requestAuthenticateVerify = async (credential: WebAuthnAuthenticateCredentialDto) => {
-  return getApiClient().post<WebAuthnSessionDto>(endpoint.webauthn.authenticateVerify, {
-    body: credential,
+const requestRegisterVerify = async (body: WebAuthnRegisterCredentialRequestDto) => {
+  return getApiClient().post<
+    WebAuthnRegisterResultResponseDto,
+    NoParams,
+    WebAuthnRegisterCredentialRequestDto
+  >(endpoint.webauthn.registerVerify, {
+    body,
+  })
+}
+
+const requestAuthenticateOptions = async (body: WebAuthnAuthenticateOptionsRequestDto = {}) => {
+  return getApiClient().post<
+    WebAuthnAuthenticateOptionsResponseDto,
+    NoParams,
+    WebAuthnAuthenticateOptionsRequestDto
+  >(endpoint.webauthn.authenticateOptions, { body })
+}
+
+const requestAuthenticateVerify = async (body: WebAuthnAuthenticateCredentialRequestDto) => {
+  return getApiClient().post<
+    WebAuthnSessionResponseDto,
+    NoParams,
+    WebAuthnAuthenticateCredentialRequestDto
+  >(endpoint.webauthn.authenticateVerify, {
+    body,
   })
 }
 
 const requestRemoveCredentials = async () => {
-  await getApiClient().delete(endpoint.webauthn.credentials)
+  await getApiClient().delete(endpoint.webauthn.credentials, {})
 }
 
 const webauthnController = {
@@ -65,7 +78,7 @@ const webauthnController = {
 
   removeCredentials: () =>
     mutationOptions({
-      mutationKey: [endpoint.webauthn.credentials, 'remove'] as const,
+      mutationKey: [endpoint.webauthn.credentials, "remove"] as const,
       mutationFn: requestRemoveCredentials,
     }),
 }

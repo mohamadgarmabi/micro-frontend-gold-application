@@ -53,7 +53,7 @@ vitest.config.*.timestamp*
 .github
 .opencode
 
-pnpm-store/
+.pnpm-store/
 ./pnpm-store
 .specify
 /.specify

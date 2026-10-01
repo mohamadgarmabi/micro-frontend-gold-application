@@ -1,14 +1,22 @@
-export type PostDto = {
+type PostResponseDto = {
   id: number
   title: string
   body: string
   userId?: number
 }
 
-export type CreatePostDto = {
+type PostRequestDto = {
   title: string
   body: string
   userId: number
 }
 
-export type UpdatePostDto = Partial<CreatePostDto>
+type PostParamsDto = {
+  id: number
+}
+
+type PostListQueryDto = {
+  limit?: number
+}
+
+export type { PostListQueryDto, PostParamsDto, PostRequestDto, PostResponseDto }

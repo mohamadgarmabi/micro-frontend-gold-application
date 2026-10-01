@@ -1,23 +1,23 @@
 import type {
-  WebAuthnAuthenticateCredentialDto,
-  WebAuthnAuthenticateOptionsDto,
+  WebAuthnAuthenticateCredentialRequestDto,
+  WebAuthnAuthenticateOptionsResponseDto,
   WebAuthnCredentialDescriptor,
-  WebAuthnRegisterCredentialDto,
-  WebAuthnRegisterOptionsDto,
-} from '@gold/apis/webauthn'
+  WebAuthnRegisterCredentialRequestDto,
+  WebAuthnRegisterOptionsResponseDto,
+} from "@gold/apis/webauthn"
 
 const bufferToBase64Url = (buffer: ArrayBuffer) => {
   const base64 = btoa(
-    Array.from(new Uint8Array(buffer), (byte) => String.fromCharCode(byte)).join(''),
+    Array.from(new Uint8Array(buffer), (byte) => String.fromCharCode(byte)).join(""),
   )
 
-  return base64.replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '')
+  return base64.replaceAll("+", "-").replaceAll("/", "_").replaceAll("=", "")
 }
 
 const base64UrlToBuffer = (value: string) => {
-  const padded = value.replaceAll('-', '+').replaceAll('_', '/')
+  const padded = value.replaceAll("-", "+").replaceAll("_", "/")
   const padLength = (4 - (padded.length % 4)) % 4
-  const base64 = `${padded}${'='.repeat(padLength)}`
+  const base64 = `${padded}${"=".repeat(padLength)}`
 
   return Uint8Array.from(atob(base64), (char) => char.charCodeAt(0))
 }
@@ -30,7 +30,7 @@ const toCredentialDescriptors = (credentials: WebAuthnCredentialDescriptor[] | u
   }))
 
 const toCreationOptions = (
-  options: WebAuthnRegisterOptionsDto,
+  options: WebAuthnRegisterOptionsResponseDto,
 ): PublicKeyCredentialCreationOptions => ({
   challenge: base64UrlToBuffer(options.challenge),
   rp: {
@@ -50,14 +50,14 @@ const toCreationOptions = (
 })
 
 const toRequestOptions = (
-  options: WebAuthnAuthenticateOptionsDto,
+  options: WebAuthnAuthenticateOptionsResponseDto,
   fallbackCredentialId?: string,
 ): PublicKeyCredentialRequestOptions => {
   const allowCredentials =
     options.allowCredentials && options.allowCredentials.length > 0
       ? options.allowCredentials
       : fallbackCredentialId
-        ? [{ id: fallbackCredentialId, type: 'public-key' as const }]
+        ? [{ id: fallbackCredentialId, type: "public-key" as const }]
         : undefined
 
   return {
@@ -71,32 +71,34 @@ const toRequestOptions = (
 
 const isAuthenticatorTransport = (value: string): value is AuthenticatorTransport => {
   switch (value) {
-    case 'ble':
-    case 'hybrid':
-    case 'internal':
-    case 'nfc':
-    case 'usb':
+    case "ble":
+    case "hybrid":
+    case "internal":
+    case "nfc":
+    case "usb":
       return true
     default:
       return false
   }
 }
 
-const serializeAttestation = (credential: PublicKeyCredential): WebAuthnRegisterCredentialDto => {
+const serializeAttestation = (
+  credential: PublicKeyCredential,
+): WebAuthnRegisterCredentialRequestDto => {
   const { response } = credential
   if (!(response instanceof AuthenticatorAttestationResponse)) {
-    throw new TypeError('Invalid attestation response')
+    throw new TypeError("Invalid attestation response")
   }
 
   const transports =
-    typeof response.getTransports === 'function'
+    typeof response.getTransports === "function"
       ? response.getTransports().filter(isAuthenticatorTransport)
       : undefined
 
   return {
     id: credential.id,
     rawId: bufferToBase64Url(credential.rawId),
-    type: 'public-key',
+    type: "public-key",
     response: {
       clientDataJSON: bufferToBase64Url(response.clientDataJSON),
       attestationObject: bufferToBase64Url(response.attestationObject),
@@ -105,10 +107,12 @@ const serializeAttestation = (credential: PublicKeyCredential): WebAuthnRegister
   }
 }
 
-const serializeAssertion = (credential: PublicKeyCredential): WebAuthnAuthenticateCredentialDto => {
+const serializeAssertion = (
+  credential: PublicKeyCredential,
+): WebAuthnAuthenticateCredentialRequestDto => {
   const { response } = credential
   if (!(response instanceof AuthenticatorAssertionResponse)) {
-    throw new TypeError('Invalid assertion response')
+    throw new TypeError("Invalid assertion response")
   }
 
   const userHandle = response.userHandle ? bufferToBase64Url(response.userHandle) : null
@@ -116,7 +120,7 @@ const serializeAssertion = (credential: PublicKeyCredential): WebAuthnAuthentica
   return {
     id: credential.id,
     rawId: bufferToBase64Url(credential.rawId),
-    type: 'public-key',
+    type: "public-key",
     response: {
       clientDataJSON: bufferToBase64Url(response.clientDataJSON),
       authenticatorData: bufferToBase64Url(response.authenticatorData),

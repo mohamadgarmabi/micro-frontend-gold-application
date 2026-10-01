@@ -1,8 +1,13 @@
 import type {
-  MarketActivityDto,
-  MarketAssetDto,
-  MarketOverviewDto,
-  MarketTickDto,
+  MarketActivityResponseDto,
+  MarketAssetResponseDto,
+  MarketOverviewResponseDto,
+  MarketTickResponseDto,
 } from "./market.dto"
 
-export type { MarketActivityDto, MarketAssetDto, MarketOverviewDto, MarketTickDto }
+export type {
+  MarketActivityResponseDto,
+  MarketAssetResponseDto,
+  MarketOverviewResponseDto,
+  MarketTickResponseDto,
+}

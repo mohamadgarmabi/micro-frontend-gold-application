@@ -1,5 +1,3 @@
-export type {
-  CreatePostDto,
-  PostDto,
-  UpdatePostDto,
-} from './post.dto'
+import type { PostListQueryDto, PostParamsDto, PostRequestDto, PostResponseDto } from "./post.dto"
+
+export type { PostListQueryDto, PostParamsDto, PostRequestDto, PostResponseDto }

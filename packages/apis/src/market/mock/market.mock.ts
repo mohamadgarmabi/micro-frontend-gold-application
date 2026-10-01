@@ -1,6 +1,6 @@
-import type { MarketOverviewDto, MarketTickDto } from "../dto"
+import type { MarketOverviewResponseDto, MarketTickResponseDto } from "../dto"
 
-const marketOverviewMock: MarketOverviewDto = {
+const marketOverviewMock: MarketOverviewResponseDto = {
   spotPrice: 3302.45,
   change: 1.28,
   assets: [
@@ -31,7 +31,7 @@ const jitter = (value: number, spread: number) => {
 }
 
 /** Infinite mock SSE stream of market ticks (for local / demo). */
-const streamMarketTicksMock = (): AsyncIterable<MarketTickDto> => {
+const streamMarketTicksMock = (): AsyncIterable<MarketTickResponseDto> => {
   let spotPrice = marketOverviewMock.spotPrice
   let change = marketOverviewMock.change
   const assets = structuredClone(marketOverviewMock.assets)
