@@ -1,12 +1,3 @@
-import {
-  requestAuthenticateOptions,
-  requestAuthenticateVerify,
-  requestRegisterOptions,
-  requestRegisterVerify,
-  requestRemoveCredentials,
-  webauthnController,
-} from "./webauthn.controller"
-
 export {
   requestAuthenticateOptions,
   requestAuthenticateVerify,
@@ -14,4 +5,4 @@ export {
   requestRegisterVerify,
   requestRemoveCredentials,
   webauthnController,
-}
+} from "./webauthn.controller"

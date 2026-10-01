@@ -9,7 +9,6 @@ allowBuilds:
   less: false
   nx: true
   unrs-resolver: false
-  vue-demi: false
 autoInstallPeers: true
 minimumReleaseAgeExclude:
   - tanstack-fetch@1.0.1 || 1.4.0 || 1.4.2 || 1.5.0 || 1.6.1

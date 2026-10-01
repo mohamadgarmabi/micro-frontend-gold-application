@@ -11,16 +11,10 @@
     "typescript": "javascript",
     "typescriptreact": "javascript"
   },
-  "tailwindCSS.classAttributes": [
-    "class",
-    "className",
-    "ngClass",
-    "class:list"
-  ],
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "class:list"],
   "tailwindCSS.classFunctions": ["cva", "cn", "clsx", "twJoin", "twMerge"],
   "tailwindCSS.experimental.configFile": {
     "apps/application-pwa/src/styles.css": "apps/application-pwa/**",
-    "apps/website/src/styles.css": "apps/website/**",
     "packages/design-system/src/styles.css": "packages/**"
   }
 }

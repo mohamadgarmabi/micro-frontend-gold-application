@@ -1,6 +1,6 @@
 # Gold
 
-Nx monorepo with **Tailwind CSS v4 design tokens**, **HeroUI** shared components, and sample **React** + **Vue** apps.
+Nx monorepo with **Tailwind CSS v4 design tokens**, **HeroUI** shared components, and the **application-pwa** React app.
 
 ## Structure
 
@@ -8,16 +8,18 @@ Nx monorepo with **Tailwind CSS v4 design tokens**, **HeroUI** shared components
 packages/
   design-system/       # Tailwind v4 tokens + global CSS
   shared-components/   # Shared UI components — Module Federation provider
+  apis/                # Shared API layer (tanstack-fetch + react-query)
 apps/
-  website/             # Vue consumer (loads React remotes)
+  application-pwa/     # React PWA
 ```
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| `@gold/design-system` | Gold tokens, portal setup, component utilities |
+| Package                   | Description                                     |
+| ------------------------- | ----------------------------------------------- |
+| `@gold/design-system`     | Gold tokens, portal setup, component utilities  |
 | `@gold/shared-components` | Styled UI components (MF remote, port **5100**) |
+| `@gold/apis`              | Typed API clients and query/mutation options    |
 
 ## Getting started
 
@@ -25,18 +27,17 @@ apps/
 pnpm install
 ```
 
-- React: http://localhost:4200
-- Vue: http://localhost:4300
+- PWA: http://localhost:4400 (or configured port)
 - Shared components: http://localhost:5100
 
 ```bash
-pnpm stop        # free ports 4200, 4300, 5100
+pnpm stop        # free ports 4200, 4400, 5100
 ```
 
 ### Run individually
 
 ```bash
-nx dev website
+nx dev application-pwa
 nx dev shared-components
 ```
 
@@ -45,16 +46,16 @@ nx dev shared-components
 Import design system CSS:
 
 ```css
-@import '@gold/design-system/styles.css';
+@import "@gold/design-system/styles.css";
 ```
 
 Load federated components:
 
 ```tsx
-import { lazyRemote } from './mf';
+import { lazyRemote } from "./mf"
 
-const Button = lazyRemote('shared_components', 'Button');
-const Dialog = lazyRemote('shared_components', 'Dialog');
+const Button = lazyRemote("shared_components", "Button")
+const Dialog = lazyRemote("shared_components", "Dialog")
 
 // Compound components keep Base UI API:
 // <Dialog><Dialog.Trigger>...</Dialog.Trigger></Dialog>

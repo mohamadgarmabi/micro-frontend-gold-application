@@ -1,3 +1,1 @@
-import { marketController } from "./market.controller"
-
-export { marketController }
+export { marketController } from "./market.controller"

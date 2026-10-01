@@ -3,16 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "stop": "for port in 4200 4300 4400 5100; do lsof -ti tcp:$port | xargs kill -9 2>/dev/null; done || true",
+    "stop": "for port in 4200 4400 5100; do lsof -ti tcp:$port | xargs kill -9 2>/dev/null; done || true",
     "check:no-js": "tsx scripts/check-no-js-source.ts",
     "typecheck:scripts": "tsc --noEmit -p scripts/tsconfig.json",
     "predev:react": "pnpm stop",
-    "predev:website": "pnpm stop",
     "predev:application-pwa": "pnpm stop",
-    "dev:website": "nx dev website",
     "dev:application-pwa": "nx dev application-pwa",
     "dev:components": "nx dev shared-components",
-    "build": "nx run-many -t build -p shared-components,website,application-pwa,form",
+    "build": "nx run-many -t build -p shared-components,application-pwa,form",
     "lint": "nx run-many -t lint --all --output-style=static",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -28,8 +26,7 @@
   "dependencies": {
     "@module-federation/runtime": "^2.9.2",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0",
-    "vue": "^3.5.43"
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.7",
