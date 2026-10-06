@@ -295,8 +295,8 @@ importers:
   packages/apis:
     dependencies:
       tanstack-fetch:
-        specifier: ^1.6.1
-        version: 1.6.1(react@19.3.0)(vue@3.5.43(@typescript/typescript6@6.0.2))(yaml@2.9.1)
+        specifier: ^1.6.3
+        version: 1.6.3(react@19.3.0)(vue@3.5.43(@typescript/typescript6@6.0.2))(yaml@2.9.1)
     devDependencies:
       "@tanstack/react-query":
         specifier: ^5.104.0
@@ -14365,10 +14365,10 @@ packages:
         integrity: sha512-gOhV3P7ufE62QDGg1zVaTgCR+EtPv92k2nIhVcVKcLmxT1sUBsQGhnZj175j+MqRt4zLF7ic+sCYjfhxMxj7YQ==,
       }
 
-  tanstack-fetch@1.6.1:
+  tanstack-fetch@1.6.3:
     resolution:
       {
-        integrity: sha512-kIkQHfZJzdYuLiLURWChEI1G1qnvcySJWi9+UcrlwG7OJ4PF64najL3fgADpmEK8elEoUTdz9TGPhLSyqjaMUg==,
+        integrity: sha512-45RCPNFEz1PUY3L6lhGpXrfPbSfPCvfs/3uEs547/9EZaVEAV7JcoOL0ie+7Wq7nkytHcgdC/JucnMwfAbj2Qw==,
       }
     engines: { node: ">=18" }
     hasBin: true
@@ -15909,7 +15909,7 @@ snapshots:
       "@babel/code-frame": 7.29.7
       "@babel/generator": 7.29.8
       "@babel/helper-compilation-targets": 7.29.7
-      "@babel/helper-module-transforms": 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
+      "@babel/helper-module-transforms": 7.29.7(@babel/core@7.29.7(supports-color@7.2.0))(supports-color@8.1.1)
       "@babel/helpers": 7.29.7
       "@babel/parser": 7.29.9
       "@babel/template": 7.29.7
@@ -16042,6 +16042,15 @@ snapshots:
       "@babel/helper-module-imports": 7.29.7(supports-color@7.2.0)
       "@babel/helper-validator-identifier": 7.29.7
       "@babel/traverse": 7.29.8(supports-color@7.2.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  "@babel/helper-module-transforms@7.29.7(@babel/core@7.29.7(supports-color@7.2.0))(supports-color@8.1.1)":
+    dependencies:
+      "@babel/core": 7.29.7(supports-color@7.2.0)
+      "@babel/helper-module-imports": 7.29.7(supports-color@8.1.1)
+      "@babel/helper-validator-identifier": 7.29.7
+      "@babel/traverse": 7.29.8(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -26059,7 +26068,7 @@ snapshots:
 
   tailwindcss@4.3.3: {}
 
-  tanstack-fetch@1.6.1(react@19.3.0)(vue@3.5.43(@typescript/typescript6@6.0.2))(yaml@2.9.1):
+  tanstack-fetch@1.6.3(react@19.3.0)(vue@3.5.43(@typescript/typescript6@6.0.2))(yaml@2.9.1):
     optionalDependencies:
       react: 19.3.0
       vue: 3.5.43(@typescript/typescript6@6.0.2)
