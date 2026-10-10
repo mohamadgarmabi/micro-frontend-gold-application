@@ -2,10 +2,7 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "analytics": false,
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
@@ -59,9 +56,34 @@
   ],
   "targetDefaults": {
     "test": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
+    }
+  },
+  "release": {
+    "projects": ["apis", "form", "shared-components", "design-system", "application-pwa"],
+    "projectsRelationship": "independent",
+    "version": {
+      "conventionalCommits": true,
+      "updateDependents": "auto",
+      "git": {
+        "commit": true,
+        "tag": true,
+        "push": true,
+        "commitMessage": "chore(release): publish [skip ci]"
+      }
+    },
+    "changelog": {
+      "projectChangelogs": true,
+      "workspaceChangelog": false,
+      "git": {
+        "commit": true,
+        "tag": true,
+        "push": true,
+        "commitMessage": "chore(release): publish [skip ci]"
+      }
+    },
+    "conventionalCommits": {
+      "useCommitScope": false
     }
   },
   "generators": {

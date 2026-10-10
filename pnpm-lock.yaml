@@ -295,8 +295,8 @@ importers:
   packages/apis:
     dependencies:
       tanstack-fetch:
-        specifier: ^1.6.3
-        version: 1.6.3(react@19.3.0)(vue@3.5.43(@typescript/typescript6@6.0.2))(yaml@2.9.1)
+        specifier: ^1.7.0
+        version: 1.7.0(react@19.3.0)(solid-js@1.9.15)(vue@3.5.43(@typescript/typescript6@6.0.2))(yaml@2.9.1)
     devDependencies:
       "@tanstack/react-query":
         specifier: ^5.104.0
@@ -14365,25 +14365,34 @@ packages:
         integrity: sha512-gOhV3P7ufE62QDGg1zVaTgCR+EtPv92k2nIhVcVKcLmxT1sUBsQGhnZj175j+MqRt4zLF7ic+sCYjfhxMxj7YQ==,
       }
 
-  tanstack-fetch@1.6.3:
+  tanstack-fetch@1.7.0:
     resolution:
       {
-        integrity: sha512-45RCPNFEz1PUY3L6lhGpXrfPbSfPCvfs/3uEs547/9EZaVEAV7JcoOL0ie+7Wq7nkytHcgdC/JucnMwfAbj2Qw==,
+        integrity: sha512-DTq24AxGLFdhlQWE5VfN4bjBsP1lHFzMLIBRgFzX07ru3uugvxPWJxkgkjKIcSy3UbxyqCLNY5cIBUvRkHlH4A==,
       }
     engines: { node: ">=18" }
     hasBin: true
     peerDependencies:
+      "@angular/core": ">=17"
       "@trpc/client": ">=10"
       "@trpc/server": ">=10"
       react: ">=18"
+      solid-js: ">=1.8"
+      svelte: ">=4"
       vue: ">=3.3"
       yaml: ^2.0.0
     peerDependenciesMeta:
+      "@angular/core":
+        optional: true
       "@trpc/client":
         optional: true
       "@trpc/server":
         optional: true
       react:
+        optional: true
+      solid-js:
+        optional: true
+      svelte:
         optional: true
       vue:
         optional: true
@@ -26068,9 +26077,10 @@ snapshots:
 
   tailwindcss@4.3.3: {}
 
-  tanstack-fetch@1.6.3(react@19.3.0)(vue@3.5.43(@typescript/typescript6@6.0.2))(yaml@2.9.1):
+  tanstack-fetch@1.7.0(react@19.3.0)(solid-js@1.9.15)(vue@3.5.43(@typescript/typescript6@6.0.2))(yaml@2.9.1):
     optionalDependencies:
       react: 19.3.0
+      solid-js: 1.9.15
       vue: 3.5.43(@typescript/typescript6@6.0.2)
       yaml: 2.9.1
 
