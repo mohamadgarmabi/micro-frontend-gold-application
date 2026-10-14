@@ -1,12 +1,12 @@
-import { createStore } from '@tanstack/store'
-import { DEFAULT_TWO_FACTOR_ENABLED } from '#/config/security.constants'
-import type { SecurityState } from '../types'
+import { createStore } from "@tanstack/store"
+import { DEFAULT_TWO_FACTOR_ENABLED } from "#/config/security.constants"
+import type { SecurityState } from "../types"
 import {
   persistPinHash,
   persistPinUnlocked,
   persistTwoFactorEnabled,
   readSecurityState,
-} from '../utils/security.utils'
+} from "../utils/security.utils"
 
 const defaultSecurityState: SecurityState = {
   pinHash: null,

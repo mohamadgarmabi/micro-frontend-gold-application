@@ -1,6 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
-import OptionsView from '#/modules/options/views/options-view'
+import { createFileRoute } from "@tanstack/react-router"
+import OptionsView from "#/modules/options/views/options-view"
 
-export const Route = createFileRoute('/(app)/options')({
+export const Route = createFileRoute("/(app)/options")({
   component: OptionsView,
 })

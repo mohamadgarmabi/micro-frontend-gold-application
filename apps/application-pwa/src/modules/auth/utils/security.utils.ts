@@ -3,17 +3,17 @@ import {
   PIN_HASH_STORAGE_KEY,
   PIN_UNLOCK_STORAGE_KEY,
   TWO_FACTOR_STORAGE_KEY,
-} from '#/config/security.constants'
-import type { SecurityState } from '../types'
+} from "#/config/security.constants"
+import type { SecurityState } from "../types"
 
-const isBrowser = () => typeof window !== 'undefined'
+const isBrowser = () => typeof window !== "undefined"
 
 const toHex = (buffer: ArrayBuffer) => {
-  return Array.from(new Uint8Array(buffer), (byte) => byte.toString(16).padStart(2, '0')).join('')
+  return Array.from(new Uint8Array(buffer), (byte) => byte.toString(16).padStart(2, "0")).join("")
 }
 
 const hashPin = async (pin: string) => {
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(pin))
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(pin))
   return toHex(digest)
 }
 
@@ -45,11 +45,11 @@ const readTwoFactorEnabled = () => {
 
   const stored = window.localStorage.getItem(TWO_FACTOR_STORAGE_KEY)
 
-  if (stored === 'true') {
+  if (stored === "true") {
     return true
   }
 
-  if (stored === 'false') {
+  if (stored === "false") {
     return false
   }
 
@@ -73,7 +73,7 @@ const readPinUnlocked = (hasPin: boolean) => {
     return true
   }
 
-  return window.sessionStorage.getItem(PIN_UNLOCK_STORAGE_KEY) === '1'
+  return window.sessionStorage.getItem(PIN_UNLOCK_STORAGE_KEY) === "1"
 }
 
 const persistPinUnlocked = (unlocked: boolean) => {
@@ -82,7 +82,7 @@ const persistPinUnlocked = (unlocked: boolean) => {
   }
 
   if (unlocked) {
-    window.sessionStorage.setItem(PIN_UNLOCK_STORAGE_KEY, '1')
+    window.sessionStorage.setItem(PIN_UNLOCK_STORAGE_KEY, "1")
     return
   }
 

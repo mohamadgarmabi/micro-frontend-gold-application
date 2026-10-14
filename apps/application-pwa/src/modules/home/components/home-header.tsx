@@ -1,13 +1,13 @@
-import Button from '@gold/shared-components/button'
-import Typography from '@gold/shared-components/typography'
-import { Hexagon, TrendingUp } from 'lucide-react'
-import type { HomeHeaderModel } from '../types'
+import Button from "@gold/shared-components/button"
+import Typography from "@gold/shared-components/typography"
+import { Hexagon, TrendingUp } from "lucide-react"
+import type { HomeHeaderModel } from "../types"
 
 const HomeHeader = ({ greeting, brandName, onOpenChart }: HomeHeaderModel) => {
   return (
-    <div className="flex justify-between items-center mb-6">
+    <div className="mb-6 flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <span className="flex justify-center items-center bg-accent shadow-sm rounded-[var(--radius)] size-11 text-accent-foreground">
+        <span className="bg-accent text-accent-foreground flex size-11 items-center justify-center rounded-[var(--radius)] shadow-sm">
           <Hexagon size={18} strokeWidth={2.4} />
         </span>
         <div>

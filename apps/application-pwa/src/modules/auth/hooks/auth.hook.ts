@@ -1,4 +1,4 @@
-import { toast } from "@gold/shared-components/sonner"
+import { toast } from "@gold/shared-components/toaster"
 import { useSelector } from "@tanstack/react-store"
 import { useRouter, useSearch } from "@tanstack/react-router"
 import { buildDefaultValues, defineFormSchema, type FooterButtons } from "@gold/form"
@@ -84,8 +84,8 @@ const useLogin = () => {
   const otpComplete = otp.length === 6
   const canResend = resendSeconds <= 0
   const otpSlotClassName = otpError
-    ? "gold-otp-slot bg-accent-foreground border-danger text-danger"
-    : "gold-otp-slot bg-accent-foreground"
+    ? "gold-otp-slot aspect-square min-w-0 flex-1 rounded-xl border border-danger bg-surface-muted p-0 text-lg font-medium leading-none text-danger"
+    : "gold-otp-slot aspect-square min-w-0 flex-1 rounded-xl border border-border-strong bg-surface-muted p-0 text-lg font-medium leading-none text-foreground data-filled:border-gold-600"
 
   useEffect(() => {
     if (!otpOpen) {

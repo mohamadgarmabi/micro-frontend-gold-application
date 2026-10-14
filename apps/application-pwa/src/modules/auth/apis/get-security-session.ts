@@ -1,7 +1,7 @@
-import { createIsomorphicFn } from '@tanstack/react-start'
-import { DEFAULT_TWO_FACTOR_ENABLED } from '#/config/security.constants'
-import { securityStore } from '../stores/security.store'
-import type { SecurityState } from '../types'
+import { createIsomorphicFn } from "@tanstack/react-start"
+import { DEFAULT_TWO_FACTOR_ENABLED } from "#/config/security.constants"
+import { securityStore } from "../stores/security.store"
+import type { SecurityState } from "../types"
 
 const defaultSecurityState: SecurityState = {
   pinHash: null,

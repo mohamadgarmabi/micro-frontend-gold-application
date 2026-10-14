@@ -1,6 +1,6 @@
-import Typography from '@gold/shared-components/typography'
-import { useThemeSelector } from '../hooks/theme-selector.hook'
-import type { ThemePreference } from '../types'
+import Typography from "@gold/shared-components/typography"
+import { useThemeSelector } from "../hooks/theme-selector.hook"
+import type { ThemePreference } from "../types"
 
 type ThemeSelectorProps = {
   value: ThemePreference

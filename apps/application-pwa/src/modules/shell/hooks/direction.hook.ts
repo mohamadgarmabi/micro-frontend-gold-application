@@ -1,7 +1,7 @@
-import { useSelector } from '@tanstack/react-store'
-import { useEffect } from 'react'
-import { directionStore } from '../stores/direction.store'
-import type { Direction } from '../types'
+import { useSelector } from "@tanstack/react-store"
+import { useEffect } from "react"
+import { directionStore } from "../stores/direction.store"
+import type { Direction } from "../types"
 
 const useDirection = () => {
   const direction: Direction = useSelector(directionStore, (state) => state)
@@ -15,15 +15,15 @@ const useDirection = () => {
   }
 
   const toggleDirection = () => {
-    setDirection(direction === 'rtl' ? 'ltr' : 'rtl')
+    setDirection(direction === "rtl" ? "ltr" : "rtl")
   }
 
-  const toasterPosition = direction === 'rtl' ? ('top-left' as const) : ('top-right' as const)
+  const toasterPosition = direction === "rtl" ? ("top-left" as const) : ("top-right" as const)
 
   return {
     direction,
     setDirection,
-    isRtl: direction === 'rtl',
+    isRtl: direction === "rtl",
     toasterPosition,
     toggleDirection,
   }

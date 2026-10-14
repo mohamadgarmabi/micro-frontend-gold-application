@@ -1,4 +1,4 @@
-import type { AuthContext, AuthSearchParams } from '../types'
+import type { AuthContext, AuthSearchParams } from "../types"
 
 const resolveAuthContext = (token: string | null): AuthContext => {
   return {
@@ -7,17 +7,17 @@ const resolveAuthContext = (token: string | null): AuthContext => {
   }
 }
 
-const resolveRedirectSearch = (search: unknown): AuthSearchParams['redirect'] => {
+const resolveRedirectSearch = (search: unknown): AuthSearchParams["redirect"] => {
   if (
-    typeof search === 'object' &&
+    typeof search === "object" &&
     search !== null &&
-    'redirect' in search &&
-    typeof search.redirect === 'string'
+    "redirect" in search &&
+    typeof search.redirect === "string"
   ) {
     return search.redirect
   }
 
-  return '/home'
+  return "/home"
 }
 
 export { resolveAuthContext, resolveRedirectSearch }

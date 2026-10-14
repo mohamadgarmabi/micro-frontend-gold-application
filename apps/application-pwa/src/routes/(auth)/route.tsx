@@ -1,8 +1,8 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
-import { redirectIfAuthenticated } from '#/modules/auth/utils/auth.guards'
-import { getSecurityState } from '#/modules/auth/stores/security.store'
-import { resolveRedirectSearch } from '#/modules/auth/utils/auth.utils'
-import AppShell from '#/modules/shell/components/app-shell'
+import { Outlet, createFileRoute } from "@tanstack/react-router"
+import { redirectIfAuthenticated } from "#/modules/auth/utils/auth.guards"
+import { getSecurityState } from "#/modules/auth/stores/security.store"
+import { resolveRedirectSearch } from "#/modules/auth/utils/auth.utils"
+import AppShell from "#/modules/shell/components/app-shell"
 
 const AuthLayout = () => {
   return (
@@ -12,7 +12,7 @@ const AuthLayout = () => {
   )
 }
 
-export const Route = createFileRoute('/(auth)')({
+export const Route = createFileRoute("/(auth)")({
   validateSearch: (search) => ({
     redirect: resolveRedirectSearch(search),
   }),

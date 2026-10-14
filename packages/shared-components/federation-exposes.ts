@@ -22,6 +22,9 @@ const federationExposes = {
   "./Input": "./src/components/input/index.tsx",
   "./InputOtp": "./src/components/input-otp/index.tsx",
   "./Link": "./src/components/link/index.tsx",
+  "./GlassToast": "./src/components/glass-toast/index.tsx",
+  "./LiquidGlass": "./src/components/liquid-glass/index.tsx",
+  "./RubberSegment": "./src/components/rubber-segment/index.tsx",
   "./Menu": "./src/components/menu/index.tsx",
   "./Menubar": "./src/components/menubar/index.tsx",
   "./Meter": "./src/components/meter/index.tsx",
@@ -39,7 +42,8 @@ const federationExposes = {
   "./Select": "./src/components/select/index.tsx",
   "./Separator": "./src/components/separator/index.tsx",
   "./Slider": "./src/components/slider/index.tsx",
-  "./Toaster": "./src/components/sonner/index.tsx",
+  "./SwipeRow": "./src/components/swipe-row/index.tsx",
+  "./Toaster": "./src/components/toaster/index.tsx",
   "./Switch": "./src/components/switch/index.tsx",
   "./Tabs": "./src/components/tabs/index.tsx",
   "./Toast": "./src/components/toast/index.tsx",
@@ -47,7 +51,7 @@ const federationExposes = {
   "./ToggleGroup": "./src/components/toggle-group/index.tsx",
   "./Toolbar": "./src/components/toolbar/index.tsx",
   "./Tooltip": "./src/components/tooltip/index.tsx",
-  "./Typography": "./src/components/typography/index.tsx"
-} as const;
+  "./Typography": "./src/components/typography/index.tsx",
+} as const
 
-export { federationExposes };
+export { federationExposes }

@@ -1,6 +1,6 @@
-import { redirect } from '@tanstack/react-router'
-import type { AuthContext, AuthSearchParams, SecurityState } from '../types'
-import { needsPinUnlock } from './security.utils'
+import { redirect } from "@tanstack/react-router"
+import type { AuthContext, AuthSearchParams, SecurityState } from "../types"
+import { needsPinUnlock } from "./security.utils"
 
 type RequireAuthOptions = {
   auth: AuthContext
@@ -11,7 +11,7 @@ type RedirectIfAuthenticatedOptions = {
   auth: AuthContext
   security: SecurityState
   pathname: string
-  redirectTo: AuthSearchParams['redirect']
+  redirectTo: AuthSearchParams["redirect"]
 }
 
 type RequirePinUnlockOptions = {
@@ -26,7 +26,7 @@ const requireAuth = ({ auth, href }: RequireAuthOptions): void => {
   }
 
   throw redirect({
-    to: '/login',
+    to: "/login",
     search: { redirect: href },
   })
 }
@@ -42,12 +42,12 @@ const redirectIfAuthenticated = ({
   }
 
   if (needsPinUnlock(security)) {
-    if (pathname === '/pin') {
+    if (pathname === "/pin") {
       return
     }
 
     throw redirect({
-      to: '/pin',
+      to: "/pin",
       search: { redirect: redirectTo },
     })
   }
@@ -61,7 +61,7 @@ const requirePinUnlock = ({ auth, security, href }: RequirePinUnlockOptions): vo
   }
 
   throw redirect({
-    to: '/pin',
+    to: "/pin",
     search: { redirect: href },
   })
 }

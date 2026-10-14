@@ -1,9 +1,9 @@
-import { createStore } from '@tanstack/store'
-import { DEFAULT_VIEW_TRANSITION_ENABLED } from '#/config/view-transition.constants'
+import { createStore } from "@tanstack/store"
+import { DEFAULT_VIEW_TRANSITION_ENABLED } from "#/config/view-transition.constants"
 import {
   persistViewTransitionEnabled,
   readViewTransitionEnabled,
-} from '../utils/view-transition.utils'
+} from "../utils/view-transition.utils"
 
 const viewTransitionStore = createStore(DEFAULT_VIEW_TRANSITION_ENABLED, ({ setState }) => ({
   hydrate: (enabled: boolean) => {

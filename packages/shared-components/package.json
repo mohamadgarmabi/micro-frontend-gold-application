@@ -48,13 +48,16 @@
     "@gold/design-system": "workspace:*",
     "@heroui/react": "^3.2.6",
     "@persian-tools/persian-tools": "^4.0.4",
+    "@vepando/liquid-glass-react": "^1.0.1",
     "class-variance-authority": "^0.7.1",
+    "motion": "^14.1.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "sonner": "^2.0.8",
     "vaul": "^1.1.2"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": "./src/index.ts",
     "./cn": {
@@ -85,7 +88,10 @@
     "./flex": "./src/components/flex/index.tsx",
     "./form": "./src/components/form/index.tsx",
     "./grid": "./src/components/grid/index.tsx",
+    "./glass-toast": "./src/components/glass-toast/index.tsx",
     "./link": "./src/components/link/index.tsx",
+    "./liquid-glass": "./src/components/liquid-glass/index.tsx",
+    "./rubber-segment": "./src/components/rubber-segment/index.tsx",
     "./input": "./src/components/input/index.tsx",
     "./input-otp": "./src/components/input-otp/index.tsx",
     "./menu": "./src/components/menu/index.tsx",
@@ -105,10 +111,11 @@
     "./select": "./src/components/select/index.tsx",
     "./separator": "./src/components/separator/index.tsx",
     "./slider": "./src/components/slider/index.tsx",
-    "./sonner": "./src/components/sonner/index.tsx",
+    "./swipe-row": "./src/components/swipe-row/index.tsx",
     "./switch": "./src/components/switch/index.tsx",
     "./tabs": "./src/components/tabs/index.tsx",
     "./toast": "./src/components/toast/index.tsx",
+    "./toaster": "./src/components/toaster/index.tsx",
     "./toggle-group": "./src/components/toggle-group/index.tsx",
     "./toggle": "./src/components/toggle/index.tsx",
     "./toolbar": "./src/components/toolbar/index.tsx",

@@ -1,9 +1,10 @@
-import Drawer from '@gold/shared-components/drawer'
-import OTPField from '@gold/shared-components/otp-field'
-import Typography from '@gold/shared-components/typography'
-import { ChevronRight } from 'lucide-react'
-import { PIN_LENGTH } from '#/config/security.constants'
-import { usePinDrawer } from '#/modules/auth/hooks/pin.hook'
+import Drawer from "@gold/shared-components/drawer"
+import LiquidGlass from "@gold/shared-components/liquid-glass"
+import OTPField from "@gold/shared-components/otp-field"
+import Typography from "@gold/shared-components/typography"
+import { ChevronRight } from "lucide-react"
+import { PIN_LENGTH } from "#/config/security.constants"
+import { usePinDrawer } from "#/modules/auth/hooks/pin.hook"
 
 const PinDrawer = () => {
   const {
@@ -21,16 +22,18 @@ const PinDrawer = () => {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={handleOpen}
-        className="flex w-full items-center justify-between rounded-xl border border-border bg-surface-elevated p-4 transition-all hover:border-gold-600/30"
-      >
-        <Typography as="span" size="sm">
-          {rowLabel}
-        </Typography>
-        <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
-      </button>
+      <LiquidGlass cornerRadius={16} className="rounded-xl">
+        <button
+          type="button"
+          onClick={handleOpen}
+          className="border-border/40 hover:border-gold-600/30 flex w-full items-center justify-between rounded-xl border bg-transparent p-4 transition-all"
+        >
+          <Typography as="span" size="sm">
+            {rowLabel}
+          </Typography>
+          <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
+        </button>
+      </LiquidGlass>
 
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
         <Drawer.Portal>
@@ -38,7 +41,7 @@ const PinDrawer = () => {
           <Drawer.Content className="px-5 pb-6">
             <Drawer.Handle />
             <Drawer.Title className="mt-2 text-lg">{title}</Drawer.Title>
-            <Drawer.Description className="mt-1 text-sm text-foreground-subtle">
+            <Drawer.Description className="text-foreground-subtle mt-1 text-sm">
               {hint}
             </Drawer.Description>
 

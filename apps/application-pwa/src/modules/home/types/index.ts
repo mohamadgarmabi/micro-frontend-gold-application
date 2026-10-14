@@ -1,6 +1,14 @@
+import type { SwipeAction, SwipeDirection } from "@gold/shared-components/swipe-row"
 import type { LucideIcon } from "lucide-react"
 
 type AssetId = "gold" | "silver"
+
+type HomeSwipeTheme = {
+  rowColor: string
+  drawerColor: string
+  textColor: string
+  actionColor: string
+}
 
 type HomeHeaderModel = {
   greeting: string
@@ -52,6 +60,10 @@ type HomeMarketRow = {
   change: number
   onSelect: () => void
   className: string
+  label: string
+  swipeDirection: SwipeDirection
+  swipeActions: SwipeAction[]
+  swipeTheme: HomeSwipeTheme
 }
 
 type HomeActivityRow = {
@@ -62,6 +74,11 @@ type HomeActivityRow = {
   ouncesLabel: string
   priceLabel: string
   className: string
+  label: string
+  swipeDirection: SwipeDirection
+  swipeActions: SwipeAction[]
+  swipeTheme: HomeSwipeTheme
+  onCommit: (action: SwipeAction) => void
 }
 
 export type {
@@ -71,6 +88,7 @@ export type {
   HomeHeroProps,
   HomeMarketRow,
   HomeQuoteModel,
+  HomeSwipeTheme,
   HomeTradeAction,
   HomeWallet,
   QuickAction,

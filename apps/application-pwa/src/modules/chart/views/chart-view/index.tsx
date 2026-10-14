@@ -1,8 +1,8 @@
-import Tabs from '@gold/shared-components/tabs'
-import Typography from '@gold/shared-components/typography'
-import Card from '#/modules/shell/components/card'
-import GoldBadge from '#/modules/shell/components/gold-badge'
-import PriceTag from '#/modules/shell/components/price-tag'
+import Tabs from "@gold/shared-components/tabs"
+import Typography from "@gold/shared-components/typography"
+import Card from "#/modules/shell/components/card"
+import GoldBadge from "#/modules/shell/components/gold-badge"
+import PriceTag from "#/modules/shell/components/price-tag"
 import {
   Area,
   AreaChart,
@@ -11,8 +11,8 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from 'recharts'
-import { useChart } from '../../hooks/chart.hook'
+} from "recharts"
+import { useChart } from "../../hooks/chart.hook"
 
 const ChartView = () => {
   const {
@@ -24,6 +24,11 @@ const ChartView = () => {
     latest,
     chgPct,
     chartStroke,
+    gridStroke,
+    axisFill,
+    tooltipStyle,
+    yAxisOrientation,
+    chartMargin,
     formatAxis,
     formatTooltip,
     stats,
@@ -32,18 +37,23 @@ const ChartView = () => {
   } = useChart()
 
   return (
-    <div className="pb-24 min-h-screen">
+    <div className="min-h-screen pb-24">
       <div className="px-5 pt-12 pb-4">
-        <div className="flex justify-between items-center mb-1">
+        <div className="mb-1 flex items-center justify-between">
           <div>
-            <Typography size="xs" weight="regular" color="subtle" className="uppercase tracking-widest">
-              {t('chart.goldSpot')}
+            <Typography
+              size="xs"
+              weight="regular"
+              color="subtle"
+              className="tracking-widest uppercase"
+            >
+              {t("chart.goldSpot")}
             </Typography>
             <Typography as="h2" size="xl" weight="semibold" className="aurum-serif">
               XAU / USD
             </Typography>
           </div>
-          <GoldBadge>{t('chart.live')}</GoldBadge>
+          <GoldBadge>{t("chart.live")}</GoldBadge>
         </div>
         <PriceTag value={latest} change={chgPct} size="lg" />
       </div>
@@ -60,50 +70,38 @@ const ChartView = () => {
 
       <div className="mb-6 px-3" style={{ height: 260 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData} margin={{ top: 8, right: 8, left: 0, bottom: 8 }}>
+          <AreaChart data={chartData} margin={chartMargin}>
             <defs>
               <linearGradient id="goldGradMain" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={chartStroke} stopOpacity={0.25} />
                 <stop offset="95%" stopColor={chartStroke} stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid
-              strokeDasharray="3 3"
-              stroke="color-mix(in oklab, var(--ds-brand) 6%, transparent)"
-            />
+            <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} />
             <XAxis
               dataKey="time"
               tick={{
-                fill: 'var(--ds-foreground-subtle)',
+                fill: axisFill,
                 fontSize: 10,
-                fontFamily: 'DM Mono, monospace',
+                fontFamily: "DM Mono, monospace",
               }}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
-              domain={['auto', 'auto']}
+              orientation={yAxisOrientation}
+              domain={["auto", "auto"]}
               tick={{
-                fill: 'var(--ds-foreground-subtle)',
+                fill: axisFill,
                 fontSize: 10,
-                fontFamily: 'DM Mono, monospace',
+                fontFamily: "DM Mono, monospace",
               }}
               axisLine={false}
               tickLine={false}
               width={55}
               tickFormatter={formatAxis}
             />
-            <Tooltip
-              contentStyle={{
-                background: 'var(--ds-surface-elevated)',
-                border: '1px solid var(--ds-border)',
-                borderRadius: 10,
-                fontFamily: 'DM Mono, monospace',
-                fontSize: 12,
-                color: 'var(--ds-foreground)',
-              }}
-              formatter={formatTooltip}
-            />
+            <Tooltip contentStyle={tooltipStyle} formatter={formatTooltip} />
             <Area
               type="monotone"
               dataKey="price"
@@ -111,20 +109,20 @@ const ChartView = () => {
               strokeWidth={2}
               fill="url(#goldGradMain)"
               dot={false}
-              activeDot={{ r: 4, fill: 'var(--ds-brand)', strokeWidth: 0 }}
+              activeDot={{ r: 4, fill: "var(--accent)", strokeWidth: 0 }}
             />
           </AreaChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="gap-3 grid grid-cols-2 mb-5 px-5">
+      <div className="mb-5 grid grid-cols-2 gap-3 px-5">
         {stats.map((stat) => (
           <Card key={stat.label} className="py-3">
             <Typography
               size="xs"
               weight="regular"
               color="subtle"
-              className="mb-1 uppercase tracking-widest"
+              className="mb-1 tracking-widest uppercase"
             >
               {stat.label}
             </Typography>
@@ -141,21 +139,33 @@ const ChartView = () => {
             size="xs"
             weight="regular"
             color="subtle"
-            className="mb-3 uppercase tracking-widest"
+            className="mb-3 tracking-widest uppercase"
           >
-            {t('chart.orderBook')}
+            {t("chart.orderBook")}
           </Typography>
-          <div className="gap-4 grid grid-cols-2">
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <Typography size="xs" weight="regular" color="success" className="mb-2">
-                {t('chart.bids')}
+                {t("chart.bids")}
               </Typography>
               {bids.map((row) => (
-                <div key={row.price} className="flex justify-between mb-1.5">
-                  <Typography as="span" size="xs" weight="regular" color="success" className="font-mono">
+                <div key={row.price} className="mb-1.5 flex justify-between">
+                  <Typography
+                    as="span"
+                    size="xs"
+                    weight="regular"
+                    color="success"
+                    className="font-mono"
+                  >
                     {row.price}
                   </Typography>
-                  <Typography as="span" size="xs" weight="regular" color="subtle" className="font-mono">
+                  <Typography
+                    as="span"
+                    size="xs"
+                    weight="regular"
+                    color="subtle"
+                    className="font-mono"
+                  >
                     {row.size}
                   </Typography>
                 </div>
@@ -163,14 +173,26 @@ const ChartView = () => {
             </div>
             <div>
               <Typography size="xs" weight="regular" color="danger" className="mb-2">
-                {t('chart.asks')}
+                {t("chart.asks")}
               </Typography>
               {asks.map((row) => (
-                <div key={row.price} className="flex justify-between mb-1.5">
-                  <Typography as="span" size="xs" weight="regular" color="danger" className="font-mono">
+                <div key={row.price} className="mb-1.5 flex justify-between">
+                  <Typography
+                    as="span"
+                    size="xs"
+                    weight="regular"
+                    color="danger"
+                    className="font-mono"
+                  >
                     {row.price}
                   </Typography>
-                  <Typography as="span" size="xs" weight="regular" color="subtle" className="font-mono">
+                  <Typography
+                    as="span"
+                    size="xs"
+                    weight="regular"
+                    color="subtle"
+                    className="font-mono"
+                  >
                     {row.size}
                   </Typography>
                 </div>

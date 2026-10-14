@@ -1,7 +1,7 @@
-import { createStore } from '@tanstack/store'
-import { clearAuthToken, getAuthToken, setAuthToken } from '@gold/apis'
-import type { AuthContext } from '../types'
-import { resolveAuthContext } from '../utils/auth.utils'
+import { createStore } from "@tanstack/store"
+import { clearAuthToken, getAuthToken, setAuthToken } from "@gold/apis"
+import type { AuthContext } from "../types"
+import { resolveAuthContext } from "../utils/auth.utils"
 
 const authStore = createStore(resolveAuthContext(null), ({ setState, get }) => ({
   syncFromCookie: (cookieSource?: string): AuthContext => {

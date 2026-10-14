@@ -1,6 +1,6 @@
-import type { ComponentProps } from 'react'
-import { Drawer as VaulDrawer } from 'vaul'
-import type { ContentProps, DialogProps, HandleProps } from 'vaul'
+import type { ComponentProps } from "react"
+import { Drawer as VaulDrawer } from "vaul"
+import type { ContentProps, DialogProps, HandleProps } from "vaul"
 
 type DrawerRootProps = DialogProps
 

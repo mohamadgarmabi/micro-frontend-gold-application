@@ -1,40 +1,40 @@
-import { WEBAUTHN_STORAGE_KEY } from '#/config/auth.constants'
+import { WEBAUTHN_STORAGE_KEY } from "#/config/auth.constants"
 import {
   requestAuthenticateOptions,
   requestAuthenticateVerify,
   requestRegisterOptions,
   requestRegisterVerify,
   requestRemoveCredentials,
-} from '../apis/webauthn'
-import type { StoredWebAuthnCredential, WebAuthnErrorCode } from '../types'
+} from "../apis/webauthn"
+import type { StoredWebAuthnCredential, WebAuthnErrorCode } from "../types"
 import {
   serializeAssertion,
   serializeAttestation,
   toCreationOptions,
   toRequestOptions,
-} from './webauthn.codec'
+} from "./webauthn.codec"
 
 const isStoredWebAuthnCredential = (value: unknown): value is StoredWebAuthnCredential => {
   return (
-    typeof value === 'object' &&
+    typeof value === "object" &&
     value !== null &&
-    'credentialId' in value &&
-    typeof value.credentialId === 'string' &&
+    "credentialId" in value &&
+    typeof value.credentialId === "string" &&
     value.credentialId.length > 0
   )
 }
 
 const isWebAuthnSupported = async () => {
   if (
-    typeof window === 'undefined' ||
-    typeof window.PublicKeyCredential !== 'function' ||
-    typeof navigator.credentials?.create !== 'function' ||
-    typeof navigator.credentials?.get !== 'function'
+    typeof window === "undefined" ||
+    typeof window.PublicKeyCredential !== "function" ||
+    typeof navigator.credentials?.create !== "function" ||
+    typeof navigator.credentials?.get !== "function"
   ) {
     return false
   }
 
-  if (typeof PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable !== 'function') {
+  if (typeof PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable !== "function") {
     return true
   }
 
@@ -46,7 +46,7 @@ const isWebAuthnSupported = async () => {
 }
 
 const readWebAuthnCredential = (): StoredWebAuthnCredential | null => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return null
   }
 
@@ -71,17 +71,17 @@ const clearWebAuthnCredential = () => localStorage.removeItem(WEBAUTHN_STORAGE_K
 const getWebAuthnErrorCode = (error: unknown): WebAuthnErrorCode => {
   if (
     error instanceof DOMException &&
-    (error.name === 'NotAllowedError' || error.name === 'AbortError')
+    (error.name === "NotAllowedError" || error.name === "AbortError")
   ) {
-    return 'cancelled'
+    return "cancelled"
   }
 
-  return 'failed'
+  return "failed"
 }
 
 const assertPublicKeyCredential = (credential: Credential | null) => {
   if (!(credential instanceof PublicKeyCredential)) {
-    throw new DOMException('Biometric prompt was dismissed', 'NotAllowedError')
+    throw new DOMException("Biometric prompt was dismissed", "NotAllowedError")
   }
 
   return credential
@@ -102,7 +102,7 @@ const registerWebAuthnCredential = async () => {
 const authenticateWithWebAuthn = async () => {
   const stored = readWebAuthnCredential()
   if (!stored) {
-    throw new Error('No biometric credential is registered')
+    throw new Error("No biometric credential is registered")
   }
 
   const options = await requestAuthenticateOptions({ credentialId: stored.credentialId })

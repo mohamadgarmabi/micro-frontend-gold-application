@@ -1,4 +1,4 @@
-import { cn } from '../../lib/cn'
+import { cn } from "../../lib/cn"
 import type {
   DrawerClassNameProps,
   DrawerCloseProps,
@@ -10,16 +10,18 @@ import type {
   DrawerRootProps,
   DrawerTitleProps,
   DrawerTriggerProps,
-} from './drawer.type'
+} from "./drawer.type"
 import {
   drawerClose,
   drawerContent,
   drawerDescription,
+  drawerGlass,
+  drawerGlassLayer,
   drawerHandle,
   drawerOverlay,
   drawerTitle,
   drawerTrigger,
-} from './drawer.styles'
+} from "./drawer.styles"
 
 const withDrawerClassName = <T extends DrawerClassNameProps>(props: T, styles: () => string) => {
   const { className, ...rest } = props
@@ -43,8 +45,19 @@ const useDrawerOverlay = (props: DrawerOverlayProps) => {
   return withDrawerClassName(props, drawerOverlay)
 }
 
+// Stronger than the default glass tint so sheet content stays readable over busy pages.
+const DRAWER_GLASS_TINT = "color-mix(in oklab, var(--surface) 72%, transparent)"
+
+const DRAWER_GLASS_RADIUS = 24
+
 const useDrawerContent = (props: DrawerContentProps) => {
-  return withDrawerClassName(props, drawerContent)
+  return {
+    ...withDrawerClassName(props, drawerContent),
+    glassLayerClassName: drawerGlassLayer(),
+    glassClassName: drawerGlass(),
+    glassTint: DRAWER_GLASS_TINT,
+    glassRadius: DRAWER_GLASS_RADIUS,
+  }
 }
 
 const useDrawerHandle = (props: DrawerHandleProps) => {

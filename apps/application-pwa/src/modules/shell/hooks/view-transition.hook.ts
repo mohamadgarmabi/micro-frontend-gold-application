@@ -1,8 +1,8 @@
-import { useSelector } from '@tanstack/react-store'
-import { useRouter } from '@tanstack/react-router'
-import { useEffect } from 'react'
-import { viewTransitionStore } from '../stores/view-transition.store'
-import { getDefaultViewTransition } from '../utils/view-transition.utils'
+import { useSelector } from "@tanstack/react-store"
+import { useRouter } from "@tanstack/react-router"
+import { useEffect } from "react"
+import { viewTransitionStore } from "../stores/view-transition.store"
+import { getDefaultViewTransition } from "../utils/view-transition.utils"
 
 const applyViewTransitionOption = (router: ReturnType<typeof useRouter>, enabled: boolean) => {
   router.update({

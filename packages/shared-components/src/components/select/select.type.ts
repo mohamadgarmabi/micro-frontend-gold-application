@@ -1,4 +1,4 @@
-import type { ChangeEvent, ReactNode } from 'react'
+import type { ChangeEvent, ReactNode } from "react"
 
 type SelectOption = {
   value: string
@@ -40,6 +40,10 @@ type SelectProps = {
   multiple?: boolean
   searchable?: boolean
   disabled?: boolean
+  /** Always open as a bottom sheet, even on desktop. */
+  forceSheet?: boolean
+  /** Size the trigger to its label instead of stretching full width. */
+  fit?: boolean
   placeholder?: string
   searchPlaceholder?: string
   emptyLabel?: string

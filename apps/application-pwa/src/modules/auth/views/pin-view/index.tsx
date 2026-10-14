@@ -1,5 +1,6 @@
 import Button from "@gold/shared-components/button"
 import InputOTP from "@gold/shared-components/input-otp"
+import LiquidGlass from "@gold/shared-components/liquid-glass"
 import Typography from "@gold/shared-components/typography"
 import { PIN_LENGTH } from "#/config/security.constants"
 import { usePinUnlock } from "../../hooks/pin-unlock.hook"
@@ -19,20 +20,26 @@ const PinView = () => {
           </Typography>
         </div>
 
-        <div className="mb-4 flex justify-center" dir="ltr">
-          <InputOTP
-            maxLength={PIN_LENGTH}
-            value={pin}
-            onChange={handlePinChange}
-            className="gold-otp-group w-full max-w-xs"
-          >
-            <InputOTP.Group className="gold-otp-group flex w-full justify-center gap-3">
-              {pinSlots.map((slot) => (
-                <InputOTP.Slot key={slot} index={slot} className="gold-otp-slot" />
-              ))}
-            </InputOTP.Group>
-          </InputOTP>
-        </div>
+        <LiquidGlass cornerRadius={24} className="mb-4 rounded-3xl p-4">
+          <div className="flex justify-center" dir="ltr">
+            <InputOTP
+              maxLength={PIN_LENGTH}
+              value={pin}
+              onChange={handlePinChange}
+              className="gold-otp-group w-full max-w-xs"
+            >
+              <InputOTP.Group className="gold-otp-group flex w-full justify-center gap-3">
+                {pinSlots.map((slot) => (
+                  <InputOTP.Slot
+                    key={slot}
+                    index={slot}
+                    className="gold-otp-slot border-border-strong bg-surface-muted text-foreground data-filled:border-gold-600 aspect-square min-w-0 flex-1 rounded-xl border p-0 text-lg leading-none font-medium"
+                  />
+                ))}
+              </InputOTP.Group>
+            </InputOTP>
+          </div>
+        </LiquidGlass>
 
         {error ? (
           <Typography size="sm" color="danger" align="center" className="mb-4">

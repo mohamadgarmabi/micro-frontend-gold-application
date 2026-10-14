@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
-import { useRegisterSW } from 'virtual:pwa-register/react'
-import { useI18n } from './i18n.hook'
+import { useEffect, useState } from "react"
+import { useRegisterSW } from "virtual:pwa-register/react"
+import { useI18n } from "./i18n.hook"
 
 type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>
 }
 
 const usePwaInstall = () => {
@@ -29,8 +29,8 @@ const usePwaInstall = () => {
       setInstallEvent(event as BeforeInstallPromptEvent)
     }
 
-    window.addEventListener('beforeinstallprompt', handler)
-    return () => window.removeEventListener('beforeinstallprompt', handler)
+    window.addEventListener("beforeinstallprompt", handler)
+    return () => window.removeEventListener("beforeinstallprompt", handler)
   }, [])
 
   const handleReload = () => {
@@ -45,7 +45,7 @@ const usePwaInstall = () => {
     await installEvent.prompt()
     const { outcome } = await installEvent.userChoice
 
-    if (outcome === 'accepted') {
+    if (outcome === "accepted") {
       setInstallEvent(null)
     }
   }

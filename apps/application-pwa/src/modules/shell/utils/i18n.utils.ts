@@ -1,6 +1,6 @@
-import type { Direction, Locale, MessageKey, TranslateValues } from '../types'
-import { enMessages } from './i18n.en'
-import { faMessages } from './i18n.fa'
+import type { Direction, Locale, MessageKey, TranslateValues } from "../types"
+import { enMessages } from "./i18n.en"
+import { faMessages } from "./i18n.fa"
 
 const messages = {
   en: enMessages,
@@ -8,7 +8,7 @@ const messages = {
 } as const
 
 const resolveLocale = (direction: Direction): Locale => {
-  return direction === 'rtl' ? 'fa' : 'en'
+  return direction === "rtl" ? "fa" : "en"
 }
 
 const interpolate = (template: string, values?: TranslateValues) => {

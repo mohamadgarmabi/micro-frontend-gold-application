@@ -1,24 +1,48 @@
-import Typography from '@gold/shared-components/typography'
-import GoldBadge from '#/modules/shell/components/gold-badge'
-import Toggle from '#/modules/shell/components/toggle'
-import { useTwoFactor } from '#/modules/auth/hooks/two-factor.hook'
+import LiquidGlass from "@gold/shared-components/liquid-glass"
+import Select from "@gold/shared-components/select"
+import Typography from "@gold/shared-components/typography"
+import { useTwoFactor } from "#/modules/auth/hooks/two-factor.hook"
+import GoldBadge from "#/modules/shell/components/gold-badge"
 
 const TwoFactorRow = () => {
   const { t, twoFactorEnabled, handleTwoFactorChange, statusLabel } = useTwoFactor()
 
+  const booleanSelectOptions = [
+    { value: "on", label: t("options.active") },
+    { value: "off", label: t("options.inactive") },
+  ]
+
+  const handleSelect = (next: string | string[]) => {
+    if (typeof next !== "string") {
+      return
+    }
+
+    handleTwoFactorChange(next === "on")
+  }
+
   return (
-    <div className="flex items-center justify-between rounded-xl border border-border bg-surface-elevated p-4">
-      <div>
-        <Typography size="sm">{t('options.twoFactor')}</Typography>
-        <Typography size="xs" weight="regular" color="subtle">
-          {t('options.twoFactorHint')}
-        </Typography>
+    <LiquidGlass cornerRadius={16} className="rounded-xl">
+      <div className="border-border/40 flex items-center justify-between rounded-xl border bg-transparent p-4">
+        <div>
+          <Typography size="sm">{t("options.twoFactor")}</Typography>
+          <Typography size="xs" weight="regular" color="subtle">
+            {t("options.twoFactorHint")}
+          </Typography>
+        </div>
+        <div className="flex items-center gap-2">
+          {twoFactorEnabled ? <GoldBadge>{statusLabel}</GoldBadge> : null}
+          <Select
+            fit
+            forceSheet
+            searchable={false}
+            value={twoFactorEnabled ? "on" : "off"}
+            onValueChange={handleSelect}
+            options={booleanSelectOptions}
+            title={t("options.twoFactor")}
+          />
+        </div>
       </div>
-      <div className="flex items-center gap-2">
-        {twoFactorEnabled ? <GoldBadge>{statusLabel}</GoldBadge> : null}
-        <Toggle value={twoFactorEnabled} onChange={handleTwoFactorChange} />
-      </div>
-    </div>
+    </LiquidGlass>
   )
 }
 

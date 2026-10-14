@@ -16,9 +16,9 @@ type StoredWebAuthnCredential = {
   credentialId: string
 }
 
-type WebAuthnErrorCode = 'cancelled' | 'failed'
+type WebAuthnErrorCode = "cancelled" | "failed"
 
-type PinStep = 'current' | 'create' | 'confirm'
+type PinStep = "current" | "create" | "confirm"
 
 type SecurityState = {
   pinHash: string | null

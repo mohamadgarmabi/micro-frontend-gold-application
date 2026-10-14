@@ -1,3 +1,4 @@
+import LiquidGlass from "@gold/shared-components/liquid-glass"
 import Separator from "@gold/shared-components/separator"
 import Typography from "@gold/shared-components/typography"
 import { GeneratedForm } from "@gold/form"
@@ -43,15 +44,17 @@ const LoginView = () => {
         {showWebAuthn ? (
           <div className="aurum-login-enter aurum-login-enter-delay-1 mb-6">
             <div className="mb-6 flex flex-col items-center">
-              <button
-                type="button"
-                className={scanClassName}
-                onClick={handleWebAuthnLogin}
-                disabled={webAuthnBusy}
-                aria-label={scanTitle}
-              >
-                {scanIcon}
-              </button>
+              <LiquidGlass cornerRadius={999} interactive className="size-24">
+                <button
+                  type="button"
+                  className={scanClassName}
+                  onClick={handleWebAuthnLogin}
+                  disabled={webAuthnBusy}
+                  aria-label={scanTitle}
+                >
+                  {scanIcon}
+                </button>
+              </LiquidGlass>
               <Typography size="sm" weight="medium" className="mt-5">
                 {scanTitle}
               </Typography>
@@ -76,37 +79,39 @@ const LoginView = () => {
           </div>
         ) : null}
 
-        <GeneratedForm
-          fields={phoneSchema}
-          defaultValues={phoneDefaults}
-          footerButtons={footerButtons}
-          formatRequiredError={formatRequiredError}
-          className="aurum-login-enter aurum-login-enter-delay-1 flex flex-1 flex-col gap-6"
-          footerClassName="aurum-login-enter aurum-login-enter-delay-2 mt-auto flex flex-col gap-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-8"
-          beforeFooter={
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {trustBadges.map((label) => (
-                <div
-                  key={label}
-                  className="border-border/60 bg-foreground/5 flex items-center gap-1.5 rounded-full border px-2.5 py-1"
-                >
-                  <Shield size={10} className="text-foreground-muted" />
-                  <Typography
-                    as="span"
-                    size="xs"
-                    weight="regular"
-                    color="muted"
-                    className="text-[10px]"
+        <LiquidGlass cornerRadius={24} className="rounded-3xl p-1">
+          <GeneratedForm
+            fields={phoneSchema}
+            defaultValues={phoneDefaults}
+            footerButtons={footerButtons}
+            formatRequiredError={formatRequiredError}
+            className="aurum-login-enter aurum-login-enter-delay-1 flex flex-1 flex-col gap-6 p-4"
+            footerClassName="aurum-login-enter aurum-login-enter-delay-2 mt-auto flex flex-col gap-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-8"
+            beforeFooter={
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {trustBadges.map((label) => (
+                  <div
+                    key={label}
+                    className="border-border/60 bg-foreground/5 flex items-center gap-1.5 rounded-full border px-2.5 py-1"
                   >
-                    {label}
-                  </Typography>
-                </div>
-              ))}
-            </div>
-          }
-          onSubmit={handlePhoneSubmit}
-          sizes={{ input: "lg", button: "lg" }}
-        />
+                    <Shield size={10} className="text-foreground-muted" />
+                    <Typography
+                      as="span"
+                      size="xs"
+                      weight="regular"
+                      color="muted"
+                      className="text-[10px]"
+                    >
+                      {label}
+                    </Typography>
+                  </div>
+                ))}
+              </div>
+            }
+            onSubmit={handlePhoneSubmit}
+            sizes={{ input: "lg", button: "lg" }}
+          />
+        </LiquidGlass>
       </div>
 
       <OtpDrawer {...otpDrawer} />

@@ -1,7 +1,7 @@
-import { createStore } from '@tanstack/store'
-import { DEFAULT_DIRECTION } from '#/config/direction.constants'
-import type { Direction } from '../types'
-import { applyDirection, persistDirection, readDirection } from '../utils/direction.utils'
+import { createStore } from "@tanstack/store"
+import { DEFAULT_DIRECTION } from "#/config/direction.constants"
+import type { Direction } from "../types"
+import { applyDirection, persistDirection, readDirection } from "../utils/direction.utils"
 
 const directionStore = createStore(DEFAULT_DIRECTION as Direction, ({ setState }) => ({
   hydrate: (nextDirection: Direction) => {

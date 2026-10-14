@@ -1,6 +1,6 @@
-import { useRouter } from '@tanstack/react-router'
-import type { AppShellModel } from '../types'
-import { useI18n } from './i18n.hook'
+import { useRouter } from "@tanstack/react-router"
+import type { AppShellModel } from "../types"
+import { useI18n } from "./i18n.hook"
 
 const useAppShell = (): AppShellModel => {
   const router = useRouter()
@@ -15,9 +15,9 @@ const useAppShell = (): AppShellModel => {
   return {
     onRefresh,
     pullRefreshLabels: {
-      pull: t('pullRefresh.pull'),
-      release: t('pullRefresh.release'),
-      refreshing: t('pullRefresh.refreshing'),
+      pull: t("pullRefresh.pull"),
+      release: t("pullRefresh.release"),
+      refreshing: t("pullRefresh.refreshing"),
     },
   }
 }

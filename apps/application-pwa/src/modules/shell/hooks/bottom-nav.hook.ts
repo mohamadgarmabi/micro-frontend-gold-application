@@ -1,123 +1,68 @@
-import { useRouterState } from '@tanstack/react-router'
-import { ArrowLeftRight, Home, Settings, TrendingUp, User } from 'lucide-react'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { liquidNavItemStyles, liquidNavSliderStyles } from '../components/bottom-nav.styles'
-import type { AurumNavPage, BottomNavItem, BottomNavSlider, MessageKey } from '../types'
-import { useI18n } from './i18n.hook'
-
-const ACTIVE_MOVE_DELAY_MS = 140
+import type { CSSProperties } from "react"
+import { useRubberThumb } from "@gold/shared-components/rubber-segment"
+import { useRouterState } from "@tanstack/react-router"
+import { ArrowLeftRight, Home, Settings, TrendingUp, User } from "lucide-react"
+import { bottomNavItemStyles, bottomNavThumbStyles } from "../components/bottom-nav.styles"
+import type { AurumNavPage, BottomNavItem, MessageKey } from "../types"
+import { useI18n } from "./i18n.hook"
+import { useTheme } from "./theme.hook"
 
 const navItems = [
-  { page: 'home' as const, to: '/home' as const, icon: Home },
-  { page: 'chart' as const, to: '/chart' as const, icon: TrendingUp },
-  { page: 'trade' as const, to: '/trade' as const, icon: ArrowLeftRight },
-  { page: 'profile' as const, to: '/profile' as const, icon: User },
-  { page: 'options' as const, to: '/options' as const, icon: Settings },
+  { page: "home" as const, to: "/home" as const, icon: Home },
+  { page: "chart" as const, to: "/chart" as const, icon: TrendingUp },
+  { page: "trade" as const, to: "/trade" as const, icon: ArrowLeftRight },
+  { page: "profile" as const, to: "/profile" as const, icon: User },
+  { page: "options" as const, to: "/options" as const, icon: Settings },
 ]
 
 const resolveActivePage = (pathname: string): AurumNavPage => {
   const match = navItems.find(
-    (item) => pathname === item.to || (item.to === '/home' && pathname === '/'),
+    (item) => pathname === item.to || (item.to === "/home" && pathname === "/"),
   )
 
-  return match?.page ?? 'home'
+  return match?.page ?? "home"
 }
 
 const useBottomNav = () => {
   const pathname = useRouterState({ select: (state) => state.location.pathname })
   const { t, locale } = useI18n()
+  const { isLight } = useTheme()
   const activePage = resolveActivePage(pathname)
-  const [visualPage, setVisualPage] = useState<AurumNavPage>(activePage)
-  const [slider, setSlider] = useState<BottomNavSlider>({
-    x: 0,
-    width: 0,
-    isReady: false,
+  const activeIndex = Math.max(
+    0,
+    navItems.findIndex((item) => item.page === activePage),
+  )
+  const { trackRef, thumbRef, isReady, registerSlotElement } = useRubberThumb({
+    activeIndex,
+    stretch: 100,
+    squash: 3,
+    speed: 1,
+    remeasureKey: `${locale}:${isLight}`,
   })
-  const trackRef = useRef<HTMLDivElement>(null)
-  const canAnimateRef = useRef(false)
 
-  useEffect(() => {
-    if (visualPage === activePage) {
-      return
-    }
-
-    const timer = window.setTimeout(() => {
-      setVisualPage(activePage)
-    }, ACTIVE_MOVE_DELAY_MS)
-
-    return () => window.clearTimeout(timer)
-  }, [activePage, visualPage])
-
-  useLayoutEffect(() => {
-    const track = trackRef.current
-
-    if (!track) {
-      return
-    }
-
-    const measure = () => {
-      const item = track.querySelector<HTMLElement>(`[data-nav-item="${visualPage}"]`)
-
-      if (!item) {
-        return
-      }
-
-      const trackBox = track.getBoundingClientRect()
-      const itemBox = item.getBoundingClientRect()
-
-      setSlider({
-        x: itemBox.left - trackBox.left,
-        width: itemBox.width,
-        isReady: canAnimateRef.current,
-      })
-
-      if (!canAnimateRef.current) {
-        requestAnimationFrame(() => {
-          canAnimateRef.current = true
-          setSlider((current) => ({ ...current, isReady: true }))
-        })
-      }
-    }
-
-    measure()
-
-    const resizeObserver = new ResizeObserver(measure)
-    resizeObserver.observe(track)
-    window.addEventListener('resize', measure)
-
-    const mutationObserver = new MutationObserver(measure)
-    mutationObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['dir'],
-    })
-
-    return () => {
-      resizeObserver.disconnect()
-      mutationObserver.disconnect()
-      window.removeEventListener('resize', measure)
-    }
-  }, [visualPage, locale])
-
-  const items: BottomNavItem[] = navItems.map((item) => {
-    const isActive = item.page === visualPage
+  const items: BottomNavItem[] = navItems.map((item, index) => {
+    const isActive = item.page === activePage
 
     return {
       ...item,
       label: t(`nav.${item.page}` as MessageKey),
       isActive,
-      className: liquidNavItemStyles({ active: isActive }),
+      className: bottomNavItemStyles({ active: isActive }),
       strokeWidth: isActive ? 2.4 : 1.75,
+      setRef: (element: HTMLAnchorElement | null) => registerSlotElement(index, element),
     }
   })
 
   return {
     items,
     trackRef,
-    sliderClassName: liquidNavSliderStyles({ ready: slider.isReady }),
-    sliderStyle: {
-      width: slider.width,
-      transform: `translate3d(${slider.x}px, 0, 0)`,
-    },
+    thumbRef,
+    barTint: isLight ? "rgba(255, 255, 255, 0.22)" : "rgba(255, 255, 255, 0.05)",
+    barStyle: {
+      "--lg-shadow": "0 8px 28px rgba(0, 0, 0, 0.08)",
+    } as CSSProperties,
+    dropletTint: "color-mix(in oklab, var(--accent) 16%, transparent)",
+    thumbClassName: bottomNavThumbStyles({ ready: isReady }),
   }
 }
 

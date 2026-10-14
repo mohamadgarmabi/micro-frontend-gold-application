@@ -1,8 +1,8 @@
-import Drawer from '../drawer'
-import type { SelectProps } from './select.type'
-import { useSelect } from './select.hook'
-import { selectStyles } from './select.styles'
-import SelectPanel from './select-panel'
+import Drawer from "../drawer"
+import type { SelectProps } from "./select.type"
+import { useSelect } from "./select.hook"
+import { selectStyles } from "./select.styles"
+import SelectPanel from "./select-panel"
 
 const Select = (props: SelectProps) => {
   const {
@@ -17,6 +17,7 @@ const Select = (props: SelectProps) => {
     title,
     showDone,
     triggerLabel,
+    rootClassName,
     triggerClassName,
     triggerLabelClassName,
     chevron,
@@ -46,7 +47,7 @@ const Select = (props: SelectProps) => {
   )
 
   return (
-    <div ref={rootRef} className="relative w-full min-w-40">
+    <div ref={rootRef} className={rootClassName}>
       <button
         type="button"
         className={triggerClassName}
@@ -62,7 +63,7 @@ const Select = (props: SelectProps) => {
         <Drawer open={open} onOpenChange={handleOpenChange}>
           <Drawer.Portal>
             <Drawer.Overlay />
-            <Drawer.Content className={selectStyles({ slot: 'mobilePopup' })}>
+            <Drawer.Content className={selectStyles({ slot: "mobilePopup" })}>
               <Drawer.Handle />
               {panel}
             </Drawer.Content>
@@ -70,11 +71,11 @@ const Select = (props: SelectProps) => {
         </Drawer>
       ) : null}
       {open && !isMobile ? (
-        <div className={selectStyles({ slot: 'desktopPopup' })}>{panel}</div>
+        <div className={selectStyles({ slot: "desktopPopup" })}>{panel}</div>
       ) : null}
     </div>
   )
 }
 
 export default Select
-export type { SelectOption, SelectProps, SelectRowAction } from './select.type'
+export type { SelectOption, SelectProps, SelectRowAction } from "./select.type"

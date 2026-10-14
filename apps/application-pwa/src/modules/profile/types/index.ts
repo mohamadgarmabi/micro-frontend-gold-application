@@ -1,4 +1,4 @@
-import type { LucideIcon } from 'lucide-react'
+import type { LucideIcon } from "lucide-react"
 
 type HoldingRow = {
   label: string
@@ -7,7 +7,7 @@ type HoldingRow = {
 }
 
 type ProfileMenuItem = {
-  id: 'security' | 'alerts' | 'history' | 'kyc'
+  id: "security" | "alerts" | "history" | "kyc"
   icon: LucideIcon
   label: string
   sub: string

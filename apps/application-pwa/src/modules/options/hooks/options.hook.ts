@@ -1,26 +1,48 @@
-import { toast } from '@gold/shared-components/sonner'
-import { Check, Clock, Fingerprint } from 'lucide-react'
-import { createElement, useState } from 'react'
-import { useWebAuthn } from '#/modules/auth/hooks/webauthn.hook'
-import { useDirection } from '#/modules/shell/hooks/direction.hook'
-import { useI18n } from '#/modules/shell/hooks/i18n.hook'
-import { useTheme } from '#/modules/shell/hooks/theme.hook'
-import { useViewTransitionPreference } from '#/modules/shell/hooks/view-transition.hook'
-import { resolveLocale, translate } from '#/modules/shell/utils/i18n.utils'
-import type { ThemePreference } from '#/modules/shell/types'
-import type { SavedAlert } from '../types'
+import type { SwipeAction } from "@gold/shared-components/swipe-row"
+import { toast } from "@gold/shared-components/toaster"
+import { Check, Clock, Fingerprint } from "lucide-react"
+import { createElement, useState } from "react"
+import { useWebAuthn } from "#/modules/auth/hooks/webauthn.hook"
+import { useDirection } from "#/modules/shell/hooks/direction.hook"
+import { useI18n } from "#/modules/shell/hooks/i18n.hook"
+import { useTheme } from "#/modules/shell/hooks/theme.hook"
+import { useViewTransitionPreference } from "#/modules/shell/hooks/view-transition.hook"
+import type { Direction, ThemePreference } from "#/modules/shell/types"
+import { resolveLocale, translate } from "#/modules/shell/utils/i18n.utils"
+import type { OptionsSwipeTheme, SavedAlert } from "../types"
 
-const currencyOptions = ['USD', 'EUR', 'GBP', 'AED']
+const currencyOptions = ["USD", "EUR", "GBP", "AED"]
+
+const resolveSwipeTheme = (isLight: boolean): OptionsSwipeTheme => {
+  if (isLight) {
+    return {
+      rowColor: "#f4f7f5",
+      drawerColor: "#e4e9e6",
+      textColor: "#111827",
+      actionColor: "#e5484d",
+    }
+  }
+
+  return {
+    rowColor: "#222825",
+    drawerColor: "#2f3632",
+    textColor: "#f4f7f5",
+    actionColor: "#e5484d",
+  }
+}
 
 const useOptions = () => {
   const [notifications, setNotifications] = useState(true)
-  const [currency, setCurrency] = useState('USD')
-  const [priceAlert, setPriceAlert] = useState('3350')
-  const { isRtl, setDirection } = useDirection()
-  const { preference, setTheme } = useTheme()
+  const [currency, setCurrency] = useState("USD")
+  const [priceAlert, setPriceAlert] = useState("3350")
+  const [removedAlertIds, setRemovedAlertIds] = useState<string[]>([])
+  const { direction, setDirection } = useDirection()
+  const { preference, setTheme, isLight } = useTheme()
   const { enabled: viewTransitionEnabled, setEnabled: setViewTransitionEnabled } =
     useViewTransitionPreference()
   const { t } = useI18n()
+  const swipeDirection = direction === "rtl" ? ("right" as const) : ("left" as const)
+  const swipeTheme = resolveSwipeTheme(isLight)
   const {
     hasCredential: biometric,
     biometricHint,
@@ -31,32 +53,73 @@ const useOptions = () => {
   const handleThemeChange = (nextTheme: ThemePreference) => {
     setTheme(nextTheme)
     const labels = {
-      light: t('options.toastLight'),
-      dark: t('options.toastDark'),
-      system: t('options.toastSystem'),
+      light: t("options.toastLight"),
+      dark: t("options.toastDark"),
+      system: t("options.toastSystem"),
     }
     toast.info(labels[nextTheme])
   }
 
-  const handleDirectionChange = (rtl: boolean) => {
-    const nextDirection = rtl ? 'rtl' : 'ltr'
+  const handleDirectionChange = (next: string | string[]) => {
+    if (typeof next !== "string") {
+      return
+    }
+
+    if (next !== "rtl" && next !== "ltr") {
+      return
+    }
+
+    const nextDirection = next as Direction
     setDirection(nextDirection)
     toast.info(
       translate(
         resolveLocale(nextDirection),
-        nextDirection === 'rtl' ? 'options.toastRtl' : 'options.toastLtr',
+        nextDirection === "rtl" ? "options.toastRtl" : "options.toastLtr",
       ),
     )
   }
 
-  const handleViewTransitionChange = (enabled: boolean) => {
+  const handleViewTransitionChange = (next: string | string[]) => {
+    if (typeof next !== "string") {
+      return
+    }
+
+    const enabled = next === "on"
     setViewTransitionEnabled(enabled)
-    toast.info(t(enabled ? 'options.toastViewTransitionOn' : 'options.toastViewTransitionOff'))
+    toast.info(t(enabled ? "options.toastViewTransitionOn" : "options.toastViewTransitionOff"))
+  }
+
+  const handleNotificationsChange = (next: string | string[]) => {
+    if (typeof next !== "string") {
+      return
+    }
+
+    setNotifications(next === "on")
+  }
+
+  const handleBiometricSelect = (next: string | string[]) => {
+    if (typeof next !== "string" || isBiometricDisabled) {
+      return
+    }
+
+    handleBiometricToggle(next === "on")
   }
 
   const handleSaveAlert = () => {
-    toast.success(t('options.toastAlert'))
+    toast.success(t("options.toastAlert"))
   }
+
+  const directionSelectOptions = [
+    { value: "rtl", label: t("options.directionRtl") },
+    { value: "ltr", label: t("options.directionLtr") },
+  ]
+
+  const viewTransitionSelectOptions = [
+    { value: "on", label: t("options.active") },
+    { value: "off", label: t("options.inactive") },
+  ]
+
+  const booleanSelectOptions = viewTransitionSelectOptions
 
   const currencySelectOptions = currencyOptions.map((code) => ({
     value: code,
@@ -64,54 +127,87 @@ const useOptions = () => {
   }))
 
   const handleCurrencyChange = (next: string | string[]) => {
-    if (typeof next === 'string') {
+    if (typeof next === "string") {
       setCurrency(next)
     }
   }
 
   const savedAlerts: SavedAlert[] = [
     {
-      price: '$3,400',
-      directionLabel: t('options.above'),
-      rowClassName: 'flex items-center justify-between rounded-lg p-2.5 bg-gold-600/10',
+      id: "alert-3400",
+      price: "$3,400",
+      directionLabel: t("options.above"),
+      contentClassName: "flex w-full items-center gap-2",
       icon: Check,
-      iconClassName: 'text-gold-600',
+      iconClassName: "text-gold-600",
+      label: `$3,400 ${t("options.above")}`,
+      swipeDirection,
+      swipeTheme,
+      swipeActions: [{ id: "delete", label: t("options.remove"), dismiss: true }],
+      onCommit: (_action: SwipeAction) => {
+        setRemovedAlertIds((current) => [...current, "alert-3400"])
+        toast.success(t("options.toastAlertRemoved"))
+      },
     },
     {
-      price: '$3,200',
-      directionLabel: t('options.below'),
-      rowClassName: 'flex items-center justify-between rounded-lg p-2.5 bg-gold-600/10',
+      id: "alert-3200",
+      price: "$3,200",
+      directionLabel: t("options.below"),
+      contentClassName: "flex w-full items-center gap-2",
       icon: Check,
-      iconClassName: 'text-gold-600',
+      iconClassName: "text-gold-600",
+      label: `$3,200 ${t("options.below")}`,
+      swipeDirection,
+      swipeTheme,
+      swipeActions: [{ id: "delete", label: t("options.remove"), dismiss: true }],
+      onCommit: (_action: SwipeAction) => {
+        setRemovedAlertIds((current) => [...current, "alert-3200"])
+        toast.success(t("options.toastAlertRemoved"))
+      },
     },
     {
-      price: '$3,100',
-      directionLabel: t('options.below'),
-      rowClassName: 'flex items-center justify-between rounded-lg p-2.5 opacity-50',
+      id: "alert-3100",
+      price: "$3,100",
+      directionLabel: t("options.below"),
+      contentClassName: "flex w-full items-center gap-2 opacity-60",
       icon: Clock,
-      iconClassName: 'text-foreground-subtle',
+      iconClassName: "text-foreground-subtle",
+      label: `$3,100 ${t("options.below")}`,
+      swipeDirection,
+      swipeTheme,
+      swipeActions: [{ id: "delete", label: t("options.remove"), dismiss: true }],
+      onCommit: (_action: SwipeAction) => {
+        setRemovedAlertIds((current) => [...current, "alert-3100"])
+        toast.success(t("options.toastAlertRemoved"))
+      },
     },
-  ]
+  ].filter((alert) => !removedAlertIds.includes(alert.id))
 
-  const aboutItems = [t('options.terms'), t('options.privacy'), t('options.disclosures')]
+  const aboutItems = [t("options.terms"), t("options.privacy"), t("options.disclosures")]
 
   return {
     t,
     notifications,
-    setNotifications,
+    notificationsValue: notifications ? "on" : "off",
+    handleNotificationsChange,
     biometric,
+    biometricValue: biometric ? "on" : "off",
     biometricHint,
     biometricIcon: createElement(Fingerprint, { size: 16, strokeWidth: 1.8 }),
     isBiometricDisabled,
-    handleBiometricToggle,
+    handleBiometricSelect,
     priceAlert,
     setPriceAlert,
-    isRtl,
+    direction,
+    directionSelectOptions,
     preference,
     handleThemeChange,
     handleDirectionChange,
     handleViewTransitionChange,
     viewTransitionEnabled,
+    viewTransitionValue: viewTransitionEnabled ? "on" : "off",
+    viewTransitionSelectOptions,
+    booleanSelectOptions,
     handleSaveAlert,
     savedAlerts,
     aboutItems,

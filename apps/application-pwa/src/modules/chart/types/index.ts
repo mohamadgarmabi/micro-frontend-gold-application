@@ -1,4 +1,4 @@
-type ChartRange = '1D' | '1W' | '1M'
+type ChartRange = "1D" | "1W" | "1M"
 
 type ChartStat = {
   label: string

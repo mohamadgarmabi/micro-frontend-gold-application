@@ -1,7 +1,7 @@
-import { toast } from '@gold/shared-components/sonner'
-import { Fingerprint, LoaderCircle } from 'lucide-react'
-import { createElement, useEffect, useState } from 'react'
-import { useI18n } from '#/modules/shell/hooks/i18n.hook'
+import { toast } from "@gold/shared-components/toaster"
+import { Fingerprint, LoaderCircle } from "lucide-react"
+import { createElement, useEffect, useState } from "react"
+import { useI18n } from "#/modules/shell/hooks/i18n.hook"
 import {
   authenticateWithWebAuthn,
   getWebAuthnErrorCode,
@@ -9,7 +9,7 @@ import {
   readWebAuthnCredential,
   registerWebAuthnCredential,
   removeWebAuthnCredential,
-} from '../utils/webauthn.utils'
+} from "../utils/webauthn.utils"
 
 const useWebAuthn = () => {
   const { t } = useI18n()
@@ -38,12 +38,12 @@ const useWebAuthn = () => {
   }, [])
 
   const showCancelledOrFailed = (error: unknown) => {
-    if (getWebAuthnErrorCode(error) === 'cancelled') {
-      toast.info(t('auth.webauthnCancelled'))
+    if (getWebAuthnErrorCode(error) === "cancelled") {
+      toast.info(t("auth.webauthnCancelled"))
       return
     }
 
-    toast.error(t('auth.webauthnFailed'))
+    toast.error(t("auth.webauthnFailed"))
   }
 
   const signIn = async () => {
@@ -67,7 +67,7 @@ const useWebAuthn = () => {
       void removeWebAuthnCredential()
         .then(() => {
           setHasCredential(false)
-          toast.info(t('auth.webauthnRemoved'))
+          toast.info(t("auth.webauthnRemoved"))
         })
         .catch(showCancelledOrFailed)
         .finally(() => {
@@ -82,7 +82,7 @@ const useWebAuthn = () => {
     void registerWebAuthnCredential()
       .then(() => {
         setHasCredential(true)
-        toast.success(t('auth.webauthnRegistered'))
+        toast.success(t("auth.webauthnRegistered"))
       })
       .catch(showCancelledOrFailed)
       .finally(() => {
@@ -93,19 +93,19 @@ const useWebAuthn = () => {
   const scanIcon = createElement(isBusy ? LoaderCircle : Fingerprint, {
     size: 28,
     strokeWidth: 1.7,
-    className: isBusy ? 'animate-spin' : undefined,
+    className: isBusy ? "animate-spin" : undefined,
   })
 
   return {
     isSupported,
     hasCredential,
     isBusy,
-    biometricHint: isSupported ? t('options.biometricHint') : t('options.biometricUnavailable'),
+    biometricHint: isSupported ? t("options.biometricHint") : t("options.biometricUnavailable"),
     isBiometricDisabled: !isSupported || isBusy,
-    scanClassName: isBusy ? 'aurum-bio-scan is-busy' : 'aurum-bio-scan',
+    scanClassName: isBusy ? "aurum-bio-scan is-busy" : "aurum-bio-scan",
     scanIcon,
-    scanTitle: isBusy ? t('auth.webauthnBusy') : t('auth.webauthn'),
-    scanHint: t('auth.webauthnHint'),
+    scanTitle: isBusy ? t("auth.webauthnBusy") : t("auth.webauthn"),
+    scanHint: t("auth.webauthnHint"),
     signIn,
     handleBiometricToggle,
     showCancelledOrFailed,

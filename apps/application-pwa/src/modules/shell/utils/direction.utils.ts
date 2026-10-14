@@ -2,15 +2,15 @@ import {
   DEFAULT_DIRECTION,
   DIRECTION_COOKIE_NAME,
   DIRECTION_STORAGE_KEY,
-} from '#/config/direction.constants'
-import type { Direction } from '../types'
+} from "#/config/direction.constants"
+import type { Direction } from "../types"
 
 const isDirection = (value: string | null): value is Direction => {
-  return value === 'ltr' || value === 'rtl'
+  return value === "ltr" || value === "rtl"
 }
 
 const readCookieDirection = (): Direction | null => {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return null
   }
 
@@ -21,7 +21,7 @@ const readCookieDirection = (): Direction | null => {
 }
 
 const readDirection = (): Direction => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return DEFAULT_DIRECTION
   }
 
@@ -35,16 +35,20 @@ const readDirection = (): Direction => {
 }
 
 const applyDirection = (direction: Direction) => {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return
   }
 
-  document.documentElement.dir = direction
-  document.documentElement.lang = direction === 'rtl' ? 'fa' : 'en'
+  const root = document.documentElement
+  root.dir = direction
+  root.lang = direction === "rtl" ? "fa" : "en"
+  root.setAttribute("dir", direction)
+  root.setAttribute("lang", root.lang)
+  document.body.dir = direction
 }
 
 const persistDirection = (direction: Direction) => {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return
   }
 

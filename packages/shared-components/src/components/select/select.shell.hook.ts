@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, type ChangeEvent, type RefObject } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type RefObject } from "react"
 
-const MOBILE_QUERY = '(max-width: 767px)'
+const MOBILE_QUERY = "(max-width: 767px)"
 
 type SelectShell = {
   open: boolean
@@ -14,25 +14,30 @@ type SelectShell = {
   handleDone: () => void
 }
 
-const useSelectShell = (disabled: boolean): SelectShell => {
-  const [isMobile, setIsMobile] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia(MOBILE_QUERY).matches,
+const useSelectShell = (disabled: boolean, forceSheet = false): SelectShell => {
+  const [isMobileQuery, setIsMobileQuery] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(MOBILE_QUERY).matches,
   )
+  const isMobile = forceSheet || isMobileQuery
   const [open, setOpen] = useState(false)
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("")
   const rootRef = useRef<HTMLDivElement>(null)
 
   const close = () => {
     setOpen(false)
-    setSearch('')
+    setSearch("")
   }
 
   useEffect(() => {
+    if (forceSheet) {
+      return
+    }
+
     const media = window.matchMedia(MOBILE_QUERY)
-    const onChange = () => setIsMobile(media.matches)
-    media.addEventListener('change', onChange)
-    return () => media.removeEventListener('change', onChange)
-  }, [])
+    const onChange = () => setIsMobileQuery(media.matches)
+    media.addEventListener("change", onChange)
+    return () => media.removeEventListener("change", onChange)
+  }, [forceSheet])
 
   useEffect(() => {
     if (!open || isMobile) {
@@ -46,17 +51,17 @@ const useSelectShell = (disabled: boolean): SelectShell => {
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         close()
       }
     }
 
-    document.addEventListener('pointerdown', onPointerDown)
-    document.addEventListener('keydown', onKeyDown)
+    document.addEventListener("pointerdown", onPointerDown)
+    document.addEventListener("keydown", onKeyDown)
 
     return () => {
-      document.removeEventListener('pointerdown', onPointerDown)
-      document.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener("pointerdown", onPointerDown)
+      document.removeEventListener("keydown", onKeyDown)
     }
   }, [open, isMobile])
 
@@ -69,7 +74,7 @@ const useSelectShell = (disabled: boolean): SelectShell => {
     handleOpenChange: (next: boolean) => {
       setOpen(next)
       if (!next) {
-        setSearch('')
+        setSearch("")
       }
     },
     handleToggle: () => {

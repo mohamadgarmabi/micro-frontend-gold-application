@@ -1,15 +1,15 @@
-import { configureApis } from '@gold/apis'
-import { QueryClient } from '@tanstack/react-query'
-import { createRouter as createTanStackRouter } from '@tanstack/react-router'
-import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query'
-import type { AuthContext } from '#/modules/auth/types'
+import { configureApis } from "@gold/apis"
+import { QueryClient } from "@tanstack/react-query"
+import { createRouter as createTanStackRouter } from "@tanstack/react-router"
+import { setupRouterSsrQueryIntegration } from "@tanstack/react-router-ssr-query"
+import type { AuthContext } from "#/modules/auth/types"
 import {
   getDefaultViewTransition,
   readViewTransitionEnabled,
-} from '#/modules/shell/utils/view-transition.utils'
-import NotFoundView from '#/modules/shell/views/not-found-view'
-import { apiConfig } from './config/api'
-import { routeTree } from './routeTree.gen'
+} from "#/modules/shell/utils/view-transition.utils"
+import NotFoundView from "#/modules/shell/views/not-found-view"
+import { apiConfig } from "./config/api"
+import { routeTree } from "./routeTree.gen"
 
 configureApis(apiConfig)
 
@@ -35,7 +35,7 @@ const getRouter = () => {
       auth: defaultAuthContext,
     },
     scrollRestoration: true,
-    defaultPreload: 'intent',
+    defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
     defaultViewTransition: getDefaultViewTransition(readViewTransitionEnabled()),
     defaultNotFoundComponent: NotFoundView,
@@ -51,7 +51,7 @@ const getRouter = () => {
 
 export { getRouter }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface Register {
     router: ReturnType<typeof getRouter>
   }

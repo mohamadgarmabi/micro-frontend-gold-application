@@ -1,3 +1,4 @@
+import type { LiquidGlassSettings } from "@gold/shared-components/liquid-glass"
 import type { PullRefreshLabels } from "@gold/shared-components/pull-refresh"
 import type { LucideIcon } from "lucide-react"
 import type { ReactNode } from "react"
@@ -67,12 +68,19 @@ type BottomNavItem = {
   isActive: boolean
   className: string
   strokeWidth: number
+  setRef: (element: HTMLAnchorElement | null) => void
 }
 
 type BottomNavSlider = {
-  x: number
-  width: number
   isReady: boolean
+}
+
+type LiquidGlassSettingKey = keyof LiquidGlassSettings
+
+type LiquidGlassSettingRange = {
+  min: number
+  max: number
+  step: number
 }
 
 type ViewTransitionType = "slide-forward" | "slide-back" | "fade"
@@ -90,6 +98,9 @@ type ViewTransitionInfo = {
 }
 
 export type {
+  LiquidGlassSettingKey,
+  LiquidGlassSettingRange,
+  LiquidGlassSettings,
   AppShellModel,
   AppShellProps,
   AurumNavPage,

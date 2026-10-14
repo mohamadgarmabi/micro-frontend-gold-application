@@ -4,7 +4,7 @@ import {
   requestRegisterOptions,
   requestRegisterVerify,
   requestRemoveCredentials,
-} from '@gold/apis/webauthn'
+} from "@gold/apis/webauthn"
 
 export {
   requestAuthenticateOptions,

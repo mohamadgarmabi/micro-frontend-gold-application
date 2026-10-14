@@ -59,7 +59,10 @@ const OtpDrawer = ({
             </Typography>
           </Drawer.Description>
 
-          <div className="mt-6 mb-6" dir="ltr">
+          <div
+            className="border-border-strong bg-surface-muted mt-6 mb-6 rounded-2xl border p-4"
+            dir="ltr"
+          >
             <div className="flex justify-center">
               <InputOTP
                 maxLength={6}

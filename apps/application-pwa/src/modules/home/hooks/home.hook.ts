@@ -1,16 +1,22 @@
 import { marketController } from "@gold/apis"
+import type { SwipeAction } from "@gold/shared-components/swipe-row"
+import { toast } from "@gold/shared-components/toaster"
 import { useQuery } from "@tanstack/react-query"
 import { useNavigate } from "@tanstack/react-router"
 import { ArrowDownToLine, ArrowUpFromLine, FileText, Truck } from "lucide-react"
+import { useState } from "react"
 import { useMarketLive } from "#/modules/market/hooks/market-live.hook"
 import { fmt } from "#/modules/market/utils/format"
+import { useDirection } from "#/modules/shell/hooks/direction.hook"
 import { useI18n } from "#/modules/shell/hooks/i18n.hook"
+import { useTheme } from "#/modules/shell/hooks/theme.hook"
 import type { MessageKey } from "#/modules/shell/types"
 import type {
   HomeActivityRow,
   HomeHeaderModel,
   HomeMarketRow,
   HomeQuoteModel,
+  HomeSwipeTheme,
   HomeTradeAction,
   HomeWallet,
   QuickAction,
@@ -19,7 +25,7 @@ import type {
 const CASH_TOMAN = "12,450,000"
 const VAULT_SOT = "1,250"
 const QUICK_TILE_CLASS =
-  "flex size-14 mx-auto items-center justify-center rounded-[var(--radius)] border border-border bg-surface text-foreground"
+  "flex size-14 mx-auto items-center justify-center rounded-[var(--radius)] text-foreground"
 
 const marketNameKey: Record<string, MessageKey> = {
   "XAU/USD": "market.goldSpot",
@@ -40,16 +46,40 @@ const greetingKey = (hour: number) => {
   return "home.greetingEvening" as const
 }
 
+const resolveSwipeTheme = (isLight: boolean): HomeSwipeTheme => {
+  if (isLight) {
+    return {
+      rowColor: "#ffffff",
+      drawerColor: "#e8ebe9",
+      textColor: "#111827",
+      actionColor: "#e5484d",
+    }
+  }
+
+  return {
+    rowColor: "#1c211e",
+    drawerColor: "#2a302c",
+    textColor: "#f4f7f5",
+    actionColor: "#e5484d",
+  }
+}
+
 const useHome = () => {
   const { t } = useI18n()
   const navigate = useNavigate()
+  const { direction } = useDirection()
+  const { isLight } = useTheme()
   const { data: overview } = useQuery(marketController.getOverview())
   const { status } = useMarketLive()
+  const [hiddenActivityIds, setHiddenActivityIds] = useState<string[]>([])
 
   const spotPrice = overview?.spotPrice ?? 0
   const goldChange = overview?.change ?? 0
   const assets = overview?.assets ?? []
   const recentActivity = overview?.recentActivity ?? []
+  const swipeDirection = direction === "rtl" ? ("right" as const) : ("left" as const)
+  const swipeTheme = resolveSwipeTheme(isLight)
+
   const openChart = () => {
     void navigate({ to: "/chart" })
   }
@@ -137,33 +167,75 @@ const useHome = () => {
     },
   ]
 
-  const markets: HomeMarketRow[] = assets.map((asset) => ({
-    id: asset.symbol,
-    name: t(marketNameKey[asset.symbol] ?? "market.goldSpot"),
-    symbol: asset.symbol,
-    price: asset.price,
-    change: asset.chg,
-    onSelect: openChart,
-    className:
-      "flex w-full items-center justify-between rounded-[var(--radius)] border border-border bg-surface px-4 py-3 text-start",
-  }))
-
-  const activity: HomeActivityRow[] = recentActivity.map((row, index) => {
-    const isBuy = row.type === "BUY"
+  const markets: HomeMarketRow[] = assets.map((asset) => {
+    const name = t(marketNameKey[asset.symbol] ?? "market.goldSpot")
 
     return {
-      id: `${row.date}-${index}`,
-      sideLabel: isBuy ? t("home.buyGoldAction") : t("home.sellGoldAction"),
-      sideColor: isBuy ? "success" : "danger",
-      date: row.date,
-      ouncesLabel: `${row.oz} oz`,
-      priceLabel: `$${fmt(row.price)}`,
-      className:
-        "flex items-center justify-between rounded-[var(--radius)] border border-border bg-surface px-4 py-3",
+      id: asset.symbol,
+      name,
+      symbol: asset.symbol,
+      price: asset.price,
+      change: asset.chg,
+      onSelect: openChart,
+      className: "flex w-full items-center justify-between",
+      label: name,
+      swipeDirection,
+      swipeTheme,
+      swipeActions: [
+        {
+          id: "chart",
+          label: t("home.swipeChart"),
+          color: "#16a34a",
+          onSelect: openChart,
+        },
+      ],
     }
   })
 
-  return { t, header, quote, tradeActions, wallets, actions, markets, activity }
+  const activity: HomeActivityRow[] = recentActivity
+    .map((row, index) => {
+      const id = `${row.date}-${index}`
+      const isBuy = row.type === "BUY"
+      const sideLabel = isBuy ? t("home.buyGoldAction") : t("home.sellGoldAction")
+
+      const onCommit = (_action: SwipeAction) => {
+        setHiddenActivityIds((current) => [...current, id])
+        toast.success(t("home.toastActivityRemoved"))
+      }
+
+      return {
+        id,
+        sideLabel,
+        sideColor: isBuy ? ("success" as const) : ("danger" as const),
+        date: row.date,
+        ouncesLabel: `${row.oz} oz`,
+        priceLabel: `$${fmt(row.price)}`,
+        className: "flex w-full items-center justify-between",
+        label: sideLabel,
+        swipeDirection,
+        swipeTheme,
+        swipeActions: [
+          {
+            id: "delete",
+            label: t("options.remove"),
+            dismiss: true,
+          },
+        ],
+        onCommit,
+      }
+    })
+    .filter((row) => !hiddenActivityIds.includes(row.id))
+
+  return {
+    t,
+    header,
+    quote,
+    tradeActions,
+    wallets,
+    actions,
+    markets,
+    activity,
+  }
 }
 
 export { useHome }

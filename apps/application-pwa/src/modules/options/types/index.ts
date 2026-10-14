@@ -1,11 +1,38 @@
-import type { LucideIcon } from 'lucide-react'
+import type { LiquidGlassSettingKey } from "#/modules/shell/types"
+import type { SwipeAction, SwipeDirection } from "@gold/shared-components/swipe-row"
+import type { LucideIcon } from "lucide-react"
 
-type SavedAlert = {
-  price: string
-  directionLabel: string
-  rowClassName: string
-  icon: LucideIcon
-  iconClassName: string
+type OptionsSwipeTheme = {
+  rowColor: string
+  drawerColor: string
+  textColor: string
+  actionColor: string
 }
 
-export type { SavedAlert }
+type SavedAlert = {
+  id: string
+  price: string
+  directionLabel: string
+  contentClassName: string
+  icon: LucideIcon
+  iconClassName: string
+  label: string
+  swipeDirection: SwipeDirection
+  swipeActions: SwipeAction[]
+  swipeTheme: OptionsSwipeTheme
+  onCommit: (action: SwipeAction) => void
+}
+
+type GlassSettingControl = {
+  id: LiquidGlassSettingKey
+  label: string
+  hint: string
+  valueLabel: string
+  value: number
+  min: number
+  max: number
+  step: number
+  onChange: (value: number | number[]) => void
+}
+
+export type { GlassSettingControl, OptionsSwipeTheme, SavedAlert }

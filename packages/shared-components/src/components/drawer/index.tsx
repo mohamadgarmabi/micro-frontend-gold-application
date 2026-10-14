@@ -1,5 +1,6 @@
-import { createElement } from 'react'
-import { Drawer as VaulDrawer } from 'vaul'
+import { createElement } from "react"
+import { Drawer as VaulDrawer } from "vaul"
+import LiquidGlass from "../liquid-glass"
 import type {
   DrawerCloseProps,
   DrawerContentProps,
@@ -10,7 +11,7 @@ import type {
   DrawerRootProps,
   DrawerTitleProps,
   DrawerTriggerProps,
-} from './drawer.type'
+} from "./drawer.type"
 import {
   useDrawerClose,
   useDrawerContent,
@@ -21,7 +22,7 @@ import {
   useDrawerRoot,
   useDrawerTitle,
   useDrawerTrigger,
-} from './drawer.hook'
+} from "./drawer.hook"
 
 const DrawerRoot = (props: DrawerRootProps) => {
   const rootProps = useDrawerRoot(props)
@@ -44,8 +45,17 @@ const DrawerOverlay = (props: DrawerOverlayProps) => {
 }
 
 const DrawerContent = (props: DrawerContentProps) => {
-  const contentProps = useDrawerContent(props)
-  return createElement(VaulDrawer.Content, contentProps)
+  const { children, glassLayerClassName, glassClassName, glassTint, glassRadius, ...contentProps } =
+    useDrawerContent(props)
+
+  return (
+    <VaulDrawer.Content {...contentProps}>
+      <div className={glassLayerClassName} aria-hidden="true">
+        <LiquidGlass cornerRadius={glassRadius} tint={glassTint} className={glassClassName} />
+      </div>
+      {children}
+    </VaulDrawer.Content>
+  )
 }
 
 const DrawerHandle = (props: DrawerHandleProps) => {
@@ -93,4 +103,4 @@ export type {
   DrawerRootProps,
   DrawerTitleProps,
   DrawerTriggerProps,
-} from './drawer.type'
+} from "./drawer.type"

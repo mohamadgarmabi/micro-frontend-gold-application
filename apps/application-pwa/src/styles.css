@@ -78,18 +78,16 @@ body,
   inset-inline-end: 1rem;
   bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
   z-index: 60;
+  max-width: min(24rem, calc(100vw - 2rem));
+  color: var(--foreground);
+}
+
+.pwa-banner__body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
-  max-width: min(24rem, calc(100vw - 2rem));
   padding: 0.875rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  background: var(--surface);
-  color: var(--foreground);
-  box-shadow: var(--shadow-overlay);
-  backdrop-filter: blur(12px);
 }
 
 .pwa-banner__action,
@@ -118,7 +116,6 @@ body,
 }
 
 .gold-app-frame {
-  view-transition-name: aurum-frame;
   border-inline: 1px solid color-mix(in oklab, var(--foreground) 14%, transparent);
   box-shadow:
     0 0 0 1px color-mix(in oklab, var(--border) 85%, transparent),
@@ -127,203 +124,13 @@ body,
 
 .gold-app-page {
   view-transition-name: aurum-page;
+  min-height: 100%;
 }
 
 @media (min-width: 28.01rem) {
   .gold-app-frame {
     border: 1px solid color-mix(in oklab, var(--foreground) 14%, transparent);
   }
-}
-
-.liquid-nav {
-  pointer-events: none;
-  position: fixed;
-  z-index: 50;
-  bottom: 0;
-  left: max(0px, calc((100% - 28rem) / 2));
-  width: min(100%, 28rem);
-  display: flex;
-  justify-content: center;
-  padding-inline: 1.15rem;
-  padding-top: 1.25rem;
-  padding-bottom: max(0.9rem, env(safe-area-inset-bottom, 0px));
-  background: transparent;
-  border: 0;
-}
-
-.liquid-nav__frost {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  transform: translateZ(0);
-  background: linear-gradient(
-    to top,
-    color-mix(in oklab, var(--background) 82%, transparent) 0%,
-    color-mix(in oklab, var(--background) 42%, transparent) 48%,
-    transparent 100%
-  );
-  backdrop-filter: blur(28px) saturate(1.45);
-  -webkit-backdrop-filter: blur(28px) saturate(1.45);
-  mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 38%, transparent 100%);
-}
-
-.liquid-nav__bar {
-  position: relative;
-  z-index: 1;
-  pointer-events: auto;
-  flex: 1 1 auto;
-  width: 100%;
-  padding: 0.35rem;
-  overflow: hidden;
-  border-radius: 1.65rem;
-  transform: translateZ(0);
-  background: color-mix(in oklab, var(--surface) 42%, transparent);
-  border: 1px solid color-mix(in oklab, #fff 26%, var(--border));
-  backdrop-filter: blur(48px) saturate(1.9);
-  -webkit-backdrop-filter: blur(48px) saturate(1.9);
-  box-shadow:
-    0 16px 44px color-mix(in oklab, #000 22%, transparent),
-    0 4px 14px color-mix(in oklab, #000 10%, transparent),
-    inset 0 1px 0 color-mix(in oklab, #fff 48%, transparent);
-}
-
-.liquid-nav__bar::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, #fff 22%, transparent) 0%,
-    transparent 46%
-  );
-  pointer-events: none;
-}
-
-.dark .liquid-nav__frost {
-  background: linear-gradient(
-    to top,
-    color-mix(in oklab, var(--background) 88%, transparent) 0%,
-    color-mix(in oklab, var(--background) 48%, transparent) 48%,
-    transparent 100%
-  );
-}
-
-.dark .liquid-nav__bar {
-  background: color-mix(in oklab, var(--surface) 34%, transparent);
-  border-color: color-mix(in oklab, #fff 12%, var(--border));
-  box-shadow:
-    0 16px 44px color-mix(in oklab, #000 42%, transparent),
-    0 4px 14px color-mix(in oklab, #000 18%, transparent),
-    inset 0 1px 0 color-mix(in oklab, #fff 14%, transparent);
-}
-
-.dark .liquid-nav__bar::before {
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, #fff 10%, transparent) 0%,
-    transparent 48%
-  );
-}
-
-.liquid-nav__track {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  min-width: 0;
-}
-
-.liquid-nav__slider {
-  position: absolute;
-  z-index: 0;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-  will-change: transform;
-}
-
-.liquid-nav__slider.is-ready {
-  transition:
-    transform 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s,
-    width 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.14s;
-}
-
-.liquid-nav__glow {
-  position: absolute;
-  inset: -18% -8%;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at center,
-    color-mix(in oklab, var(--accent) 38%, transparent),
-    transparent 72%
-  );
-  filter: blur(12px);
-  opacity: 0.8;
-  pointer-events: none;
-  animation: liquid-nav-breathe 4.2s ease-in-out infinite;
-}
-
-.liquid-nav__indicator {
-  position: absolute;
-  z-index: 0;
-  inset: 0.2rem;
-  border-radius: 0.95rem;
-  background: color-mix(in oklab, var(--accent) 18%, transparent);
-  box-shadow: inset 0 1px 0 color-mix(in oklab, #fff 28%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  pointer-events: none;
-}
-
-.liquid-nav__item {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.12rem;
-  min-height: 3.35rem;
-  min-width: 0;
-  padding-inline: 0.2rem;
-  border: 0;
-  background: transparent;
-  border-radius: 999px;
-  color: var(--muted);
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    color 0.35s ease 0.14s,
-    transform 0.35s ease 0.14s;
-}
-
-.liquid-nav__item span {
-  font-size: 0.625rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-}
-
-.liquid-nav__item.is-active {
-  color: var(--accent);
-  transform: none;
-}
-
-.liquid-nav__item.is-active svg {
-  transform: scale(1.08);
-}
-
-.liquid-nav__item svg {
-  transition: transform 0.35s ease 0.14s;
-}
-
-.liquid-nav__item.is-active span {
-  font-weight: 700;
 }
 
 .aurum-mark {
@@ -475,20 +282,6 @@ body,
   }
 }
 
-@keyframes liquid-nav-breathe {
-  0%,
-  100% {
-    opacity: 0.45;
-    filter: blur(11px);
-    transform: scaleX(0.92);
-  }
-  50% {
-    opacity: 0.85;
-    filter: blur(16px);
-    transform: scaleX(1.08);
-  }
-}
-
 :root {
   --vt-duration: 0.38s;
   --vt-ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -514,6 +307,18 @@ html[dir="rtl"] {
 
 ::view-transition-group(aurum-nav) {
   z-index: 50;
+  animation-duration: 0.01ms;
+  animation-timing-function: linear;
+}
+
+::view-transition-old(aurum-nav) {
+  display: none;
+}
+
+::view-transition-new(aurum-nav) {
+  animation: none;
+  mix-blend-mode: normal;
+  opacity: 1;
 }
 
 ::view-transition-old(aurum-page),

@@ -1,7 +1,7 @@
 import Button from "@gold/shared-components/button"
-import Card from "@gold/shared-components/card"
 import Link from "@gold/shared-components/link"
 import Typography from "@gold/shared-components/typography"
+import Card from "#/modules/shell/components/card"
 import GoldBadge from "#/modules/shell/components/gold-badge"
 import PriceTag from "#/modules/shell/components/price-tag"
 import type { HomeHeroProps } from "../types"
