@@ -19,8 +19,11 @@ const toApiUrlPattern = (baseURL: string): RegExp => {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, import.meta.dirname, "")
   const apiBaseURL = env.VITE_APP_API_URL || DEFAULT_API_URL
+  const isGitHubPages = mode === "production"
+  const pagesBase = isGitHubPages ? "/micro-frontend-gold-application/" : "/"
 
   return {
+    base: pagesBase,
     server: {
       port: PORT,
       strictPort: true,
