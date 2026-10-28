@@ -2,6 +2,8 @@ import type { SwipeAction } from "@gold/shared-components/swipe-row"
 import { toast } from "@gold/shared-components/toaster"
 import { Check, Clock, Fingerprint } from "lucide-react"
 import { createElement, useState } from "react"
+import { SPOT_PRICE } from "#/modules/market/utils/data"
+import { fmt } from "#/modules/market/utils/format"
 import { useWebAuthn } from "#/modules/auth/hooks/webauthn.hook"
 import { useDirection } from "#/modules/shell/hooks/direction.hook"
 import { useI18n } from "#/modules/shell/hooks/i18n.hook"
@@ -36,6 +38,7 @@ const useOptions = () => {
   const [currency, setCurrency] = useState("USD")
   const [priceAlert, setPriceAlert] = useState("3350")
   const [removedAlertIds, setRemovedAlertIds] = useState<string[]>([])
+  const [addedAlerts, setAddedAlerts] = useState<{ id: string; value: number }[]>([])
   const { direction, setDirection } = useDirection()
   const { preference, setTheme, isLight } = useTheme()
   const { enabled: viewTransitionEnabled, setEnabled: setViewTransitionEnabled } =
@@ -79,33 +82,39 @@ const useOptions = () => {
     )
   }
 
-  const handleViewTransitionChange = (next: string | string[]) => {
-    if (typeof next !== "string") {
-      return
-    }
-
-    const enabled = next === "on"
+  const handleViewTransitionChange = (enabled: boolean) => {
     setViewTransitionEnabled(enabled)
     toast.info(t(enabled ? "options.toastViewTransitionOn" : "options.toastViewTransitionOff"))
   }
 
-  const handleNotificationsChange = (next: string | string[]) => {
-    if (typeof next !== "string") {
+  const handleNotificationsChange = (enabled: boolean) => {
+    setNotifications(enabled)
+  }
+
+  const handleBiometricSelect = (enabled: boolean) => {
+    if (isBiometricDisabled) {
       return
     }
 
-    setNotifications(next === "on")
+    handleBiometricToggle(enabled)
   }
 
-  const handleBiometricSelect = (next: string | string[]) => {
-    if (typeof next !== "string" || isBiometricDisabled) {
-      return
-    }
-
-    handleBiometricToggle(next === "on")
-  }
+  const priceAlertValue = parseFloat(priceAlert.replace(/,/g, ""))
+  const isPriceAlertValid = Number.isFinite(priceAlertValue) && priceAlertValue > 0
 
   const handleSaveAlert = () => {
+    if (!isPriceAlertValid) {
+      toast.error(t("options.invalidAlert"))
+      return
+    }
+
+    const id = `custom-alert-${priceAlertValue}`
+    setAddedAlerts((current) =>
+      current.some((alert) => alert.id === id)
+        ? current
+        : [{ id, value: priceAlertValue }, ...current],
+    )
+    setRemovedAlertIds((current) => current.filter((alertId) => alertId !== id))
     toast.success(t("options.toastAlert"))
   }
 
@@ -113,13 +122,6 @@ const useOptions = () => {
     { value: "rtl", label: t("options.directionRtl") },
     { value: "ltr", label: t("options.directionLtr") },
   ]
-
-  const viewTransitionSelectOptions = [
-    { value: "on", label: t("options.active") },
-    { value: "off", label: t("options.inactive") },
-  ]
-
-  const booleanSelectOptions = viewTransitionSelectOptions
 
   const currencySelectOptions = currencyOptions.map((code) => ({
     value: code,
@@ -133,6 +135,27 @@ const useOptions = () => {
   }
 
   const savedAlerts: SavedAlert[] = [
+    ...addedAlerts.map((alert) => {
+      const price = `$${fmt(alert.value)}`
+      const directionLabel = t(alert.value >= SPOT_PRICE ? "options.above" : "options.below")
+
+      return {
+        id: alert.id,
+        price,
+        directionLabel,
+        contentClassName: "flex w-full items-center gap-2",
+        icon: Check,
+        iconClassName: "text-gold-600",
+        label: `${price} ${directionLabel}`,
+        swipeDirection,
+        swipeTheme,
+        swipeActions: [{ id: "delete", label: t("options.remove"), dismiss: true }],
+        onCommit: (_action: SwipeAction) => {
+          setRemovedAlertIds((current) => [...current, alert.id])
+          toast.success(t("options.toastAlertRemoved"))
+        },
+      }
+    }),
     {
       id: "alert-3400",
       price: "$3,400",
@@ -188,10 +211,8 @@ const useOptions = () => {
   return {
     t,
     notifications,
-    notificationsValue: notifications ? "on" : "off",
     handleNotificationsChange,
     biometric,
-    biometricValue: biometric ? "on" : "off",
     biometricHint,
     biometricIcon: createElement(Fingerprint, { size: 16, strokeWidth: 1.8 }),
     isBiometricDisabled,
@@ -205,9 +226,6 @@ const useOptions = () => {
     handleDirectionChange,
     handleViewTransitionChange,
     viewTransitionEnabled,
-    viewTransitionValue: viewTransitionEnabled ? "on" : "off",
-    viewTransitionSelectOptions,
-    booleanSelectOptions,
     handleSaveAlert,
     savedAlerts,
     aboutItems,

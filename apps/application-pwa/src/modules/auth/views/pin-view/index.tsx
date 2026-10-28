@@ -5,10 +5,11 @@ import { PIN_LENGTH } from "#/config/security.constants"
 import { usePinUnlock } from "../../hooks/pin-unlock.hook"
 
 const PinView = () => {
-  const { t, pin, handlePinChange, complete, unlock, error, isBusy, pinSlots } = usePinUnlock()
+  const { t, pin, handlePinChange, complete, unlock, error, isBusy, pinSlots, switchAccount } =
+    usePinUnlock()
 
   return (
-    <div className="aurum-gradient-bg bg-background flex min-h-screen flex-col px-6 pt-16">
+    <div className="aurum-gradient-bg bg-background flex min-h-dvh flex-col px-6 pt-16 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
       <div className="mx-auto flex w-full max-w-sm flex-1 flex-col">
         <div className="mb-8">
           <Typography as="h2" size="display" weight="semibold" className="mb-2 text-2xl">
@@ -41,11 +42,9 @@ const PinView = () => {
           </div>
         </Glass>
 
-        {error ? (
-          <Typography size="sm" color="danger" align="center" className="mb-4">
-            {error}
-          </Typography>
-        ) : null}
+        <Typography role="alert" size="sm" color="danger" align="center" className="mb-4 min-h-5">
+          {error}
+        </Typography>
 
         <Button
           type="button"
@@ -56,6 +55,10 @@ const PinView = () => {
           onClick={unlock}
         >
           {t("auth.pinContinue")}
+        </Button>
+
+        <Button type="button" onClick={switchAccount} className="mt-auto w-full">
+          {t("auth.pinSwitchAccount")}
         </Button>
       </div>
     </div>

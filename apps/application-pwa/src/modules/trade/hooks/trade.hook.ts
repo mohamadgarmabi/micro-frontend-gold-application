@@ -1,6 +1,7 @@
 import type { SwipeAction } from "@gold/shared-components/swipe-row"
 import { toast } from "@gold/shared-components/toaster"
 import type { TabBarItem } from "glisse"
+import { useSearch } from "@tanstack/react-router"
 import type { CSSProperties } from "react"
 import { useState } from "react"
 import { SPOT_PRICE } from "#/modules/market/utils/data"
@@ -36,10 +37,14 @@ const useTrade = () => {
   const { t } = useI18n()
   const { direction } = useDirection()
   const { isLight } = useTheme()
-  const [side, setSide] = useState<TradeSide>("buy")
+  const { side: initialSide } = useSearch({ from: "/(app)/trade" })
+  const [side, setSide] = useState<TradeSide>(initialSide ?? "buy")
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+  const [isAmountTouched, setIsAmountTouched] = useState(false)
   const [amount, setAmount] = useState("1.00")
   const [hiddenOrderIds, setHiddenOrderIds] = useState<string[]>([])
   const numericAmount = parseFloat(amount || "0")
+  const isAmountValid = Number.isFinite(numericAmount) && numericAmount > 0
   const execPrice = side === "buy" ? SPOT_PRICE + SPREAD / 2 : SPOT_PRICE - SPREAD / 2
   const total = numericAmount * execPrice
   const fee = total * FEE_RATE
@@ -65,7 +70,22 @@ const useTrade = () => {
   }
 
   const handleSubmit = () => {
-    toast.success(t(isBuy ? "trade.buyToast" : "trade.sellToast", { amount }))
+    if (isAmountValid) {
+      setIsConfirmOpen(true)
+    }
+  }
+
+  const handleConfirm = () => {
+    setIsConfirmOpen(false)
+    toast.success(t(isBuy ? "trade.buyToast" : "trade.sellToast", { amount: formattedAmount }))
+  }
+
+  const handleAmountBlur = () => {
+    setIsAmountTouched(true)
+  }
+
+  const handleCancelConfirm = () => {
+    setIsConfirmOpen(false)
   }
 
   const sideItems: TabBarItem[] = [
@@ -149,10 +169,20 @@ const useTrade = () => {
     incrementAmount,
     handleSideChange,
     handleSubmit,
+    isSubmitDisabled: !isAmountValid,
+    isAmountInvalid: isAmountTouched && !isAmountValid,
+    amountError: isAmountTouched && !isAmountValid ? t("trade.invalidAmount") : null,
+    handleAmountBlur,
+    isConfirmOpen,
+    handleConfirmOpenChange: setIsConfirmOpen,
+    handleConfirm,
+    handleCancelConfirm,
+    confirmTitle: t("trade.confirmTitle"),
+    confirmHint: t("trade.confirmHint"),
     execPriceLabel: `$${fmt(execPrice)}`,
     spreadSpotLabel: t("trade.spreadSpot", { spread: fmt(SPREAD), spot: fmt(SPOT_PRICE) }),
     totalLabel: `$${fmt(total + fee)}`,
-    submitLabel: t(isBuy ? "trade.buyAction" : "trade.sellAction", { amount }),
+    submitLabel: t(isBuy ? "trade.buyAction" : "trade.sellAction", { amount: formattedAmount }),
     submitTint: isBuy ? "var(--success)" : "var(--danger)",
     // Glisse only lays tabs out left to right, so RTL reverses the order instead.
     sideItems: direction === "rtl" ? [...sideItems].reverse() : sideItems,

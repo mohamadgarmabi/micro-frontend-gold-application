@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority"
 
 const bottomNavStyles = cva(
-  "pointer-events-none fixed bottom-0 left-[max(0px,calc((100%-28rem)/2))] z-50 flex w-[min(100%,28rem)] justify-center px-[1.15rem] pt-5 pb-[max(0.9rem,env(safe-area-inset-bottom,0px))]",
+  "pointer-events-none fixed bottom-0 left-[max(0px,calc((100%-28rem)/2))] z-50 flex w-[min(100%,28rem)] justify-center px-[1.15rem] pt-5 pb-[max(0.9rem,env(safe-area-inset-bottom,0px))] lg:hidden",
 )
 
 const bottomNavBarStyles = cva("pointer-events-auto relative flex justify-center")

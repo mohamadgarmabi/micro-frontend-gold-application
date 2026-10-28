@@ -60,6 +60,7 @@
     "@gold/form": "workspace:*",
     "@gold/shared-components": "workspace:*",
     "@tailwindcss/vite": "^4.3.3",
+    "@tanstack/charts": "1.1.0",
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-query": "5.104.0",
     "@tanstack/react-router": "latest",
@@ -77,7 +78,6 @@
     "motion": "^14.1.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "recharts": "^3.10.1",
     "tailwindcss": "^4.3.3",
     "vite-plugin-react-splash": "^1.1.0",
     "workbox-window": "^7.4.1"

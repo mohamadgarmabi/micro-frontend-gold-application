@@ -6,6 +6,7 @@ const faMessages: Record<MessageKey, string> = {
   "nav.trade": "معامله",
   "nav.profile": "پروفایل",
   "nav.options": "تنظیمات",
+  "nav.label": "ناوبری اصلی",
 
   "home.greeting": "صبح بخیر",
   "home.greetingAfternoon": "ظهر بخیر",
@@ -62,6 +63,8 @@ const faMessages: Record<MessageKey, string> = {
   "chart.goldSpot": "طلای لحظه‌ای",
   "chart.live": "زنده",
   "chart.price": "قیمت",
+  "chart.time": "زمان",
+  "chart.ariaLabel": "نمودار قیمت طلا، {range}",
   "chart.open": "باز",
   "chart.high": "بالا",
   "chart.low": "پایین",
@@ -246,6 +249,15 @@ const faMessages: Record<MessageKey, string> = {
   "pwa.installHint": "عیار را برای دسترسی آفلاین نصب کنید.",
   "pwa.install": "نصب",
   "pwa.notNow": "الان نه",
+  "trade.confirmTitle": "تأیید سفارش",
+  "trade.confirmHint": "پیش از ثبت سفارش، جزئیات را بررسی کنید.",
+  "trade.confirm": "تأیید",
+  "trade.cancel": "انصراف",
+  "trade.invalidAmount": "مقداری بیشتر از صفر وارد کنید",
+  "profile.toggleBalance": "نمایش یا پنهان کردن موجودی",
+  "auth.pinSwitchAccount": "ورود با حساب دیگر",
+  "home.openChart": "باز کردن نمودار",
+  "options.invalidAlert": "یک قیمت معتبر وارد کنید",
 }
 
 export { faMessages }

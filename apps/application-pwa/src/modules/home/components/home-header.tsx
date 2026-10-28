@@ -3,7 +3,7 @@ import { Button } from "glisse"
 import { Hexagon, TrendingUp } from "lucide-react"
 import type { HomeHeaderModel } from "../types"
 
-const HomeHeader = ({ greeting, brandName, onOpenChart }: HomeHeaderModel) => {
+const HomeHeader = ({ greeting, brandName, chartLabel, onOpenChart }: HomeHeaderModel) => {
   return (
     <div className="mb-6 flex items-center justify-between">
       <div className="flex items-center gap-3">
@@ -19,7 +19,7 @@ const HomeHeader = ({ greeting, brandName, onOpenChart }: HomeHeaderModel) => {
           </Typography>
         </div>
       </div>
-      <Button icon={<TrendingUp size={16} />} aria-label="Open chart" onClick={onOpenChart} />
+      <Button icon={<TrendingUp size={16} />} aria-label={chartLabel} onClick={onOpenChart} />
     </div>
   )
 }

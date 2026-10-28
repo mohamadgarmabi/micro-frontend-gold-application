@@ -1,17 +1,9 @@
 import Typography from "@gold/shared-components/typography"
+import { Chart } from "@tanstack/charts/react"
 import { TabBar } from "glisse"
 import Card from "#/modules/shell/components/card"
 import GoldBadge from "#/modules/shell/components/gold-badge"
 import PriceTag from "#/modules/shell/components/price-tag"
-import {
-  Area,
-  AreaChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts"
 import { useChart } from "../../hooks/chart.hook"
 
 const ChartView = () => {
@@ -20,24 +12,17 @@ const ChartView = () => {
     range,
     rangeItems,
     handleRangeChange,
-    chartData,
+    chartDefinition,
+    chartLabel,
     latest,
     chgPct,
-    chartStroke,
-    gridStroke,
-    axisFill,
-    tooltipStyle,
-    yAxisOrientation,
-    chartMargin,
-    formatAxis,
-    formatTooltip,
     stats,
     bids,
     asks,
   } = useChart()
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className="min-h-screen pb-24 lg:pb-10">
       <div className="px-5 pt-12 pb-4">
         <div className="mb-1 flex items-center justify-between">
           <div>
@@ -68,54 +53,17 @@ const ChartView = () => {
         />
       </div>
 
-      <div className="mb-6 px-3" style={{ height: 260 }}>
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData} margin={chartMargin}>
-            <defs>
-              <linearGradient id="goldGradMain" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={chartStroke} stopOpacity={0.25} />
-                <stop offset="95%" stopColor={chartStroke} stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} />
-            <XAxis
-              dataKey="time"
-              tick={{
-                fill: axisFill,
-                fontSize: 10,
-                fontFamily: "DM Mono, monospace",
-              }}
-              axisLine={false}
-              tickLine={false}
-            />
-            <YAxis
-              orientation={yAxisOrientation}
-              domain={["auto", "auto"]}
-              tick={{
-                fill: axisFill,
-                fontSize: 10,
-                fontFamily: "DM Mono, monospace",
-              }}
-              axisLine={false}
-              tickLine={false}
-              width={55}
-              tickFormatter={formatAxis}
-            />
-            <Tooltip contentStyle={tooltipStyle} formatter={formatTooltip} />
-            <Area
-              type="monotone"
-              dataKey="price"
-              stroke={chartStroke}
-              strokeWidth={2}
-              fill="url(#goldGradMain)"
-              dot={false}
-              activeDot={{ r: 4, fill: "var(--accent)", strokeWidth: 0 }}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+      <div className="mb-6 px-3">
+        <Chart
+          definition={chartDefinition}
+          height={300}
+          initialWidth={400}
+          ariaLabel={chartLabel}
+          className="gold-chart"
+        />
       </div>
 
-      <div className="mb-5 grid grid-cols-2 gap-3 px-5">
+      <div className="mb-5 grid grid-cols-2 gap-3 px-5 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="py-3">
             <Typography

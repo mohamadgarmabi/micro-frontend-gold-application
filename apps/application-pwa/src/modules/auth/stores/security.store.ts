@@ -34,6 +34,14 @@ const securityStore = createStore(defaultSecurityState, ({ setState, get }) => (
     }))
     return get()
   },
+  clearPin: (): SecurityState => {
+    persistPinHash(null)
+    setState((current) => ({
+      ...current,
+      pinHash: null,
+    }))
+    return get()
+  },
   setTwoFactorEnabled: (twoFactorEnabled: boolean): SecurityState => {
     persistTwoFactorEnabled(twoFactorEnabled)
     setState((current) => ({

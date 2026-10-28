@@ -1,9 +1,11 @@
+import Drawer from "@gold/shared-components/drawer"
 import SwipeRow from "@gold/shared-components/swipe-row"
 import Typography from "@gold/shared-components/typography"
 import { Button, Input, TabBar } from "glisse"
 import { Minus, Plus } from "lucide-react"
 import Card from "#/modules/shell/components/card"
 import GoldBadge from "#/modules/shell/components/gold-badge"
+import OrderSummary from "../../components/order-summary"
 import { useTrade } from "../../hooks/trade.hook"
 
 const TradeView = () => {
@@ -18,6 +20,16 @@ const TradeView = () => {
     sideItems,
     sideTabBarStyle,
     handleSubmit,
+    isSubmitDisabled,
+    isAmountInvalid,
+    amountError,
+    handleAmountBlur,
+    isConfirmOpen,
+    handleConfirmOpenChange,
+    handleConfirm,
+    handleCancelConfirm,
+    confirmTitle,
+    confirmHint,
     execPriceLabel,
     spreadSpotLabel,
     totalLabel,
@@ -29,7 +41,7 @@ const TradeView = () => {
   } = useTrade()
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className="min-h-screen pb-24 lg:mx-auto lg:max-w-xl lg:pb-10">
       <div className="px-5 pt-12 pb-6">
         <Typography as="h2" size="xl" weight="semibold" className="aurum-serif mb-1">
           {t("trade.title")}
@@ -93,7 +105,10 @@ const TradeView = () => {
               type="number"
               inputMode="decimal"
               aria-label={t("trade.amount")}
+              aria-invalid={isAmountInvalid}
+              aria-describedby="trade-amount-error"
               value={amount}
+              onBlur={handleAmountBlur}
               onValueChange={setAmount}
               className="max-w-none! flex-1 font-mono [&_input]:text-center"
             />
@@ -104,6 +119,15 @@ const TradeView = () => {
               onClick={incrementAmount}
             />
           </div>
+          <Typography
+            id="trade-amount-error"
+            role="alert"
+            size="xs"
+            color="danger"
+            className="mt-1 min-h-4"
+          >
+            {amountError}
+          </Typography>
           <div className="mt-2 flex gap-2">
             {quickAmounts.map((item) => (
               <Button key={item.value} type="button" onClick={item.onSelect} className="flex-1">
@@ -122,30 +146,14 @@ const TradeView = () => {
           >
             {t("trade.orderSummary")}
           </Typography>
-          {orderRows.map((row) => (
-            <div key={row.label} className="flex items-center justify-between">
-              <Typography as="span" size="sm" color="subtle">
-                {row.label}
-              </Typography>
-              <Typography as="span" size="sm" className="font-mono">
-                {row.value}
-              </Typography>
-            </div>
-          ))}
-          <div className="border-border flex items-center justify-between border-t pt-2">
-            <Typography as="span" size="sm" weight="semibold">
-              {t("trade.total")}
-            </Typography>
-            <Typography as="span" size="md" weight="semibold" color="brand" className="font-mono">
-              {totalLabel}
-            </Typography>
-          </div>
+          <OrderSummary rows={orderRows} totalLabel={t("trade.total")} totalValue={totalLabel} />
         </Card>
 
         <Button
           type="button"
           variant="filled"
           tint={submitTint}
+          disabled={isSubmitDisabled}
           onClick={handleSubmit}
           className="h-12! w-full font-semibold"
         >
@@ -194,16 +202,44 @@ const TradeView = () => {
           </div>
         </div>
 
-        <Typography
-          size="xs"
-          weight="regular"
-          color="subtle"
-          align="center"
-          className="text-[10px]"
-        >
+        <Typography size="xs" weight="regular" color="subtle" align="center">
           {t("trade.disclaimer")}
         </Typography>
       </div>
+
+      <Drawer open={isConfirmOpen} onOpenChange={handleConfirmOpenChange}>
+        <Drawer.Portal>
+          <Drawer.Overlay />
+          <Drawer.Content className="px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+            <Drawer.Handle />
+            <Drawer.Title className="mt-2 text-lg">{confirmTitle}</Drawer.Title>
+            <Drawer.Description className="text-foreground-subtle mt-1 text-sm">
+              {confirmHint}
+            </Drawer.Description>
+            <div className="mt-5">
+              <OrderSummary
+                rows={orderRows}
+                totalLabel={t("trade.total")}
+                totalValue={totalLabel}
+              />
+            </div>
+            <div className="mt-6 flex gap-3">
+              <Button type="button" onClick={handleCancelConfirm} className="h-12! flex-1">
+                {t("trade.cancel")}
+              </Button>
+              <Button
+                type="button"
+                variant="filled"
+                tint={submitTint}
+                onClick={handleConfirm}
+                className="h-12! flex-1 font-semibold"
+              >
+                {t("trade.confirm")}
+              </Button>
+            </div>
+          </Drawer.Content>
+        </Drawer.Portal>
+      </Drawer>
     </div>
   )
 }

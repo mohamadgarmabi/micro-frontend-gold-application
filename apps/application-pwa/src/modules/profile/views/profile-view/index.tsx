@@ -7,10 +7,20 @@ import GoldBadge from "#/modules/shell/components/gold-badge"
 import { useProfile } from "../../hooks/profile.hook"
 
 const ProfileView = () => {
-  const { t, BalanceIcon, toggleBalance, signOut, balanceLabel, holdings, menuItems } = useProfile()
+  const {
+    t,
+    BalanceIcon,
+    toggleBalance,
+    balanceToggleLabel,
+    showBalance,
+    signOut,
+    balanceLabel,
+    holdings,
+    menuItems,
+  } = useProfile()
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className="min-h-screen pb-24 lg:mx-auto lg:max-w-2xl lg:pb-10">
       <div className="from-gold-600/8 bg-gradient-to-b to-transparent px-5 pt-12 pb-8">
         <div className="flex items-center gap-4">
           <Avatar className="bg-button text-button-foreground size-16 rounded-2xl text-xl font-bold">
@@ -45,9 +55,11 @@ const ProfileView = () => {
             <button
               type="button"
               onClick={toggleBalance}
-              className="text-foreground-subtle hover:text-foreground transition-colors"
+              aria-label={balanceToggleLabel}
+              aria-pressed={!showBalance}
+              className="text-foreground-subtle hover:text-foreground -m-3 flex size-11 cursor-pointer items-center justify-center transition-colors"
             >
-              <BalanceIcon size={14} />
+              <BalanceIcon size={16} />
             </button>
           </div>
           <Typography size="display" weight="medium" className="font-mono">
@@ -92,9 +104,10 @@ const ProfileView = () => {
               <Glass key={item.id} className="rounded-xl">
                 <button
                   type="button"
-                  className="border-border/40 hover:border-gold-600/30 flex w-full items-center gap-3 rounded-xl border bg-transparent p-4 transition-all duration-200"
+                  onClick={item.onSelect}
+                  className="border-border/40 hover:border-gold-600/30 flex w-full cursor-pointer items-center gap-3 rounded-xl border bg-transparent p-4 transition-all duration-200"
                 >
-                  <span className="text-gold-600">
+                  <span className="text-gold-600" aria-hidden="true">
                     <Icon size={16} />
                   </span>
                   <Typography as="span" size="sm" className="flex-1 text-start">

@@ -11,6 +11,7 @@ type ProfileMenuItem = {
   icon: LucideIcon
   label: string
   sub: string
+  onSelect: () => void
 }
 
 export type { HoldingRow, ProfileMenuItem }

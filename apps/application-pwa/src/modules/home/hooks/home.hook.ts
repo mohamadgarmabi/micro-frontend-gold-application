@@ -11,6 +11,7 @@ import { useDirection } from "#/modules/shell/hooks/direction.hook"
 import { useI18n } from "#/modules/shell/hooks/i18n.hook"
 import { useTheme } from "#/modules/shell/hooks/theme.hook"
 import type { MessageKey } from "#/modules/shell/types"
+import type { TradeSide } from "#/modules/trade/types"
 import type {
   HomeActivityRow,
   HomeHeaderModel,
@@ -84,8 +85,8 @@ const useHome = () => {
     void navigate({ to: "/chart" })
   }
 
-  const openTrade = () => {
-    void navigate({ to: "/trade" })
+  const openTrade = (side: TradeSide) => {
+    void navigate({ to: "/trade", search: { side } })
   }
 
   const streamStatus =
@@ -98,6 +99,7 @@ const useHome = () => {
   const header: HomeHeaderModel = {
     greeting: t(greetingKey(new Date().getHours())),
     brandName: t("home.brand"),
+    chartLabel: t("home.openChart"),
     onOpenChart: openChart,
   }
 
@@ -116,12 +118,12 @@ const useHome = () => {
     {
       label: t("home.buyGold"),
       tint: "var(--accent)",
-      onSelect: openTrade,
+      onSelect: () => openTrade("buy"),
     },
     {
       label: t("home.sellGold"),
       tint: "var(--danger)",
-      onSelect: openTrade,
+      onSelect: () => openTrade("sell"),
     },
   ]
 

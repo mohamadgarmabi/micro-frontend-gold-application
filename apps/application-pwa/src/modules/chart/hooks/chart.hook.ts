@@ -1,3 +1,7 @@
+import { areaY, crosshair, defineChart, lineY } from "@tanstack/charts"
+import { scaleLinear } from "@tanstack/charts/scales/linear"
+import { scalePoint } from "@tanstack/charts/scales/point"
+import { tooltip } from "@tanstack/charts/tooltip"
 import type { TabBarItem } from "glisse"
 import { useState } from "react"
 import { monthData, priceData, weekData } from "#/modules/market/utils/data"
@@ -30,21 +34,11 @@ const useChart = () => {
   const first = data[0].price
   const chgPct = ((latest - first) / first) * 100
   const up = chgPct >= 0
-  const chartStroke = up ? "var(--accent)" : "var(--danger)"
-  const gridStroke = "color-mix(in oklab, var(--accent) 10%, transparent)"
-  const axisFill = "var(--muted)"
-  const tooltipStyle = {
-    background: "var(--surface)",
-    border: "1px solid var(--border)",
-    borderRadius: 10,
-    fontFamily: "DM Mono, monospace",
-    fontSize: 12,
-    color: "var(--foreground)",
-  }
-  const yAxisOrientation = isRtl ? ("right" as const) : ("left" as const)
-  const chartMargin = isRtl
-    ? { top: 8, right: 4, left: 8, bottom: 8 }
-    : { top: 8, right: 8, left: 0, bottom: 8 }
+  // Theme-aware tokens from styles.css; the raw accent is too pale for a line on the light theme.
+  const chartStroke = up ? "var(--chart-up)" : "var(--chart-down)"
+  const prices = data.map((point) => point.price)
+  const high = Math.max(...prices)
+  const low = Math.min(...prices)
 
   const handleRangeChange = (value: string) => {
     setRange(value as ChartRange)
@@ -55,17 +49,62 @@ const useChart = () => {
     time: weekdayKeys[point.time] ? t(weekdayKeys[point.time]) : point.time,
   }))
 
-  const formatAxis = (value: number) => `$${(value / 1000).toFixed(1)}k`
-
-  const formatTooltip = (value: unknown) => {
-    const numericValue = typeof value === "number" ? value : 0
-    return [`$${fmt(numericValue)}`, t("chart.price")]
-  }
+  const chartDefinition = defineChart({
+    marks: [
+      areaY(chartData, {
+        x: "time",
+        y1: low,
+        y2: "price",
+        fill: "url(#gold-chart-fill)",
+        fillOpacity: 1,
+      }),
+      lineY(chartData, { x: "time", y: "price", stroke: chartStroke, strokeWidth: 2 }),
+      crosshair({ y: false }),
+    ],
+    scales: {
+      x: {
+        scale: () => scalePoint<string>(),
+        axis: { line: false, ticks: { size: 0 } },
+      },
+      y: {
+        scale: scaleLinear,
+        nice: true,
+        grid: true,
+        side: isRtl ? "right" : "left",
+        axis: {
+          line: false,
+          ticks: { size: 0, format: (value: number) => `$${(value / 1000).toFixed(2)}k` },
+        },
+      },
+    },
+    gradients: [
+      {
+        id: "gold-chart-fill",
+        x1: 0,
+        y1: 1,
+        x2: 0,
+        y2: 0,
+        stops: [
+          { offset: 0, color: chartStroke, opacity: 0 },
+          { offset: 1, color: chartStroke, opacity: 0.28 },
+        ],
+      },
+    ],
+    focus: "nearest-x",
+    maxFocusDistance: Number.POSITIVE_INFINITY,
+    tooltip: {
+      use: tooltip,
+      items: [
+        { channel: "y", label: t("chart.price"), text: (point) => `$${fmt(point.yValue)}` },
+        { channel: "x", label: t("chart.time") },
+      ],
+    },
+  })
 
   const stats: ChartStat[] = [
     { label: t("chart.open"), value: `$${fmt(first)}` },
-    { label: t("chart.high"), value: `$${fmt(Math.max(...data.map((point) => point.price)))}` },
-    { label: t("chart.low"), value: `$${fmt(Math.min(...data.map((point) => point.price)))}` },
+    { label: t("chart.high"), value: `$${fmt(high)}` },
+    { label: t("chart.low"), value: `$${fmt(low)}` },
     { label: t("chart.volume"), value: t("chart.volumeValue") },
   ]
 
@@ -87,17 +126,10 @@ const useChart = () => {
     // Glisse only lays tabs out left to right, so RTL reverses the order instead.
     rangeItems: isRtl ? [...rangeItems].reverse() : rangeItems,
     handleRangeChange,
-    chartData,
+    chartDefinition,
+    chartLabel: t("chart.ariaLabel", { range }),
     latest,
     chgPct,
-    chartStroke,
-    gridStroke,
-    axisFill,
-    tooltipStyle,
-    yAxisOrientation,
-    chartMargin,
-    formatAxis,
-    formatTooltip,
     stats,
     bids,
     asks,

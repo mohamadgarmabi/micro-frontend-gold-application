@@ -65,13 +65,7 @@ const LoginView = () => {
 
             <div className="flex items-center gap-3">
               <Separator className="flex-1" />
-              <Typography
-                as="span"
-                size="xs"
-                weight="regular"
-                color="muted"
-                className="text-[11px]"
-              >
+              <Typography as="span" size="xs" weight="regular" color="muted">
                 {orPhoneLabel}
               </Typography>
               <Separator className="flex-1" />
@@ -95,13 +89,7 @@ const LoginView = () => {
                     className="border-border/60 bg-foreground/5 flex items-center gap-1.5 rounded-full border px-2.5 py-1"
                   >
                     <Shield size={10} className="text-foreground-muted" />
-                    <Typography
-                      as="span"
-                      size="xs"
-                      weight="regular"
-                      color="muted"
-                      className="text-[10px]"
-                    >
+                    <Typography as="span" size="xs" weight="regular" color="muted">
                       {label}
                     </Typography>
                   </div>

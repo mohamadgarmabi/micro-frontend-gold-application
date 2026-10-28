@@ -30,8 +30,13 @@ const readPinHash = () => {
   return window.localStorage.getItem(PIN_HASH_STORAGE_KEY)
 }
 
-const persistPinHash = (pinHash: string) => {
+const persistPinHash = (pinHash: string | null) => {
   if (!isBrowser()) {
+    return
+  }
+
+  if (pinHash === null) {
+    window.localStorage.removeItem(PIN_HASH_STORAGE_KEY)
     return
   }
 

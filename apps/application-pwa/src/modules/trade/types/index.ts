@@ -7,6 +7,12 @@ type OrderRow = {
   value: string
 }
 
+type OrderSummaryProps = {
+  rows: OrderRow[]
+  totalLabel: string
+  totalValue: string
+}
+
 type QuickAmount = {
   value: number
   label: string
@@ -35,4 +41,11 @@ type TradeRecentOrder = {
   onCommit: (action: SwipeAction) => void
 }
 
-export type { OrderRow, QuickAmount, TradeRecentOrder, TradeSide, TradeSwipeTheme }
+export type {
+  OrderRow,
+  OrderSummaryProps,
+  QuickAmount,
+  TradeRecentOrder,
+  TradeSide,
+  TradeSwipeTheme,
+}

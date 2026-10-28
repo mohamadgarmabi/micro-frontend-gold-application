@@ -13,6 +13,7 @@ type HomeSwipeTheme = {
 type HomeHeaderModel = {
   greeting: string
   brandName: string
+  chartLabel: string
   onOpenChart: () => void
 }
 

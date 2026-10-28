@@ -12,17 +12,18 @@ const HomeView = () => {
   const { t, header, quote, tradeActions, wallets, actions, markets, activity } = useHome()
 
   return (
-    <div className="min-h-full pb-28">
+    <div className="min-h-full pb-28 lg:pb-10">
       <div className="px-5 pt-12">
         <HomeHeader
           greeting={header.greeting}
           brandName={header.brandName}
+          chartLabel={header.chartLabel}
           onOpenChart={header.onOpenChart}
         />
         <HomeHero quote={quote} tradeActions={tradeActions} />
       </div>
 
-      <div className="mt-6 space-y-6 px-5">
+      <div className="mt-6 space-y-6 px-5 lg:grid lg:grid-cols-2 lg:items-start lg:gap-6 lg:space-y-0">
         <div className="grid grid-cols-2 gap-3">
           {wallets.map((wallet) => (
             <Card key={wallet.id} className="p-4">

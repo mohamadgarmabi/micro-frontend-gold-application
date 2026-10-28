@@ -22,6 +22,18 @@ const useProfile = () => {
     navigate({ to: "/login", search: { redirect: "/home" } })
   }
 
+  const openOptions = () => {
+    void navigate({ to: "/options" })
+  }
+
+  const openTrade = () => {
+    void navigate({ to: "/trade" })
+  }
+
+  const showKycStatus = () => {
+    toast.info(`${t("profile.kyc")}: ${t("profile.kycVerified")}`)
+  }
+
   const balanceLabel = showBalance ? "$48,250.00" : "••••••••"
   const BalanceIcon = showBalance ? Eye : EyeOff
 
@@ -36,15 +48,29 @@ const useProfile = () => {
       icon: Shield,
       label: t("profile.security"),
       sub: t("profile.securityEnabled"),
+      onSelect: openOptions,
     },
     {
       id: "alerts",
       icon: Bell,
       label: t("profile.priceAlerts"),
       sub: t("profile.priceAlertsActive"),
+      onSelect: openOptions,
     },
-    { id: "history", icon: Clock, label: t("profile.transactionHistory"), sub: "" },
-    { id: "kyc", icon: Info, label: t("profile.kyc"), sub: t("profile.kycVerified") },
+    {
+      id: "history",
+      icon: Clock,
+      label: t("profile.transactionHistory"),
+      sub: "",
+      onSelect: openTrade,
+    },
+    {
+      id: "kyc",
+      icon: Info,
+      label: t("profile.kyc"),
+      sub: t("profile.kycVerified"),
+      onSelect: showKycStatus,
+    },
   ]
 
   return {
@@ -52,6 +78,7 @@ const useProfile = () => {
     showBalance,
     BalanceIcon,
     toggleBalance,
+    balanceToggleLabel: t("profile.toggleBalance"),
     signOut,
     balanceLabel,
     holdings,

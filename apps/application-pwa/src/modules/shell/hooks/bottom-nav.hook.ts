@@ -43,4 +43,4 @@ const useBottomNav = () => {
   }
 }
 
-export { useBottomNav }
+export { navItems, resolveActivePage, useBottomNav }

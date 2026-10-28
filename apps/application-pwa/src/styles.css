@@ -24,6 +24,29 @@
   --lg-destructive: var(--danger);
 }
 
+/* The raw accent is a pale green that disappears on a white surface, so light mode
+   darkens it toward the foreground; dark mode keeps the brand accent. */
+:root {
+  --chart-up: color-mix(in oklab, var(--accent) 60%, var(--foreground));
+  --chart-down: var(--danger);
+}
+
+.dark,
+[data-theme="dark"] {
+  --chart-up: var(--accent);
+}
+
+.gold-chart {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  --ts-chart-tooltip-background: var(--surface);
+  --ts-chart-tooltip-color: var(--foreground);
+  --ts-chart-tooltip-border: 1px solid var(--border);
+  --ts-chart-tooltip-border-radius: 0.625rem;
+  --ts-chart-tooltip-shadow: 0 12px 28px color-mix(in oklab, #000 14%, transparent);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -140,6 +163,14 @@ body,
 @media (min-width: 28.01rem) {
   .gold-app-frame {
     border: 1px solid color-mix(in oklab, var(--foreground) 14%, transparent);
+  }
+}
+
+/* Desktop fills the window with a sidebar, so the phone-frame chrome goes away. */
+@media (min-width: 64rem) {
+  .gold-app-frame {
+    border: 0;
+    box-shadow: none;
   }
 }
 

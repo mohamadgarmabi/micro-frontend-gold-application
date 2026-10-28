@@ -36,6 +36,7 @@ type PriceTagProps = {
 type ToggleProps = {
   value: boolean
   onChange: (value: boolean) => void
+  label: string
   disabled?: boolean
 }
 
@@ -66,6 +67,15 @@ type BottomNavPath = "/home" | "/chart" | "/trade" | "/profile" | "/options"
 type BottomNavItem = TabBarItem & {
   value: AurumNavPage
   href: BottomNavPath
+}
+
+type SideNavItem = {
+  page: AurumNavPage
+  to: BottomNavPath
+  icon: LucideIcon
+  label: string
+  ariaCurrent: "page" | undefined
+  className: string
 }
 
 type BottomNavLabelProps = {
@@ -108,6 +118,7 @@ export type {
   AurumNavPage,
   BottomNavItem,
   BottomNavLabelProps,
+  SideNavItem,
   BottomNavLinkProps,
   CardProps,
   Direction,

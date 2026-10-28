@@ -4,6 +4,7 @@ import Typography from "@gold/shared-components/typography"
 import { Button, Glass, Input } from "glisse"
 import { ChevronRight } from "lucide-react"
 import Card from "#/modules/shell/components/card"
+import Toggle from "#/modules/shell/components/toggle"
 import ThemeSelector from "#/modules/shell/components/theme-selector"
 import GlassSettingsDrawer from "../../components/glass-settings-drawer"
 import PinDrawer from "../../components/pin-drawer"
@@ -13,9 +14,9 @@ import { useOptions } from "../../hooks/options.hook"
 const OptionsView = () => {
   const {
     t,
-    notificationsValue,
+    notifications,
     handleNotificationsChange,
-    biometricValue,
+    biometric,
     biometricHint,
     biometricIcon,
     isBiometricDisabled,
@@ -26,9 +27,9 @@ const OptionsView = () => {
     handleThemeChange,
     handleDirectionChange,
     handleViewTransitionChange,
-    viewTransitionValue,
-    viewTransitionSelectOptions,
-    booleanSelectOptions: onOffSelectOptions,
+    viewTransitionEnabled,
+    priceAlert,
+    setPriceAlert,
     handleSaveAlert,
     savedAlerts,
     aboutItems,
@@ -38,7 +39,7 @@ const OptionsView = () => {
   } = useOptions()
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className="min-h-screen pb-24 lg:mx-auto lg:max-w-2xl lg:pb-10">
       <div className="px-5 pt-12 pb-6">
         <Typography as="h2" size="xl" weight="semibold" className="aurum-serif">
           {t("options.title")}
@@ -97,14 +98,10 @@ const OptionsView = () => {
                     {t("options.viewTransitionHint")}
                   </Typography>
                 </div>
-                <Select
-                  fit
-                  forceSheet
-                  searchable={false}
-                  value={viewTransitionValue}
-                  onValueChange={handleViewTransitionChange}
-                  options={viewTransitionSelectOptions}
-                  title={t("options.viewTransition")}
+                <Toggle
+                  value={viewTransitionEnabled}
+                  onChange={handleViewTransitionChange}
+                  label={t("options.viewTransition")}
                 />
               </div>
             </Glass>
@@ -148,14 +145,10 @@ const OptionsView = () => {
                   {t("options.pushHint")}
                 </Typography>
               </div>
-              <Select
-                fit
-                forceSheet
-                searchable={false}
-                value={notificationsValue}
-                onValueChange={handleNotificationsChange}
-                options={onOffSelectOptions}
-                title={t("options.pushNotifications")}
+              <Toggle
+                value={notifications}
+                onChange={handleNotificationsChange}
+                label={t("options.pushNotifications")}
               />
             </div>
           </Glass>
@@ -179,7 +172,8 @@ const OptionsView = () => {
                 inputMode="decimal"
                 aria-label={t("options.alertWhen")}
                 icon={<span>$</span>}
-                defaultValue="3,400"
+                value={priceAlert}
+                onValueChange={setPriceAlert}
                 className="flex-1 font-mono"
               />
               <Button type="button" variant="filled" onClick={handleSaveAlert}>
@@ -244,14 +238,10 @@ const OptionsView = () => {
                     </Typography>
                   </div>
                 </div>
-                <Select
-                  fit
-                  forceSheet
-                  searchable={false}
-                  value={biometricValue}
-                  onValueChange={handleBiometricSelect}
-                  options={onOffSelectOptions}
-                  title={t("options.biometric")}
+                <Toggle
+                  value={biometric}
+                  onChange={handleBiometricSelect}
+                  label={t("options.biometric")}
                   disabled={isBiometricDisabled}
                 />
               </div>

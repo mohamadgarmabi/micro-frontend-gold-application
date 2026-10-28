@@ -4,6 +4,7 @@ const enMessages = {
   "nav.trade": "Trade",
   "nav.profile": "Profile",
   "nav.options": "Settings",
+  "nav.label": "Main navigation",
 
   "home.greeting": "Good morning",
   "home.greetingAfternoon": "Good afternoon",
@@ -60,6 +61,8 @@ const enMessages = {
   "chart.goldSpot": "Gold Spot",
   "chart.live": "Live",
   "chart.price": "Price",
+  "chart.time": "Time",
+  "chart.ariaLabel": "Gold price chart, {range}",
   "chart.open": "Open",
   "chart.high": "High",
   "chart.low": "Low",
@@ -244,6 +247,15 @@ const enMessages = {
   "pwa.installHint": "Install Ayar for offline access.",
   "pwa.install": "Install",
   "pwa.notNow": "Not now",
+  "trade.confirmTitle": "Confirm order",
+  "trade.confirmHint": "Review the details before placing your order.",
+  "trade.confirm": "Confirm",
+  "trade.cancel": "Cancel",
+  "trade.invalidAmount": "Enter an amount greater than 0",
+  "profile.toggleBalance": "Show or hide balance",
+  "auth.pinSwitchAccount": "Use a different account",
+  "home.openChart": "Open chart",
+  "options.invalidAlert": "Enter a valid price",
 } as const
 
 export { enMessages }
