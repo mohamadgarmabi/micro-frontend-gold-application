@@ -1,7 +1,6 @@
-import Button from "@gold/shared-components/button"
 import InputOTP from "@gold/shared-components/input-otp"
-import LiquidGlass from "@gold/shared-components/liquid-glass"
 import Typography from "@gold/shared-components/typography"
+import { Button, Glass } from "glisse"
 import { PIN_LENGTH } from "#/config/security.constants"
 import { usePinUnlock } from "../../hooks/pin-unlock.hook"
 
@@ -20,10 +19,11 @@ const PinView = () => {
           </Typography>
         </div>
 
-        <LiquidGlass cornerRadius={24} className="mb-4 rounded-3xl p-4">
+        <Glass className="mb-4 rounded-3xl p-4">
           <div className="flex justify-center" dir="ltr">
             <InputOTP
               maxLength={PIN_LENGTH}
+              noScriptCSSFallback={null}
               value={pin}
               onChange={handlePinChange}
               className="gold-otp-group w-full max-w-xs"
@@ -39,7 +39,7 @@ const PinView = () => {
               </InputOTP.Group>
             </InputOTP>
           </div>
-        </LiquidGlass>
+        </Glass>
 
         {error ? (
           <Typography size="sm" color="danger" align="center" className="mb-4">
@@ -49,10 +49,11 @@ const PinView = () => {
 
         <Button
           type="button"
-          fullWidth
-          isDisabled={!complete || isBusy}
-          isPending={isBusy}
-          onPress={unlock}
+          variant="filled"
+          className="w-full"
+          disabled={!complete || isBusy}
+          aria-busy={isBusy}
+          onClick={unlock}
         >
           {t("auth.pinContinue")}
         </Button>

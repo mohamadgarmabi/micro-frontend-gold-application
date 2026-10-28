@@ -1,6 +1,6 @@
-import Button from "@gold/shared-components/button"
 import Link from "@gold/shared-components/link"
 import Typography from "@gold/shared-components/typography"
+import { Button } from "glisse"
 import Card from "#/modules/shell/components/card"
 import GoldBadge from "#/modules/shell/components/gold-badge"
 import PriceTag from "#/modules/shell/components/price-tag"
@@ -34,9 +34,10 @@ const HomeHero = ({ quote, tradeActions }: HomeHeroProps) => {
           <Button
             key={action.label}
             type="button"
-            variant={action.variant}
+            variant="filled"
+            tint={action.tint}
             className="flex-1"
-            onPress={action.onSelect}
+            onClick={action.onSelect}
           >
             {action.label}
           </Button>

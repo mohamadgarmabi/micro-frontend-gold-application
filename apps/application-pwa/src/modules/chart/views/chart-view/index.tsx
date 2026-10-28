@@ -1,5 +1,5 @@
-import Tabs from "@gold/shared-components/tabs"
 import Typography from "@gold/shared-components/typography"
+import { TabBar } from "glisse"
 import Card from "#/modules/shell/components/card"
 import GoldBadge from "#/modules/shell/components/gold-badge"
 import PriceTag from "#/modules/shell/components/price-tag"
@@ -18,7 +18,7 @@ const ChartView = () => {
   const {
     t,
     range,
-    ranges,
+    rangeItems,
     handleRangeChange,
     chartData,
     latest,
@@ -58,15 +58,15 @@ const ChartView = () => {
         <PriceTag value={latest} change={chgPct} size="lg" />
       </div>
 
-      <Tabs value={range} onValueChange={handleRangeChange} className="mb-4 px-5">
-        <Tabs.List className="w-full">
-          {ranges.map((item) => (
-            <Tabs.Tab key={item} value={item} className="flex-1">
-              {item}
-            </Tabs.Tab>
-          ))}
-        </Tabs.List>
-      </Tabs>
+      <div className="mb-4 flex justify-center px-5">
+        <TabBar
+          dir="ltr"
+          items={rangeItems}
+          value={range}
+          onValueChange={handleRangeChange}
+          className="[--lg-tab-width:calc((min(100vw,28rem)-2.5rem-8px)/3)]!"
+        />
+      </div>
 
       <div className="mb-6 px-3" style={{ height: 260 }}>
         <ResponsiveContainer width="100%" height="100%">

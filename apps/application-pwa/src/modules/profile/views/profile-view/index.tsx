@@ -1,7 +1,6 @@
 import Avatar from "@gold/shared-components/avatar"
-import Button from "@gold/shared-components/button"
-import LiquidGlass from "@gold/shared-components/liquid-glass"
 import Typography from "@gold/shared-components/typography"
+import { Button, Glass } from "glisse"
 import { ChevronRight, LogOut, Star } from "lucide-react"
 import Card from "#/modules/shell/components/card"
 import GoldBadge from "#/modules/shell/components/gold-badge"
@@ -90,7 +89,7 @@ const ProfileView = () => {
             const Icon = item.icon
 
             return (
-              <LiquidGlass key={item.id} cornerRadius={16} className="rounded-xl">
+              <Glass key={item.id} className="rounded-xl">
                 <button
                   type="button"
                   className="border-border/40 hover:border-gold-600/30 flex w-full items-center gap-3 rounded-xl border bg-transparent p-4 transition-all duration-200"
@@ -106,23 +105,20 @@ const ProfileView = () => {
                   </Typography>
                   <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
                 </button>
-              </LiquidGlass>
+              </Glass>
             )
           })}
         </div>
 
-        <LiquidGlass cornerRadius={16} className="rounded-xl">
-          <Button
-            type="button"
-            onClick={signOut}
-            className="border-border/40 text-danger hover:border-danger/30 hover:bg-danger-muted flex w-full items-center justify-start gap-3 rounded-xl border bg-transparent p-4"
-          >
-            <LogOut size={16} />
-            <Typography as="span" size="sm" color="danger">
-              {t("profile.signOut")}
-            </Typography>
-          </Button>
-        </LiquidGlass>
+        <Button
+          type="button"
+          destructive
+          icon={<LogOut size={16} />}
+          onClick={signOut}
+          className="h-14! w-full justify-start! rounded-xl!"
+        >
+          {t("profile.signOut")}
+        </Button>
       </div>
     </div>
   )

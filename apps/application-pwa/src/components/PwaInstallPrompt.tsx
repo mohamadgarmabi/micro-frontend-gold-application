@@ -1,4 +1,4 @@
-import LiquidGlass from "@gold/shared-components/liquid-glass"
+import { Glass } from "glisse"
 import Typography from "@gold/shared-components/typography"
 import { usePwaInstall } from "#/modules/shell/hooks/pwa-install.hook"
 
@@ -8,7 +8,7 @@ const PwaInstallPrompt = () => {
   if (showUpdate) {
     return (
       <div className="pwa-banner" role="status">
-        <LiquidGlass cornerRadius={16}>
+        <Glass className="rounded-2xl">
           <div className="pwa-banner__body">
             <Typography size="sm" className="m-0">
               {t("pwa.updateAvailable")}
@@ -17,7 +17,7 @@ const PwaInstallPrompt = () => {
               {t("pwa.reload")}
             </button>
           </div>
-        </LiquidGlass>
+        </Glass>
       </div>
     )
   }
@@ -25,7 +25,7 @@ const PwaInstallPrompt = () => {
   if (showInstall) {
     return (
       <div className="pwa-banner" role="dialog" aria-label={t("pwa.installLabel")}>
-        <LiquidGlass cornerRadius={16}>
+        <Glass className="rounded-2xl">
           <div className="pwa-banner__body">
             <Typography size="sm" className="m-0">
               {t("pwa.installHint")}
@@ -39,7 +39,7 @@ const PwaInstallPrompt = () => {
               </button>
             </div>
           </div>
-        </LiquidGlass>
+        </Glass>
       </div>
     )
   }

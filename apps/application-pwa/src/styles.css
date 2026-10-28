@@ -1,4 +1,5 @@
 @import "@gold/design-system/styles.css";
+@import "glisse/styles.css";
 
 /* nx-tailwind-sources:start */
 @source "../../../packages/apis";
@@ -12,6 +13,15 @@
 @theme inline {
   --font-sans: var(--font-vazirmatn), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-vazirmatn), ui-monospace, monospace;
+}
+
+/* Glisse declares its tokens under :where(), so these brand overrides win in both themes. */
+:root {
+  --lg-fill: var(--accent);
+  --lg-on: var(--accent);
+  --lg-foreground: var(--foreground);
+  --lg-muted: var(--muted);
+  --lg-destructive: var(--danger);
 }
 
 * {

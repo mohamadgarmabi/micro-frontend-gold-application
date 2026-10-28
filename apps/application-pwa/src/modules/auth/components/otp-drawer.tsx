@@ -1,8 +1,8 @@
-import Button from "@gold/shared-components/button"
 import Drawer from "@gold/shared-components/drawer"
 import InputOTP from "@gold/shared-components/input-otp"
 import Link from "@gold/shared-components/link"
 import Typography from "@gold/shared-components/typography"
+import { Button } from "glisse"
 
 type OtpDrawerProps = {
   isOpen: boolean
@@ -66,6 +66,7 @@ const OtpDrawer = ({
             <div className="flex justify-center">
               <InputOTP
                 maxLength={6}
+                noScriptCSSFallback={null}
                 value={otp}
                 onChange={setOtp}
                 className="gold-otp-group w-full max-w-xs"
@@ -87,10 +88,10 @@ const OtpDrawer = ({
           </div>
           <Button
             type="button"
-            fullWidth
-            className="mb-4"
-            isDisabled={!otpComplete}
-            onPress={onVerify}
+            variant="filled"
+            className="mb-4 w-full"
+            disabled={!otpComplete}
+            onClick={onVerify}
           >
             {continueLabel}
           </Button>

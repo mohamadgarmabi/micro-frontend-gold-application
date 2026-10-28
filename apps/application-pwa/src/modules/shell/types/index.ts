@@ -1,7 +1,8 @@
 import type { LiquidGlassSettings } from "@gold/shared-components/liquid-glass"
 import type { PullRefreshLabels } from "@gold/shared-components/pull-refresh"
 import type { LucideIcon } from "lucide-react"
-import type { ReactNode } from "react"
+import type { TabBarItem } from "glisse"
+import type { ComponentProps, ReactNode } from "react"
 
 type AppShellProps = {
   children: ReactNode
@@ -60,19 +61,20 @@ type ThemeSelectorOption = {
   iconWrapClassName: string
 }
 
-type BottomNavItem = {
-  page: AurumNavPage
-  to: "/home" | "/chart" | "/trade" | "/profile" | "/options"
-  icon: LucideIcon
-  label: string
-  isActive: boolean
-  className: string
-  strokeWidth: number
-  setRef: (element: HTMLAnchorElement | null) => void
+type BottomNavPath = "/home" | "/chart" | "/trade" | "/profile" | "/options"
+
+type BottomNavItem = TabBarItem & {
+  value: AurumNavPage
+  href: BottomNavPath
 }
 
-type BottomNavSlider = {
-  isReady: boolean
+type BottomNavLabelProps = {
+  icon: LucideIcon
+  label: string
+}
+
+type BottomNavLinkProps = Omit<ComponentProps<"a">, "href" | "ref"> & {
+  href: BottomNavPath
 }
 
 type LiquidGlassSettingKey = keyof LiquidGlassSettings
@@ -105,7 +107,8 @@ export type {
   AppShellProps,
   AurumNavPage,
   BottomNavItem,
-  BottomNavSlider,
+  BottomNavLabelProps,
+  BottomNavLinkProps,
   CardProps,
   Direction,
   GoldBadgeProps,

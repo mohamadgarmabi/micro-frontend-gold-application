@@ -1,10 +1,8 @@
-import {
-  LIQUID_GLASS_DEFAULT_SETTINGS,
-  setLiquidGlassSettings,
-} from "@gold/shared-components/liquid-glass"
+import { LIQUID_GLASS_DEFAULT_SETTINGS } from "@gold/shared-components/liquid-glass"
 import { createStore } from "@tanstack/store"
 import type { LiquidGlassSettings } from "../types"
 import {
+  applyLiquidGlassSettings,
   normalizeLiquidGlassSettings,
   persistLiquidGlassSettings,
   readLiquidGlassSettings,
@@ -15,7 +13,7 @@ const liquidGlassStore = createStore(
   ({ setState }) => ({
     syncFromStorage: () => {
       const settings = readLiquidGlassSettings()
-      setLiquidGlassSettings(settings)
+      applyLiquidGlassSettings(settings)
       setState(() => settings)
       return settings
     },
@@ -26,7 +24,7 @@ const liquidGlassStore = createStore(
         return settings
       })
       persistLiquidGlassSettings(settings)
-      setLiquidGlassSettings(settings)
+      applyLiquidGlassSettings(settings)
       return settings
     },
   }),

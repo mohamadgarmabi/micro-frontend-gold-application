@@ -1,8 +1,6 @@
-import Button from "@gold/shared-components/button"
-import Input from "@gold/shared-components/input"
 import SwipeRow from "@gold/shared-components/swipe-row"
-import Tabs from "@gold/shared-components/tabs"
 import Typography from "@gold/shared-components/typography"
+import { Button, Input, TabBar } from "glisse"
 import { Minus, Plus } from "lucide-react"
 import Card from "#/modules/shell/components/card"
 import GoldBadge from "#/modules/shell/components/gold-badge"
@@ -17,12 +15,14 @@ const TradeView = () => {
     decrementAmount,
     incrementAmount,
     handleSideChange,
+    sideItems,
+    sideTabBarStyle,
     handleSubmit,
     execPriceLabel,
     spreadSpotLabel,
     totalLabel,
     submitLabel,
-    submitClassName,
+    submitTint,
     quickAmounts,
     orderRows,
     recentOrders,
@@ -40,22 +40,16 @@ const TradeView = () => {
       </div>
 
       <div className="space-y-4 px-5">
-        <Tabs value={side} onValueChange={handleSideChange}>
-          <Tabs.List className="w-full">
-            <Tabs.Tab
-              value="buy"
-              className="text-success data-active:bg-success-muted data-active:text-success flex-1 capitalize"
-            >
-              {t("trade.buy")}
-            </Tabs.Tab>
-            <Tabs.Tab
-              value="sell"
-              className="text-danger data-active:bg-danger-muted data-active:text-danger flex-1 capitalize"
-            >
-              {t("trade.sell")}
-            </Tabs.Tab>
-          </Tabs.List>
-        </Tabs>
+        <div className="flex justify-center">
+          <TabBar
+            dir="ltr"
+            items={sideItems}
+            value={side}
+            onValueChange={handleSideChange}
+            style={sideTabBarStyle}
+            className="[--lg-tab-width:calc((min(100vw,28rem)-2.5rem-8px)/2)]! [&_.lg-tab-copy]:font-semibold!"
+          />
+        </div>
 
         <Card>
           <div className="mb-1 flex items-center justify-between">
@@ -91,33 +85,28 @@ const TradeView = () => {
           <div className="flex items-center gap-3">
             <Button
               type="button"
+              icon={<Minus size={16} />}
+              aria-label={t("trade.decrease")}
               onClick={decrementAmount}
-              className="border-border bg-surface-muted text-foreground hover:border-gold-600/40 hover:bg-surface-elevated size-11 rounded-xl border p-0"
-            >
-              <Minus size={16} />
-            </Button>
+            />
             <Input
               type="number"
+              inputMode="decimal"
+              aria-label={t("trade.amount")}
               value={amount}
               onValueChange={setAmount}
-              className="flex-1 text-center font-mono text-xl font-medium"
+              className="max-w-none! flex-1 font-mono [&_input]:text-center"
             />
             <Button
               type="button"
+              icon={<Plus size={16} />}
+              aria-label={t("trade.increase")}
               onClick={incrementAmount}
-              className="border-border bg-surface-muted text-foreground hover:border-gold-600/40 hover:bg-surface-elevated size-11 rounded-xl border p-0"
-            >
-              <Plus size={16} />
-            </Button>
+            />
           </div>
           <div className="mt-2 flex gap-2">
             {quickAmounts.map((item) => (
-              <Button
-                key={item.value}
-                type="button"
-                onClick={item.onSelect}
-                className="border-border text-foreground-subtle hover:border-gold-600/30 hover:bg-surface-muted hover:text-foreground flex-1 rounded-lg border bg-transparent py-1.5 text-xs"
-              >
+              <Button key={item.value} type="button" onClick={item.onSelect} className="flex-1">
                 {item.label}
               </Button>
             ))}
@@ -155,8 +144,10 @@ const TradeView = () => {
 
         <Button
           type="button"
+          variant="filled"
+          tint={submitTint}
           onClick={handleSubmit}
-          className={`w-full rounded-xl py-4 text-sm font-semibold ${submitClassName}`}
+          className="h-12! w-full font-semibold"
         >
           {submitLabel}
         </Button>

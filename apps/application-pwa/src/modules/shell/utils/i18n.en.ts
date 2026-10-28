@@ -84,6 +84,8 @@ const enMessages = {
   "trade.live": "Live",
   "trade.spreadSpot": "Spread: ${spread} · Spot: ${spot}",
   "trade.amount": "Amount (troy oz)",
+  "trade.decrease": "Decrease amount",
+  "trade.increase": "Increase amount",
   "trade.orderSummary": "Order Summary",
   "trade.quantity": "Quantity",
   "trade.quantityValue": "{amount} oz",

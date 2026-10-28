@@ -1,5 +1,5 @@
 import SharedCard from "@gold/shared-components/card"
-import LiquidGlass from "@gold/shared-components/liquid-glass"
+import { Glass } from "glisse"
 import { useShellCard } from "../hooks/card.hook"
 import type { CardProps } from "../types"
 
@@ -7,9 +7,9 @@ const Card = (props: CardProps) => {
   const { children, className } = useShellCard(props)
 
   return (
-    <LiquidGlass cornerRadius={16} className="rounded-xl">
+    <Glass className="rounded-xl">
       <SharedCard className={className}>{children}</SharedCard>
-    </LiquidGlass>
+    </Glass>
   )
 }
 

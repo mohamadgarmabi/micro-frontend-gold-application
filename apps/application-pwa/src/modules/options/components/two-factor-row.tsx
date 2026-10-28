@@ -1,4 +1,4 @@
-import LiquidGlass from "@gold/shared-components/liquid-glass"
+import { Glass } from "glisse"
 import Select from "@gold/shared-components/select"
 import Typography from "@gold/shared-components/typography"
 import { useTwoFactor } from "#/modules/auth/hooks/two-factor.hook"
@@ -21,7 +21,7 @@ const TwoFactorRow = () => {
   }
 
   return (
-    <LiquidGlass cornerRadius={16} className="rounded-xl">
+    <Glass className="rounded-xl">
       <div className="border-border/40 flex items-center justify-between rounded-xl border bg-transparent p-4">
         <div>
           <Typography size="sm">{t("options.twoFactor")}</Typography>
@@ -42,7 +42,7 @@ const TwoFactorRow = () => {
           />
         </div>
       </div>
-    </LiquidGlass>
+    </Glass>
   )
 }
 

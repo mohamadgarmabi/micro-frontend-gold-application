@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from "vite"
 import { devtools } from "@tanstack/devtools-vite"
+import { redact } from "@tanstack/redact/vite"
 import { tanstackStart } from "@tanstack/react-start/plugin/vite"
 import viteReact from "@vitejs/plugin-react"
 import tailwindcss from "@tailwindcss/vite"
@@ -41,9 +42,10 @@ export default defineConfig(({ mode }) => {
       exclude: workspacePackages,
     },
     ssr: {
-      noExternal: workspacePackages,
+      noExternal: true,
     },
     plugins: [
+      redact(),
       devtools(),
       tailwindcss(),
       tanstackStart(),

@@ -1,5 +1,7 @@
 import type { SwipeAction } from "@gold/shared-components/swipe-row"
 import { toast } from "@gold/shared-components/toaster"
+import type { TabBarItem } from "glisse"
+import type { CSSProperties } from "react"
 import { useState } from "react"
 import { SPOT_PRICE } from "#/modules/market/utils/data"
 import { fmt } from "#/modules/market/utils/format"
@@ -65,6 +67,11 @@ const useTrade = () => {
   const handleSubmit = () => {
     toast.success(t(isBuy ? "trade.buyToast" : "trade.sellToast", { amount }))
   }
+
+  const sideItems: TabBarItem[] = [
+    { value: "buy", label: t("trade.buy") },
+    { value: "sell", label: t("trade.sell") },
+  ]
 
   const quickAmounts: QuickAmount[] = QUICK_AMOUNTS.map((value) => ({
     value,
@@ -146,9 +153,12 @@ const useTrade = () => {
     spreadSpotLabel: t("trade.spreadSpot", { spread: fmt(SPREAD), spot: fmt(SPOT_PRICE) }),
     totalLabel: `$${fmt(total + fee)}`,
     submitLabel: t(isBuy ? "trade.buyAction" : "trade.sellAction", { amount }),
-    submitClassName: isBuy
-      ? "bg-success text-white shadow-lg shadow-success/25 hover:bg-success/90"
-      : "bg-danger text-white shadow-lg shadow-danger/25 hover:bg-danger/90",
+    submitTint: isBuy ? "var(--success)" : "var(--danger)",
+    // Glisse only lays tabs out left to right, so RTL reverses the order instead.
+    sideItems: direction === "rtl" ? [...sideItems].reverse() : sideItems,
+    sideTabBarStyle: {
+      "--lg-foreground": isBuy ? "var(--success)" : "var(--danger)",
+    } as CSSProperties,
     quickAmounts,
     orderRows,
     recentOrders,

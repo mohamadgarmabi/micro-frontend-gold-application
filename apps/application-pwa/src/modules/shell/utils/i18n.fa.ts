@@ -86,6 +86,8 @@ const faMessages: Record<MessageKey, string> = {
   "trade.live": "زنده",
   "trade.spreadSpot": "اسپرد: ${spread} · لحظه‌ای: ${spot}",
   "trade.amount": "مقدار (اونس تروی)",
+  "trade.decrease": "کاهش مقدار",
+  "trade.increase": "افزایش مقدار",
   "trade.orderSummary": "خلاصه سفارش",
   "trade.quantity": "تعداد",
   "trade.quantityValue": "{amount} اونس",

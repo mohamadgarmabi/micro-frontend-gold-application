@@ -1,8 +1,6 @@
-import Button from "@gold/shared-components/button"
 import Drawer from "@gold/shared-components/drawer"
-import LiquidGlass from "@gold/shared-components/liquid-glass"
-import Slider from "@gold/shared-components/slider"
 import Typography from "@gold/shared-components/typography"
+import { Button, Glass, Slider } from "glisse"
 import { ChevronRight } from "lucide-react"
 import { useGlassSettingsDrawer } from "../hooks/glass-settings-drawer.hook"
 
@@ -14,13 +12,14 @@ const GlassSettingsDrawer = () => {
     handleOpenChange,
     controls,
     depthLabel,
+    previewKey,
     handleReset,
     isResetDisabled,
   } = useGlassSettingsDrawer()
 
   return (
     <>
-      <LiquidGlass cornerRadius={16} className="rounded-xl">
+      <Glass className="rounded-xl">
         <button
           type="button"
           onClick={handleOpen}
@@ -36,7 +35,7 @@ const GlassSettingsDrawer = () => {
           </div>
           <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle shrink-0" />
         </button>
-      </LiquidGlass>
+      </Glass>
 
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
         <Drawer.Portal>
@@ -51,7 +50,7 @@ const GlassSettingsDrawer = () => {
 
               <div className="border-border relative mt-5 shrink-0 overflow-hidden rounded-3xl border bg-[repeating-linear-gradient(135deg,color-mix(in_oklab,var(--accent)_30%,var(--surface))_0_14px,var(--surface-secondary)_14px_28px)]">
                 <div className="flex min-h-36 items-center justify-center p-6">
-                  <LiquidGlass cornerRadius={28} className="h-24 w-full max-w-60">
+                  <Glass key={previewKey} className="h-24 w-full max-w-60 rounded-[28px]">
                     <div className="flex h-full flex-col items-center justify-center">
                       <Typography size="xs" weight="regular" className="tracking-widest uppercase">
                         {t("options.glassPreview")}
@@ -60,7 +59,7 @@ const GlassSettingsDrawer = () => {
                         {depthLabel}
                       </Typography>
                     </div>
-                  </LiquidGlass>
+                  </Glass>
                 </div>
               </div>
 
@@ -80,25 +79,19 @@ const GlassSettingsDrawer = () => {
                     </Typography>
                     <Slider
                       aria-label={control.label}
-                      minValue={control.min}
-                      maxValue={control.max}
+                      min={control.min}
+                      max={control.max}
                       step={control.step}
                       value={control.value}
-                      onChange={control.onChange}
-                    >
-                      <Slider.Track>
-                        <Slider.Fill />
-                        <Slider.Thumb />
-                      </Slider.Track>
-                    </Slider>
+                      onValueChange={control.onChange}
+                    />
                   </div>
                 ))}
               </div>
 
               <Button
                 type="button"
-                variant="secondary"
-                className="mt-6 w-full shrink-0 rounded-xl"
+                className="mt-6 w-full shrink-0"
                 onClick={handleReset}
                 disabled={isResetDisabled}
               >

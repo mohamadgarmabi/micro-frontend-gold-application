@@ -29,7 +29,7 @@ type HomeQuoteModel = {
 
 type HomeTradeAction = {
   label: string
-  variant: "primary" | "danger"
+  tint: string
   onSelect: () => void
 }
 

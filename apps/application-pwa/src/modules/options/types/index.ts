@@ -32,7 +32,7 @@ type GlassSettingControl = {
   min: number
   max: number
   step: number
-  onChange: (value: number | number[]) => void
+  onChange: (value: number) => void
 }
 
 export type { GlassSettingControl, OptionsSwipeTheme, SavedAlert }

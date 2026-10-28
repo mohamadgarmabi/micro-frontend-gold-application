@@ -1,4 +1,4 @@
-import LiquidGlass from "@gold/shared-components/liquid-glass"
+import { Glass } from "glisse"
 import Separator from "@gold/shared-components/separator"
 import Typography from "@gold/shared-components/typography"
 import { GeneratedForm } from "@gold/form"
@@ -44,7 +44,7 @@ const LoginView = () => {
         {showWebAuthn ? (
           <div className="aurum-login-enter aurum-login-enter-delay-1 mb-6">
             <div className="mb-6 flex flex-col items-center">
-              <LiquidGlass cornerRadius={999} interactive className="size-24">
+              <Glass className="size-24 rounded-full">
                 <button
                   type="button"
                   className={scanClassName}
@@ -54,7 +54,7 @@ const LoginView = () => {
                 >
                   {scanIcon}
                 </button>
-              </LiquidGlass>
+              </Glass>
               <Typography size="sm" weight="medium" className="mt-5">
                 {scanTitle}
               </Typography>
@@ -79,7 +79,7 @@ const LoginView = () => {
           </div>
         ) : null}
 
-        <LiquidGlass cornerRadius={24} className="rounded-3xl p-1">
+        <Glass className="rounded-3xl p-1">
           <GeneratedForm
             fields={phoneSchema}
             defaultValues={phoneDefaults}
@@ -111,7 +111,7 @@ const LoginView = () => {
             onSubmit={handlePhoneSubmit}
             sizes={{ input: "lg", button: "lg" }}
           />
-        </LiquidGlass>
+        </Glass>
       </div>
 
       <OtpDrawer {...otpDrawer} />

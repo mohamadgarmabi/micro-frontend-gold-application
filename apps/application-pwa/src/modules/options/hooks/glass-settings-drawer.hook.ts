@@ -37,8 +37,7 @@ const useGlassSettingsDrawer = () => {
     valueLabel: formatLiquidGlassSetting(key, settings[key], locale),
     value: settings[key],
     ...LIQUID_GLASS_SETTING_RANGES[key],
-    onChange: (nextValue: number | number[]) => {
-      const value = Array.isArray(nextValue) ? (nextValue[0] ?? settings[key]) : nextValue
+    onChange: (value: number) => {
       setSetting(key, value)
     },
   }))
@@ -50,6 +49,8 @@ const useGlassSettingsDrawer = () => {
     handleOpenChange,
     controls,
     depthLabel: formatLiquidGlassSetting("depth", settings.depth, locale),
+    // Glisse bakes refraction into an SVG filter on mount, so the preview remounts to pick up changes.
+    previewKey: LIQUID_GLASS_SETTING_KEYS.map((key) => settings[key]).join(":"),
     handleReset: resetSettings,
     isResetDisabled: isDefault,
   }

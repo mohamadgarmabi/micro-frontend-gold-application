@@ -1,5 +1,5 @@
-import Button from "@gold/shared-components/button"
 import Typography from "@gold/shared-components/typography"
+import { Button } from "glisse"
 import AppShell from "../../components/app-shell"
 import { useNotFound } from "../../hooks/not-found.hook"
 
@@ -18,7 +18,7 @@ const NotFoundView = () => {
         <Typography size="sm" color="muted" align="center" className="mt-2">
           {t("notFound.description")}
         </Typography>
-        <Button type="button" className="mt-8" onPress={goHome}>
+        <Button type="button" variant="filled" className="mt-8" onClick={goHome}>
           {t("notFound.goHome")}
         </Button>
       </div>

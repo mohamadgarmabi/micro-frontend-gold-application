@@ -1,5 +1,5 @@
-import Button from "@gold/shared-components/button"
 import Typography from "@gold/shared-components/typography"
+import { Button } from "glisse"
 import { Hexagon, TrendingUp } from "lucide-react"
 import type { HomeHeaderModel } from "../types"
 
@@ -19,9 +19,7 @@ const HomeHeader = ({ greeting, brandName, onOpenChart }: HomeHeaderModel) => {
           </Typography>
         </div>
       </div>
-      <Button isIconOnly variant="secondary" aria-label="Open chart" onPress={onOpenChart}>
-        <TrendingUp size={16} />
-      </Button>
+      <Button icon={<TrendingUp size={16} />} aria-label="Open chart" onClick={onOpenChart} />
     </div>
   )
 }

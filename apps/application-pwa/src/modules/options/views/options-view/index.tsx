@@ -1,9 +1,7 @@
-import Button from "@gold/shared-components/button"
-import Input from "@gold/shared-components/input"
-import LiquidGlass from "@gold/shared-components/liquid-glass"
 import Select from "@gold/shared-components/select"
 import SwipeRow from "@gold/shared-components/swipe-row"
 import Typography from "@gold/shared-components/typography"
+import { Button, Glass, Input } from "glisse"
 import { ChevronRight } from "lucide-react"
 import Card from "#/modules/shell/components/card"
 import ThemeSelector from "#/modules/shell/components/theme-selector"
@@ -61,7 +59,7 @@ const OptionsView = () => {
             {t("options.appearance")}
           </Typography>
           <div className="space-y-1">
-            <LiquidGlass cornerRadius={16} className="rounded-xl">
+            <Glass className="rounded-xl">
               <div className="border-border/40 flex items-center justify-between rounded-xl border bg-transparent p-4">
                 <div>
                   <Typography size="sm">{t("options.language")}</Typography>
@@ -79,8 +77,8 @@ const OptionsView = () => {
                   title={t("options.language")}
                 />
               </div>
-            </LiquidGlass>
-            <LiquidGlass cornerRadius={16} className="rounded-xl">
+            </Glass>
+            <Glass className="rounded-xl">
               <div className="border-border/40 rounded-xl border bg-transparent p-4">
                 <div className="mb-3">
                   <Typography size="sm">{t("options.theme")}</Typography>
@@ -90,8 +88,8 @@ const OptionsView = () => {
                 </div>
                 <ThemeSelector value={preference} onChange={handleThemeChange} />
               </div>
-            </LiquidGlass>
-            <LiquidGlass cornerRadius={16} className="rounded-xl">
+            </Glass>
+            <Glass className="rounded-xl">
               <div className="border-border/40 flex items-center justify-between rounded-xl border bg-transparent p-4">
                 <div>
                   <Typography size="sm">{t("options.viewTransition")}</Typography>
@@ -109,9 +107,9 @@ const OptionsView = () => {
                   title={t("options.viewTransition")}
                 />
               </div>
-            </LiquidGlass>
+            </Glass>
             <GlassSettingsDrawer />
-            <LiquidGlass cornerRadius={16} className="rounded-xl">
+            <Glass className="rounded-xl">
               <div className="border-border/40 flex items-center justify-between rounded-xl border bg-transparent p-4">
                 <div>
                   <Typography size="sm">{t("options.currency")}</Typography>
@@ -129,7 +127,7 @@ const OptionsView = () => {
                   title={t("options.currency")}
                 />
               </div>
-            </LiquidGlass>
+            </Glass>
           </div>
         </div>
 
@@ -142,7 +140,7 @@ const OptionsView = () => {
           >
             {t("options.notifications")}
           </Typography>
-          <LiquidGlass cornerRadius={16} className="rounded-xl">
+          <Glass className="rounded-xl">
             <div className="border-border/40 flex items-center justify-between rounded-xl border bg-transparent p-4">
               <div>
                 <Typography size="sm">{t("options.pushNotifications")}</Typography>
@@ -160,7 +158,7 @@ const OptionsView = () => {
                 title={t("options.pushNotifications")}
               />
             </div>
-          </LiquidGlass>
+          </Glass>
         </div>
 
         <div>
@@ -177,24 +175,14 @@ const OptionsView = () => {
               {t("options.alertWhen")}
             </Typography>
             <div className="flex gap-2">
-              <div className="border-border bg-surface-muted flex flex-1 items-center gap-2 rounded-xl border px-4">
-                <Typography as="span" size="sm" color="subtle">
-                  $
-                </Typography>
-                <Input
-                  type="number"
-                  value={["3,400"]}
-                  onValueChange={() => {
-                    //
-                  }}
-                  className="border-0 bg-transparent p-0 font-mono text-sm shadow-none focus:ring-0"
-                />
-              </div>
-              <Button
-                type="button"
-                className="rounded-xl px-4 py-3 text-sm"
-                onClick={handleSaveAlert}
-              >
+              <Input
+                inputMode="decimal"
+                aria-label={t("options.alertWhen")}
+                icon={<span>$</span>}
+                defaultValue="3,400"
+                className="flex-1 font-mono"
+              />
+              <Button type="button" variant="filled" onClick={handleSaveAlert}>
                 {t("options.set")}
               </Button>
             </div>
@@ -243,7 +231,7 @@ const OptionsView = () => {
             {t("options.security")}
           </Typography>
           <div className="space-y-1">
-            <LiquidGlass cornerRadius={16} className="rounded-xl">
+            <Glass className="rounded-xl">
               <div className="border-border/40 flex items-center justify-between rounded-xl border bg-transparent p-4">
                 <div className="flex items-center gap-3">
                   <div className="bg-gold-600/10 text-gold-600 flex h-10 w-10 items-center justify-center rounded-full">
@@ -267,7 +255,7 @@ const OptionsView = () => {
                   disabled={isBiometricDisabled}
                 />
               </div>
-            </LiquidGlass>
+            </Glass>
             <PinDrawer />
             <TwoFactorRow />
           </div>
@@ -284,7 +272,7 @@ const OptionsView = () => {
           </Typography>
           <div className="space-y-1">
             {aboutItems.map((item) => (
-              <LiquidGlass key={item} cornerRadius={16} className="rounded-xl">
+              <Glass key={item} className="rounded-xl">
                 <button
                   type="button"
                   className="border-border/40 hover:border-gold-600/30 flex w-full items-center justify-between rounded-xl border bg-transparent p-4 transition-all"
@@ -294,7 +282,7 @@ const OptionsView = () => {
                   </Typography>
                   <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
                 </button>
-              </LiquidGlass>
+              </Glass>
             ))}
             <Typography size="xs" weight="regular" color="subtle" align="center" className="p-4">
               {t("options.footer")}

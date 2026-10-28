@@ -1,5 +1,5 @@
 import Drawer from "@gold/shared-components/drawer"
-import LiquidGlass from "@gold/shared-components/liquid-glass"
+import { Glass } from "glisse"
 import OTPField from "@gold/shared-components/otp-field"
 import Typography from "@gold/shared-components/typography"
 import { ChevronRight } from "lucide-react"
@@ -22,7 +22,7 @@ const PinDrawer = () => {
 
   return (
     <>
-      <LiquidGlass cornerRadius={16} className="rounded-xl">
+      <Glass className="rounded-xl">
         <button
           type="button"
           onClick={handleOpen}
@@ -33,7 +33,7 @@ const PinDrawer = () => {
           </Typography>
           <ChevronRight size={14} className="gold-rtl-flip text-foreground-subtle" />
         </button>
-      </LiquidGlass>
+      </Glass>
 
       <Drawer open={isOpen} onOpenChange={handleOpenChange}>
         <Drawer.Portal>

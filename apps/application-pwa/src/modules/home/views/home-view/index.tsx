@@ -1,4 +1,4 @@
-import LiquidGlass from "@gold/shared-components/liquid-glass"
+import { Glass } from "glisse"
 import SwipeRow from "@gold/shared-components/swipe-row"
 import Typography from "@gold/shared-components/typography"
 import { Link } from "@tanstack/react-router"
@@ -54,11 +54,11 @@ const HomeView = () => {
 
               return (
                 <Link key={action.label} to={action.to} className="no-underline">
-                  <LiquidGlass cornerRadius={16} className="mx-auto size-14">
+                  <Glass className="mx-auto size-14 rounded-2xl">
                     <span className={action.tileClassName}>
                       <Icon size={20} strokeWidth={2} />
                     </span>
-                  </LiquidGlass>
+                  </Glass>
                   <Typography
                     as="span"
                     size="xs"

@@ -115,12 +115,12 @@ const useHome = () => {
   const tradeActions: HomeTradeAction[] = [
     {
       label: t("home.buyGold"),
-      variant: "primary",
+      tint: "var(--accent)",
       onSelect: openTrade,
     },
     {
       label: t("home.sellGold"),
-      variant: "danger",
+      tint: "var(--danger)",
       onSelect: openTrade,
     },
   ]

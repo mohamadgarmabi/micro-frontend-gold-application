@@ -1,4 +1,4 @@
-import Switch from "@gold/shared-components/switch"
+import { Switch } from "glisse"
 import type { ToggleProps } from "../types"
 
 const Toggle = ({ value, onChange, disabled }: ToggleProps) => {

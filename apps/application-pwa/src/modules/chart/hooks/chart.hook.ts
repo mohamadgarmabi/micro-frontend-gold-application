@@ -1,3 +1,4 @@
+import type { TabBarItem } from "glisse"
 import { useState } from "react"
 import { monthData, priceData, weekData } from "#/modules/market/utils/data"
 import { fmt } from "#/modules/market/utils/format"
@@ -78,10 +79,13 @@ const useChart = () => {
     size: (1.8 + index * 0.3).toFixed(1),
   }))
 
+  const rangeItems: TabBarItem[] = ranges.map((item) => ({ value: item, label: item }))
+
   return {
     t,
     range,
-    ranges,
+    // Glisse only lays tabs out left to right, so RTL reverses the order instead.
+    rangeItems: isRtl ? [...rangeItems].reverse() : rangeItems,
     handleRangeChange,
     chartData,
     latest,

@@ -3,6 +3,9 @@ import type { LiquidGlassSettingKey, LiquidGlassSettingRange } from "#/modules/s
 const LIQUID_GLASS_STORAGE_KEY = "aurum:liquid-glass:v2"
 const LEGACY_LIQUID_GLASS_DEPTH_STORAGE_KEY = "aurum:liquid-glass-depth:v1"
 
+// Glisse's own bezel default for a ~66px-tall surface; the radius setting scales it.
+const LIQUID_GLASS_BASE_BEZEL = 8
+
 const LIQUID_GLASS_SETTING_KEYS: LiquidGlassSettingKey[] = [
   "depth",
   "blur",
@@ -21,6 +24,7 @@ const LIQUID_GLASS_SETTING_RANGES: Record<LiquidGlassSettingKey, LiquidGlassSett
 
 export {
   LEGACY_LIQUID_GLASS_DEPTH_STORAGE_KEY,
+  LIQUID_GLASS_BASE_BEZEL,
   LIQUID_GLASS_SETTING_KEYS,
   LIQUID_GLASS_SETTING_RANGES,
   LIQUID_GLASS_STORAGE_KEY,
