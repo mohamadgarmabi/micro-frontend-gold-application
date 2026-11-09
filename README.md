@@ -62,24 +62,24 @@ packages/
   form/                  # Schema-driven form generator
 ```
 
-| Package / App             | Description                                         |
-| ------------------------- | --------------------------------------------------- |
-| `@gold/application-pwa`   | Gold-trading PWA, Module Federation host (port **4400**) |
-| `@gold/shared-components` | Styled UI components, Module Federation remote (port **5100**) |
-| `@gold/design-system`     | Gold tokens, portal setup, component utilities      |
-| `@gold/apis`              | Typed API clients and query/mutation options        |
-| `@gold/form`              | Schema-driven forms and default-value builders      |
+| Package / App             | Description                                                              |
+| ------------------------- | ------------------------------------------------------------------------ |
+| `@gold/application-pwa`   | Gold-trading PWA, Module Federation host (port **4400**)                 |
+| `@gold/shared-components` | Styled UI components, Module Federation remote (port **5100**)           |
+| `@gold/design-system`     | Gold tokens, portal setup, component utilities                           |
+| `@gold/apis`              | Typed API clients and query/mutation options                             |
+| `@gold/form`              | Schema-driven forms and default-value builders                           |
 | `backend`                 | Django REST API — see [`apps/backend/README.md`](apps/backend/README.md) |
 
 ## Tech stack
 
-| Layer      | Tools |
-| ---------- | ----- |
+| Layer      | Tools                                                                          |
+| ---------- | ------------------------------------------------------------------------------ |
 | Frontend   | React 19, TypeScript, TanStack Start / Router / Query / Store / Charts, Motion |
-| UI         | Tailwind CSS v4, HeroUI, Base UI |
-| Federation | `@module-federation/vite`, `@module-federation/runtime` |
-| Tooling    | Nx, pnpm workspaces, Vite, Vitest, ESLint, Prettier, Husky, commitlint |
-| Backend    | Django, Django REST Framework, Channels, PostgreSQL, drf-spectacular |
+| UI         | Tailwind CSS v4, HeroUI, Base UI                                               |
+| Federation | `@module-federation/vite`, `@module-federation/runtime`                        |
+| Tooling    | Nx, pnpm workspaces, Vite, Vitest, ESLint, Prettier, Husky, commitlint         |
+| Backend    | Django, Django REST Framework, Channels, PostgreSQL, drf-spectacular           |
 
 ## Getting started
 
@@ -134,14 +134,14 @@ Wrap the app root with the `gold-root` class for correct popup stacking (Base UI
 
 ## Scripts
 
-| Command              | What it does                                   |
-| -------------------- | ---------------------------------------------- |
-| `pnpm build`         | Build shared-components, form and the PWA      |
-| `pnpm test`          | Run Vitest for form, apis and shared-components |
-| `pnpm lint`          | Lint every project                             |
-| `pnpm typecheck`     | Strict TypeScript check across the workspace   |
-| `pnpm format`        | Format with Prettier                           |
-| `pnpm preview:application-pwa` | Preview the production PWA build     |
+| Command                        | What it does                                    |
+| ------------------------------ | ----------------------------------------------- |
+| `pnpm build`                   | Build shared-components, form and the PWA       |
+| `pnpm test`                    | Run Vitest for form, apis and shared-components |
+| `pnpm lint`                    | Lint every project                              |
+| `pnpm typecheck`               | Strict TypeScript check across the workspace    |
+| `pnpm format`                  | Format with Prettier                            |
+| `pnpm preview:application-pwa` | Preview the production PWA build                |
 
 ## Conventions
 
