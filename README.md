@@ -149,4 +149,4 @@ Component folders, module layout, export rules and the UI/hooks split are docume
 
 ## License
 
-MIT
+Released under the [MIT License](LICENSE).
