@@ -1,6 +1,1 @@
-export {
-  clearAuthToken,
-  getAuthToken,
-  hasAuthToken,
-  setAuthToken,
-} from './cookie'
+export { clearAuthToken, getAuthToken, hasAuthToken, setAuthToken } from "./cookie"

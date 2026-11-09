@@ -2,7 +2,7 @@ export type ApiCookieOptions = {
   path?: string
   maxAge?: number
   secure?: boolean
-  sameSite?: 'strict' | 'lax' | 'none'
+  sameSite?: "strict" | "lax" | "none"
   domain?: string
 }
 

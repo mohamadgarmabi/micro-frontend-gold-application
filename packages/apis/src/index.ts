@@ -15,12 +15,14 @@ export type { ApiClient } from "./client"
 
 export {
   createRefreshTokenInterceptor,
+  createRetryIdempotentInterceptor,
   createSseResumeInterceptor,
+  createTraceInterceptor,
   parseRetryAfter,
   isFetchError,
   isAbortError,
 } from "./reexports"
-export type { RefreshTokenConfig } from "./reexports"
+export type { RefreshTokenConfig, StatusHandler, StatusHandlers } from "./reexports"
 
 export * from "./posts"
 export * from "./market"

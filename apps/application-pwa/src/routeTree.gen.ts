@@ -155,14 +155,14 @@ declare module '@tanstack/react-router' {
     '/(app)': {
       id: '/(app)'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof appRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)': {
       id: '/(auth)'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof authRouteRouteImport
       parentRoute: typeof rootRouteImport
     }

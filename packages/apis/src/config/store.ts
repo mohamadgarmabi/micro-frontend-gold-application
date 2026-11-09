@@ -11,37 +11,12 @@ const setApiConfig = (options: ApiConfig): ResolvedApiConfig => {
 }
 
 const getApiConfig = (): ResolvedApiConfig => {
+  const { baseURL, baseUrl, timeout, timeoutMs, ...rest } = config
+
   return {
-    baseURL: config.baseUrl ?? config.baseURL ?? DEFAULT_BASE_URL,
-    timeout: config.timeoutMs ?? config.timeout ?? DEFAULT_TIMEOUT,
-    headers: config.headers,
-    auth: config.auth,
-    getToken: config.getToken,
-    mocks: config.mocks,
-    enableDevtools: config.enableDevtools,
-    plugins: config.plugins,
-    credentials: config.credentials,
-    maxRetries: config.maxRetries,
-    fetch: config.fetch,
-    interceptors: config.interceptors,
-    onStatus: config.onStatus,
-    source: config.source,
-    incoming: config.incoming,
-    onBadRequest: config.onBadRequest,
-    onUnauthorized: config.onUnauthorized,
-    onForbidden: config.onForbidden,
-    onNotFound: config.onNotFound,
-    onMethodNotAllowed: config.onMethodNotAllowed,
-    onRequestTimeout: config.onRequestTimeout,
-    onConflict: config.onConflict,
-    onGone: config.onGone,
-    onPayloadTooLarge: config.onPayloadTooLarge,
-    onUnsupportedMediaType: config.onUnsupportedMediaType,
-    onUnprocessableEntity: config.onUnprocessableEntity,
-    onTooManyRequests: config.onTooManyRequests,
-    onUnavailableForLegalReasons: config.onUnavailableForLegalReasons,
-    onClientError: config.onClientError,
-    onServerError: config.onServerError,
+    ...rest,
+    baseURL: baseUrl ?? baseURL ?? DEFAULT_BASE_URL,
+    timeout: timeoutMs ?? timeout ?? DEFAULT_TIMEOUT,
   }
 }
 

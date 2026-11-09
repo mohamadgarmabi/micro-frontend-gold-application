@@ -1,18 +1,17 @@
-import type { ApiCookieOptions } from '../config'
-import { getApiConfig, getAuthCookieName } from '../config'
+import type { ApiCookieOptions } from "../config"
+import { getApiConfig, getAuthCookieName } from "../config"
 
 const readCookie = (name: string, cookieSource?: string): string | null => {
-  const source =
-    cookieSource ?? (typeof document !== 'undefined' ? document.cookie : '')
+  const source = cookieSource ?? (typeof document !== "undefined" ? document.cookie : "")
 
   if (!source) {
     return null
   }
 
-  const parts = source.split('; ')
+  const parts = source.split("; ")
 
   for (const part of parts) {
-    const separatorIndex = part.indexOf('=')
+    const separatorIndex = part.indexOf("=")
 
     if (separatorIndex === -1) {
       continue
@@ -29,19 +28,15 @@ const readCookie = (name: string, cookieSource?: string): string | null => {
   return null
 }
 
-const writeCookie = (
-  name: string,
-  value: string,
-  options?: ApiCookieOptions,
-): void => {
-  if (typeof document === 'undefined') {
+const writeCookie = (name: string, value: string, options?: ApiCookieOptions): void => {
+  if (typeof document === "undefined") {
     return
   }
 
   const cookieOptions = options ?? {}
   const segments = [
     `${encodeURIComponent(name)}=${encodeURIComponent(value)}`,
-    `path=${cookieOptions.path ?? '/'}`,
+    `path=${cookieOptions.path ?? "/"}`,
   ]
 
   if (cookieOptions.maxAge !== undefined) {
@@ -53,33 +48,33 @@ const writeCookie = (
   }
 
   if (cookieOptions.secure) {
-    segments.push('secure')
+    segments.push("secure")
   }
 
   if (cookieOptions.sameSite) {
     segments.push(`samesite=${cookieOptions.sameSite}`)
   }
 
-  document.cookie = segments.join('; ')
+  document.cookie = segments.join("; ")
 }
 
 const clearCookie = (name: string, options?: ApiCookieOptions): void => {
-  if (typeof document === 'undefined') {
+  if (typeof document === "undefined") {
     return
   }
 
   const cookieOptions = options ?? {}
   const segments = [
     `${encodeURIComponent(name)}=`,
-    'max-age=0',
-    `path=${cookieOptions.path ?? '/'}`,
+    "max-age=0",
+    `path=${cookieOptions.path ?? "/"}`,
   ]
 
   if (cookieOptions.domain) {
     segments.push(`domain=${cookieOptions.domain}`)
   }
 
-  document.cookie = segments.join('; ')
+  document.cookie = segments.join("; ")
 }
 
 const getAuthToken = (cookieSource?: string): string | null => {
@@ -101,9 +96,7 @@ const setAuthToken = (token: string): void => {
   const cookieName = auth?.tokenCookieName
 
   if (!cookieName) {
-    throw new Error(
-      'auth.tokenCookieName is not configured. Set it in your app apiConfig.',
-    )
+    throw new Error("auth.tokenCookieName is not configured. Set it in your app apiConfig.")
   }
 
   writeCookie(cookieName, token, auth.cookie)

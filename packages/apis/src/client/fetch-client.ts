@@ -1,15 +1,17 @@
+import { createMocks } from "tanstack-fetch/mock"
+import type { StatusHandler } from "tanstack-fetch"
+import { createAuthInterceptor, createStatusInterceptor } from "tanstack-fetch/plugins"
 import { createFetch, type FetchClient } from "tanstack-fetch/sse"
 import { clearAuthToken, getAuthToken } from "../auth/cookie"
 import { getApiConfig, setApiConfig } from "../config"
-import type { ApiConfig } from "../config"
-import { createMockFetch } from "./create-mock-fetch"
+import type { ApiConfig, ResolvedApiConfig } from "../config"
 
 type ApiClient = FetchClient
 
 let client: ApiClient | null = null
 let destroyDevtools: (() => void) | null = null
 
-const resolveGetToken = (options: ReturnType<typeof getApiConfig>) => {
+const resolveGetToken = (options: ResolvedApiConfig) => {
   if (options.getToken) {
     return options.getToken
   }
@@ -19,6 +21,32 @@ const resolveGetToken = (options: ReturnType<typeof getApiConfig>) => {
   }
 
   return undefined
+}
+
+const resolveStatusHandlers = (options: ResolvedApiConfig) => {
+  if (!options.auth?.tokenCookieName) {
+    return options.status
+  }
+
+  const onUnauthorized = options.status?.[401]
+
+  const clearTokenOnUnauthorized: StatusHandler = (input) => {
+    clearAuthToken()
+    return onUnauthorized?.(input)
+  }
+
+  return { ...options.status, 401: clearTokenOnUnauthorized }
+}
+
+const resolveInterceptors = (options: ResolvedApiConfig) => {
+  const getToken = resolveGetToken(options)
+  const status = resolveStatusHandlers(options)
+
+  return [
+    ...(getToken ? [createAuthInterceptor({ getToken })] : []),
+    ...(status ? [createStatusInterceptor(status)] : []),
+    ...(options.interceptors ?? []),
+  ]
 }
 
 const shouldEnableDevtools = (enabled: boolean | undefined) => {
@@ -50,42 +78,17 @@ const attachDevtools = (api: ApiClient, enabled: boolean | undefined) => {
 
 const createApiClient = (): ApiClient => {
   const options = getApiConfig()
-  const fallbackFetch = options.fetch ?? globalThis.fetch.bind(globalThis)
-
   const nextClient = createFetch({
     baseUrl: options.baseURL,
     timeoutMs: options.timeout,
     headers: options.headers,
-    plugins: options.plugins,
     credentials: options.credentials,
     maxRetries: options.maxRetries,
-    interceptors: options.interceptors,
-    onStatus: options.onStatus,
+    interceptors: resolveInterceptors(options),
     source: options.source,
     incoming: options.incoming,
-    getToken: resolveGetToken(options),
-    onBadRequest: options.onBadRequest,
-    onUnauthorized: (input) => {
-      if (options.auth?.tokenCookieName) {
-        clearAuthToken()
-      }
-
-      return options.onUnauthorized?.(input)
-    },
-    onForbidden: options.onForbidden,
-    onNotFound: options.onNotFound,
-    onMethodNotAllowed: options.onMethodNotAllowed,
-    onRequestTimeout: options.onRequestTimeout,
-    onConflict: options.onConflict,
-    onGone: options.onGone,
-    onPayloadTooLarge: options.onPayloadTooLarge,
-    onUnsupportedMediaType: options.onUnsupportedMediaType,
-    onUnprocessableEntity: options.onUnprocessableEntity,
-    onTooManyRequests: options.onTooManyRequests,
-    onUnavailableForLegalReasons: options.onUnavailableForLegalReasons,
-    onClientError: options.onClientError,
-    onServerError: options.onServerError,
-    fetch: createMockFetch(options.mocks, fallbackFetch),
+    fetch: options.fetch,
+    mocks: options.mocks && createMocks(options.mocks),
   })
 
   attachDevtools(nextClient, options.enableDevtools)

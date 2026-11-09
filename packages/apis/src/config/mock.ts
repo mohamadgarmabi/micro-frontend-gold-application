@@ -1,18 +1,11 @@
-type ApiMockMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "HEAD" | "OPTIONS"
+import type { MockHttpRoute, MockOptions, MockRoute } from "tanstack-fetch/mock"
 
-type ApiMockHandler = () => unknown | Promise<unknown> | AsyncIterable<unknown>
+type ApiMockMethod = NonNullable<MockHttpRoute["method"]>
 
-type ApiMockRoute = {
-  method?: ApiMockMethod
-  path: string
-  handler: ApiMockHandler
-  /** Respond as `text/event-stream`. Handler may yield an async iterable of event payloads. */
-  sse?: boolean
-}
+type ApiMockHandler = MockHttpRoute["handler"]
 
-type ApiMockConfig = {
-  enabled?: boolean
-  routes: ApiMockRoute[]
-}
+type ApiMockRoute = MockRoute
+
+type ApiMockConfig = MockOptions
 
 export type { ApiMockConfig, ApiMockHandler, ApiMockMethod, ApiMockRoute }
